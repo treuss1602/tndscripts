@@ -21,9 +21,14 @@ class Param:
         self.name = name
         self.desc = desc
         self.valuetype = valuetype.lower()
-        if self.valuetype == "enumerated" or self.valuetype == "enumeration" and typedetails is not None:
-            self.enumvalues = [v.strip() for v in typedetails.split(";")]
-            self.typedetails = None
+        if self.valuetype == "enumerated" or self.valuetype == "enumeration":
+            if typedetails:
+                self.enumvalues = [v.strip() for v in typedetails.split(";")]
+                self.typedetails = None
+            else:
+                print("WARNING: Parameter '{}' is of type '{}' but no enumeration values are provided.".format(self.name, self.valuetype))
+                self.enumvalues = []
+                self.typedetails = None
         else:            
             self.typedetails = typedetails
             self.enumvalues = None
@@ -42,7 +47,7 @@ class Param:
 
     def as_dict(self):
         param = {"name": self.name, "description": self.desc, "mandatory": self.mandatory, "valueType": self.valuetype}
-        if self.enumvalues:
+        if self.enumvalues is not None:
             param["valueTypeDetails"] = {"enumValues": self.enumvalues}
         elif self.typedetails:
             param["valueTypeDetails"] = {"comment": self.typedetails}
