@@ -1,0 +1,267 @@
+{
+  "factoryProductName": "IPVPN_CORE",
+  "action": "Create",
+  "version": 0.1,
+  "inputParameters": [
+    {
+      "name": "NETWORK_ELEMENT_NAME",
+      "description": "Network element name",
+      "mandatory": true,
+      "valueType": "string",
+      "special": true,
+      "exampleValue": "ZH0004MEB101",
+      "cramerStorage": "TND device ( types to TBD)"
+    },
+    {
+      "name": "VPN_NAME",
+      "description": "Topology name in Cramer\nIt is the key identifier of the VPN.",
+      "mandatory": true,
+      "valueType": "string",
+      "special": false,
+      "exampleValue": "SIPCORE1234",
+      "cramerStorage": "Toplogy name ( created by the first Factory service or manually created upfront)\nIf exsists, it implies that RTs related to topology must exist."
+    },
+    {
+      "name": "VRF_NAME",
+      "description": "VRF name",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "Infrastructure case:\nCMTS_INET_VPN\n\nAutomatic case:\nSIPCORE1234_A_IVC000000001"
+      },
+      "special": false,
+      "exampleValue": "SIPCORE1234_A_IVC000000001",
+      "cramerStorage": "Routing Instance VRFNAME field (Generic Entity: Routing Instance)\n\nThe VRF name is in VRFNAME field where as the RI name can not reflect the VRF name as inventory model needs to differentiate different import/export settings per RI."
+    },
+    {
+      "name": "VRF_TYPE",
+      "description": "VRF type",
+      "mandatory": true,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "Any2Any",
+          "Hub",
+          "Spoke"
+        ]
+      },
+      "special": false,
+      "exampleValue": "Any2Any",
+      "acadefault": "Any2Any",
+      "cramerStorage": "Behaviour attribute of RI."
+    },
+    {
+      "name": "VRF_SR_TE_COLOR",
+      "description": "VRF SR-TE color community",
+      "mandatory": false,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": []
+      },
+      "special": false,
+      "exampleValue": "6730:1225555",
+      "cramerStorage": "IPVPN_CORE_GE"
+    },
+    {
+      "name": "UCAST_IPV4_FLAG",
+      "description": "Unicast - IPv4 flag",
+      "mandatory": true,
+      "valueType": "boolean",
+      "special": false,
+      "exampleValue": true,
+      "acadefault": true,
+      "cramerStorage": "IPVPN_CORE_GE"
+    },
+    {
+      "name": "UCAST_IPV6_FLAG",
+      "description": "Unicast - IPv6 flag",
+      "mandatory": true,
+      "valueType": "boolean",
+      "special": false,
+      "exampleValue": false,
+      "acadefault": false,
+      "cramerStorage": "IPVPN_CORE_GE"
+    },
+    {
+      "name": "MCAST_SITE_TYPE",
+      "description": "Multicast - site type",
+      "mandatory": false,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "receiver",
+          "source",
+          "source&receiver"
+        ]
+      },
+      "special": false,
+      "exampleValue": "receiver",
+      "cramerStorage": "IPVPN_CORE_GE"
+    },
+    {
+      "name": "MCAST_IPV4_FLAG",
+      "description": "Multicast - IPv4 flag",
+      "mandatory": true,
+      "valueType": "boolean",
+      "special": false,
+      "exampleValue": false,
+      "acadefault": false,
+      "cramerStorage": "IPVPN_CORE_GE"
+    },
+    {
+      "name": "MCAST_IPV4_SSM_GROUPS",
+      "description": "Multicast - IPv4 SSM groups prefixes",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or multiple values separated by ;"
+      },
+      "special": false,
+      "exampleValue": "232.0.0.0/24",
+      "cramerStorage": "IPVPN_CORE_GE"
+    },
+    {
+      "name": "MCAST_IPV4_SSM_MAP_SOURCES",
+      "description": "Multicast - IPv4 SSM map sources",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or multiple values separated by ;"
+      },
+      "special": false,
+      "exampleValue": "232.0.0.1",
+      "cramerStorage": "IPVPN_CORE_GE"
+    },
+    {
+      "name": "MCAST_IPV6_FLAG",
+      "description": "Multicast - IPv6 flag",
+      "mandatory": true,
+      "valueType": "boolean",
+      "special": false,
+      "exampleValue": false,
+      "acadefault": false,
+      "cramerStorage": "IPVPN_CORE_GE"
+    },
+    {
+      "name": "IPV4_DHCP_RELAY_FLAG",
+      "description": "IPv4 DHCP relay flag",
+      "mandatory": true,
+      "valueType": "boolean",
+      "special": false,
+      "exampleValue": false,
+      "acadefault": false,
+      "cramerStorage": "IPVPN_CORE_GE"
+    },
+    {
+      "name": "IPV4_DHCP_SERVER_VRF",
+      "description": "IPv4 DHCP - server VRF",
+      "mandatory": false,
+      "valueType": "string",
+      "special": false,
+      "exampleValue": "DHCP_VRF_dummy",
+      "cramerStorage": "IPVPN_CORE_GE"
+    },
+    {
+      "name": "IPV6_DHCP_RELAY_FLAG",
+      "description": "IPv6 DHCP relay flag",
+      "mandatory": true,
+      "valueType": "boolean",
+      "special": false,
+      "exampleValue": false,
+      "acadefault": false,
+      "cramerStorage": "IPVPN_CORE_GE"
+    },
+    {
+      "name": "IPV6_DHCP_SERVER_VRF",
+      "description": "IPv6 DHCP - server VRF",
+      "mandatory": false,
+      "valueType": "string",
+      "special": false,
+      "exampleValue": "DHCP_VRF_dummy",
+      "cramerStorage": "IPVPN_CORE_GE"
+    },
+    {
+      "name": "IPV6_DHCP_SERVER_IP_ADDRESSES",
+      "description": "IPv6 DHCP - server IP addresses,Set of IPv6 addresses",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or multiple values separated by ;\nSpecified using double colons ( :: ) in place of a series of zeros. For example, IPv6 address ff06:0:0:0:0:0:0:c3 can be written as ff06::c3"
+      },
+      "special": false,
+      "exampleValue": "ff06:0:0:0:0:0:0:c3",
+      "cramerStorage": "IPVPN_CORE_GE"
+    },
+    {
+      "name": "MANAGED_SR_DHCP_FLAG",
+      "description": "Managed SR DHCP flag",
+      "mandatory": true,
+      "valueType": "boolean",
+      "special": false,
+      "exampleValue": false,
+      "acadefault": false,
+      "cramerStorage": "IPVPN_CORE_GE"
+    },
+    {
+      "name": "CUST_SNIPPET_NAMES",
+      "description": "custom snippet name(s) , name also includes the version of the snippet, delimeter as ';'",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or multiple values separated by ;"
+      },
+      "special": false,
+      "exampleValue": "Snippet1;Snippet2",
+      "cramerStorage": "CONFIG_SNIPPET_GE (s)"
+    }
+  ],
+  "cramerParameters": [
+    {
+      "name": "IPVPN_CORE_RFS_NAME",
+      "description": "IPVPN Core service name",
+      "mandatory": true,
+      "valueType": "string",
+      "special": false,
+      "exampleValue": "IVC000000001"
+    },
+    {
+      "name": "VRF_IMPORT_RT_SET",
+      "description": "VRF import route target set",
+      "mandatory": true,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or multiple values separated by ;"
+      },
+      "special": false,
+      "exampleValue": "6730:122334;6730:122335"
+    },
+    {
+      "name": "VRF_EXPORT_RT_SET",
+      "description": "VRF export route target set",
+      "mandatory": true,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or multiple values separated by ;"
+      },
+      "special": false,
+      "exampleValue": "6730:122334;6730:122335"
+    },
+    {
+      "name": "VRF_RD",
+      "description": "VRF route distinguisher",
+      "mandatory": true,
+      "valueType": "string",
+      "special": false,
+      "exampleValue": "6730:1225555"
+    }
+  ],
+  "cramerValidations": [
+    {
+      "name": "CHECK_NODE_LOCATION",
+      "parameters": [
+        "NETWORK_ELEMENT_NAME"
+      ],
+      "taskname": "CHECK_TARGET_NE_EXISTS"
+    }
+  ]
+}
