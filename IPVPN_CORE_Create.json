@@ -1,7 +1,7 @@
 {
   "factoryProductName": "IPVPN_CORE",
   "action": "Create",
-  "version": 0.1,
+  "version": 0.3,
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
@@ -56,7 +56,10 @@
       "mandatory": false,
       "valueType": "enumerated",
       "valueTypeDetails": {
-        "enumValues": []
+        "enumValues": [
+          "SR-TE color1",
+          "SR-TE color2"
+        ]
       },
       "special": false,
       "exampleValue": "6730:1225555",
@@ -162,6 +165,18 @@
       "cramerStorage": "IPVPN_CORE_GE"
     },
     {
+      "name": "IPV4_DHCP_SERVER_IP_ADDRESSES",
+      "description": "IPv4 DHCP - server IP addresses,Set of IPv4 addresses",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or multiple values separated by ;"
+      },
+      "special": false,
+      "exampleValue": "10.0.0.1",
+      "cramerStorage": "IPVPN_CORE_GE"
+    },
+    {
       "name": "IPV6_DHCP_RELAY_FLAG",
       "description": "IPv6 DHCP relay flag",
       "mandatory": true,
@@ -223,6 +238,18 @@
       "valueType": "string",
       "special": false,
       "exampleValue": "IVC000000001"
+    },
+    {
+      "name": "VRF_NAME",
+      "description": "VRF name",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "Infrastructure case:\nCMTS_INET_VPN\n\nAutomatic case:\nSIPCORE1234_A_IVC000000001"
+      },
+      "special": false,
+      "exampleValue": "SIPCORE1234_A_IVC000000001",
+      "cramerStorage": "Routing Instance VRFNAME field (Generic Entity: Routing Instance)\n\nThe VRF name is in VRFNAME field where as the RI name can not reflect the VRF name as inventory model needs to differentiate different import/export settings per RI."
     },
     {
       "name": "VRF_IMPORT_RT_SET",
