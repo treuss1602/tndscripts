@@ -52,8 +52,12 @@ def read_data_from_excel(xlfile, tab):
                 DBG(30, "Adding parameter {} (type {}) to input parameters".format(techname, paramtype))
                 inparams.append(Param('input', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, acadefault, paramtype.lower() == "special"))
             elif paramtype.lower() == "return":
+                DBG(30, "Adding parameter {} (type {}) to cramer output parameters".format(techname, paramtype))
                 crameroutparams.append(Param('Cramer', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage))
-                DBG(30, "Adding parameter {} (type {}) to input cramer output parameters".format(techname, paramtype))
+            elif paramtype.lower() == "inputorreturn":
+                DBG(30, "Adding parameter {} (type {}) to input AND cramer output parameters".format(techname, paramtype))
+                inparams.append(Param('input', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, acadefault, paramtype.lower() == "special"))
+                crameroutparams.append(Param('Cramer', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage))
             else:
                 DBG(30, "Ignoring parameter {} (type {})".format(techname, paramtype))
 
