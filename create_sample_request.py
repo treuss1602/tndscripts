@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import argparse
 import uuid
+from xml.sax.saxutils import escape
 
 from factoryproduct import FactoryProductConfiguration
 from debug import DBG, set_debug_level
@@ -44,12 +45,14 @@ def create_sample_request(productconfig : FactoryProductConfiguration, orderno =
     for p in productconfig.input_params:
         if p.mandatory or not mandatory_only:
             if p.examplevalue is not None:
+                DBG(30, "Adding parameter {} to request.".format(p.name))
+                pname = p.name if "<N>" not in p.name else p.name.replace("<N>", "1")
                 if p.valuetype == "string":
-                    xml += '            <il:Parameter name="LINE_1_PS_PARAM_{}" value="{}" />\n'.format(p.name, p.examplevalue.replace('\n', '\\n'))
+                    xml += '            <il:Parameter name="LINE_1_PS_PARAM_{}" value="{}" />\n'.format(pname, escape(p.examplevalue, entities={"'": "&apos;",'"': "&quot;", '\n': "\\n"}))
                 elif p.valuetype == "boolean":
-                    xml += '            <il:Parameter name="LINE_1_PS_PARAM_{}" value="{}" />\n'.format(p.name, "true" if p.examplevalue else "false")
+                    xml += '            <il:Parameter name="LINE_1_PS_PARAM_{}" value="{}" />\n'.format(pname, "true" if p.examplevalue else "false")
                 else:
-                    xml += '            <il:Parameter name="LINE_1_PS_PARAM_{}" value="{}" />\n'.format(p.name, p.examplevalue)
+                    xml += '            <il:Parameter name="LINE_1_PS_PARAM_{}" value="{}" />\n'.format(pname, p.examplevalue)
             else:
                 DBG(10, "Skipping parameter {}. No example value in input file.".format(p.name))
     xml += """         </il:RequestParameters>
