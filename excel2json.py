@@ -41,7 +41,7 @@ def read_data_from_excel(xlfile, tab):
     crameroutparams = []
     for row in range(STARTROW, 300):
         cellvalues = [sheet.cell(row=row, column=col).value for col in [COLUMNS[s]
-                                                     for s in ['TECHNAME','DESC','VALUETYPE','TYPEDETAILS','OM','EXAMPLE_VALUE','PARAMTYPE', 'ACADEFAULT', 'CRAMERSTORAGE']]]
+            for s in ['TECHNAME','DESC','VALUETYPE','TYPEDETAILS','OM','EXAMPLE_VALUE','PARAMTYPE', 'ACADEFAULT', 'CRAMERSTORAGE']]]
         techname, desc, valuetype, typedetails, mo, example, paramtype, acadefault, cramerstorage = (x.strip() if isinstance(x, str) else x for x in cellvalues)
         if techname == "Version": # avoid reading version history
             break
