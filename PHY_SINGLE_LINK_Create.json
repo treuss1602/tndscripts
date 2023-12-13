@@ -1,7 +1,7 @@
 {
   "factoryProductName": "PHY_SINGLE_LINK",
   "action": "Create",
-  "version": 0.2,
+  "version": 0.3,
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
@@ -28,7 +28,6 @@
       "valueType": "integer",
       "special": false,
       "exampleValue": 1500,
-      "acadefault": 0,
       "cramerStorage": "PHY_SINGLE_LINK_GE"
     },
     {
@@ -76,7 +75,6 @@
       "valueType": "integer",
       "special": false,
       "exampleValue": 255,
-      "acadefault": 0,
       "cramerStorage": "PHY_SINGLE_LINK_GE"
     },
     {
@@ -95,8 +93,6 @@
       "mandatory": false,
       "valueType": "integer",
       "special": false,
-      "exampleValue": 0,
-      "acadefault": 0,
       "cramerStorage": "PHY_SINGLE_LINK_GE"
     },
     {
@@ -239,7 +235,6 @@
       "valueType": "integer",
       "special": false,
       "exampleValue": 100000000,
-      "acadefault": 0,
       "cramerStorage": "optical  module's speed?"
     },
     {

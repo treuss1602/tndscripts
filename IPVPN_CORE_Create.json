@@ -1,7 +1,7 @@
 {
   "factoryProductName": "IPVPN_CORE",
   "action": "Create",
-  "version": 0.3,
+  "version": 0.5,
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
@@ -13,7 +13,7 @@
       "cramerStorage": "TND device ( types to TBD)"
     },
     {
-      "name": "VPN_NAME",
+      "name": "L3_VPN_NAME",
       "description": "Topology name in Cramer\nIt is the key identifier of the VPN.",
       "mandatory": true,
       "valueType": "string",
@@ -31,7 +31,7 @@
       },
       "special": false,
       "exampleValue": "SIPCORE1234_A_IVC000000001",
-      "cramerStorage": "Routing Instance VRFNAME field (Generic Entity: Routing Instance)\n\nThe VRF name is in VRFNAME field where as the RI name can not reflect the VRF name as inventory model needs to differentiate different import/export settings per RI."
+      "cramerStorage": "Routing Instance \u00abVPN Instance Network Name\u00bb field (Generic Entity: Routing Instance)\n\nThe VRF name is in \u00abVPN Instance Network Name\u00bb field where as the RI name can not reflect the VRF name as inventory model needs to differentiate different import/export settings per RI."
     },
     {
       "name": "VRF_TYPE",
@@ -62,7 +62,7 @@
         ]
       },
       "special": false,
-      "exampleValue": "6730:1225555",
+      "exampleValue": "SR-TE color1",
       "cramerStorage": "IPVPN_CORE_GE"
     },
     {
@@ -249,7 +249,7 @@
       },
       "special": false,
       "exampleValue": "SIPCORE1234_A_IVC000000001",
-      "cramerStorage": "Routing Instance VRFNAME field (Generic Entity: Routing Instance)\n\nThe VRF name is in VRFNAME field where as the RI name can not reflect the VRF name as inventory model needs to differentiate different import/export settings per RI."
+      "cramerStorage": "Routing Instance \u00abVPN Instance Network Name\u00bb field (Generic Entity: Routing Instance)\n\nThe VRF name is in \u00abVPN Instance Network Name\u00bb field where as the RI name can not reflect the VRF name as inventory model needs to differentiate different import/export settings per RI."
     },
     {
       "name": "VRF_IMPORT_RT_SET",
