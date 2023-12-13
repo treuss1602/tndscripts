@@ -37,8 +37,11 @@ class Param:
             self.examplevalue = examplevalue if isinstance(examplevalue, bool) else examplevalue.lower().strip() == "true"
             self.acadefault =  acadefault if isinstance(acadefault, bool) else acadefault.lower().strip() == "true"
         elif self.valuetype == "integer":
-            self.examplevalue = int(examplevalue) if examplevalue else 0;
-            self.acadefault = int(acadefault) if acadefault else 0;
+            self.examplevalue = int(examplevalue) if examplevalue else None;
+            self.acadefault = int(acadefault) if acadefault else None;
+        elif self.valuetype == "string":
+            self.examplevalue = str(examplevalue) if examplevalue else None;
+            self.acadefault = str(acadefault) if acadefault else None;
         else:
             self.examplevalue = examplevalue
             self.acadefault = acadefault
@@ -53,7 +56,8 @@ class Param:
         elif self.typedetails:
             param["valueTypeDetails"] = {"comment": self.typedetails}
         param["special"] = self.special
-        param["exampleValue"] =  self.examplevalue
+        if self.examplevalue is not None:
+            param["exampleValue"] =  self.examplevalue
         if self.acadefault is not None:
             param["acadefault"] =  self.acadefault
         if self.cramerStorage:
