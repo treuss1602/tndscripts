@@ -15,7 +15,7 @@ for name, cls in validations.__dict__.items():
 
 class Param:
     ''' Parameter class '''
-    def __init__(self, type, name, desc, valuetype, typedetails, mandatory, examplevalue=None, cramerStorage=None, acadefault=None, special=False):
+    def __init__(self, type, name, desc, valuetype, typedetails, mandatory, examplevalue=None, cramerStorage=None, acadefault=None, special=False, maxoccurs=None):
         DBG(50, "Param.init called with type={}, name={}, desc={}, valuetype={}, typedetails={}, mandatory={}, examplevalue={}, cramerStorage={}, acadefault={}, special={}".format(type, name, desc, valuetype, typedetails, mandatory, examplevalue, cramerStorage, acadefault, special))
         self.type = type
         self.name = name
@@ -44,6 +44,7 @@ class Param:
             self.acadefault = acadefault
         self.special = special
         self.cramerStorage = cramerStorage
+        self.maxoccurs = maxoccurs
 
     def as_dict(self):
         param = {"name": self.name, "description": self.desc, "mandatory": self.mandatory, "valueType": self.valuetype}
@@ -57,6 +58,8 @@ class Param:
             param["acadefault"] =  self.acadefault
         if self.cramerStorage:
             param["cramerStorage"] = self.cramerStorage
+        if self.maxoccurs:
+            param["maxOccurs"] = self.maxoccurs
         return param
 
     @staticmethod
@@ -67,17 +70,13 @@ class Param:
             typedetails = ";".join(data["valueTypeDetails"]["enumValues"])
         else:
             typedetails = None
-        return Param(paramtype, data["name"], data["description"], data["valueType"], typedetails, data["mandatory"], data["exampleValue"], data.get("cramerStorage"), data.get("acadefault"), data["special"])
+        return Param(paramtype, data["name"], data["description"], data["valueType"], typedetails, data["mandatory"], data["exampleValue"], data.get("cramerStorage"), data.get("acadefault"), data["special"], data.get("maxOccurs"))
 
     def __str__(self):
         return self.name
 
     def __repr__(self):
         return "'"+self.name+"'"
-
-def joinparams(*paramsets):
-    return ";".join(map(lambda x: x.name, functools.reduce(lambda a,b: a+b, paramsets)))+";"
-
 
 class FactoryProductConfiguration:
     ''' The full configuration, read & write json, create lookup tables, etc. '''
@@ -125,43 +124,4 @@ class FactoryProductConfiguration:
             else:
                 prod.add_validation(v["name"], *v["parameters"])
         return prod
-
-    def create_lookup_tables(self, nenameparam="NETWORK_ELEMENT_NAME"):
-        ''' Create the lookup Tables '''
-        prod = self.factoryProductName
-        trans = self.transaction
-        lkt1 = LookupTable('LKT_TND_FACTORY_PRODUCT_PARAMETERS')
-        lkt1.add(LtEntry(prod+"#"+trans, joinparams(self.input_params)))
-
-        lkt2 = LookupTable.from_validations(prod, trans, *self.cramer_validations)
-
-        lkt3 = LookupTable('LKT_TND_CRAMER_SUBORDERS')
-        lkt3.add(LtEntry(prod+"#"+trans+"#SUBORDER_PRODUCT", "TECHPROD_CRAMER_FACT_PROD_"+prod))
-        lkt3.add(LtEntry(prod+"#"+trans+"#PARAMETERS", joinparams([p for p in self.input_params if not p.special])))
-        lkt3.add(LtEntry(prod+"#"+trans+"#RETURN_PARAMETERS", joinparams(self.cramer_output_params)))
-        lkt3.add(LtEntry(prod+"#"+trans+"#GE_PARAMETERS", joinparams([p for p in self.input_params if p.cramerStorage == self.factoryProductName+"_GE"])))
-        lkt3.add(LtEntry(prod+"#"+trans+"#RB#SUBORDER_PRODUCT", "TECHPROD_CRAMER_FACT_PROD_"+prod+"_RB"))
-        lkt3.add(LtEntry(prod+"#"+trans+"#RB#PARAMETERS", joinparams([p for p in self.input_params if not p.special])))
-
-        lkt4 = LookupTable('LKT_TND_STABLENET')
-        if self.transaction == "Create":
-            lkt4.add(LtEntry(prod+"#"+trans+"#ORDER_DESCRIPTION", "new_rfs"))
-        elif self.transaction == "Delete":
-            lkt4.add(LtEntry(prod+"#"+trans+"#ORDER_DESCRIPTION", "cease_rfs"))
-        else:
-            raise ValueError("Action {} not (yet) supported for Stablenet Requests.")
-        lkt4.add(LtEntry(prod+"#"+trans+"#TARGET_DEVICE", nenameparam))
-        lkt4.add(LtEntry(prod+"#"+trans+"#RFS_NAME", self.factoryProductName+"_RFS_NAME"))
-        lkt4.add(LtEntry(prod+"#"+trans+"#PARAMETERS", joinparams([p for p in self.input_params if not p.special], self.cramer_output_params)))
-
-        lkt5 = LookupTable('LKT_TND_ENUM_PARAM_CHECK')
-        lkt5.add(LtEntry(prod+"#"+trans+"#ENUM_PARAMS", ";".join(p.name for p in self.input_params if p.valuetype == "enumerated")+";"))
-        for p in self.input_params:
-            if p.valuetype == "enumerated" or p.valuetype == "enumeration":
-                lkt5.add(LtEntry(prod+"#"+trans+"#{}".format(p.name), ";".join(p.enumvalues)+";"))
-
-        lkt6 = LookupTable('LKT_MANDATORY_PARAM_CHECK')
-        lkt6.add(LtEntry('FACTORY_PRODUCT_'+prod+"#"+trans, " ".join(p.name for p in self.input_params if p.mandatory)+" "))
-
-        return (lkt1, lkt2, lkt3, lkt4, lkt5, lkt6)
 
