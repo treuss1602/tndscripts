@@ -74,7 +74,7 @@ class Param:
             typedetails = ";".join(data["valueTypeDetails"]["enumValues"])
         else:
             typedetails = None
-        return Param(paramtype, data["name"], data["description"], data["valueType"], typedetails, data["mandatory"], data["exampleValue"], data.get("cramerStorage"), data.get("acadefault"), data["special"], data.get("maxOccurs"))
+        return Param(paramtype, data["name"], data["description"], data["valueType"], typedetails, data["mandatory"], data.get("exampleValue"), data.get("cramerStorage"), data.get("acadefault"), data["special"], data.get("maxOccurs"))
 
     def __str__(self):
         return self.name
