@@ -318,7 +318,7 @@
         ]
       },
       "special": false,
-      "exampleValue": "Refe PHY_SINGLE_LINK sheet",
+      "exampleValue": "ING_POLICING_PROFILE1",
       "cramerStorage": "IPVPN_SAP_GE"
     },
     {
@@ -335,7 +335,7 @@
         ]
       },
       "special": false,
-      "exampleValue": "Refe PHY_SINGLE_LINK sheet",
+      "exampleValue": "EGRESS_QOS_QUEUE_PROFILE1",
       "cramerStorage": "IPVPN_SAP_GE"
     },
     {
@@ -350,7 +350,7 @@
         ]
       },
       "special": false,
-      "exampleValue": "Refer PHY_SINGLE_LINK sheet",
+      "exampleValue": "CORE_MPLS",
       "cramerStorage": "IPVPN_SAP_GE"
     },
     {
@@ -476,7 +476,6 @@
         "comment": "character with special chars"
       },
       "special": false,
-      "exampleValue": null,
       "cramerStorage": "IPVPN_SAP_GE"
     },
     {
@@ -488,7 +487,6 @@
         "comment": "16bit or 32bit ASN"
       },
       "special": false,
-      "exampleValue": null,
       "cramerStorage": "IPVPN_SAP_GE"
     },
     {
