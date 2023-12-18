@@ -11,7 +11,7 @@ from debug import DBG, set_debug_level
 def read_data_from_excel(xlfile, tab):
     ''' Read and return the data from the correct sheet in the excel file.'''
     STARTROW = 6
-    COLUMNS = {'TECHNAME': 1, 'DESC': 2, 'VALUETYPE': 3, 'TYPEDETAILS': 4, 'OM': 5, 'EXAMPLE_VALUE': 6, 'PARAMTYPE': 7, 'ACADEFAULT': 9, 'CRAMERSTORAGE': 16}
+    COLUMNS = {'TECHNAME': 1, 'DESC': 2, 'VALUETYPE': 3, 'TYPEDETAILS': 4, 'OM': 5, 'EXAMPLE_VALUE': 6, 'CRAMERSTORAGE': 7, 'PARAMTYPE': 8, 'ACADEFAULT': 10 }
     PRODNAME_CELL = 'B1'
     ACTION_CELL = 'B3'
     VERSION_CELL = 'B4'
