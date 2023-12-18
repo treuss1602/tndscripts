@@ -30,7 +30,7 @@ class Validation:
         return value
 
     def get_return_param_string(self):
-        return ";".join("{}:{}".format(*x) for x in self.return_parameters)+";"
+        return ",".join("{}:{}".format(*x) for x in self.return_parameters)
 
 class NodeExistsValidation(Validation):
     ''' Checks whether a node of specific name exists, using checkObjectExists API '''
