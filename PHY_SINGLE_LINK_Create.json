@@ -1,7 +1,7 @@
 {
   "factoryProductName": "PHY_SINGLE_LINK",
   "action": "Create",
-  "version": 0.3,
+  "version": 0.5,
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
@@ -235,7 +235,7 @@
       "valueType": "integer",
       "special": false,
       "exampleValue": 100000000,
-      "cramerStorage": "optical  module's speed?"
+      "cramerStorage": "optical  module of the port"
     },
     {
       "name": "PHYS_IF_TYPE",
@@ -244,7 +244,7 @@
       "valueType": "string",
       "special": false,
       "exampleValue": "100GBASE-LR1",
-      "cramerStorage": "Optical module's port def?"
+      "cramerStorage": "optical  module of the port"
     },
     {
       "name": "PHYS_IF_CENTER_FREQUENCY",
@@ -256,7 +256,7 @@
       },
       "special": false,
       "exampleValue": "1540.25",
-      "cramerStorage": "optical module's ?"
+      "cramerStorage": "optical  module of the port"
     },
     {
       "name": "PHYS_IF_TX_POWER",
@@ -268,7 +268,7 @@
       },
       "special": false,
       "exampleValue": "-5.00",
-      "cramerStorage": "optical module's ?"
+      "cramerStorage": "optical  module of the port"
     },
     {
       "name": "PHY_ACCESS_SERVICE_NAME",

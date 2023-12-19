@@ -1,7 +1,7 @@
 {
   "factoryProductName": "IPVPN_SAP",
   "action": "Create",
-  "version": 0.3,
+  "version": 0.7,
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
@@ -476,6 +476,7 @@
         "comment": "character with special chars"
       },
       "special": false,
+      "exampleValue": "abb$abc",
       "cramerStorage": "IPVPN_SAP_GE"
     },
     {
@@ -658,7 +659,8 @@
       "mandatory": true,
       "valueType": "string",
       "special": false,
-      "exampleValue": "IPVPNSAP000000001"
+      "exampleValue": "IPVPNSAP000000001",
+      "cramerStorage": "Service"
     },
     {
       "name": "SAP_IF_NAME",
@@ -666,7 +668,8 @@
       "mandatory": true,
       "valueType": "string",
       "special": false,
-      "exampleValue": "Bundle-Ether20.1024"
+      "exampleValue": "Bundle-Ether20.1024",
+      "cramerStorage": "Port"
     },
     {
       "name": "INNER_VLAN_ID",

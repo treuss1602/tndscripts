@@ -1,7 +1,7 @@
 {
   "factoryProductName": "IPVPN_CORE",
   "action": "Create",
-  "version": 0.5,
+  "version": 0.8,
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
@@ -10,7 +10,7 @@
       "valueType": "string",
       "special": true,
       "exampleValue": "ZH0004MEB101",
-      "cramerStorage": "TND device ( types to TBD)"
+      "cramerStorage": "TND devices"
     },
     {
       "name": "L3_VPN_NAME",
@@ -237,7 +237,8 @@
       "mandatory": true,
       "valueType": "string",
       "special": false,
-      "exampleValue": "IVC000000001"
+      "exampleValue": "IVC000000001",
+      "cramerStorage": "Service"
     },
     {
       "name": "VRF_NAME",
@@ -260,7 +261,8 @@
         "comment": "1 or multiple values separated by ;"
       },
       "special": false,
-      "exampleValue": "6730:122334;6730:122335"
+      "exampleValue": "6730:122334;6730:122335",
+      "cramerStorage": "RT"
     },
     {
       "name": "VRF_EXPORT_RT_SET",
@@ -271,7 +273,8 @@
         "comment": "1 or multiple values separated by ;"
       },
       "special": false,
-      "exampleValue": "6730:122334;6730:122335"
+      "exampleValue": "6730:122334;6730:122335",
+      "cramerStorage": "RT"
     },
     {
       "name": "VRF_RD",
@@ -279,7 +282,8 @@
       "mandatory": true,
       "valueType": "string",
       "special": false,
-      "exampleValue": "6730:1225555"
+      "exampleValue": "6730:1225555",
+      "cramerStorage": "RD"
     }
   ],
   "cramerValidations": [
