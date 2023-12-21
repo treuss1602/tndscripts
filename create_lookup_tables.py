@@ -48,7 +48,7 @@ def create_lookup_tables(config, nenameparam="NETWORK_ELEMENT_NAME"):
             lkt5.add(LtEntry(prod+"#"+trans+"#{}".format(p.name), ";".join(p.enumvalues)+";"))
 
     lkt6 = LookupTable('LKT_MANDATORY_PARAM_CHECK')
-    lkt6.add(LtEntry('FACTORY_PRODUCT_'+prod+"#"+trans, " ".join(p.name for p in config.input_params if p.mandatory)+" "))
+    lkt6.add(LtEntry('FACTORY_PRODUCT_'+prod+"#"+trans, " ".join(p.name for p in config.input_params if p.mandatory)+" ", "ORDER_TYPE IL_REQ_GROUP ORDER_EXTERNAL_ORDER_ID "))
 
     return (lkt1, lkt2, lkt3, lkt4, lkt5, lkt6)
 
