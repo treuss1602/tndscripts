@@ -1,0 +1,297 @@
+{
+  "factoryProductName": "ELAN_SAP",
+  "action": "Create",
+  "version": 0.4,
+  "inputParameters": [
+    {
+      "name": "NETWORK_ELEMENT_NAME",
+      "description": "Network element name",
+      "mandatory": true,
+      "valueType": "string",
+      "special": true,
+      "exampleValue": "ZH0004MEB101",
+      "cramerStorage": "TND device"
+    },
+    {
+      "name": "LOGICAL_SUB_IF_NAME",
+      "description": "Logical subinterface identifier,",
+      "mandatory": true,
+      "valueType": "string",
+      "special": false,
+      "exampleValue": "1024"
+    },
+    {
+      "name": "ELAN_ACCESS_TYPE",
+      "description": "ELAN access type",
+      "mandatory": true,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "E-LAN",
+          "E-Tree-Root",
+          "E-Tree-Leaf"
+        ]
+      },
+      "special": false,
+      "exampleValue": "ELAN",
+      "acadefault": "E-LAN",
+      "cramerStorage": "ELAN_SAP_GE"
+    },
+    {
+      "name": "ACCESS_TYPE",
+      "description": "Access type",
+      "mandatory": true,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "UNI,NNI"
+        ]
+      },
+      "special": false,
+      "exampleValue": "UNI",
+      "acadefault": "UNI",
+      "cramerStorage": "ELAN_SAP_GE"
+    },
+    {
+      "name": "ELAN_CORE_RFS_NAME",
+      "description": "ELANCore Service name",
+      "mandatory": true,
+      "valueType": "string",
+      "special": false,
+      "exampleValue": "ELANC000000001",
+      "cramerStorage": "Service"
+    },
+    {
+      "name": "PHY_SERVICE_NAME",
+      "description": "PHY_xxx service  Service name",
+      "mandatory": true,
+      "valueType": "string",
+      "special": false,
+      "exampleValue": "PHYSL000000001",
+      "cramerStorage": "Service"
+    },
+    {
+      "name": "INNER_VLAN_ID",
+      "description": "VLAN - inner VLAN ID",
+      "mandatory": false,
+      "valueType": "integer",
+      "valueTypeDetails": {
+        "comment": "Integer, valid range 1-4094"
+      },
+      "special": false,
+      "exampleValue": 4000,
+      "cramerStorage": "VLAN number"
+    },
+    {
+      "name": "INNER_TPI",
+      "description": "VLAN - inner TPI",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "2byte hex value"
+      },
+      "special": false,
+      "exampleValue": "0x8100",
+      "acadefault": "0x8100",
+      "cramerStorage": "ELAN_SAP_GE"
+    },
+    {
+      "name": "OUTER_VLAN_ID",
+      "description": "VLAN - outer VLAN ID",
+      "mandatory": false,
+      "valueType": "integer",
+      "valueTypeDetails": {
+        "comment": "Integer, valid range 1-4094"
+      },
+      "special": false,
+      "exampleValue": 3000,
+      "cramerStorage": "VLAN number"
+    },
+    {
+      "name": "OUTER_TPI",
+      "description": "VLAN - outer TPI",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "2byte hex value"
+      },
+      "special": false,
+      "exampleValue": "0x8100",
+      "acadefault": "0x8100",
+      "cramerStorage": "ELAN_SAP_GE"
+    },
+    {
+      "name": "SERVICE_MTU",
+      "description": "Service MTU",
+      "mandatory": true,
+      "valueType": "integer",
+      "valueTypeDetails": {
+        "comment": "value should be within 576 to 9000"
+      },
+      "special": false,
+      "exampleValue": 1500,
+      "acadefault": 1500,
+      "cramerStorage": "ELAN_SAP_GE"
+    },
+    {
+      "name": "INGRESS_L2_ACL_NAME",
+      "description": "Ingress L2 ACL",
+      "mandatory": false,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "1 or multiple string values separated by",
+          ""
+        ]
+      },
+      "special": false,
+      "exampleValue": "FILTER_L2_INPUT_EDGE",
+      "cramerStorage": "ELAN_SAP_GE"
+    },
+    {
+      "name": "EGRESS_L2_ACL_NAME",
+      "description": "Egress L2 ACL",
+      "mandatory": false,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "1 or multiple values separated by",
+          ""
+        ]
+      },
+      "special": false,
+      "exampleValue": "FILTER_L2_OUTPUT_EDGE",
+      "cramerStorage": "ELAN_SAP_GE"
+    },
+    {
+      "name": "QOS_INGRESS_CLASSIFICATION_PROFILE",
+      "description": "Ingress classification profile",
+      "mandatory": false,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "INGRESS_QOS_CLASSIFICATION_1",
+          "INGRESS_QOS_CLASSIFICATION_2",
+          "INGRESS_QOS_CLASSIFICATION_3"
+        ]
+      },
+      "special": false,
+      "exampleValue": "INGRESS_QOS_CLASSIFICATION_1",
+      "cramerStorage": "ELAN_SAP_GE"
+    },
+    {
+      "name": "QOS_INGRESS_POLICING_PROFILE",
+      "description": "Ingress policing profile",
+      "mandatory": false,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "Refer PHY_SINGLE_LINK sheet"
+        ]
+      },
+      "special": false,
+      "exampleValue": "Refer PHY_SINGLE_LINK sheet",
+      "cramerStorage": "ELAN_SAP_GE"
+    },
+    {
+      "name": "QOS_EGRESS_QOS_QUEUE_PROFILE",
+      "description": "Egress QoS queue profile",
+      "mandatory": false,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "Refer PHY_SINGLE_LINK sheet"
+        ]
+      },
+      "special": false,
+      "exampleValue": "Refer PHY_SINGLE_LINK sheet",
+      "cramerStorage": "ELAN_SAP_GE"
+    },
+    {
+      "name": "QOS_EGRESS_QOS_POLICY",
+      "description": "Egress QoS policy",
+      "mandatory": false,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "Refer PHY_SINGLE_LINK sheet"
+        ]
+      },
+      "special": false,
+      "exampleValue": "Refer PHY_SINGLE_LINK sheet",
+      "cramerStorage": "ELAN_SAP_GE"
+    },
+    {
+      "name": "QOS_CUST_EGRESS_REWRITE_CONFIG",
+      "description": "Egress rewrite configuration",
+      "mandatory": false,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "rewrite_config1",
+          "rewrite_config2",
+          "rewrite_config3"
+        ]
+      },
+      "special": false,
+      "exampleValue": "rewrite_config1",
+      "cramerStorage": "ELAN_SAP_GE"
+    },
+    {
+      "name": "CUST_SNIPPET_NAMES",
+      "description": "custom snippet name(s) , name also includes the version of the snippet, delimeter as ';'",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or multiple values separated by ;"
+      },
+      "special": false,
+      "exampleValue": "Snippet1;Snippet2",
+      "cramerStorage": "CONFIG_SNIPPET_GE (s)"
+    }
+  ],
+  "cramerParameters": [
+    {
+      "name": "SAP_IF_NAME",
+      "description": "L2 SAP Interface name",
+      "mandatory": true,
+      "valueType": "string",
+      "special": false,
+      "exampleValue": "Bundle-Ether20.1024",
+      "cramerStorage": "Port"
+    },
+    {
+      "name": "INNER_VLAN_ID",
+      "description": "VLAN - inner VLAN ID",
+      "mandatory": false,
+      "valueType": "integer",
+      "valueTypeDetails": {
+        "comment": "Integer, valid range 1-4094"
+      },
+      "special": false,
+      "exampleValue": 4000,
+      "cramerStorage": "VLAN number"
+    },
+    {
+      "name": "OUTER_VLAN_ID",
+      "description": "VLAN - outer VLAN ID",
+      "mandatory": false,
+      "valueType": "integer",
+      "valueTypeDetails": {
+        "comment": "Integer, valid range 1-4094"
+      },
+      "special": false,
+      "exampleValue": 3000,
+      "cramerStorage": "VLAN number"
+    }
+  ],
+  "cramerValidations": [
+    {
+      "name": "CHECK_NODE_LOCATION",
+      "parameters": [
+        "NETWORK_ELEMENT_NAME"
+      ],
+      "taskname": "CHECK_TARGET_NE_EXISTS"
+    }
+  ]
+}

@@ -1,0 +1,204 @@
+{
+  "factoryProductName": "ELAN_CORE",
+  "action": "Create",
+  "version": 0.6,
+  "inputParameters": [
+    {
+      "name": "NETWORK_ELEMENT_NAME",
+      "description": "Network element name",
+      "mandatory": true,
+      "valueType": "string",
+      "special": true,
+      "exampleValue": "ZH0004MEB101",
+      "cramerStorage": "TND device"
+    },
+    {
+      "name": "EVPN_EVI_RANGE",
+      "description": "EVPN ranges for B2B and B2C/Infrastructure services.",
+      "mandatory": true,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "\u2022\tCH customer EVIs: \t\t41000 to 41999\n\u2022\tCH infrastructure EVIs\t\t20400 to 20599"
+        ]
+      },
+      "special": false,
+      "cramerStorage": "Number range"
+    },
+    {
+      "name": "IPVPN_CORE_SERVICE_NAME",
+      "description": "IPVPN Core service name",
+      "mandatory": false,
+      "valueType": "string",
+      "special": false,
+      "exampleValue": "IVC000000001",
+      "cramerStorage": "Service"
+    },
+    {
+      "name": "L2_VPN_NAME",
+      "description": "ELAN Topology name in Cramer\nIt is the key identifier of the L2 VPN.",
+      "mandatory": true,
+      "valueType": "string",
+      "special": false,
+      "exampleValue": "ELANT1234",
+      "cramerStorage": "Toplogy name ( created by the first Factory service or manually created upfront)\nIf exsists, it implies that RTs related to topology must exist."
+    },
+    {
+      "name": "EVI_NAME",
+      "description": "VRF name",
+      "mandatory": true,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "Infrastructure case:\nCMTS_INET_VPN\n\nAutomatic case:\nSIPCORE1234_A_IVC000000001"
+      },
+      "special": false,
+      "exampleValue": "SIPCORE1234_A_IVC000000001",
+      "cramerStorage": "Routing Instance VRFNAME field (Generic Entity: Routing Instance)\n\nThe VRF name is in VRFNAME field where as the RI name can not reflect the VRF name as inventory model needs to differentiate different import/export settings per RI."
+    },
+    {
+      "name": "EVI_TYPE",
+      "description": "EVI type",
+      "mandatory": true,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "E-LAN",
+          "E-Tree-Root",
+          "E-Tree-Leaf"
+        ]
+      },
+      "special": false,
+      "exampleValue": "E-LAN",
+      "acadefault": "E-LAN",
+      "cramerStorage": "ELANC Topology"
+    },
+    {
+      "name": "VRF_SR_TE_COLOR_COMMUNITY",
+      "description": "VRF SR-TE color community",
+      "mandatory": false,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "SR-TE color1",
+          "SR-TE color2"
+        ]
+      },
+      "special": false,
+      "exampleValue": "SR-TE color1",
+      "cramerStorage": "ELANCORE_GE"
+    },
+    {
+      "name": "RELATED_L3_LOGICAL_IF",
+      "description": "Related L3 logical interface",
+      "mandatory": false,
+      "valueType": "string",
+      "special": false,
+      "cramerStorage": "ELANCORE_GE"
+    },
+    {
+      "name": "MANAGEMENT_FLAG",
+      "description": "Management flag",
+      "mandatory": true,
+      "valueType": "boolean",
+      "special": false,
+      "exampleValue": false,
+      "acadefault": false,
+      "cramerStorage": "ELANCORE_GE"
+    },
+    {
+      "name": "IGMP_MLD_SNOOPING_FLAG",
+      "description": "IGMP/MLD snooping flag",
+      "mandatory": true,
+      "valueType": "boolean",
+      "special": false,
+      "exampleValue": false,
+      "acadefault": false,
+      "cramerStorage": "ELANCORE_GE"
+    },
+    {
+      "name": "CUST_SNIPPET_NAMES",
+      "description": "custom snippet name(s) , name also includes the version of the snippet, delimeter as ';'",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or multiple values separated by ;"
+      },
+      "special": false,
+      "exampleValue": "Snippet1;Snippet2",
+      "cramerStorage": "CONFIG_SNIPPET_GE (s)"
+    }
+  ],
+  "cramerParameters": [
+    {
+      "name": "ELAN_CORE_RFS_NAME",
+      "description": "ELAN Core service name",
+      "mandatory": true,
+      "valueType": "string",
+      "special": false,
+      "exampleValue": "ELANC000000001",
+      "cramerStorage": "Service"
+    },
+    {
+      "name": "EVI_INSTANCE_ID",
+      "description": "EVI instance ID",
+      "mandatory": true,
+      "valueType": "integer",
+      "special": false,
+      "exampleValue": 41001,
+      "cramerStorage": "Number object related to topology?"
+    },
+    {
+      "name": "EVI_NAME",
+      "description": "VRF name",
+      "mandatory": true,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "Infrastructure case:\nCMTS_INET_VPN\n\nAutomatic case:\nSIPCORE1234_A_IVC000000001"
+      },
+      "special": false,
+      "exampleValue": "SIPCORE1234_A_IVC000000001",
+      "cramerStorage": "Routing Instance VRFNAME field (Generic Entity: Routing Instance)\n\nThe VRF name is in VRFNAME field where as the RI name can not reflect the VRF name as inventory model needs to differentiate different import/export settings per RI."
+    },
+    {
+      "name": "EVI_IMPORT_ROUTE_TARGET_SET",
+      "description": "EVI import route target set",
+      "mandatory": true,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or multiple values separated by ;"
+      },
+      "special": false,
+      "exampleValue": "6730:122334;6730:122335",
+      "cramerStorage": "RT"
+    },
+    {
+      "name": "EVI_EXPORT_ROUTE_TARGET_SET",
+      "description": "EVI export route target set",
+      "mandatory": true,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or multiple values separated by ;"
+      },
+      "special": false,
+      "cramerStorage": "RT"
+    },
+    {
+      "name": "EVI_ROUTE_DISTINGUISHER",
+      "description": "EVI route distinguisher",
+      "mandatory": true,
+      "valueType": "string",
+      "special": false,
+      "exampleValue": "6730:1225555",
+      "cramerStorage": "RD"
+    }
+  ],
+  "cramerValidations": [
+    {
+      "name": "CHECK_NODE_LOCATION",
+      "parameters": [
+        "NETWORK_ELEMENT_NAME"
+      ],
+      "taskname": "CHECK_TARGET_NE_EXISTS"
+    }
+  ]
+}
