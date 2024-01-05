@@ -7,7 +7,7 @@ from factoryproduct import FactoryProductConfiguration
 from soaws import CreateRequest, OrderLine
 from debug import DBG, set_debug_level
 
-def create_sample_request_new(productconfig : FactoryProductConfiguration, orderno = None, replyto_address = None, mandatory_only = True, soaws_py_syntax = False):
+def create_sample_request(productconfig : FactoryProductConfiguration, orderno = None, replyto_address = None, mandatory_only = True, soaws_py_syntax = False):
     if orderno is None:
         if soaws_py_syntax:
             orderno = '${uuid}'
@@ -49,7 +49,7 @@ if __name__ == "__main__":
     DBG(10, "Reading json file '{}'".format(args.filename))
     with open(args.filename, "r") as fp:
         config = FactoryProductConfiguration.from_file(fp)
-    req = create_sample_request_new(config, orderno=args.orderNo, replyto_address=args.replyAddress, mandatory_only=args.mandatory_only, soaws_py_syntax=args.soaws_py)
+    req = create_sample_request(config, orderno=args.orderNo, replyto_address=args.replyAddress, mandatory_only=args.mandatory_only, soaws_py_syntax=args.soaws_py)
     if args.outfile:
         with open(args.outfile, "w") as fp:
             fp.write(req.xml())
