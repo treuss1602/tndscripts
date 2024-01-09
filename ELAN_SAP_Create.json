@@ -1,7 +1,7 @@
 {
   "factoryProductName": "ELAN_SAP",
   "action": "Create",
-  "version": 0.4,
+  "version": 0.6,
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
@@ -186,7 +186,10 @@
       "valueType": "enumerated",
       "valueTypeDetails": {
         "enumValues": [
-          "Refer PHY_SINGLE_LINK sheet"
+          "ING_POLICING_PROFILE1",
+          "ING_POLICING_PROFILE2",
+          "ING_POLICING_PROFILE3",
+          "ING_POLICING_BESTEFFORT"
         ]
       },
       "special": false,
@@ -200,7 +203,10 @@
       "valueType": "enumerated",
       "valueTypeDetails": {
         "enumValues": [
-          "Refer PHY_SINGLE_LINK sheet"
+          "EGRESS_QOS_QUEUE_PROFILE1",
+          "EGRESS_QOS_QUEUE_PROFILE2",
+          "EGRESS_QOS_QUEUE_PROFILE3",
+          "EGRESS_BESTEFFORT"
         ]
       },
       "special": false,
@@ -214,7 +220,8 @@
       "valueType": "enumerated",
       "valueTypeDetails": {
         "enumValues": [
-          "Refer PHY_SINGLE_LINK sheet"
+          "CORE_MPLS",
+          "EGRESS_PROFILE1"
         ]
       },
       "special": false,

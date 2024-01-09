@@ -1,7 +1,7 @@
 {
   "factoryProductName": "PHY_SINGLE_LINK",
   "action": "Create",
-  "version": 0.5,
+  "version": 0.7,
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",

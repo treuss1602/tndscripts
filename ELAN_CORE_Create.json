@@ -1,7 +1,7 @@
 {
   "factoryProductName": "ELAN_CORE",
   "action": "Create",
-  "version": 0.6,
+  "version": 0.9,
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
