@@ -101,7 +101,7 @@ if __name__ == "__main__":
         jsondata = json.load(fp)
 
     if "factoryProductName" in jsondata:
-        config = FactoryProductConfiguration.from_file(fp)
+        config = FactoryProductConfiguration.from_jsondata(jsondata)
         tables = create_lookup_tables_for_factory_product(config)
         for table in tables:
             DBG(30, "Lookup Table dump:\n"+table.debugdump())
