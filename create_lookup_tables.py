@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import argparse
 import functools
+import json
 from zipfile import ZipFile
 from factoryproduct import FactoryProductConfiguration
 from lookuptable import LookupTable, LtEntry
@@ -15,7 +16,7 @@ def create_zipfile(filename, *tables):
 def joinparams(*paramsets):
     return ";".join(map(lambda x: x.name, functools.reduce(lambda a,b: a+b, paramsets)))+";"
 
-def create_lookup_tables(config, nenameparam="NETWORK_ELEMENT_NAME"):
+def create_lookup_tables_for_factory_product(config, nenameparam="NETWORK_ELEMENT_NAME"):
     ''' Create the lookup Tables '''
     prod = config.factoryProductName
     trans = config.transaction
@@ -61,6 +62,30 @@ def create_lookup_tables(config, nenameparam="NETWORK_ELEMENT_NAME"):
 
     return (lkt1, lkt2, lkt3, lkt4, lkt5, lkt6)
 
+def create_lookup_tables_for_composition(data):
+    ''' Create the lookup Tables '''
+    if data["compositionType"] == "cfs":
+        cfs = data["compositionName"]
+        component = ""
+    else:
+        component = data["compositionName"]
+        cfs = ""
+    
+    lkt = LookupTable('LKT_TND_STATIC_PARAM_VALUES')
+    for fpdata in data["paramMapping"]:
+        fpname = fpdata["factoryProduct"]
+        action = fpdata["action"]
+        for paramdata in fpdata["parameters"]:
+            pname, ptype = (paramdata[x] for x in ["name", "type"])
+            key = "#".join([cfs, component, fpname, action, pname])
+            DBG(30, "Key is {}".format(key))
+            if ptype == "static":
+                value = paramdata["value"] if paramdata["value"] is not None else "<NULL>"
+            elif ptype in ["input", "mapped"]:
+                value = "(${})".format(paramdata["from"])
+            DBG(30, "Value is {}".format(value))
+            lkt.add(LtEntry(key, value))
+    return lkt
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
@@ -73,9 +98,18 @@ if __name__ == "__main__":
 
     DBG(10, "Reading json file '{}'".format(args.filename))
     with open(args.filename, "r") as fp:
+        jsondata = json.load(fp)
+
+    if "factoryProductName" in jsondata:
         config = FactoryProductConfiguration.from_file(fp)
-    tables = create_lookup_tables(config)
-    for table in tables:
+        tables = create_lookup_tables_for_factory_product(config)
+        for table in tables:
+            DBG(30, "Lookup Table dump:\n"+table.debugdump())
+        outfile = "{}_{}.zip".format(config.factoryProductName, config.transaction) if args.outfile is None else args.outfile
+        create_zipfile(outfile, *tables)
+    elif "compositionName" in jsondata:
+        table = create_lookup_tables_for_composition(jsondata)
         DBG(30, "Lookup Table dump:\n"+table.debugdump())
-    outfile = "{}_{}.zip".format(config.factoryProductName, config.transaction) if args.outfile is None else args.outfile
-    create_zipfile(outfile, *tables)
+        outfile = "{}.zip".format(jsondata["compositionName"]) if args.outfile is None else args.outfile
+        create_zipfile(outfile, table)
+        

@@ -116,8 +116,7 @@ class FactoryProductConfiguration:
         json.dump(data, fp, indent=2)
 
     @staticmethod
-    def from_file(fp):
-        data = json.load(fp)
+    def from_jsondata(data):
         input_params = [Param.from_dict(p, "input") for p in data["inputParameters"]]
         cramer_params = [Param.from_dict(p, "Cramer") for p in data["cramerParameters"]]
         prod = FactoryProductConfiguration(data["factoryProductName"], data["action"], data["version"], input_params, cramer_params)
@@ -129,3 +128,7 @@ class FactoryProductConfiguration:
                 prod.add_validation(v["name"], *v["parameters"])
         return prod
 
+    @staticmethod
+    def from_file(fp):
+        data = json.load(fp)
+        return FactoryProductConfiguration.from_jsondata(data)
