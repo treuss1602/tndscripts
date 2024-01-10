@@ -373,18 +373,13 @@
       "parameters": [
         {
           "name": "EVPN_EVI_RANGE",
-          "type": "input",
-          "from": "RBH_RPD_EVPN_EVI_RANGE"
-        },
-        {
-          "name": "IPVPN_CORE_SERVICE_NAME",
-          "type": "mapped",
-          "from": "RBH_RPD_IPVPN_CORE_RFS_NAME"
+          "type": "static",
+          "value": "20400 ->20599"
         },
         {
           "name": "L2_VPN_NAME",
-          "type": "input",
-          "from": "RBH_RPD_L2_VPN_NAME"
+          "type": "static",
+          "value": "ELANT1234"
         },
         {
           "name": "EVI_NAME",
@@ -461,7 +456,7 @@
         {
           "name": "INNER_TPI",
           "type": "static",
-          "value": "0x8100"
+          "value": 8100
         },
         {
           "name": "OUTER_VLAN_ID",
@@ -471,7 +466,7 @@
         {
           "name": "OUTER_TPI",
           "type": "static",
-          "value": "0x8100"
+          "value": 8100
         },
         {
           "name": "VLAN_TAG_OPERATION",
@@ -522,6 +517,18 @@
           "name": "CUST_SNIPPET_NAMES",
           "type": "input",
           "from": "RBH_RPD_ELAN_SAP_CUST_SNIPPET_NAMES"
+        }
+      ]
+    },
+    {
+      "factoryProduct": "PHY_IRB",
+      "action": "Create",
+      "factoryProductVersion": 0.3,
+      "parameters": [
+        {
+          "name": "CUST_SNIPPET_NAMES",
+          "type": "input",
+          "from": "RBH_RPD_PHY_IRB_CUST_SNIPPET_NAMES"
         }
       ]
     }
