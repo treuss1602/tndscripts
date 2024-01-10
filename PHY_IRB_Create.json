@@ -1,0 +1,40 @@
+{
+  "factoryProductName": "PHY_IRB",
+  "action": "Create",
+  "version": 0.3,
+  "inputParameters": [
+    {
+      "name": "NETWORK_ELEMENT_NAME",
+      "description": "Network element name",
+      "mandatory": true,
+      "valueType": "string",
+      "special": true,
+      "exampleValue": "ZH0004MEB101"
+    },
+    {
+      "name": "CUST_SNIPPET_NAMES",
+      "description": "custom snippet name(s) , name also includes the version of the snippet, delimeter as ';'",
+      "mandatory": false,
+      "valueType": "string",
+      "special": false
+    }
+  ],
+  "cramerParameters": [
+    {
+      "name": "PHY_IRB_RFS_NAME",
+      "description": "PHY IRB service name",
+      "mandatory": true,
+      "valueType": "string",
+      "special": false
+    }
+  ],
+  "cramerValidations": [
+    {
+      "name": "CHECK_NODE_LOCATION",
+      "parameters": [
+        "NETWORK_ELEMENT_NAME"
+      ],
+      "taskname": "CHECK_TARGET_NE_EXISTS"
+    }
+  ]
+}
