@@ -16,12 +16,12 @@ if __name__ == "__main__":
         clsdict = dict(inspect.getmembers(subclass))
         description = "// " + clsdict["__doc__"].strip()
         symname = clsdict["name"]
-        jsonsig = {"name": symname, "parameters": [], "taskname": symname}
+        json_snippet = {"name": symname, "parameters": [], "taskname": symname}
         parameters = inspect.signature(clsdict["__init__"]).parameters
         for pname in parameters:
             if pname != "self" and parameters[pname].kind == inspect.Parameter.POSITIONAL_OR_KEYWORD:
-                jsonsig["parameters"].append("<"+pname+">")
+                json_snippet["parameters"].append("<"+pname+">")
         print(description)
-        print(json.dumps(jsonsig))
+        print(json.dumps(json_snippet))
         print()
 
