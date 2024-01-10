@@ -45,10 +45,10 @@ def read_data_from_excel(xlfile, tab):
         techname, desc, valuetype, typedetails, mo, example, paramtype, acadefault, cramerstorage = (x.strip() if isinstance(x, str) else x for x in cellvalues)
         if techname == "Version": # avoid reading version history
             break
+        if sheet.cell(row=row, column=1).font.strike:
+            DBG(10, "Ignoring parameter {} because of strikethough formatting".format(techname))
+            continue
         if techname and valuetype and mo and paramtype:
-            if sheet.cell(row=row, column=1).font.strike:
-                DBG(10, "Ignoring parameter {} because of strikethough formatting".format(techname))
-                continue
             # Check for arrays
             m = re.match(r'(.*)\[\d+\.\.(\d+)\]', valuetype)
             if m is not None:
@@ -68,6 +68,12 @@ def read_data_from_excel(xlfile, tab):
                 crameroutparams.append(Param('Cramer', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, maxoccurs=maxoccurs))
             else:
                 DBG(30, "Ignoring parameter {} (type {})".format(techname, paramtype))
+        elif techname and not valuetype:
+            print("WARNING: No value type defined for parameter '{}'".format(techname))
+        elif techname and not mo:
+            print("WARNING: Mandatory/Optional column not defined for parameter '{}'".format(techname))
+        elif techname and not paramtype:
+            print("WARNING: No param type defined for parameter '{}'".format(techname))
 
     return prodname, action, version, inparams, crameroutparams
 
