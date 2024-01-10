@@ -87,12 +87,9 @@
       "description": "VLAN - inner TPI",
       "mandatory": false,
       "valueType": "string",
-      "valueTypeDetails": {
-        "comment": "2byte hex value"
-      },
       "special": false,
-      "exampleValue": "0x8100",
-      "acadefault": "0x8100",
+      "exampleValue": "8100",
+      "acadefault": "8100",
       "cramerStorage": "ELAN_SAP_GE"
     },
     {
@@ -112,12 +109,23 @@
       "description": "VLAN - outer TPI",
       "mandatory": false,
       "valueType": "string",
+      "special": false,
+      "exampleValue": "8100",
+      "acadefault": "8100",
+      "cramerStorage": "ELAN_SAP_GE"
+    },
+    {
+      "name": "VLAN_TAG_OPERATION",
+      "description": "VLAN tag operation",
+      "mandatory": false,
+      "valueType": "enumerated",
       "valueTypeDetails": {
-        "comment": "2byte hex value"
+        "enumValues": [
+          "Push",
+          "Pop"
+        ]
       },
       "special": false,
-      "exampleValue": "0x8100",
-      "acadefault": "0x8100",
       "cramerStorage": "ELAN_SAP_GE"
     },
     {
@@ -140,8 +148,9 @@
       "valueType": "enumerated",
       "valueTypeDetails": {
         "enumValues": [
-          "1 or multiple string values separated by",
-          ""
+          "FILTER_L2_INPUT_EDGE1",
+          "FILTER_L2_INPUT_EDGE2",
+          "FILTER_L2_INPUT_EDGE3"
         ]
       },
       "special": false,
@@ -155,8 +164,9 @@
       "valueType": "enumerated",
       "valueTypeDetails": {
         "enumValues": [
-          "1 or multiple values separated by",
-          ""
+          "FILTER_L2_OUTPUT_EDGE1",
+          "FILTER_L2_OUTPUT_EDGE2",
+          "FILTER_L2_OUTPUT_EDGE3"
         ]
       },
       "special": false,
@@ -258,6 +268,14 @@
     }
   ],
   "cramerParameters": [
+    {
+      "name": "ELAN_SAP_RFS_NAME",
+      "description": "ELAN SAP Name",
+      "mandatory": true,
+      "valueType": "string",
+      "special": false,
+      "cramerStorage": "Service"
+    },
     {
       "name": "SAP_IF_NAME",
       "description": "L2 SAP Interface name",

@@ -19,20 +19,12 @@
       "valueType": "enumerated",
       "valueTypeDetails": {
         "enumValues": [
-          "\u2022\tCH customer EVIs: \t\t41000 to 41999\n\u2022\tCH infrastructure EVIs\t\t20400 to 20599"
+          "41000->41999",
+          "20400 ->20599"
         ]
       },
       "special": false,
       "cramerStorage": "Number range"
-    },
-    {
-      "name": "IPVPN_CORE_SERVICE_NAME",
-      "description": "IPVPN Core service name",
-      "mandatory": false,
-      "valueType": "string",
-      "special": false,
-      "exampleValue": "IVC000000001",
-      "cramerStorage": "Service"
     },
     {
       "name": "L2_VPN_NAME",
