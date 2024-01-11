@@ -1,5 +1,5 @@
 {
-  "compositionName": "TN_RBH_RPD_ACCESS",
+  "compositionName": "TN_RBH_CMTS_ACCESS",
   "compositionType": "cfs",
   "paramMapping": [
     {
@@ -54,8 +54,8 @@
         },
         {
           "name": "PHYS_IF_8021X_ENABLED",
-          "type": "input",
-          "from": "PHYS_IF_8021X_ENABLED"
+          "type": "static",
+          "value": "false"
         },
         {
           "name": "PHYS_IF_8021X_PROFILE_NAME",
