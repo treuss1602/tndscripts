@@ -1,7 +1,7 @@
 {
   "factoryProductName": "IPVPN_CORE",
   "action": "Create",
-  "version": 1.1,
+  "version": "1.1",
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
@@ -9,6 +9,7 @@
       "mandatory": true,
       "valueType": "string",
       "special": true,
+      "dynamicallyMapped": false,
       "exampleValue": "ZH0004MEB101",
       "cramerStorage": "TND devices"
     },
@@ -18,6 +19,7 @@
       "mandatory": true,
       "valueType": "string",
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": "SIPCORE1234",
       "cramerStorage": "Toplogy name ( created by the first Factory service or manually created upfront)\nIf exsists, it implies that RTs related to topology must exist."
     },
@@ -30,6 +32,7 @@
         "comment": "Infrastructure case:\nCMTS_INET_VPN\n\nAutomatic case:\nSIPCORE1234_A_IVC000000001"
       },
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": "SIPCORE1234_A_IVC000000001",
       "cramerStorage": "Routing Instance \u00abVPN Instance Network Name\u00bb field (Generic Entity: Routing Instance)\n\nThe VRF name is in \u00abVPN Instance Network Name\u00bb field where as the RI name can not reflect the VRF name as inventory model needs to differentiate different import/export settings per RI."
     },
@@ -46,6 +49,7 @@
         ]
       },
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": "Any2Any",
       "acadefault": "Any2Any",
       "cramerStorage": "Behaviour attribute of RI."
@@ -62,6 +66,7 @@
         ]
       },
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": "SR-TE color1",
       "cramerStorage": "IPVPN_CORE_GE"
     },
@@ -71,6 +76,7 @@
       "mandatory": true,
       "valueType": "boolean",
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": true,
       "acadefault": true,
       "cramerStorage": "IPVPN_CORE_GE"
@@ -81,6 +87,7 @@
       "mandatory": true,
       "valueType": "boolean",
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": false,
       "acadefault": false,
       "cramerStorage": "IPVPN_CORE_GE"
@@ -98,6 +105,7 @@
         ]
       },
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": "receiver",
       "cramerStorage": "IPVPN_CORE_GE"
     },
@@ -107,6 +115,7 @@
       "mandatory": true,
       "valueType": "boolean",
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": false,
       "acadefault": false,
       "cramerStorage": "IPVPN_CORE_GE"
@@ -120,6 +129,7 @@
         "comment": "1 or multiple values separated by ;"
       },
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": "232.0.0.0/24",
       "cramerStorage": "IPVPN_CORE_GE"
     },
@@ -132,6 +142,7 @@
         "comment": "1 or multiple values separated by ;"
       },
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": "232.0.0.1",
       "cramerStorage": "IPVPN_CORE_GE"
     },
@@ -141,6 +152,7 @@
       "mandatory": true,
       "valueType": "boolean",
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": false,
       "acadefault": false,
       "cramerStorage": "IPVPN_CORE_GE"
@@ -151,6 +163,7 @@
       "mandatory": true,
       "valueType": "boolean",
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": false,
       "acadefault": false,
       "cramerStorage": "IPVPN_CORE_GE"
@@ -161,6 +174,7 @@
       "mandatory": false,
       "valueType": "string",
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": "DHCP_VRF_dummy",
       "cramerStorage": "IPVPN_CORE_GE"
     },
@@ -173,6 +187,7 @@
         "comment": "1 or multiple values separated by ;"
       },
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": "10.0.0.1",
       "cramerStorage": "IPVPN_CORE_GE"
     },
@@ -182,6 +197,7 @@
       "mandatory": true,
       "valueType": "boolean",
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": false,
       "acadefault": false,
       "cramerStorage": "IPVPN_CORE_GE"
@@ -192,6 +208,7 @@
       "mandatory": false,
       "valueType": "string",
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": "DHCP_VRF_dummy",
       "cramerStorage": "IPVPN_CORE_GE"
     },
@@ -204,6 +221,7 @@
         "comment": "1 or multiple values separated by ;\nSpecified using double colons ( :: ) in place of a series of zeros. For example, IPv6 address ff06:0:0:0:0:0:0:c3 can be written as ff06::c3"
       },
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": "ff06:0:0:0:0:0:0:c3",
       "cramerStorage": "IPVPN_CORE_GE"
     },
@@ -213,6 +231,7 @@
       "mandatory": true,
       "valueType": "boolean",
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": false,
       "acadefault": false,
       "cramerStorage": "IPVPN_CORE_GE"
@@ -226,6 +245,7 @@
         "comment": "1 or multiple values separated by ;"
       },
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": "Snippet1;Snippet2",
       "cramerStorage": "CONFIG_SNIPPET_GE (s)"
     }
@@ -236,7 +256,6 @@
       "description": "IPVPN Core service name",
       "mandatory": true,
       "valueType": "string",
-      "special": false,
       "exampleValue": "IVC000000001",
       "cramerStorage": "Service"
     },
@@ -248,7 +267,6 @@
       "valueTypeDetails": {
         "comment": "Infrastructure case:\nCMTS_INET_VPN\n\nAutomatic case:\nSIPCORE1234_A_IVC000000001"
       },
-      "special": false,
       "exampleValue": "SIPCORE1234_A_IVC000000001",
       "cramerStorage": "Routing Instance \u00abVPN Instance Network Name\u00bb field (Generic Entity: Routing Instance)\n\nThe VRF name is in \u00abVPN Instance Network Name\u00bb field where as the RI name can not reflect the VRF name as inventory model needs to differentiate different import/export settings per RI."
     },
@@ -260,7 +278,6 @@
       "valueTypeDetails": {
         "comment": "1 or multiple values separated by ;"
       },
-      "special": false,
       "exampleValue": "6730:122334;6730:122335",
       "cramerStorage": "RT"
     },
@@ -272,7 +289,6 @@
       "valueTypeDetails": {
         "comment": "1 or multiple values separated by ;"
       },
-      "special": false,
       "exampleValue": "6730:122334;6730:122335",
       "cramerStorage": "RT"
     },
@@ -281,7 +297,6 @@
       "description": "VRF route distinguisher",
       "mandatory": true,
       "valueType": "string",
-      "special": false,
       "exampleValue": "6730:1225555",
       "cramerStorage": "RD"
     }

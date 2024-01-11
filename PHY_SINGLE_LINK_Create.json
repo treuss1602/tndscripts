@@ -1,7 +1,7 @@
 {
   "factoryProductName": "PHY_SINGLE_LINK",
   "action": "Create",
-  "version": 0.8,
+  "version": "0.8",
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
@@ -9,6 +9,7 @@
       "mandatory": true,
       "valueType": "string",
       "special": true,
+      "dynamicallyMapped": false,
       "exampleValue": "ZH0004MEB101",
       "cramerStorage": "TND device ( types to TBD)"
     },
@@ -18,6 +19,7 @@
       "mandatory": true,
       "valueType": "string",
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": "GigabitEthernet0/1/0",
       "cramerStorage": "TND device's  ports"
     },
@@ -27,6 +29,7 @@
       "mandatory": false,
       "valueType": "integer",
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": 1500,
       "cramerStorage": "PHY_SINGLE_LINK_GE"
     },
@@ -44,6 +47,7 @@
         ]
       },
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": "On",
       "acadefault": "On",
       "cramerStorage": "PHY_SINGLE_LINK_GE"
@@ -54,6 +58,7 @@
       "mandatory": true,
       "valueType": "boolean",
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": true,
       "acadefault": false,
       "cramerStorage": "PHY_SINGLE_LINK_GE"
@@ -64,6 +69,7 @@
       "mandatory": true,
       "valueType": "boolean",
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": false,
       "acadefault": false,
       "cramerStorage": "PHY_SINGLE_LINK_GE"
@@ -74,6 +80,7 @@
       "mandatory": false,
       "valueType": "integer",
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": 255,
       "cramerStorage": "PHY_SINGLE_LINK_GE"
     },
@@ -83,6 +90,7 @@
       "mandatory": true,
       "valueType": "boolean",
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": true,
       "acadefault": false,
       "cramerStorage": "PHY_SINGLE_LINK_GE"
@@ -93,6 +101,7 @@
       "mandatory": false,
       "valueType": "integer",
       "special": false,
+      "dynamicallyMapped": false,
       "cramerStorage": "PHY_SINGLE_LINK_GE"
     },
     {
@@ -101,6 +110,7 @@
       "mandatory": true,
       "valueType": "boolean",
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": true,
       "acadefault": true,
       "cramerStorage": "PHY_SINGLE_LINK_GE"
@@ -111,6 +121,7 @@
       "mandatory": true,
       "valueType": "boolean",
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": true,
       "acadefault": false,
       "cramerStorage": "PHY_SINGLE_LINK_GE"
@@ -121,6 +132,7 @@
       "mandatory": false,
       "valueType": "string",
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": "DummyProfile802",
       "cramerStorage": "PHY_SINGLE_LINK_GE"
     },
@@ -137,6 +149,7 @@
         ]
       },
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": "INGRESS_QOS_CLASSIFICATION_1",
       "cramerStorage": "PHY_SINGLE_LINK_GE"
     },
@@ -154,6 +167,7 @@
         ]
       },
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": "ING_POLICING_PROFILE1",
       "cramerStorage": "PHY_SINGLE_LINK_GE"
     },
@@ -171,6 +185,7 @@
         ]
       },
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": "EGRESS_QOS_QUEUE_PROFILE1",
       "cramerStorage": "PHY_SINGLE_LINK_GE"
     },
@@ -186,6 +201,7 @@
         ]
       },
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": "CORE_MPLS",
       "cramerStorage": "PHY_SINGLE_LINK_GE"
     },
@@ -202,6 +218,7 @@
         ]
       },
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": "rewrite_config1",
       "cramerStorage": "PHY_SINGLE_LINK_GE"
     },
@@ -214,6 +231,7 @@
         "comment": "1 or multiple values separated by ;"
       },
       "special": false,
+      "dynamicallyMapped": false,
       "exampleValue": "Snippet1;Snippet2",
       "cramerStorage": "CONFIG_SNIPPET_GE (s)"
     }
@@ -224,7 +242,6 @@
       "description": "PHY Single link service name",
       "mandatory": true,
       "valueType": "string",
-      "special": false,
       "exampleValue": "PHYSL000000001",
       "cramerStorage": "Service object"
     },
@@ -233,7 +250,6 @@
       "description": "Physical interface speed (Kbit/s)",
       "mandatory": true,
       "valueType": "integer",
-      "special": false,
       "exampleValue": 100000000,
       "cramerStorage": "optical  module of the port"
     },
@@ -242,7 +258,6 @@
       "description": "Physical interface type",
       "mandatory": true,
       "valueType": "string",
-      "special": false,
       "exampleValue": "100GBASE-LR1",
       "cramerStorage": "optical  module of the port"
     },
@@ -254,7 +269,6 @@
       "valueTypeDetails": {
         "comment": "two decimal places"
       },
-      "special": false,
       "exampleValue": "1540.25",
       "cramerStorage": "optical  module of the port"
     },
@@ -266,7 +280,6 @@
       "valueTypeDetails": {
         "comment": "two decimal places; must support negative numbers"
       },
-      "special": false,
       "exampleValue": "-5.00",
       "cramerStorage": "optical  module of the port"
     },
@@ -275,7 +288,6 @@
       "description": "Physical link service ID (IDN service name)",
       "mandatory": true,
       "valueType": "string",
-      "special": false,
       "exampleValue": "IDN001",
       "cramerStorage": "Service"
     },
@@ -284,7 +296,6 @@
       "description": "Remote access device name",
       "mandatory": true,
       "valueType": "string",
-      "special": false,
       "exampleValue": "ONT0000000014",
       "cramerStorage": "Access device"
     },
@@ -293,7 +304,6 @@
       "description": "Remote access device interface name",
       "mandatory": true,
       "valueType": "string",
-      "special": false,
       "exampleValue": "Ge1/0",
       "cramerStorage": "Access device port"
     }
