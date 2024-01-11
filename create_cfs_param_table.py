@@ -11,7 +11,7 @@ from lookuptable import LookupTable, LtEntry
 from debug import DBG, set_debug_level
 
 def read_data_from_sheet(sheet, col1, col2, cfsname, componentname, fpname):
-    STARTROW = 6
+    STARTROW = 7
     AMBIGUOUS = ["CUST_SNIPPET_NAMES"] # Parameters which can have different values for different FPs
 
     rv = []
@@ -21,7 +21,7 @@ def read_data_from_sheet(sheet, col1, col2, cfsname, componentname, fpname):
         if techname == "Version": # avoid reading version history
             break
         if sheet.cell(row=row, column=1).font.strike:
-            DBG(10, "Ignoring parameter {} because of strikethough formatting".format(techname))
+            DBG(20, "Ignoring parameter {} because of strikethough formatting".format(techname))
             continue
         if techname and paramtype and techname != "NETWORK_ELEMENT_NAME":
             if paramtype == 'input':
@@ -80,7 +80,7 @@ def read_data_from_excel(xlfile, cfsname, componentname):
                     col1, col2 = col, col+1
                     DBG(10, "Reading parameters for product {}, action {} from tab {}, columns {},{}".format(prodname, action, tab, col1, col2))
                     data = read_data_from_sheet(sheet, col1, col2, cfsname, componentname, prodname)
-                    rv.append({"factoryProduct": prodname, "action": action, "factoryProductVersion": version, "parameters": data})
+                    rv.append({"factoryProduct": prodname, "action": action, "factoryProductVersion": str(version), "parameters": data})
                     break
     
     return rv
