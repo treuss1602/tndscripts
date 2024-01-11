@@ -1,6 +1,6 @@
 ''' Model for the Factory Product Configuration. '''
 import json
-import functools
+import re
 import validations
 from debug import DBG
 from lookuptable import LookupTable, LtEntry
@@ -15,8 +15,10 @@ for name, cls in validations.__dict__.items():
 
 class Param:
     ''' Parameter class '''
-    def __init__(self, type, name, desc, valuetype, typedetails, mandatory, examplevalue=None, cramerStorage=None, acadefault=None, special=False, maxoccurs=None):
-        DBG(50, "Param.init called with type={}, name={}, desc={}, valuetype={}, typedetails={}, mandatory={}, examplevalue={}, cramerStorage={}, acadefault={}, special={}".format(type, name, desc, valuetype, typedetails, mandatory, examplevalue, cramerStorage, acadefault, special))
+    def __init__(self, type, name, desc, valuetype, typedetails, mandatory,
+                 examplevalue=None, cramerStorage=None, acadefault=None, special=None, dynamically_mapped=None, maxoccurs=None):
+        DBG(50, "Param.init called with type={}, name={}, desc={}, valuetype={}, typedetails={}, mandatory={}, examplevalue={}, "
+                "cramerStorage={}, acadefault={}, special={}, dynamically_mapped={}".format(type, name, desc, valuetype, typedetails, mandatory, examplevalue, cramerStorage, acadefault, special, dynamically_mapped))
         self.type = type
         self.name = name
         self.desc = desc
@@ -25,12 +27,24 @@ class Param:
             if typedetails:
                 self.enumvalues = [v.strip() for v in typedetails.split(";")]
                 self.typedetails = None
+                self.integerrange = None
             else:
                 print("WARNING: Parameter '{}' is of type '{}' but no enumeration values are provided.".format(self.name, self.valuetype))
                 self.enumvalues = []
                 self.typedetails = None
+                self.integerrange = None
+        elif self.valuetype == "integer" and typedetails:
+            m = re.match(r'(\d+)-(\d+)', typedetails)
+            if m:
+                self.integerrange = tuple(int(g) for g in m.groups())
+                self.typedetails = None
+            else:
+                self.typedetails = typedetails
+                self.integerrange = None
+            self.enumvalues = None
         else:            
             self.typedetails = typedetails
+            self.integerrange = None
             self.enumvalues = None
         self.mandatory = mandatory
         if self.valuetype == "boolean":
@@ -47,15 +61,21 @@ class Param:
             self.acadefault = acadefault
         self.special = special
         self.cramerStorage = cramerStorage
+        self.dynamically_mapped = dynamically_mapped
         self.maxoccurs = maxoccurs
 
     def as_dict(self):
         param = {"name": self.name, "description": self.desc, "mandatory": self.mandatory, "valueType": self.valuetype}
         if self.enumvalues is not None:
             param["valueTypeDetails"] = {"enumValues": self.enumvalues}
+        elif self.integerrange is not None:
+            param["valueTypeDetails"] = {"minValue": self.integerrange[0], "maxValue": self.integerrange[1]}
         elif self.typedetails:
             param["valueTypeDetails"] = {"comment": self.typedetails}
-        param["special"] = self.special
+        if self.special is not None:
+            param["special"] = self.special
+        if self.dynamically_mapped is not None:
+            param["dynamicallyMapped"] = self.dynamically_mapped
         if self.examplevalue is not None:
             param["exampleValue"] =  self.examplevalue
         if self.acadefault is not None:
@@ -74,7 +94,7 @@ class Param:
             typedetails = ";".join(data["valueTypeDetails"]["enumValues"])
         else:
             typedetails = None
-        return Param(paramtype, data["name"], data["description"], data["valueType"], typedetails, data["mandatory"], data.get("exampleValue"), data.get("cramerStorage"), data.get("acadefault"), data["special"], data.get("maxOccurs"))
+        return Param(paramtype, data["name"], data["description"], data["valueType"], typedetails, data["mandatory"], data.get("exampleValue"), data.get("cramerStorage"), data.get("acadefault"), data.get("special"), data.get("dynamicallyMapped", False), data.get("maxOccurs"))
 
     def __str__(self):
         return self.name
@@ -88,7 +108,7 @@ class FactoryProductConfiguration:
     def __init__(self, factory_product_name, transaction, version, input_params, cramer_output_params, cramer_validations = []):
         self.factoryProductName = factory_product_name
         self.transaction = transaction
-        self.version = float(version) if version is not None else None
+        self.version = str(version) if version is not None else None
         self.input_params = input_params
         self.cramer_output_params = cramer_output_params
         self.cramer_validations = cramer_validations

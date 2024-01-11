@@ -12,6 +12,7 @@ def read_data_from_excel(xlfile, tab):
     ''' Read and return the data from the correct sheet in the excel file.'''
     STARTROW = 6
     COLUMNS = {'TECHNAME': 1, 'DESC': 2, 'VALUETYPE': 3, 'TYPEDETAILS': 4, 'OM': 5, 'EXAMPLE_VALUE': 6, 'CRAMERSTORAGE': 7, 'PARAMTYPE': 8, 'ACADEFAULT': 10 }
+    COLS_TO_CHECK_FOR_MAPPING = [11, 13 ,15, 17]
     PRODNAME_CELL = 'B1'
     ACTION_CELL = 'B3'
     VERSION_CELL = 'B4'
@@ -46,7 +47,7 @@ def read_data_from_excel(xlfile, tab):
         if techname == "Version": # avoid reading version history
             break
         if sheet.cell(row=row, column=1).font.strike:
-            DBG(10, "Ignoring parameter {} because of strikethough formatting".format(techname))
+            DBG(20, "Ignoring parameter {} because of strikethough formatting".format(techname))
             continue
         if techname and valuetype and mo and paramtype:
             # Check for arrays
@@ -56,15 +57,16 @@ def read_data_from_excel(xlfile, tab):
                 maxoccurs = int(m.group(2))
             else:
                 maxoccurs = None
+            mapped = any(sheet.cell(row=row, column=col).value and sheet.cell(row=row, column=col).value.lower() == "mapped" for col in COLS_TO_CHECK_FOR_MAPPING)
             if paramtype.lower() == "input" or paramtype.lower() == "special":
                 DBG(30, "Adding parameter {} (type {}) to input parameters".format(techname, paramtype))
-                inparams.append(Param('input', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, acadefault, paramtype.lower() == "special", maxoccurs))
+                inparams.append(Param('input', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, acadefault, paramtype.lower() == "special", mapped, maxoccurs))
             elif paramtype.lower() == "return":
                 DBG(30, "Adding parameter {} (type {}) to cramer output parameters".format(techname, paramtype))
                 crameroutparams.append(Param('Cramer', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, maxoccurs=maxoccurs))
             elif paramtype.lower() == "inputorreturn":
                 DBG(30, "Adding parameter {} (type {}) to input AND cramer output parameters".format(techname, paramtype))
-                inparams.append(Param('input', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, acadefault, paramtype.lower() == "special", maxoccurs))
+                inparams.append(Param('input', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, acadefault, paramtype.lower() == "special", mapped, maxoccurs))
                 crameroutparams.append(Param('Cramer', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, maxoccurs=maxoccurs))
             else:
                 DBG(30, "Ignoring parameter {} (type {})".format(techname, paramtype))
