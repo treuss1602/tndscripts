@@ -23,7 +23,7 @@ def create_lookup_tables_for_factory_product(config, nenameparam="NETWORK_ELEMEN
 
     # LKT_TND_FACTORY_PRODUCT_PARAMETERS
     lkt1 = LookupTable('LKT_TND_FACTORY_PRODUCT_PARAMETERS')
-    lkt1.add(LtEntry(prod+"#"+trans, joinparams(config.input_params)))
+    lkt1.add(LtEntry(prod+"#"+trans, joinparams(config.input_params), joinparams([p for p in config.input_params if p.dynamically_mapped])))
 
     # LKT_MANDATORY_PARAM_CHECK
     lkt2 = LookupTable('LKT_MANDATORY_PARAM_CHECK')
