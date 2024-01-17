@@ -5,6 +5,7 @@ import json
 from zipfile import ZipFile
 from factoryproduct import FactoryProductConfiguration
 from lookuptable import LookupTable, LtEntry
+from identifyfunctions import IdentifyFunctions
 from debug import DBG, set_debug_level
 
 def create_zipfile(filename, *tables):
@@ -41,26 +42,34 @@ def create_lookup_tables_for_factory_product(config, nenameparam="NETWORK_ELEMEN
     # LKT_TND_CRAMER_COMMAND_VALIDATION
     lkt4 = LookupTable.from_validations(prod, trans, *config.cramer_validations)
 
-    # LKT_TND_CRAMER_SUBORDERS
-    lkt5 = LookupTable('LKT_TND_CRAMER_SUBORDERS')
-    lkt5.add(LtEntry(prod+"#"+trans+"#SUBORDER_PRODUCT", "TECHPROD_CRAMER_FACT_PROD_"+prod))
-    lkt5.add(LtEntry(prod+"#"+trans+"#PARAMETERS", joinparams([p for p in config.input_params if not p.special])))
-    lkt5.add(LtEntry(prod+"#"+trans+"#RETURN_PARAMETERS", joinparams(config.cramer_output_params)))
+    # LKT_LKT_TND_CRAMER_IDENTIFY_SERVICE
+    lkt5 = LookupTable('LKT_LKT_TND_CRAMER_IDENTIFY_SERVICE')
+    fdata = IdentifyFunctions[prod]
+    lkt5.add(LtEntry(prod+"#"+trans+"#API_NAME", fdata["api"]))
+    lkt5.add(LtEntry(prod+"#"+trans+"#PARAMETERS", ";".join("{}={}".format(*it) for it in fdata["inparams"].items())+";"))
     lkt5.add(LtEntry(prod+"#"+trans+"#GE_PARAMETERS", joinparams([p for p in config.input_params if p.cramerStorage == config.factoryProductName+"_GE"])))
+    lkt5.add(LtEntry(prod+"#"+trans+"#RETURN_PARAMETERS", ",".join("{}:{}".format(*it) for it in fdata["outparams"].items())))
+
+    # LKT_TND_CRAMER_SUBORDERS
+    lkt6 = LookupTable('LKT_TND_CRAMER_SUBORDERS')
+    lkt6.add(LtEntry(prod+"#"+trans+"#SUBORDER_PRODUCT", "TECHPROD_CRAMER_FACT_PROD_"+prod))
+    lkt6.add(LtEntry(prod+"#"+trans+"#PARAMETERS", joinparams([p for p in config.input_params if not p.special])))
+    lkt6.add(LtEntry(prod+"#"+trans+"#RETURN_PARAMETERS", joinparams(config.cramer_output_params)))
+    lkt6.add(LtEntry(prod+"#"+trans+"#GE_PARAMETERS", joinparams([p for p in config.input_params if p.cramerStorage == config.factoryProductName+"_GE"])))
 
     # LKT_TND_STABLENET
-    lkt6 = LookupTable('LKT_TND_STABLENET')
+    lkt7 = LookupTable('LKT_TND_STABLENET')
     if config.transaction == "Create":
-        lkt6.add(LtEntry(prod+"#"+trans+"#ORDER_DESCRIPTION", "new_rfs"))
+        lkt7.add(LtEntry(prod+"#"+trans+"#ORDER_DESCRIPTION", "new_rfs"))
     elif config.transaction == "Delete":
-        lkt6.add(LtEntry(prod+"#"+trans+"#ORDER_DESCRIPTION", "cease_rfs"))
+        lkt7.add(LtEntry(prod+"#"+trans+"#ORDER_DESCRIPTION", "cease_rfs"))
     else:
         raise ValueError("Action {} not (yet) supported for Stablenet Requests.")
-    lkt6.add(LtEntry(prod+"#"+trans+"#TARGET_DEVICE", nenameparam))
-    lkt6.add(LtEntry(prod+"#"+trans+"#RFS_NAME", config.factoryProductName+"_RFS_NAME"))
-    lkt6.add(LtEntry(prod+"#"+trans+"#PARAMETERS", joinparams([p for p in config.input_params if not p.special], config.cramer_output_params)))
+    lkt7.add(LtEntry(prod+"#"+trans+"#TARGET_DEVICE", nenameparam))
+    lkt7.add(LtEntry(prod+"#"+trans+"#RFS_NAME", config.factoryProductName+"_RFS_NAME"))
+    lkt7.add(LtEntry(prod+"#"+trans+"#PARAMETERS", joinparams([p for p in config.input_params if not p.special], config.cramer_output_params)))
 
-    return (lkt1, lkt2, lkt3, lkt4, lkt5, lkt6)
+    return (lkt1, lkt2, lkt3, lkt4, lkt5, lkt6, lkt7)
 
 def create_lookup_tables_for_composition(data):
     ''' Create the lookup Tables '''
