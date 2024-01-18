@@ -95,7 +95,7 @@ if __name__ == "__main__":
     config.add_validation("CHECK_NODE_LOCATION", args.nename, taskname="CHECK_TARGET_NE_EXISTS")
     if "ACCESS_DEVICE_NAME" in config.input_param_names():
         config.add_validation("CHECK_NODE_LOCATION", "ACCESS_DEVICE_NAME", taskname="CHECK_ACCESS_DEVICE_EXISTS")
-    outfile = "{}_{}.json".format(prodname, transaction) if args.outfile is None else args.outfile
+    outfile = "FP_{}_{}.json".format(prodname, transaction) if args.outfile is None else args.outfile
     DBG(10, "Writing json file '{}'".format(outfile))
     with open(outfile, "w") as fp:
         config.to_file(fp)

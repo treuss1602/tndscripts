@@ -519,18 +519,6 @@
           "from": "RBH_RPD_ELAN_SAP_CUST_SNIPPET_NAMES"
         }
       ]
-    },
-    {
-      "factoryProduct": "PHY_IRB",
-      "action": "Create",
-      "factoryProductVersion": "0.3",
-      "parameters": [
-        {
-          "name": "CUST_SNIPPET_NAMES",
-          "type": "input",
-          "from": "RBH_RPD_PHY_IRB_CUST_SNIPPET_NAMES"
-        }
-      ]
     }
   ]
 }

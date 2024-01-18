@@ -109,7 +109,7 @@ if __name__ == "__main__":
     jsondata = {"compositionName": args.composite, "compositionType": "cfs" if cfsname else "component"}
     jsondata["paramMapping"] = read_data_from_excel(args.filename, cfsname, componentname)
 
-    outfile = "pmapping_{}.json".format(args.composite) if args.outfile is None else args.outfile
+    outfile = "{}_{}.json".format("CFS" if cfsname else "Component", args.composite) if args.outfile is None else args.outfile
     DBG(10, "Writing json file '{}'".format(outfile))
     with open(outfile, "w") as fp:
         json.dump(jsondata, fp, indent=2)
