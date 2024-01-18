@@ -86,6 +86,12 @@ class Param:
             param["maxOccurs"] = self.maxoccurs
         return param
 
+    def get_example_value(self):
+        if self.valuetype == "boolean":
+            return "true" if self.examplevalue else "false"
+        else:
+            return str(self.examplevalue)
+
     @staticmethod
     def from_dict(data, paramtype):
         if data.get("valueTypeDetails") and data["valueTypeDetails"].get("comment"):
@@ -124,9 +130,15 @@ class FactoryProductConfiguration:
 
     def input_param_names(self):
         return {p.name for p in self.input_params}
+    
+    def find_input_param(self, name):
+        return next(p for p in self.input_params if p.name == name)
 
     def return_param_names(self):
         return {p.name for p in self.cramer_output_params}
+
+    def find_return_param(self, name):
+        return next(p for p in self.cramer_output_params if p.name == name)
 
     def to_file(self, fp):
         data = {"factoryProductName": self.factoryProductName, "action": self.transaction, "version": self.version}
