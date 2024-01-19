@@ -101,7 +101,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": false,
+      "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "ELANCORE_GE"
     },
@@ -112,7 +112,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": false,
+      "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "ELANCORE_GE"
     },
@@ -144,7 +144,7 @@
       "description": "EVI instance ID",
       "mandatory": true,
       "valueType": "integer",
-      "exampleValue": 41001,
+      "exampleValue": "41001",
       "cramerStorage": "Number object related to topology?"
     },
     {

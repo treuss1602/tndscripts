@@ -77,7 +77,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": true,
+      "exampleValue": "true",
       "acadefault": true,
       "cramerStorage": "IPVPN_CORE_GE"
     },
@@ -88,7 +88,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": false,
+      "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_CORE_GE"
     },
@@ -116,7 +116,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": false,
+      "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_CORE_GE"
     },
@@ -153,7 +153,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": false,
+      "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_CORE_GE"
     },
@@ -164,7 +164,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": false,
+      "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_CORE_GE"
     },
@@ -198,7 +198,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": false,
+      "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_CORE_GE"
     },
@@ -232,7 +232,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": false,
+      "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_CORE_GE"
     },

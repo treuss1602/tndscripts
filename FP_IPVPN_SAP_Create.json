@@ -68,7 +68,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": 4000,
+      "exampleValue": "4000",
       "cramerStorage": "VLAN number"
     },
     {
@@ -96,7 +96,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": 3000,
+      "exampleValue": "3000",
       "cramerStorage": "VLAN number"
     },
     {
@@ -124,7 +124,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": 1500,
+      "exampleValue": "1500",
       "acadefault": 1500,
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -233,7 +233,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": false,
+      "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -247,7 +247,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": 2,
+      "exampleValue": "2",
       "cramerStorage": "IPVPN_SAP_GE"
     },
     {
@@ -257,7 +257,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": false,
+      "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -268,7 +268,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": false,
+      "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -279,7 +279,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": false,
+      "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -290,7 +290,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": false,
+      "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -301,7 +301,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": false,
+      "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -312,7 +312,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": false,
+      "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -437,7 +437,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": false,
+      "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -448,7 +448,7 @@
       "valueType": "integer",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": 1,
+      "exampleValue": "1",
       "cramerStorage": "IPVPN_SAP_GE"
     },
     {
@@ -471,7 +471,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": false,
+      "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -482,7 +482,7 @@
       "valueType": "integer",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": 1,
+      "exampleValue": "1",
       "cramerStorage": "IPVPN_SAP_GE"
     },
     {
@@ -505,7 +505,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": false,
+      "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -541,7 +541,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": false,
+      "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -552,7 +552,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": false,
+      "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -563,7 +563,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": false,
+      "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -574,7 +574,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": false,
+      "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -692,7 +692,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": false,
+      "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -736,7 +736,7 @@
         "minValue": 1,
         "maxValue": 4094
       },
-      "exampleValue": 4000,
+      "exampleValue": "4000",
       "cramerStorage": "VLAN number"
     },
     {
@@ -748,7 +748,7 @@
         "minValue": 1,
         "maxValue": 4094
       },
-      "exampleValue": 3000,
+      "exampleValue": "3000",
       "cramerStorage": "VLAN number"
     },
     {

@@ -23,10 +23,7 @@ def create_sample_request(productconfig : FactoryProductConfiguration, orderno =
             if p.examplevalue is not None:
                 DBG(30, "Adding parameter {} to request.".format(p.name))
                 pname = p.name if "<N>" not in p.name else p.name.replace("<N>", "1")
-                if p.valuetype == "boolean":
-                    ol.add_parameter(pname, "true" if p.examplevalue else "false")
-                else:
-                    ol.add_parameter(pname, str(p.examplevalue))
+                ol.add_parameter(pname, p.examplevalue)
             else:
                 DBG(10, "Skipping parameter {}. No example value in input file.".format(p.name))
     req.add_orderline(ol)

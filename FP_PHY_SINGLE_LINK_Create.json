@@ -30,7 +30,7 @@
       "valueType": "integer",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": 1500,
+      "exampleValue": "1500",
       "cramerStorage": "PHY_SINGLE_LINK_GE"
     },
     {
@@ -59,7 +59,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": true,
+      "exampleValue": "true",
       "acadefault": false,
       "cramerStorage": "PHY_SINGLE_LINK_GE"
     },
@@ -70,7 +70,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": false,
+      "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "PHY_SINGLE_LINK_GE"
     },
@@ -81,7 +81,7 @@
       "valueType": "integer",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": 255,
+      "exampleValue": "255",
       "cramerStorage": "PHY_SINGLE_LINK_GE"
     },
     {
@@ -91,7 +91,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": true,
+      "exampleValue": "true",
       "acadefault": false,
       "cramerStorage": "PHY_SINGLE_LINK_GE"
     },
@@ -111,7 +111,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": true,
+      "exampleValue": "true",
       "acadefault": true,
       "cramerStorage": "PHY_SINGLE_LINK_GE"
     },
@@ -122,7 +122,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": true,
+      "exampleValue": "true",
       "acadefault": false,
       "cramerStorage": "PHY_SINGLE_LINK_GE"
     },
@@ -250,7 +250,7 @@
       "description": "Physical interface speed (Kbit/s)",
       "mandatory": true,
       "valueType": "integer",
-      "exampleValue": 100000000,
+      "exampleValue": "100000000",
       "cramerStorage": "optical  module of the port"
     },
     {

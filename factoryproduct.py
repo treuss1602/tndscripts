@@ -48,10 +48,10 @@ class Param:
             self.enumvalues = None
         self.mandatory = mandatory
         if self.valuetype == "boolean":
-            self.examplevalue = examplevalue if isinstance(examplevalue, bool) else examplevalue.lower().strip() == "true"
+            self.examplevalue = "true" if (isinstance(examplevalue, bool) and examplevalue) or examplevalue.lower().strip() == "true" else "false"
             self.acadefault =  acadefault if isinstance(acadefault, bool) else acadefault.lower().strip() == "true"
         elif self.valuetype == "integer":
-            self.examplevalue = int(examplevalue) if examplevalue else None;
+            self.examplevalue = str(examplevalue) if examplevalue else None;
             self.acadefault = int(acadefault) if acadefault else None;
         elif self.valuetype == "string":
             self.examplevalue = str(examplevalue) if examplevalue else None;
@@ -77,7 +77,10 @@ class Param:
         if self.dynamically_mapped is not None:
             param["dynamicallyMapped"] = self.dynamically_mapped
         if self.examplevalue is not None:
-            param["exampleValue"] =  self.examplevalue
+            if self.type == "boolean":
+                param["exampleValue"] = "true" if self.examplevalue else "false"
+            else:
+                param["exampleValue"] = str(self.examplevalue)
         if self.acadefault is not None:
             param["acadefault"] =  self.acadefault
         if self.cramerStorage:
@@ -87,10 +90,7 @@ class Param:
         return param
 
     def get_example_value(self):
-        if self.valuetype == "boolean":
-            return "true" if self.examplevalue else "false"
-        else:
-            return str(self.examplevalue)
+        return str(self.examplevalue)
 
     @staticmethod
     def from_dict(data, paramtype):
