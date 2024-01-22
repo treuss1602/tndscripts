@@ -1,6 +1,9 @@
 {
   "compositionName": "TN_RBH_RPD_ACCESS",
   "compositionType": "cfs",
+  "includedComponents": [
+    "RBH_RPD"
+  ],
   "paramMapping": [
     {
       "factoryProduct": "PHY_SINGLE_LINK",

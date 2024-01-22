@@ -10,6 +10,12 @@ from lookuptable import LookupTable, LtEntry
 
 from debug import DBG, set_debug_level
 
+CFS_COMPONENT_MAPPING = {
+    "TN_RBH_RPD_ACCESS": ["RBH_RPD"],
+    "TN_RBH_CMTS_ACCESS": ["RBH_CMTS"],
+    "TN_RBH_CMTS_CORE": ["RBH_CMTS_INET", "RBH_CMTS_ABR_MC"],
+}
+
 def read_data_from_sheet(sheet, col1, col2, cfsname, componentname, fpname):
     STARTROW = 7
     AMBIGUOUS = ["CUST_SNIPPET_NAMES"] # Parameters which can have different values for different FPs
@@ -107,6 +113,8 @@ if __name__ == "__main__":
         cfsname = None
 
     jsondata = {"compositionName": args.composite, "compositionType": "cfs" if cfsname else "component"}
+    if cfsname:
+        jsondata["includedComponents"] = CFS_COMPONENT_MAPPING.get(cfsname, [])
     jsondata["paramMapping"] = read_data_from_excel(args.filename, cfsname, componentname)
 
     outfile = "{}_{}.json".format("CFS" if cfsname else "Component", args.composite) if args.outfile is None else args.outfile
