@@ -67,7 +67,9 @@ def create_lookup_tables_for_factory_product(config, nenameparam="NETWORK_ELEMEN
         raise ValueError("Action {} not (yet) supported for Stablenet Requests.")
     lkt7.add(LtEntry(prod+"#"+trans+"#TARGET_DEVICE", nenameparam))
     lkt7.add(LtEntry(prod+"#"+trans+"#RFS_NAME", config.factoryProductName+"_RFS_NAME"))
-    lkt7.add(LtEntry(prod+"#"+trans+"#PARAMETERS", joinparams([p for p in config.input_params if not p.special], config.cramer_output_params)))
+    parameters = [p for p in config.input_params if not p.special]
+    parameters += [p for p in config.cramer_output_params if p.name not in config.input_param_names()]
+    lkt7.add(LtEntry(prod+"#"+trans+"#PARAMETERS", joinparams(parameters)))
 
     return (lkt1, lkt2, lkt3, lkt4, lkt5, lkt6, lkt7)
 

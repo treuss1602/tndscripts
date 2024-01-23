@@ -25,7 +25,7 @@ if __name__ == "__main__":
                 print("="*len(config.factoryProductName))
             parameters = []
             for p in config.input_params + config.cramer_output_params:
-                if not p.special:
+                if not p.special and p.name not in parameters: # Avoid adding inputOrReturn parameters twice
                     if (config.factoryProductName, p.name) in TR:
                         parameters += TR[(config.factoryProductName, p.name)]
                     else:
