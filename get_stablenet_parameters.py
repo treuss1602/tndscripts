@@ -20,8 +20,9 @@ if __name__ == "__main__":
         DBG(10, "Reading json file '{}'".format(filename))
         with open(filename, "r") as fp:
             config = FactoryProductConfiguration.from_file(fp)
-            print(config.factoryProductName)
-            print("="*len(config.factoryProductName))
+            if len(args.filename) > 1:
+                print(config.factoryProductName)
+                print("="*len(config.factoryProductName))
             parameters = []
             for p in config.input_params + config.cramer_output_params:
                 if not p.special:
@@ -31,4 +32,5 @@ if __name__ == "__main__":
                         parameters.append(p.name)
             #print("\n".join([p.name for p in config.input_params + config.cramer_output_params if not p.special]))
             print("\n".join(parameters))
-            print()
+            if len(args.filename) > 1:
+                print()
