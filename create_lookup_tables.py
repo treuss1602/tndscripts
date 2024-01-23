@@ -89,11 +89,11 @@ def create_lookup_tables_for_composition(data):
             key = "#".join([cfs, component, fpname, action, pname])
             DBG(30, "Key is {}".format(key))
             if ptype == "static":
-                value = paramdata["value"] if paramdata["value"] is not None else "<NULL>"
+                values = (paramdata["value"] if paramdata["value"] is not None else "<NULL>", "S")
             elif ptype in ["input", "mapped"]:
-                value = "(${})".format(paramdata["from"])
-            DBG(30, "Value is {}".format(value))
-            lkt.add(LtEntry(key, value))
+                values = (paramdata["from"], "D")
+            DBG(30, "Values are {}".format(values))
+            lkt.add(LtEntry(key, *values))
     return lkt
 
 if __name__ == "__main__":
