@@ -24,7 +24,6 @@ if __name__ == "__main__":
     set_debug_level(args.dbglevel)
 
     paramlist = []
-    paramlist = []
     cfsname = None
     for f in args.filename:
         DBG(10, "Reading json file '{}'".format(f))
