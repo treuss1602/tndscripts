@@ -1,0 +1,336 @@
+{
+  "factoryProductName": "PHY_ILAG",
+  "action": "Create",
+  "version": "0.5",
+  "inputParameters": [
+    {
+      "name": "NETWORK_ELEMENT_NAME",
+      "description": "Network element name",
+      "mandatory": true,
+      "valueType": "string",
+      "special": true,
+      "dynamicallyMapped": false,
+      "exampleValue": "ZH0004MEB101",
+      "cramerStorage": "TND device ( types to TBD)"
+    },
+    {
+      "name": "PHYS_IF_NAME_<N>",
+      "description": "Physical interface name(s)\nUpto 32 interfaces or members links possible in",
+      "mandatory": true,
+      "valueType": "string[32]",
+      "special": false,
+      "dynamicallyMapped": false,
+      "exampleValue": "GigabitEthernet0/1/0",
+      "cramerStorage": "TND device's  port"
+    },
+    {
+      "name": "PHYS_LINK_UP_DELAY",
+      "description": "Physical link - link up delay (ms)",
+      "mandatory": false,
+      "valueType": "integer",
+      "special": false,
+      "dynamicallyMapped": false,
+      "cramerStorage": "PHY_ILAG_GE"
+    },
+    {
+      "name": "PHYS_LINK_FLAP_DAMPENING_FLAG",
+      "description": "Physical link - link flap dampening flag",
+      "mandatory": true,
+      "valueType": "boolean",
+      "special": false,
+      "dynamicallyMapped": false,
+      "exampleValue": "false",
+      "acadefault": false,
+      "cramerStorage": "PHY_ILAG_GE"
+    },
+    {
+      "name": "PHYS_IF_AUTO_NEGOTIATION",
+      "description": "Autonegotiation",
+      "mandatory": true,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "On",
+          "On-1000",
+          "On-100",
+          "Off"
+        ]
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "exampleValue": "On",
+      "acadefault": "On",
+      "cramerStorage": "PHY_ILAG_GE"
+    },
+    {
+      "name": "PHYS_IF_8021X_PROFILE_NAME",
+      "description": "802.1x profile name",
+      "mandatory": false,
+      "valueType": "string",
+      "special": false,
+      "dynamicallyMapped": false,
+      "exampleValue": "DummyProfile802",
+      "cramerStorage": "PHY_ILAG_GE"
+    },
+    {
+      "name": "PHYS_ILAG_IF_NAME",
+      "description": "Logical LAG interface identifier",
+      "mandatory": true,
+      "valueType": "string",
+      "special": false,
+      "dynamicallyMapped": false,
+      "cramerStorage": "IF name"
+    },
+    {
+      "name": "PHYS_LACP_FAST_TIMER",
+      "description": "LACP fast timer",
+      "mandatory": true,
+      "valueType": "boolean",
+      "special": false,
+      "dynamicallyMapped": false,
+      "exampleValue": "false",
+      "acadefault": false,
+      "cramerStorage": "PHY_ILAG_GE"
+    },
+    {
+      "name": "PHYS_ILAG_IF_MTU",
+      "description": "Interface MTU",
+      "mandatory": false,
+      "valueType": "integer",
+      "special": false,
+      "dynamicallyMapped": false,
+      "cramerStorage": "PHY_ILAG_GE"
+    },
+    {
+      "name": "PHYS_ILAG_SYNCE_ENABLED",
+      "description": "SyncE enabled",
+      "mandatory": true,
+      "valueType": "boolean",
+      "special": false,
+      "dynamicallyMapped": false,
+      "exampleValue": "false",
+      "acadefault": false,
+      "cramerStorage": "PHY_ILAG_GE"
+    },
+    {
+      "name": "PHYS_ILAG_PTP_ENABLED",
+      "description": "PTP enabled",
+      "mandatory": true,
+      "valueType": "boolean",
+      "special": false,
+      "dynamicallyMapped": false,
+      "exampleValue": "false",
+      "acadefault": false,
+      "cramerStorage": "PHY_ILAG_GE"
+    },
+    {
+      "name": "PHYS_ILAG_PTP_PRIO",
+      "description": "PTP priority",
+      "mandatory": false,
+      "valueType": "integer",
+      "special": false,
+      "dynamicallyMapped": false,
+      "exampleValue": "255",
+      "cramerStorage": "PHY_ILAG_GE"
+    },
+    {
+      "name": "PHYS_ILAG_MAC_SEC",
+      "description": "MACsec flag",
+      "mandatory": true,
+      "valueType": "boolean",
+      "special": false,
+      "dynamicallyMapped": false,
+      "exampleValue": "false",
+      "acadefault": false,
+      "cramerStorage": "PHY_ILAG_GE"
+    },
+    {
+      "name": "QOS_INGRESS_CLASSIFICATION_PROFILE",
+      "description": "Ingress classification profile",
+      "mandatory": false,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "INGRESS_QOS_CLASSIFICATION_1",
+          "INGRESS_QOS_CLASSIFICATION_2",
+          "INGRESS_QOS_CLASSIFICATION_3"
+        ]
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "exampleValue": "INGRESS_QOS_CLASSIFICATION_1",
+      "cramerStorage": "PHY_ILAG_GE"
+    },
+    {
+      "name": "QOS_INGRESS_POLICING_PROFILE",
+      "description": "Ingress policing profile",
+      "mandatory": false,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "ING_POLICING_PROFILE1",
+          "ING_POLICING_PROFILE2",
+          "ING_POLICING_PROFILE3",
+          "ING_POLICING_BESTEFFORT"
+        ]
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "exampleValue": "Common link parameters are grouped",
+      "cramerStorage": "PHY_ILAG_GE"
+    },
+    {
+      "name": "QOS_EGRESS_QOS_QUEUE_PROFILE",
+      "description": "Egress QoS queue profile",
+      "mandatory": false,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "EGRESS_QOS_QUEUE_PROFILE1",
+          "EGRESS_QOS_QUEUE_PROFILE2",
+          "EGRESS_QOS_QUEUE_PROFILE3",
+          "EGRESS_BESTEFFORT"
+        ]
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "exampleValue": "0",
+      "cramerStorage": "PHY_ILAG_GE"
+    },
+    {
+      "name": "QOS_EGRESS_QOS_POLICY",
+      "description": "Egress QoS policy",
+      "mandatory": false,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "CORE_MPLS",
+          "EGRESS_PROFILE1"
+        ]
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "exampleValue": "0",
+      "cramerStorage": "PHY_ILAG_GE"
+    },
+    {
+      "name": "QOS_CUST_EGRESS_REWRITE_CONFIG",
+      "description": "Egress rewrite configuration",
+      "mandatory": false,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "rewrite_config1",
+          "rewrite_config2",
+          "rewrite_config3"
+        ]
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "exampleValue": "rewrite_config1",
+      "cramerStorage": "PHY_ILAG_GE"
+    },
+    {
+      "name": "CUST_SNIPPET_NAMES",
+      "description": "custom snippet name(s) , name also includes the version of the snippet, delimeter as ';'",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or multiple values separated by ;"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "exampleValue": "Snippet1;Snippet2",
+      "cramerStorage": "CONFIG_SNIPPET_GE (s)"
+    }
+  ],
+  "cramerParameters": [
+    {
+      "name": "PHYS_IF_TYPE_<N>",
+      "description": "Physical interface type",
+      "mandatory": true,
+      "valueType": "string[32]",
+      "exampleValue": "100GBASE-LR1",
+      "cramerStorage": "optical  module of the port"
+    },
+    {
+      "name": "PHYS_IF_CENTER_FREQUENCY_<N>",
+      "description": null,
+      "mandatory": false,
+      "valueType": "number[32]",
+      "valueTypeDetails": {
+        "comment": "two decimal places"
+      },
+      "exampleValue": "1540.25",
+      "cramerStorage": "optical  module of the port"
+    },
+    {
+      "name": "PHYS_IF_TX_POWER_<N>",
+      "description": null,
+      "mandatory": false,
+      "valueType": "number[32]",
+      "valueTypeDetails": {
+        "comment": "two decimal places; must support negative numbers"
+      },
+      "exampleValue": "-5.00",
+      "cramerStorage": "optical  module of the port"
+    },
+    {
+      "name": "PHYS_IDN_ACCESS_SERVICE_NAME_<N>",
+      "description": "Access service ( IDN service)",
+      "mandatory": true,
+      "valueType": "string[32]",
+      "exampleValue": "IDN001",
+      "cramerStorage": "Service"
+    },
+    {
+      "name": "ACCESS_DEVICE_NAME_<N>",
+      "description": "Remote access device name",
+      "mandatory": true,
+      "valueType": "string[32]",
+      "exampleValue": "ONT0000000014",
+      "cramerStorage": "Access device"
+    },
+    {
+      "name": "ACCESS_DEVICE_IF_NAME_<N>",
+      "description": "Remote access device interface name",
+      "mandatory": true,
+      "valueType": "string[32]",
+      "exampleValue": "Ge1/0",
+      "cramerStorage": "Access device port"
+    },
+    {
+      "name": "PHYS_IF_SPEED",
+      "description": "Physical interface speed (Kbit/s)",
+      "mandatory": true,
+      "valueType": "integer",
+      "exampleValue": "100000000",
+      "cramerStorage": "optical  module of the port"
+    },
+    {
+      "name": "PHYS_ILAG_RFS_NAME",
+      "description": "PHY ILAG service name",
+      "mandatory": true,
+      "valueType": "string",
+      "exampleValue": "PHYILAG00000001",
+      "cramerStorage": "PHY Service"
+    },
+    {
+      "name": "PHYS_ILAG_ACCESS_SERVICE_NAME",
+      "description": "ILAG service identifier",
+      "mandatory": true,
+      "valueType": "string",
+      "exampleValue": "ILAG0001",
+      "cramerStorage": "Service"
+    }
+  ],
+  "cramerValidations": [
+    {
+      "name": "CHECK_NODE_LOCATION",
+      "parameters": [
+        "NETWORK_ELEMENT_NAME"
+      ],
+      "taskname": "CHECK_TARGET_NE_EXISTS"
+    }
+  ]
+}
