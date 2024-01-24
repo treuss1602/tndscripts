@@ -46,6 +46,8 @@ def read_data_from_excel(xlfile, tab):
         techname, desc, valuetype, typedetails, mo, example, paramtype, acadefault, cramerstorage = (x.strip() if isinstance(x, str) else x for x in cellvalues)
         if techname == "Version": # avoid reading version history
             break
+        if techname is not None and techname.startswith("#"):
+            continue
         if sheet.cell(row=row, column=1).font.strike:
             DBG(20, "Ignoring parameter {} because of strikethough formatting".format(techname))
             continue
