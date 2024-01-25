@@ -43,7 +43,7 @@ def create_lookup_tables_for_factory_product(config, nenameparam="NETWORK_ELEMEN
     lkt4 = LookupTable.from_validations(prod, trans, *config.cramer_validations)
 
     # LKT_LKT_TND_CRAMER_IDENTIFY_SERVICE
-    lkt5 = LookupTable('LKT_LKT_TND_CRAMER_IDENTIFY_SERVICE')
+    lkt5 = LookupTable('LKT_TND_CRAMER_IDENTIFY_SERVICE')
     fdata = IdentifyFunctions[prod]
     lkt5.add(LtEntry(prod+"#"+trans+"#API_NAME", fdata["api"]))
     lkt5.add(LtEntry(prod+"#"+trans+"#PARAMETERS", ";".join("{}={}".format(*it) for it in fdata["inparams"].items())+";"))
