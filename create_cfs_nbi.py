@@ -15,36 +15,46 @@ def create_confluence_table(cfsname, action, parameters, headers=True):
     for param in parameters:
         print("|{}|Order Line|{}|{}|{}|".format(*param))
 
+def extract_parameters(config):
+    pass
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('-D', dest='dbglevel', action='store', default=0,    help='Print Debug information')
     parser.add_argument('-H', dest='headers', action='store_true',           help='Include headers (default if multiple files are given)')
-    parser.add_argument('filename', metavar='<FILENAME>', nargs="*",         help='JSON input files')
+    parser.add_argument('filename', metavar='<FILENAME>',                    help='JSON input file')
 
     args=parser.parse_args()
     set_debug_level(args.dbglevel)
 
     paramlist = []
     cfsname = None
-    for f in args.filename:
-        DBG(10, "Reading json file '{}'".format(f))
-        with open(f, "r") as fp:
-            config = json.load(fp)
-        if cfsname is None:
-            cfsname = config["compositionName"]
-        inputparams = [(p["from"], p["name"], fp["factoryProduct"]) for fp in config["paramMapping"] for p in fp["parameters"] if p["type"] == "input"]
-        fps = {p[2] for p in inputparams}
-        for fp in fps:
-            fp_definition_filename = "{}_Create.json".format(fp)
-            DBG(10, "Loading additional json file '{}'".format(fp_definition_filename))
-            try:
-                with open(fp_definition_filename, "r") as f:
-                    config = FactoryProductConfiguration.from_file(f)
-                for p in filter(lambda p: p[2] == fp, inputparams):
-                    pdetails = config.find_input_param(p[1])
-                    paramlist.append((p[0], pdetails.desc, pdetails.examplevalue, "M" if pdetails.mandatory else "O"))
-            except Exception as e:
-                print("WARNING: Unable to extract information for factory product {}. JSON File missing?".format(fp))
-                raise(e)
+    DBG(10, "Reading json file '{}'".format(args.filename))
+    with open(args.filename, "r") as fp:
+        config = json.load(fp)
+    if cfsname is None:
+        cfsname = config["compositionName"]
+    inputparams = [(p["from"], p["name"], fp["factoryProduct"]) for fp in config["paramMapping"] for p in fp["parameters"] if p["type"] == "input"]
+    if "includedComponents" in config:
+        for component in config["includedComponents"]:
+            component_definition_filename = "Component_{}.json".format(component)
+            DBG(10, "Loading additional json file '{}'".format(component_definition_filename))
+            with open (component_definition_filename, "r") as f:
+                comp_config = json.load(f)
+                inputparams += [(p["from"], p["name"], fp["factoryProduct"]) for fp in comp_config["paramMapping"] for p in fp["parameters"] if p["type"] == "input"]
+    fps = {p[2] for p in inputparams}
+    for fp in fps:
+        fp_definition_filename = "FP_{}_Create.json".format(fp)
+        DBG(10, "Loading additional json file '{}'".format(fp_definition_filename))
+        try:
+            with open(fp_definition_filename, "r") as f:
+                config = FactoryProductConfiguration.from_file(f)
+            for p in filter(lambda p: p[2] == fp, inputparams):
+                pdetails = config.find_input_param(p[1])
+                paramlist.append((p[0], pdetails.desc, pdetails.examplevalue, "M" if pdetails.mandatory else "O"))
+        except Exception as e:
+            print("WARNING: Unable to extract information for factory product {}. JSON File missing?".format(fp))
+            raise(e)
+
     create_confluence_table(cfsname, "Create", paramlist)
 
