@@ -1,7 +1,7 @@
 ''' Module for classes for Cramer Identify Functions '''
 
 IdentifyFunctions = {
-    "PHY_SINGLE_LINK": { "api": "identifyIPVPNCore",
+    "PHY_SINGLE_LINK": { "api": "identifyPHYSingleLink",
                          "inparams" : { "networkElementName": "NETWORK_ELEMENT_NAME", 
                                         "phyIfName": "PHYS_IF_NAME",
                                         "custSnippetName": "CUST_SNIPPET_NAMES"},

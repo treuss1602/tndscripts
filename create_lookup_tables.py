@@ -43,12 +43,16 @@ def create_lookup_tables_for_factory_product(config, nenameparam="NETWORK_ELEMEN
     lkt4 = LookupTable.from_validations(prod, trans, *config.cramer_validations)
 
     # LKT_LKT_TND_CRAMER_IDENTIFY_SERVICE
-    lkt5 = LookupTable('LKT_TND_CRAMER_IDENTIFY_SERVICE')
-    fdata = IdentifyFunctions[prod]
-    lkt5.add(LtEntry(prod+"#"+trans+"#API_NAME", fdata["api"]))
-    lkt5.add(LtEntry(prod+"#"+trans+"#PARAMETERS", ";".join("{}={}".format(*it) for it in fdata["inparams"].items())+";"))
-    lkt5.add(LtEntry(prod+"#"+trans+"#GE_PARAMETERS", joinparams([p for p in config.input_params if p.cramerStorage == config.factoryProductName+"_GE"])))
-    lkt5.add(LtEntry(prod+"#"+trans+"#RETURN_PARAMETERS", ",".join("{}:{}".format(*it) for it in fdata["outparams"].items())))
+    if prod in IdentifyFunctions:
+        lkt5 = LookupTable('LKT_TND_CRAMER_IDENTIFY_SERVICE')
+        fdata = IdentifyFunctions[prod]
+        lkt5.add(LtEntry(prod+"#"+trans+"#API_NAME", fdata["api"]))
+        lkt5.add(LtEntry(prod+"#"+trans+"#PARAMETERS", ";".join("{}={}".format(*it) for it in fdata["inparams"].items())+";"))
+        lkt5.add(LtEntry(prod+"#"+trans+"#GE_PARAMETERS", joinparams([p for p in config.input_params if p.cramerStorage == config.factoryProductName+"_GE"])))
+        lkt5.add(LtEntry(prod+"#"+trans+"#RETURN_PARAMETERS", ",".join("{}:{}".format(*it) for it in fdata["outparams"].items())))
+    else:
+        print("No identify function defined for product {}".format(prod))
+        lkt5 = None
 
     # LKT_TND_CRAMER_SUBORDERS
     lkt6 = LookupTable('LKT_TND_CRAMER_SUBORDERS')
@@ -102,25 +106,31 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('-D', dest='dbglevel', action='store', default=10,    help='Print Debug information')
     parser.add_argument('-o', dest='outfile', metavar='<OUTPUT_FILE>', help='Name of the output file (overrides default name)')
-    parser.add_argument('filename', metavar='<FILENAME>', help='JSON input file')
+    parser.add_argument('filenames', metavar='<FILENAME>', nargs='+', help='JSON input file(s)')
 
     args=parser.parse_args()
     set_debug_level(args.dbglevel)
 
-    DBG(10, "Reading json file '{}'".format(args.filename))
-    with open(args.filename, "r") as fp:
-        jsondata = json.load(fp)
+    for filename in args.filenames:
+        DBG(10, "Reading json file '{}'".format(filename))
+        with open(filename, "r") as fp:
+            jsondata = json.load(fp)
 
-    if "factoryProductName" in jsondata:
-        config = FactoryProductConfiguration.from_jsondata(jsondata)
-        tables = create_lookup_tables_for_factory_product(config)
-        for table in tables:
+        if "factoryProductName" in jsondata:
+            config = FactoryProductConfiguration.from_jsondata(jsondata)
+            tables = create_lookup_tables_for_factory_product(config)
+            for table in tables:
+                if table is not None:
+                    DBG(30, "Lookup Table dump:\n"+table.debugdump())
+                else:
+                    DBG(30, "No lookup table")
+            outfile = "{}_{}.zip".format(config.factoryProductName, config.transaction) if args.outfile is None else args.outfile
+            create_zipfile(outfile, *tables)
+            print(outfile)
+        elif "compositionName" in jsondata:
+            table = create_lookup_tables_for_composition(jsondata)
             DBG(30, "Lookup Table dump:\n"+table.debugdump())
-        outfile = "{}_{}.zip".format(config.factoryProductName, config.transaction) if args.outfile is None else args.outfile
-        create_zipfile(outfile, *tables)
-    elif "compositionName" in jsondata:
-        table = create_lookup_tables_for_composition(jsondata)
-        DBG(30, "Lookup Table dump:\n"+table.debugdump())
-        outfile = "{}.zip".format(jsondata["compositionName"]) if args.outfile is None else args.outfile
-        create_zipfile(outfile, table)
+            outfile = "{}.zip".format(jsondata["compositionName"]) if args.outfile is None else args.outfile
+            create_zipfile(outfile, table)
+            print(outfile)
         
