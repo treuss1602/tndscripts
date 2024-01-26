@@ -27,7 +27,6 @@ if __name__ == "__main__":
     args=parser.parse_args()
     set_debug_level(args.dbglevel)
 
-    paramlist = []
     cfsname = None
     DBG(10, "Reading json file '{}'".format(args.filename))
     with open(args.filename, "r") as fp:
@@ -43,6 +42,7 @@ if __name__ == "__main__":
                 comp_config = json.load(f)
                 inputparams += [(p["from"], p["name"], fp["factoryProduct"]) for fp in comp_config["paramMapping"] for p in fp["parameters"] if p["type"] == "input"]
     fps = {p[2] for p in inputparams}
+    paramdetails = {}
     for fp in fps:
         fp_definition_filename = "FP_{}_Create.json".format(fp)
         DBG(10, "Loading additional json file '{}'".format(fp_definition_filename))
@@ -51,10 +51,10 @@ if __name__ == "__main__":
                 config = FactoryProductConfiguration.from_file(f)
             for p in filter(lambda p: p[2] == fp, inputparams):
                 pdetails = config.find_input_param(p[1])
-                paramlist.append((p[0], pdetails.desc, pdetails.examplevalue, "M" if pdetails.mandatory else "O"))
+                paramdetails[p[0]] = (pdetails.desc, pdetails.examplevalue, "M" if pdetails.mandatory else "O")
         except Exception as e:
             print("WARNING: Unable to extract information for factory product {}. JSON File missing?".format(fp))
             raise(e)
 
-    create_confluence_table(cfsname, "Create", paramlist)
+    create_confluence_table(cfsname, "Create", [(p[0], *paramdetails[p[0]]) for p in inputparams])
 
