@@ -43,12 +43,4 @@ IdentifyFunctions = {
                                    "elanCoreName": "ELAN_CORE_RFS_NAME",
                                    "eviNAme": "EVI_NAME"}
                  },
-    "ELAN_SAP": { "api": "identifyELANSap",
-                  "inparams" : { "nodeName": "NETWORK_ELEMENT_NAME", 
-                                 "logicalSubInterface": "LOGICAL_SAP_IF_NAME",
-                                 "custSnippetName": "CUST_SNIPPET_NAMES"},
-                  "outparams" : { "serviceReuse": "SERVICE_FOUND",
-                                  "elanSapName": "ELAN_CORE_RFS_NAME"}
-                },
-
 }

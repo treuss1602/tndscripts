@@ -12,7 +12,8 @@ def create_zipfile(filename, *tables):
     DBG(10, "Writing Lookup Tables zipfile '{}'".format(filename))
     with ZipFile(filename, "w") as z:
         for table in tables:
-            z.writestr(table.name, table.dump())
+            if table:
+                z.writestr(table.name, table.dump())
 
 def joinparams(*paramsets):
     return ";".join(map(lambda x: x.name, functools.reduce(lambda a,b: a+b, paramsets)))+";"
