@@ -1,0 +1,102 @@
+{
+  "compositionName": "TN_RBH_CMTS_CORE",
+  "compositionType": "cfs",
+  "includedComponents": [
+    "RBH_CMTS_INET",
+    "RBH_CMTS_ABR_MC"
+  ],
+  "paramMapping": [
+    {
+      "factoryProduct": "PHY_ILAG",
+      "action": "Create",
+      "factoryProductVersion": "0.6",
+      "parameters": [
+        {
+          "name": "PHYS_IF_NAME_<N>",
+          "type": "input",
+          "from": "PHYS_IF_NAME_<N>"
+        },
+        {
+          "name": "PHYS_IF_NAMES",
+          "type": "input",
+          "from": "PHYS_IF_NAMES"
+        },
+        {
+          "name": "PHYS_LINK_UP_DELAY",
+          "type": "static",
+          "value": 0
+        },
+        {
+          "name": "PHYS_LINK_FLAP_DAMPENING_FLAG",
+          "type": "static",
+          "value": "true"
+        },
+        {
+          "name": "PHYS_IF_AUTO_NEGOTIATION",
+          "type": "static",
+          "value": "On"
+        },
+        {
+          "name": "PHYS_LACP_FAST_TIMER",
+          "type": "static",
+          "value": "true"
+        },
+        {
+          "name": "PHYS_ILAG_IF_MTU",
+          "type": "static",
+          "value": 9188
+        },
+        {
+          "name": "PHYS_ILAG_SYNCE_ENABLED",
+          "type": "static",
+          "value": "true"
+        },
+        {
+          "name": "PHYS_ILAG_PTP_ENABLED",
+          "type": "static",
+          "value": "true"
+        },
+        {
+          "name": "PHYS_ILAG_PTP_PRIO",
+          "type": "static",
+          "value": 255
+        },
+        {
+          "name": "PHYS_ILAG_MAC_SEC",
+          "type": "static",
+          "value": "false"
+        },
+        {
+          "name": "QOS_INGRESS_CLASSIFICATION_PROFILE",
+          "type": "static",
+          "value": "NGRESS_QOS_CLASSIFICATION_1"
+        },
+        {
+          "name": "QOS_INGRESS_POLICING_PROFILE",
+          "type": "static",
+          "value": "ING_POLICING_PROFILE2"
+        },
+        {
+          "name": "QOS_EGRESS_QOS_QUEUE_PROFILE",
+          "type": "static",
+          "value": "EGRESS_QOS_QUEUE_PROFILE1"
+        },
+        {
+          "name": "QOS_EGRESS_QOS_POLICY",
+          "type": "static",
+          "value": "CORE_MPLS"
+        },
+        {
+          "name": "QOS_CUST_EGRESS_REWRITE_CONFIG",
+          "type": "static",
+          "value": "rewrite_config1"
+        },
+        {
+          "name": "CUST_SNIPPET_NAMES",
+          "type": "input",
+          "from": "PHY_ILAG_CUST_SNIPPET_NAMES"
+        }
+      ]
+    }
+  ]
+}

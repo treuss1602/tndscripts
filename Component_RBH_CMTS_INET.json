@@ -102,10 +102,10 @@
     {
       "factoryProduct": "IPVPN_SAP",
       "action": "Create",
-      "factoryProductVersion": "0.10",
+      "factoryProductVersion": "0.13",
       "parameters": [
         {
-          "name": "LOGICAL_SUB_IF_NAME",
+          "name": "LOGICAL_SUB_IF_ID",
           "type": "static",
           "value": 9000
         },
@@ -147,7 +147,7 @@
         {
           "name": "PRIMARY_IPV4_IF_ADDRESS",
           "type": "static",
-          "value": "/30#SNG"
+          "value": "/30@SNG"
         },
         {
           "name": "ADDITIONAL_IPV4_IF_ADDRESSES",
