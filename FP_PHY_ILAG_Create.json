@@ -63,16 +63,6 @@
       "cramerStorage": "PHY_ILAG_GE"
     },
     {
-      "name": "PHYS_IF_8021X_PROFILE_NAME",
-      "description": "802.1x profile name",
-      "mandatory": false,
-      "valueType": "string",
-      "special": false,
-      "dynamicallyMapped": false,
-      "exampleValue": "DummyProfile802",
-      "cramerStorage": "PHY_ILAG_GE"
-    },
-    {
       "name": "PHYS_ILAG_IF_NAME",
       "description": "Logical LAG interface identifier",
       "mandatory": true,
