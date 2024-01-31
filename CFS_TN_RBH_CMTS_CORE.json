@@ -17,11 +17,6 @@
           "from": "PHYS_IF_NAME_<N>"
         },
         {
-          "name": "PHYS_IF_NAMES",
-          "type": "input",
-          "from": "PHYS_IF_NAMES"
-        },
-        {
           "name": "PHYS_LINK_UP_DELAY",
           "type": "static",
           "value": 0
