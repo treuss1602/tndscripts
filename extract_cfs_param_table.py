@@ -100,24 +100,25 @@ if __name__ == "__main__":
     parser.add_argument('-D', dest='dbglevel', action='store', default=10,    help='Print Debug information')
     parser.add_argument('-o', dest='outfile', metavar='<OUTPUT_FILE>', help='Name of the output file (overrides default name)')
     parser.add_argument('filename', metavar='<FILENAME>', help='Excel input file')
-    parser.add_argument('composite', metavar='<COMPOSITE>', help='CFS or Component name for which to extract data')
+    parser.add_argument('composite', metavar='<COMPOSITE>', nargs='+', help='CFS or Component name for which to extract data')
 
     args=parser.parse_args()
     set_debug_level(args.dbglevel)
 
-    if args.composite.startswith("TN_"):
-        cfsname = args.composite
-        componentname = None
-    else:
-        componentname = args.composite
-        cfsname = None
+    for composite in args.composite:
+        if composite.startswith("TN_"):
+            cfsname = composite
+            componentname = None
+        else:
+            componentname = composite
+            cfsname = None
 
-    jsondata = {"compositionName": args.composite, "compositionType": "cfs" if cfsname else "component"}
-    if cfsname:
-        jsondata["includedComponents"] = CFS_COMPONENT_MAPPING.get(cfsname, [])
-    jsondata["paramMapping"] = read_data_from_excel(args.filename, cfsname, componentname)
+        jsondata = {"compositionName": composite, "compositionType": "cfs" if cfsname else "component"}
+        if cfsname:
+            jsondata["includedComponents"] = CFS_COMPONENT_MAPPING.get(cfsname, [])
+        jsondata["paramMapping"] = read_data_from_excel(args.filename, cfsname, componentname)
 
-    outfile = "{}_{}.json".format("CFS" if cfsname else "Component", args.composite) if args.outfile is None else args.outfile
-    DBG(10, "Writing json file '{}'".format(outfile))
-    with open(outfile, "w") as fp:
-        json.dump(jsondata, fp, indent=2)
+        outfile = "{}_{}.json".format("CFS" if cfsname else "Component", composite) if args.outfile is None else args.outfile
+        DBG(10, "Writing json file '{}'".format(outfile))
+        with open(outfile, "w") as fp:
+            json.dump(jsondata, fp, indent=2)
