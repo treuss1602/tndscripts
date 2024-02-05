@@ -1,7 +1,7 @@
 {
   "factoryProductName": "PHY_ILAG",
   "action": "Create",
-  "version": "0.6",
+  "version": "0.7",
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
@@ -63,7 +63,7 @@
       "cramerStorage": "PHY_ILAG_GE"
     },
     {
-      "name": "PHYS_ILAG_IF_NAME",
+      "name": "ILAG_IF_NAME",
       "description": "Logical LAG interface identifier",
       "mandatory": true,
       "valueType": "string",
@@ -72,7 +72,7 @@
       "cramerStorage": "IF name"
     },
     {
-      "name": "PHYS_LACP_FAST_TIMER",
+      "name": "LACP_FAST_TIMER",
       "description": "LACP fast timer",
       "mandatory": true,
       "valueType": "boolean",
@@ -83,7 +83,7 @@
       "cramerStorage": "PHY_ILAG_GE"
     },
     {
-      "name": "PHYS_ILAG_IF_MTU",
+      "name": "ILAG_IF_MTU",
       "description": "Interface MTU",
       "mandatory": false,
       "valueType": "integer",
@@ -92,7 +92,7 @@
       "cramerStorage": "PHY_ILAG_GE"
     },
     {
-      "name": "PHYS_ILAG_SYNCE_ENABLED",
+      "name": "ILAG_SYNCE_ENABLED",
       "description": "SyncE enabled",
       "mandatory": true,
       "valueType": "boolean",
@@ -103,7 +103,7 @@
       "cramerStorage": "PHY_ILAG_GE"
     },
     {
-      "name": "PHYS_ILAG_PTP_ENABLED",
+      "name": "ILAG_PTP_ENABLED",
       "description": "PTP enabled",
       "mandatory": true,
       "valueType": "boolean",
@@ -114,7 +114,7 @@
       "cramerStorage": "PHY_ILAG_GE"
     },
     {
-      "name": "PHYS_ILAG_PTP_PRIO",
+      "name": "ILAG_PTP_PRIO",
       "description": "PTP priority",
       "mandatory": false,
       "valueType": "integer",
@@ -124,7 +124,7 @@
       "cramerStorage": "PHY_ILAG_GE"
     },
     {
-      "name": "PHYS_ILAG_MAC_SEC",
+      "name": "ILAG_MAC_SEC",
       "description": "MACsec flag",
       "mandatory": true,
       "valueType": "boolean",
@@ -298,7 +298,7 @@
       "cramerStorage": "optical  module of the port"
     },
     {
-      "name": "PHYS_ILAG_RFS_NAME",
+      "name": "PHY_ILAG_RFS_NAME",
       "description": "PHY ILAG service name",
       "mandatory": true,
       "valueType": "string",
@@ -306,7 +306,7 @@
       "cramerStorage": "PHY Service"
     },
     {
-      "name": "PHYS_ILAG_ACCESS_SERVICE_NAME",
+      "name": "ILAG_ACCESS_SERVICE_NAME",
       "description": "ILAG service identifier",
       "mandatory": true,
       "valueType": "string",

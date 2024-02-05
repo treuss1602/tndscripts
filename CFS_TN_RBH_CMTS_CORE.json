@@ -9,7 +9,7 @@
     {
       "factoryProduct": "PHY_ILAG",
       "action": "Create",
-      "factoryProductVersion": "0.6",
+      "factoryProductVersion": "0.7",
       "parameters": [
         {
           "name": "PHYS_IF_NAME_<N>",
@@ -32,32 +32,32 @@
           "value": "On"
         },
         {
-          "name": "PHYS_LACP_FAST_TIMER",
+          "name": "LACP_FAST_TIMER",
           "type": "static",
           "value": "true"
         },
         {
-          "name": "PHYS_ILAG_IF_MTU",
+          "name": "ILAG_IF_MTU",
           "type": "static",
           "value": 9188
         },
         {
-          "name": "PHYS_ILAG_SYNCE_ENABLED",
+          "name": "ILAG_SYNCE_ENABLED",
           "type": "static",
           "value": "true"
         },
         {
-          "name": "PHYS_ILAG_PTP_ENABLED",
+          "name": "ILAG_PTP_ENABLED",
           "type": "static",
           "value": "true"
         },
         {
-          "name": "PHYS_ILAG_PTP_PRIO",
+          "name": "ILAG_PTP_PRIO",
           "type": "static",
           "value": 255
         },
         {
-          "name": "PHYS_ILAG_MAC_SEC",
+          "name": "ILAG_MAC_SEC",
           "type": "static",
           "value": "false"
         },

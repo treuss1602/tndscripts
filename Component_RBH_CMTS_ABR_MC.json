@@ -137,7 +137,7 @@
         {
           "name": "IPVPN_CORE_RFS_NAME",
           "type": "mapped",
-          "from": "RBH_CMTS_IPVPN_CORE_RFS_NAME"
+          "from": "RBH_CMTS_ABR_MC_IPVPN_CORE_RFS_NAME"
         },
         {
           "name": "PHY_SERVICE_NAME",
