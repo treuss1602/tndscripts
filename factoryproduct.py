@@ -16,9 +16,11 @@ for name, cls in validations.__dict__.items():
 class Param:
     ''' Parameter class '''
     def __init__(self, type, name, desc, valuetype, typedetails, mandatory,
-                 examplevalue=None, cramerStorage=None, acadefault=None, special=None, dynamically_mapped=None, maxoccurs=None):
+                 examplevalue=None, cramerStorage=None, acadefault=None, special=None, dynamically_mapped=None, maxoccurs=None,
+                 jsonname=None):
         DBG(50, "Param.init called with type={}, name={}, desc={}, valuetype={}, typedetails={}, mandatory={}, examplevalue={}, "
-                "cramerStorage={}, acadefault={}, special={}, dynamically_mapped={}".format(type, name, desc, valuetype, typedetails, mandatory, examplevalue, cramerStorage, acadefault, special, dynamically_mapped))
+                "cramerStorage={}, acadefault={}, special={}, dynamically_mapped={}, jsonname={}".format(
+                    type, name, desc, valuetype, typedetails, mandatory, examplevalue, cramerStorage, acadefault, special, dynamically_mapped, jsonname))
         self.type = type
         self.name = name
         self.desc = desc
@@ -63,6 +65,7 @@ class Param:
         self.cramerStorage = cramerStorage
         self.dynamically_mapped = dynamically_mapped
         self.maxoccurs = maxoccurs
+        self.jsonname = jsonname
 
     def as_dict(self):
         param = {"name": self.name, "description": self.desc, "mandatory": self.mandatory, "valueType": self.valuetype}
@@ -87,6 +90,8 @@ class Param:
             param["cramerStorage"] = self.cramerStorage
         if self.maxoccurs:
             param["maxOccurs"] = self.maxoccurs
+        if self.jsonname:
+            param["jsonName"] = self.jsonname
         return param
 
     def get_example_value(self):
@@ -100,7 +105,9 @@ class Param:
             typedetails = ";".join(data["valueTypeDetails"]["enumValues"])
         else:
             typedetails = None
-        return Param(paramtype, data["name"], data["description"], data["valueType"], typedetails, data["mandatory"], data.get("exampleValue"), data.get("cramerStorage"), data.get("acadefault"), data.get("special"), data.get("dynamicallyMapped", False), data.get("maxOccurs"))
+        return Param(paramtype, data["name"], data["description"], data["valueType"], typedetails, data["mandatory"],
+                     data.get("exampleValue"), data.get("cramerStorage"), data.get("acadefault"), data.get("special"),
+                     data.get("dynamicallyMapped", False), data.get("maxOccurs"), data.get("jsonName"))
 
     def __str__(self):
         return self.name
@@ -111,12 +118,14 @@ class Param:
 class FactoryProductConfiguration:
     ''' The full configuration, read & write json, create lookup tables, etc. '''
 
-    def __init__(self, factory_product_name, transaction, version, input_params, cramer_output_params, cramer_validations = []):
+    def __init__(self, factory_product_name, transaction, version, input_params, cramer_output_params, stablenet_params, key_params, cramer_validations = []):
         self.factoryProductName = factory_product_name
         self.transaction = transaction
         self.version = str(version) if version is not None else None
         self.input_params = input_params
         self.cramer_output_params = cramer_output_params
+        self.stablenet_params = stablenet_params
+        self.key_params = key_params
         self.cramer_validations = cramer_validations
 
     def add_validation(self, validation_name, *validation_params, taskname = None):
@@ -144,6 +153,8 @@ class FactoryProductConfiguration:
         data = {"factoryProductName": self.factoryProductName, "action": self.transaction, "version": self.version}
         data["inputParameters"] = [p.as_dict() for p in self.input_params]
         data["cramerParameters"] = [p.as_dict() for p in self.cramer_output_params]
+        data["keyParameters"] = self.key_params
+        data["stablenetParameters"] = {"preNEI": self.stablenet_params[0], "postNEI": self.stablenet_params[1]}
         data["cramerValidations"] = [{"name": v.name, "parameters": v.config_parameters(), "taskname": v.taskname} for v in self.cramer_validations]
         json.dump(data, fp, indent=2)
 
@@ -151,7 +162,10 @@ class FactoryProductConfiguration:
     def from_jsondata(data):
         input_params = [Param.from_dict(p, "input") for p in data["inputParameters"]]
         cramer_params = [Param.from_dict(p, "Cramer") for p in data["cramerParameters"]]
-        prod = FactoryProductConfiguration(data["factoryProductName"], data["action"], data["version"], input_params, cramer_params)
+        stablenet_params = (data["stablenetParameters"]["preNEI"], data["stablenetParameters"]["postNEI"])
+        key_params = data["keyParameters"]
+        prod = FactoryProductConfiguration(data["factoryProductName"], data["action"], data["version"],
+                                           input_params, cramer_params, stablenet_params, key_params)
         for v in data["cramerValidations"]:
             DBG(30, "Adding validation {}".format(v["name"]))
             if "taskname" in v:

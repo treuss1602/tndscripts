@@ -1,7 +1,7 @@
 {
   "factoryProductName": "IPVPN_CORE",
   "action": "Create",
-  "version": "1.1",
+  "version": "1.2",
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
@@ -11,7 +11,8 @@
       "special": true,
       "dynamicallyMapped": false,
       "exampleValue": "ZH0004MEB101",
-      "cramerStorage": "TND devices"
+      "cramerStorage": "TND devices",
+      "jsonName": "networkElementName"
     },
     {
       "name": "L3_VPN_NAME",
@@ -21,7 +22,8 @@
       "special": false,
       "dynamicallyMapped": false,
       "exampleValue": "SIPCORE1234",
-      "cramerStorage": "Toplogy name ( created by the first Factory service or manually created upfront)\nIf exsists, it implies that RTs related to topology must exist."
+      "cramerStorage": "Toplogy name ( created by the first Factory service or manually created upfront)\nIf exsists, it implies that RTs related to topology must exist.",
+      "jsonName": "l3vpnName"
     },
     {
       "name": "VRF_NAME",
@@ -34,7 +36,8 @@
       "special": false,
       "dynamicallyMapped": false,
       "exampleValue": "SIPCORE1234_A_IVC000000001",
-      "cramerStorage": "Routing Instance \u00abVPN Instance Network Name\u00bb field (Generic Entity: Routing Instance)\n\nThe VRF name is in \u00abVPN Instance Network Name\u00bb field where as the RI name can not reflect the VRF name as inventory model needs to differentiate different import/export settings per RI."
+      "cramerStorage": "Routing Instance \u00abVPN Instance Network Name\u00bb field (Generic Entity: Routing Instance)\n\nThe VRF name is in \u00abVPN Instance Network Name\u00bb field where as the RI name can not reflect the VRF name as inventory model needs to differentiate different import/export settings per RI.",
+      "jsonName": "vrfName"
     },
     {
       "name": "VRF_TYPE",
@@ -52,7 +55,8 @@
       "dynamicallyMapped": false,
       "exampleValue": "Any2Any",
       "acadefault": "Any2Any",
-      "cramerStorage": "Behaviour attribute of RI."
+      "cramerStorage": "Behaviour attribute of RI.",
+      "jsonName": "vrfType"
     },
     {
       "name": "VRF_SR_TE_COLOR",
@@ -247,7 +251,8 @@
       "special": false,
       "dynamicallyMapped": false,
       "exampleValue": "Snippet1;Snippet2",
-      "cramerStorage": "CONFIG_SNIPPET_GE (s)"
+      "cramerStorage": "CONFIG_SNIPPET_GE (s)",
+      "jsonName": "custSnippetNames"
     }
   ],
   "cramerParameters": [
@@ -257,7 +262,8 @@
       "mandatory": true,
       "valueType": "string",
       "exampleValue": "IVC000000001",
-      "cramerStorage": "Service"
+      "cramerStorage": "Service",
+      "jsonName": "ipvpnCoreRFSName"
     },
     {
       "name": "VRF_NAME",
@@ -268,7 +274,8 @@
         "comment": "Infrastructure case:\nCMTS_INET_VPN\n\nAutomatic case:\nSIPCORE1234_A_IVC000000001"
       },
       "exampleValue": "SIPCORE1234_A_IVC000000001",
-      "cramerStorage": "Routing Instance \u00abVPN Instance Network Name\u00bb field (Generic Entity: Routing Instance)\n\nThe VRF name is in \u00abVPN Instance Network Name\u00bb field where as the RI name can not reflect the VRF name as inventory model needs to differentiate different import/export settings per RI."
+      "cramerStorage": "Routing Instance \u00abVPN Instance Network Name\u00bb field (Generic Entity: Routing Instance)\n\nThe VRF name is in \u00abVPN Instance Network Name\u00bb field where as the RI name can not reflect the VRF name as inventory model needs to differentiate different import/export settings per RI.",
+      "jsonName": "vrfName"
     },
     {
       "name": "VRF_IMPORT_RT_SET",
@@ -279,7 +286,8 @@
         "comment": "1 or multiple values separated by ;"
       },
       "exampleValue": "6730:122334;6730:122335",
-      "cramerStorage": "RT"
+      "cramerStorage": "RT",
+      "jsonName": "vrfImportRTSet"
     },
     {
       "name": "VRF_EXPORT_RT_SET",
@@ -290,7 +298,8 @@
         "comment": "1 or multiple values separated by ;"
       },
       "exampleValue": "6730:122334;6730:122335",
-      "cramerStorage": "RT"
+      "cramerStorage": "RT",
+      "jsonName": "vrfExportRTSet"
     },
     {
       "name": "VRF_RD",
@@ -298,9 +307,65 @@
       "mandatory": true,
       "valueType": "string",
       "exampleValue": "6730:1225555",
-      "cramerStorage": "RD"
+      "cramerStorage": "RD",
+      "jsonName": "vrfRD"
     }
   ],
+  "keyParameters": [
+    "NETWORK_ELEMENT_NAME",
+    "L3_VPN_NAME",
+    "VRF_TYPE"
+  ],
+  "stablenetParameters": {
+    "preNEI": [
+      "L3_VPN_NAME",
+      "VRF_NAME",
+      "VRF_TYPE",
+      "VRF_IMPORT_RT_SET",
+      "VRF_EXPORT_RT_SET",
+      "VRF_SR_TE_COLOR",
+      "VRF_RD",
+      "UCAST_IPV4_FLAG",
+      "UCAST_IPV6_FLAG",
+      "MCAST_SITE_TYPE",
+      "MCAST_IPV4_FLAG",
+      "MCAST_IPV4_SSM_GROUPS",
+      "MCAST_IPV4_SSM_MAP_SOURCES",
+      "MCAST_IPV6_FLAG",
+      "IPV4_DHCP_RELAY_FLAG",
+      "IPV4_DHCP_SERVER_VRF",
+      "IPV4_DHCP_SERVER_IP_ADDRESSES",
+      "IPV6_DHCP_RELAY_FLAG",
+      "IPV6_DHCP_SERVER_VRF",
+      "IPV6_DHCP_SERVER_IP_ADDRESSES",
+      "MANAGED_SR_DHCP_FLAG",
+      "CUST_SNIPPET_NAMES"
+    ],
+    "postNEI": [
+      "L3_VPN_NAME",
+      "VRF_NAME",
+      "VRF_TYPE",
+      "VRF_IMPORT_RT_SET",
+      "VRF_EXPORT_RT_SET",
+      "VRF_SR_TE_COLOR",
+      "VRF_RD",
+      "UCAST_IPV4_FLAG",
+      "UCAST_IPV6_FLAG",
+      "MCAST_SITE_TYPE",
+      "MCAST_IPV4_FLAG",
+      "MCAST_IPV4_SSM_GROUPS",
+      "MCAST_IPV4_SSM_MAP_SOURCES",
+      "MCAST_IPV6_FLAG",
+      "IPV4_DHCP_RELAY_FLAG",
+      "IPV4_DHCP_SERVER_VRF",
+      "IPV4_DHCP_SERVER_IP_ADDRESSES",
+      "IPV6_DHCP_RELAY_FLAG",
+      "IPV6_DHCP_SERVER_VRF",
+      "IPV6_DHCP_SERVER_IP_ADDRESSES",
+      "MANAGED_SR_DHCP_FLAG",
+      "CUST_SNIPPET_NAMES"
+    ]
+  },
   "cramerValidations": [
     {
       "name": "CHECK_NODE_LOCATION",

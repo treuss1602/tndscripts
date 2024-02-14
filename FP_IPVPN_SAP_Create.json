@@ -1,7 +1,7 @@
 {
   "factoryProductName": "IPVPN_SAP",
   "action": "Create",
-  "version": "0.10",
+  "version": "0.14",
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
@@ -11,16 +11,19 @@
       "special": true,
       "dynamicallyMapped": false,
       "exampleValue": "ZH0004MEB101",
-      "cramerStorage": "TND device ( types to TBD)"
+      "cramerStorage": "TND device ( types to TBD)",
+      "jsonName": "networkElementName"
     },
     {
-      "name": "LOGICAL_SUB_IF_NAME",
+      "name": "LOGICAL_SUB_IF_ID",
       "description": "Logical subinterface identifier",
       "mandatory": true,
       "valueType": "string",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": "1024"
+      "exampleValue": "1024",
+      "cramerStorage": "Number object",
+      "jsonName": "logicalSubInterfaceId"
     },
     {
       "name": "VPN_ACCESS_TYPE",
@@ -69,7 +72,8 @@
       "special": false,
       "dynamicallyMapped": false,
       "exampleValue": "4000",
-      "cramerStorage": "VLAN number"
+      "cramerStorage": "VLAN number",
+      "jsonName": "innerVLANId"
     },
     {
       "name": "INNER_TPI",
@@ -97,7 +101,8 @@
       "special": false,
       "dynamicallyMapped": false,
       "exampleValue": "3000",
-      "cramerStorage": "VLAN number"
+      "cramerStorage": "VLAN number",
+      "jsonName": "outerVLANId"
     },
     {
       "name": "OUTER_TPI",
@@ -136,17 +141,19 @@
       "special": false,
       "dynamicallyMapped": true,
       "exampleValue": "IVC000000001",
-      "cramerStorage": "Service"
+      "cramerStorage": "Service",
+      "jsonName": "ipvpnCoreRFSName"
     },
     {
       "name": "PHY_SERVICE_NAME",
-      "description": "PHY_xxx service  Service name",
-      "mandatory": false,
+      "description": "PHY_SINGLE_LINK or PHY_IRB or PHY_ILAG   Service name",
+      "mandatory": true,
       "valueType": "string",
       "special": false,
       "dynamicallyMapped": true,
       "exampleValue": "PHYSL000000001",
-      "cramerStorage": "Service"
+      "cramerStorage": "Service",
+      "jsonName": "phyServiceName"
     },
     {
       "name": "PRIMARY_IPV4_IF_ADDRESS",
@@ -154,12 +161,13 @@
       "mandatory": false,
       "valueType": "string",
       "valueTypeDetails": {
-        "comment": "one IPv4 CIDR prefixes (121.10.10.1/30#SNG;)"
+        "comment": "one IPv4 CIDR prefixes (121.10.10.1/30@SNG;)"
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": "121.10.10.1/30#SNG",
-      "cramerStorage": "IP number,Subnet group,SNG"
+      "exampleValue": "121.10.10.1/30@SNG",
+      "cramerStorage": "IP number,Subnet group,SNG",
+      "jsonName": "primaryIPv4IFaddress"
     },
     {
       "name": "ADDITIONAL_IPV4_IF_ADDRESSES",
@@ -167,12 +175,13 @@
       "mandatory": false,
       "valueType": "string",
       "valueTypeDetails": {
-        "comment": "1 or more IPv4 CIDR prefixes (121.10.10.1/30#SNG;121.10.20.1/24#SNG)"
+        "comment": "1 or more IPv4 CIDR prefixes (121.10.10.1/30@SNG;121.10.20.1/24@SNG)"
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": "121.10.10.1/30#SNG;121.10.20.1/24#SNG",
-      "cramerStorage": "IP number,Subnet group,SNG"
+      "exampleValue": "121.10.10.1/30@SNG;121.10.20.1/24#SNG",
+      "cramerStorage": "IP number,Subnet group,SNG",
+      "jsonName": "additionalIPv4IFaddresses"
     },
     {
       "name": "PRIMARY_IPV6_IF_ADDRESS",
@@ -180,12 +189,13 @@
       "mandatory": false,
       "valueType": "string",
       "valueTypeDetails": {
-        "comment": "one IPv4 CIDR prefixes (2001:0db8:/30#SNG)"
+        "comment": "one IPv4 CIDR prefixes (2001:0db8:/30@SNG)"
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": "2001:0db8:/30#SNG",
-      "cramerStorage": "IP number,Subnet group,SNG"
+      "exampleValue": "2001:0db8:/30@SNG",
+      "cramerStorage": "IP number,Subnet group,SNG",
+      "jsonName": "primaryIPv6IFaddress"
     },
     {
       "name": "ADDITIONAL_IPV6_IF_ADDRESSES",
@@ -193,12 +203,13 @@
       "mandatory": false,
       "valueType": "string",
       "valueTypeDetails": {
-        "comment": "1 or more IPv4 CIDR prefixes (2001:0db7:/30#SNG;2001:0db6/24#SNG)"
+        "comment": "1 or more IPv4 CIDR prefixes (2001:0db7:/30@SNG;2001:0db6/24@SNG)"
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": "2001:0db7:/30#SNG;2001:0db6/24#SNG",
-      "cramerStorage": "IP number,Subnet group,SNG"
+      "exampleValue": "2001:0db7:/30@SNG;2001:0db6/24@SNG",
+      "cramerStorage": "IP number,Subnet group,SNG",
+      "jsonName": "additionalIPv6IFaddresses"
     },
     {
       "name": "INGRESS_L3_ACL_NAME",
@@ -348,7 +359,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": "ING_POLICING_PROFILE1",
+      "exampleValue": "#REF!",
       "cramerStorage": "IPVPN_SAP_GE"
     },
     {
@@ -366,7 +377,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": "EGRESS_QOS_QUEUE_PROFILE1",
+      "exampleValue": "#REF!",
       "cramerStorage": "IPVPN_SAP_GE"
     },
     {
@@ -382,7 +393,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": "CORE_MPLS",
+      "exampleValue": "#REF!",
       "cramerStorage": "IPVPN_SAP_GE"
     },
     {
@@ -707,7 +718,8 @@
       "special": false,
       "dynamicallyMapped": false,
       "exampleValue": "Snippet1;Snippet2;mcast_igmp_snippet;",
-      "cramerStorage": "CONFIG_SNIPPET_GE (s)"
+      "cramerStorage": "CONFIG_SNIPPET_GE (s)",
+      "jsonName": "configSnippetNames"
     }
   ],
   "cramerParameters": [
@@ -717,7 +729,8 @@
       "mandatory": true,
       "valueType": "string",
       "exampleValue": "IPVPNSAP000000001",
-      "cramerStorage": "Service"
+      "cramerStorage": "Service",
+      "jsonName": "ipvpnSAPRFSName"
     },
     {
       "name": "SAP_IF_NAME",
@@ -725,7 +738,8 @@
       "mandatory": true,
       "valueType": "string",
       "exampleValue": "Bundle-Ether20.1024",
-      "cramerStorage": "Port"
+      "cramerStorage": "Port",
+      "jsonName": "sapIFName"
     },
     {
       "name": "INNER_VLAN_ID",
@@ -737,7 +751,8 @@
         "maxValue": 4094
       },
       "exampleValue": "4000",
-      "cramerStorage": "VLAN number"
+      "cramerStorage": "VLAN number",
+      "jsonName": "innerVLANId"
     },
     {
       "name": "OUTER_VLAN_ID",
@@ -749,7 +764,8 @@
         "maxValue": 4094
       },
       "exampleValue": "3000",
-      "cramerStorage": "VLAN number"
+      "cramerStorage": "VLAN number",
+      "jsonName": "outerVLANId"
     },
     {
       "name": "VRF_NAME",
@@ -760,7 +776,8 @@
         "comment": "Infrastructure case:\nCMTS_INET_VPN\n\nAutomatic case:\nSIPCORE1234_A_IVC000000001"
       },
       "exampleValue": "SIPCORE1234_A_IVC000000001",
-      "cramerStorage": "RI name"
+      "cramerStorage": "RI name",
+      "jsonName": "vrfName"
     },
     {
       "name": "PRIMARY_IPV4_IF_ADDRESS",
@@ -768,10 +785,11 @@
       "mandatory": false,
       "valueType": "string",
       "valueTypeDetails": {
-        "comment": "one IPv4 CIDR prefixes (121.10.10.1/30#SNG;)"
+        "comment": "one IPv4 CIDR prefixes (121.10.10.1/30@SNG;)"
       },
-      "exampleValue": "121.10.10.1/30#SNG",
-      "cramerStorage": "IP number,Subnet group,SNG"
+      "exampleValue": "121.10.10.1/30@SNG",
+      "cramerStorage": "IP number,Subnet group,SNG",
+      "jsonName": "primaryIPv4IFaddress"
     },
     {
       "name": "ADDITIONAL_IPV4_IF_ADDRESSES",
@@ -779,10 +797,11 @@
       "mandatory": false,
       "valueType": "string",
       "valueTypeDetails": {
-        "comment": "1 or more IPv4 CIDR prefixes (121.10.10.1/30#SNG;121.10.20.1/24#SNG)"
+        "comment": "1 or more IPv4 CIDR prefixes (121.10.10.1/30@SNG;121.10.20.1/24@SNG)"
       },
-      "exampleValue": "121.10.10.1/30#SNG;121.10.20.1/24#SNG",
-      "cramerStorage": "IP number,Subnet group,SNG"
+      "exampleValue": "121.10.10.1/30@SNG;121.10.20.1/24#SNG",
+      "cramerStorage": "IP number,Subnet group,SNG",
+      "jsonName": "additionalIPv4IFaddresses"
     },
     {
       "name": "PRIMARY_IPV6_IF_ADDRESS",
@@ -790,10 +809,11 @@
       "mandatory": false,
       "valueType": "string",
       "valueTypeDetails": {
-        "comment": "one IPv4 CIDR prefixes (2001:0db8:/30#SNG)"
+        "comment": "one IPv4 CIDR prefixes (2001:0db8:/30@SNG)"
       },
-      "exampleValue": "2001:0db8:/30#SNG",
-      "cramerStorage": "IP number,Subnet group,SNG"
+      "exampleValue": "2001:0db8:/30@SNG",
+      "cramerStorage": "IP number,Subnet group,SNG",
+      "jsonName": "primaryIPv6IFaddress"
     },
     {
       "name": "ADDITIONAL_IPV6_IF_ADDRESSES",
@@ -801,12 +821,144 @@
       "mandatory": false,
       "valueType": "string",
       "valueTypeDetails": {
-        "comment": "1 or more IPv4 CIDR prefixes (2001:0db7:/30#SNG;2001:0db6/24#SNG)"
+        "comment": "1 or more IPv4 CIDR prefixes (2001:0db7:/30@SNG;2001:0db6/24@SNG)"
       },
-      "exampleValue": "2001:0db7:/30#SNG;2001:0db6/24#SNG",
-      "cramerStorage": "IP number,Subnet group,SNG"
+      "exampleValue": "2001:0db7:/30@SNG;2001:0db6/24@SNG",
+      "cramerStorage": "IP number,Subnet group,SNG",
+      "jsonName": "additionalIPv6IFaddresses"
     }
   ],
+  "keyParameters": [
+    "NETWORK_ELEMENT_NAME",
+    "LOGICAL_SUB_IF_ID",
+    "PHY_SERVICE_NAME"
+  ],
+  "stablenetParameters": {
+    "preNEI": [
+      "LOGICAL_SUB_IF_ID",
+      "SAP_IF_NAME",
+      "VPN_ACCESS_TYPE",
+      "ACCESS_TYPE",
+      "INNER_VLAN_ID",
+      "INNER_TPI",
+      "OUTER_VLAN_ID",
+      "OUTER_TPI",
+      "SERVICE_MTU",
+      "IPVPN_CORE_RFS_NAME",
+      "PHY_SERVICE_NAME",
+      "VRF_NAME",
+      "PRIMARY_IPV4_IF_ADDRESS",
+      "ADDITIONAL_IPV4_IF_ADDRESSES",
+      "PRIMARY_IPV6_IF_ADDRESS",
+      "ADDITIONAL_IPV6_IF_ADDRESSES",
+      "INGRESS_L3_ACL_NAME",
+      "EGRESS_L3_ACL_NAME",
+      "IPV4_MCAST_IGMP_FLAG",
+      "IPV4_MCAST_IGMP_VERSION",
+      "IPV4_MCAST_PIM_FLAG",
+      "IPV6_MCAST_IF_FLAG",
+      "IPV4_DHCP_RELAY_FLAG",
+      "IPV6_DHCP_RELAY_FLAG",
+      "ACAST_IPV4_FLAG",
+      "ACAST_IPV6_FLAG",
+      "QOS_INGRESS_CLASSIFICATION_PROFILE",
+      "QOS_INGRESS_POLICING_PROFILE",
+      "QOS_EGRESS_QOS_QUEUE_PROFILE",
+      "QOS_EGRESS_QOS_POLICY",
+      "QOS_CUST_EGRESS_REWRITE_CONFIG",
+      "IPV4_STATIC_ROUTE_<N>",
+      "IPV6_STATIC_ROUTE_<N>",
+      "VRRP_IPV4_FLAG",
+      "VRRP_IPV4_PRIORITY",
+      "VRRP_IPV4_VIRTUAL_IP",
+      "VRRP_IPV6_FLAG",
+      "VRRP_IPV6_PRIORITY",
+      "VRRP_IPV6_VIRTUAL_IP",
+      "PE_CE_EBGP_FLAG",
+      "PE_CE_EBGP_AUTHENTICATION_KEY",
+      "PE_CE_EBGP_PEER_ASN",
+      "PE_CE_EBGP_BFD_FLAG",
+      "PE_CE_EBGP_IPV4_DEFAULT_FLAG",
+      "PE_CE_EBGP_IPV6_DEFAULT_FLAG",
+      "PE_CE_EBGP_MAIN_BACKUP_SELECTOR",
+      "PE_CE_EBGP_IPV4_INGRESS_PREFIX_FILTERS_ALLOWED",
+      "PE_CE_EBGP_IPV6_INGRESS_PREFIX_FILTERS_ALLOWED",
+      "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTERS_ALLOWED",
+      "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTERS_ALLOWED",
+      "PE_CE_EBGP_IPV4_INGRESS_PREFIX_FILTERS_DENIED",
+      "PE_CE_EBGP_IPV6_INGRESS_PREFIX_FILTERS_DENIED",
+      "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTERS_DENIED",
+      "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTERS_DENIED",
+      "PE_CE_EBGP_STD_TE_COMMUNITY_HANDLING",
+      "CUST_SNIPPET_NAMES"
+    ],
+    "postNEI": [
+      "LOGICAL_SUB_IF_ID",
+      "SAP_IF_NAME",
+      "VPN_ACCESS_TYPE",
+      "ACCESS_TYPE",
+      "INNER_VLAN_ID",
+      "INNER_TPI",
+      "OUTER_VLAN_ID",
+      "OUTER_TPI",
+      "SERVICE_MTU",
+      "IPVPN_CORE_RFS_NAME",
+      "PHY_SERVICE_NAME",
+      "VRF_NAME",
+      "PRIMARY_IPV4_IF_ADDRESS",
+      "ADDITIONAL_IPV4_IF_ADDRESSES",
+      "PRIMARY_IPV6_IF_ADDRESS",
+      "ADDITIONAL_IPV6_IF_ADDRESSES",
+      "INGRESS_L3_ACL_NAME",
+      "EGRESS_L3_ACL_NAME",
+      "IPV4_MCAST_IGMP_FLAG",
+      "IPV4_MCAST_IGMP_VERSION",
+      "IPV4_MCAST_PIM_FLAG",
+      "IPV6_MCAST_IF_FLAG",
+      "IPV4_DHCP_RELAY_FLAG",
+      "IPV6_DHCP_RELAY_FLAG",
+      "ACAST_IPV4_FLAG",
+      "ACAST_IPV6_FLAG",
+      "QOS_INGRESS_CLASSIFICATION_PROFILE",
+      "QOS_INGRESS_POLICING_PROFILE",
+      "QOS_EGRESS_QOS_QUEUE_PROFILE",
+      "QOS_EGRESS_QOS_POLICY",
+      "QOS_CUST_EGRESS_REWRITE_CONFIG",
+      "IPV4_STATIC_ROUTES_SUBNETS",
+      "IPV4_STATIC_ROUTES_NEXTHOP_ADDRESSES",
+      "IPV4_STATIC_ROUTES_VRF_NAMES",
+      "IPV4_STATIC_ROUTES_ROUTE_TAGS",
+      "IPV4_STATIC_ROUTES_ADMIN_DISTANCES",
+      "IPV6_STATIC_ROUTES_SUBNETS",
+      "IPV6_STATIC_ROUTES_NEXTHOP_ADDRESSES",
+      "IPV6_STATIC_ROUTES_VRF_NAMES",
+      "IPV6_STATIC_ROUTES_ROUTE_TAGS",
+      "IPV6_STATIC_ROUTES_ADMIN_DISTANCES",
+      "VRRP_IPV4_FLAG",
+      "VRRP_IPV4_PRIORITY",
+      "VRRP_IPV4_VIRTUAL_IP",
+      "VRRP_IPV6_FLAG",
+      "VRRP_IPV6_PRIORITY",
+      "VRRP_IPV6_VIRTUAL_IP",
+      "PE_CE_EBGP_FLAG",
+      "PE_CE_EBGP_AUTHENTICATION_KEY",
+      "PE_CE_EBGP_PEER_ASN",
+      "PE_CE_EBGP_BFD_FLAG",
+      "PE_CE_EBGP_IPV4_DEFAULT_FLAG",
+      "PE_CE_EBGP_IPV6_DEFAULT_FLAG",
+      "PE_CE_EBGP_MAIN_BACKUP_SELECTOR",
+      "PE_CE_EBGP_IPV4_INGRESS_PREFIX_FILTERS_ALLOWED",
+      "PE_CE_EBGP_IPV6_INGRESS_PREFIX_FILTERS_ALLOWED",
+      "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTERS_ALLOWED",
+      "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTERS_ALLOWED",
+      "PE_CE_EBGP_IPV4_INGRESS_PREFIX_FILTERS_DENIED",
+      "PE_CE_EBGP_IPV6_INGRESS_PREFIX_FILTERS_DENIED",
+      "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTERS_DENIED",
+      "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTERS_DENIED",
+      "PE_CE_EBGP_STD_TE_COMMUNITY_HANDLING",
+      "CUST_SNIPPET_NAMES"
+    ]
+  },
   "cramerValidations": [
     {
       "name": "CHECK_NODE_LOCATION",

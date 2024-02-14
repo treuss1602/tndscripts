@@ -1,7 +1,7 @@
 {
   "factoryProductName": "ELAN_SAP",
   "action": "Create",
-  "version": "0.7",
+  "version": "0.13",
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
@@ -11,16 +11,19 @@
       "special": true,
       "dynamicallyMapped": false,
       "exampleValue": "ZH0004MEB101",
-      "cramerStorage": "TND device"
+      "cramerStorage": "TND device",
+      "jsonName": "networkElementName"
     },
     {
-      "name": "LOGICAL_SUB_IF_NAME",
+      "name": "LOGICAL_SUB_IF_ID",
       "description": "Logical subinterface identifier,",
       "mandatory": true,
-      "valueType": "string",
+      "valueType": "integer",
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": "1024"
+      "exampleValue": "1024",
+      "cramerStorage": "Number object",
+      "jsonName": "logicalSubInterfaceId"
     },
     {
       "name": "ELAN_ACCESS_TYPE",
@@ -47,7 +50,8 @@
       "valueType": "enumerated",
       "valueTypeDetails": {
         "enumValues": [
-          "UNI,NNI"
+          "UNI",
+          "NNI"
         ]
       },
       "special": false,
@@ -64,7 +68,8 @@
       "special": false,
       "dynamicallyMapped": true,
       "exampleValue": "ELANC000000001",
-      "cramerStorage": "Service"
+      "cramerStorage": "Service",
+      "jsonName": "elanCoreRFSName"
     },
     {
       "name": "PHY_SERVICE_NAME",
@@ -74,7 +79,8 @@
       "special": false,
       "dynamicallyMapped": true,
       "exampleValue": "PHYSL000000001",
-      "cramerStorage": "Service"
+      "cramerStorage": "Service",
+      "jsonName": "phyServiceName"
     },
     {
       "name": "INNER_VLAN_ID",
@@ -88,7 +94,8 @@
       "special": false,
       "dynamicallyMapped": false,
       "exampleValue": "4000",
-      "cramerStorage": "VLAN number"
+      "cramerStorage": "VLAN number",
+      "jsonName": "innerVLANId"
     },
     {
       "name": "INNER_TPI",
@@ -116,7 +123,8 @@
       "special": false,
       "dynamicallyMapped": false,
       "exampleValue": "3000",
-      "cramerStorage": "VLAN number"
+      "cramerStorage": "VLAN number",
+      "jsonName": "outerVLANId"
     },
     {
       "name": "OUTER_TPI",
@@ -228,7 +236,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": "Refer PHY_SINGLE_LINK sheet",
+      "exampleValue": "ING_POLICING_PROFILE1",
       "cramerStorage": "ELAN_SAP_GE"
     },
     {
@@ -246,7 +254,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": "Refer PHY_SINGLE_LINK sheet",
+      "exampleValue": "EGRESS_QOS_QUEUE_PROFILE1",
       "cramerStorage": "ELAN_SAP_GE"
     },
     {
@@ -262,7 +270,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": "Refer PHY_SINGLE_LINK sheet",
+      "exampleValue": "CORE_MPLS",
       "cramerStorage": "ELAN_SAP_GE"
     },
     {
@@ -293,7 +301,8 @@
       "special": false,
       "dynamicallyMapped": false,
       "exampleValue": "Snippet1;Snippet2",
-      "cramerStorage": "CONFIG_SNIPPET_GE (s)"
+      "cramerStorage": "CONFIG_SNIPPET_GE (s)",
+      "jsonName": "configSnippetNames"
     }
   ],
   "cramerParameters": [
@@ -302,7 +311,8 @@
       "description": "ELAN SAP Name",
       "mandatory": true,
       "valueType": "string",
-      "cramerStorage": "Service"
+      "cramerStorage": "Service",
+      "jsonName": "elanSAPRFSName"
     },
     {
       "name": "SAP_IF_NAME",
@@ -310,7 +320,20 @@
       "mandatory": true,
       "valueType": "string",
       "exampleValue": "Bundle-Ether20.1024",
-      "cramerStorage": "Port"
+      "cramerStorage": "Port",
+      "jsonName": "sapIFName"
+    },
+    {
+      "name": "EVI_NAME",
+      "description": "VRF name",
+      "mandatory": true,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "Infrastructure case:\nCMTS_INET_VPN\n\nAutomatic case:\nELANCORE1234_A_IVC000000001"
+      },
+      "exampleValue": "ELANCORE1234_A_IVC000000001",
+      "cramerStorage": "Routing Instance VRFNAME field (Generic Entity: Routing Instance)\n\nThe VRF name is in VRFNAME field where as the RI name can not reflect the VRF name as inventory model needs to differentiate different import/export settings per RI.",
+      "jsonName": "eviName"
     },
     {
       "name": "INNER_VLAN_ID",
@@ -322,7 +345,8 @@
         "maxValue": 4094
       },
       "exampleValue": "4000",
-      "cramerStorage": "VLAN number"
+      "cramerStorage": "VLAN number",
+      "jsonName": "innerVLANId"
     },
     {
       "name": "OUTER_VLAN_ID",
@@ -334,9 +358,59 @@
         "maxValue": 4094
       },
       "exampleValue": "3000",
-      "cramerStorage": "VLAN number"
+      "cramerStorage": "VLAN number",
+      "jsonName": "outerVLANId"
     }
   ],
+  "keyParameters": [],
+  "stablenetParameters": {
+    "preNEI": [
+      "LOGICAL_SUB_IF_ID",
+      "SAP_IF_NAME",
+      "ELAN_ACCESS_TYPE",
+      "ACCESS_TYPE",
+      "ELAN_CORE_RFS_NAME",
+      "PHY_SERVICE_NAME",
+      "EVI_NAME",
+      "INNER_VLAN_ID",
+      "INNER_TPI",
+      "OUTER_VLAN_ID",
+      "OUTER_TPI",
+      "VLAN_TAG_OPERATION",
+      "SERVICE_MTU",
+      "INGRESS_L2_ACL_NAME",
+      "EGRESS_L2_ACL_NAME",
+      "QOS_INGRESS_CLASSIFICATION_PROFILE",
+      "QOS_INGRESS_POLICING_PROFILE",
+      "QOS_EGRESS_QOS_QUEUE_PROFILE",
+      "QOS_EGRESS_QOS_POLICY",
+      "QOS_CUST_EGRESS_REWRITE_CONFIG",
+      "CUST_SNIPPET_NAMES"
+    ],
+    "postNEI": [
+      "LOGICAL_SUB_IF_ID",
+      "SAP_IF_NAME",
+      "ELAN_ACCESS_TYPE",
+      "ACCESS_TYPE",
+      "ELAN_CORE_RFS_NAME",
+      "PHY_SERVICE_NAME",
+      "EVI_NAME",
+      "INNER_VLAN_ID",
+      "INNER_TPI",
+      "OUTER_VLAN_ID",
+      "OUTER_TPI",
+      "VLAN_TAG_OPERATION",
+      "SERVICE_MTU",
+      "INGRESS_L2_ACL_NAME",
+      "EGRESS_L2_ACL_NAME",
+      "QOS_INGRESS_CLASSIFICATION_PROFILE",
+      "QOS_INGRESS_POLICING_PROFILE",
+      "QOS_EGRESS_QOS_QUEUE_PROFILE",
+      "QOS_EGRESS_QOS_POLICY",
+      "QOS_CUST_EGRESS_REWRITE_CONFIG",
+      "CUST_SNIPPET_NAMES"
+    ]
+  },
   "cramerValidations": [
     {
       "name": "CHECK_NODE_LOCATION",

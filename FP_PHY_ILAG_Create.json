@@ -1,7 +1,7 @@
 {
   "factoryProductName": "PHY_ILAG",
   "action": "Create",
-  "version": "0.7",
+  "version": "0.8",
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
@@ -11,7 +11,8 @@
       "special": true,
       "dynamicallyMapped": false,
       "exampleValue": "ZH0004MEB101",
-      "cramerStorage": "TND device ( types to TBD)"
+      "cramerStorage": "TND device ( types to TBD)",
+      "jsonName": "networkElementName"
     },
     {
       "name": "PHYS_IF_NAME_<N>",
@@ -21,7 +22,8 @@
       "special": false,
       "dynamicallyMapped": false,
       "exampleValue": "GigabitEthernet0/1/0",
-      "cramerStorage": "TND device's  port"
+      "cramerStorage": "TND device's  port",
+      "jsonName": "phyIfDetails.phyIfName"
     },
     {
       "name": "PHYS_LINK_UP_DELAY",
@@ -69,7 +71,8 @@
       "valueType": "string",
       "special": false,
       "dynamicallyMapped": false,
-      "cramerStorage": "IF name"
+      "cramerStorage": "IF name",
+      "jsonName": "phyILagIfName"
     },
     {
       "name": "LACP_FAST_TIMER",
@@ -231,17 +234,28 @@
       "special": false,
       "dynamicallyMapped": false,
       "exampleValue": "Snippet1;Snippet2",
-      "cramerStorage": "CONFIG_SNIPPET_GE (s)"
+      "cramerStorage": "CONFIG_SNIPPET_GE (s)",
+      "jsonName": "custSnippetNames"
     }
   ],
   "cramerParameters": [
+    {
+      "name": "PHY_ILAG_RFS_NAME",
+      "description": "PHY ILAG service name",
+      "mandatory": true,
+      "valueType": "string",
+      "exampleValue": "PHYILAG00000001",
+      "cramerStorage": "PHY Service",
+      "jsonName": "phyILagRfsName"
+    },
     {
       "name": "PHYS_IF_TYPE_<N>",
       "description": "Physical interface type",
       "mandatory": true,
       "valueType": "string[32]",
       "exampleValue": "100GBASE-LR1",
-      "cramerStorage": "optical  module of the port"
+      "cramerStorage": "optical  module of the port",
+      "jsonName": "phyIfDetails.phyIfType"
     },
     {
       "name": "PHYS_IF_CENTER_FREQUENCY_<N>",
@@ -252,7 +266,8 @@
         "comment": "two decimal places"
       },
       "exampleValue": "1540.25",
-      "cramerStorage": "optical  module of the port"
+      "cramerStorage": "optical  module of the port",
+      "jsonName": "phyIfDetails.phyIfCenterFrequency"
     },
     {
       "name": "PHYS_IF_TX_POWER_<N>",
@@ -263,7 +278,8 @@
         "comment": "two decimal places; must support negative numbers"
       },
       "exampleValue": "-5.00",
-      "cramerStorage": "optical  module of the port"
+      "cramerStorage": "optical  module of the port",
+      "jsonName": "phyIfDetails.phyIfTxPower"
     },
     {
       "name": "PHYS_IDN_ACCESS_SERVICE_NAME_<N>",
@@ -271,7 +287,8 @@
       "mandatory": true,
       "valueType": "string[32]",
       "exampleValue": "IDN001",
-      "cramerStorage": "Service"
+      "cramerStorage": "Service",
+      "jsonName": "phyIfDetails.phyAccessServiceName"
     },
     {
       "name": "ACCESS_DEVICE_NAME_<N>",
@@ -279,7 +296,8 @@
       "mandatory": true,
       "valueType": "string[32]",
       "exampleValue": "ONT0000000014",
-      "cramerStorage": "Access device"
+      "cramerStorage": "Access device",
+      "jsonName": "phyIfDetails.accessDeviceName"
     },
     {
       "name": "ACCESS_DEVICE_IF_NAME_<N>",
@@ -287,7 +305,8 @@
       "mandatory": true,
       "valueType": "string[32]",
       "exampleValue": "Ge1/0",
-      "cramerStorage": "Access device port"
+      "cramerStorage": "Access device port",
+      "jsonName": "phyIfDetails.accessDeviceIfName"
     },
     {
       "name": "PHYS_IF_SPEED",
@@ -295,15 +314,8 @@
       "mandatory": true,
       "valueType": "integer",
       "exampleValue": "100000000",
-      "cramerStorage": "optical  module of the port"
-    },
-    {
-      "name": "PHY_ILAG_RFS_NAME",
-      "description": "PHY ILAG service name",
-      "mandatory": true,
-      "valueType": "string",
-      "exampleValue": "PHYILAG00000001",
-      "cramerStorage": "PHY Service"
+      "cramerStorage": "optical  module of the port",
+      "jsonName": "phyIfSpeed"
     },
     {
       "name": "ILAG_ACCESS_SERVICE_NAME",
@@ -311,9 +323,70 @@
       "mandatory": true,
       "valueType": "string",
       "exampleValue": "ILAG0001",
-      "cramerStorage": "Service"
+      "cramerStorage": "Service",
+      "jsonName": "iLagAccessServiceName"
     }
   ],
+  "keyParameters": [
+    "NETWORK_ELEMENT_NAME",
+    "ILAG_IF_NAME"
+  ],
+  "stablenetParameters": {
+    "preNEI": [
+      "PHYS_IF_NAME_<N>",
+      "PHYS_IF_TYPE_<N>",
+      "PHYS_IF_CENTER_FREQUENCY_<N>",
+      "PHYS_IF_TX_POWER_<N>",
+      "PHYS_IDN_ACCESS_SERVICE_NAME_<N>",
+      "ACCESS_DEVICE_NAME_<N>",
+      "ACCESS_DEVICE_IF_NAME_<N>",
+      "PHYS_IF_SPEED",
+      "PHYS_LINK_UP_DELAY",
+      "PHYS_LINK_FLAP_DAMPENING_FLAG",
+      "PHYS_IF_AUTO_NEGOTIATION",
+      "ILAG_IF_NAME",
+      "ILAG_ACCESS_SERVICE_NAME",
+      "LACP_FAST_TIMER",
+      "ILAG_IF_MTU",
+      "ILAG_SYNCE_ENABLED",
+      "ILAG_PTP_ENABLED",
+      "ILAG_PTP_PRIO",
+      "ILAG_MAC_SEC",
+      "QOS_INGRESS_CLASSIFICATION_PROFILE",
+      "QOS_INGRESS_POLICING_PROFILE",
+      "QOS_EGRESS_QOS_QUEUE_PROFILE",
+      "QOS_EGRESS_QOS_POLICY",
+      "QOS_CUST_EGRESS_REWRITE_CONFIG",
+      "CUST_SNIPPET_NAMES"
+    ],
+    "postNEI": [
+      "PHYS_IF_NAMES",
+      "PHYS_IF_TYPES",
+      "PHYS_IF_CENTER_FREQUENCIES",
+      "PHYS_IF_TX_POWERS",
+      "PHYS_IDN_ACCESS_SERVICE_NAMES",
+      "ACCESS_DEVICE_NAMES",
+      "ACCESS_DEVICE_IF_NAMES",
+      "PHYS_IF_SPEED",
+      "PHYS_LINK_UP_DELAY",
+      "PHYS_LINK_FLAP_DAMPENING_FLAG",
+      "PHYS_IF_AUTO_NEGOTIATION",
+      "ILAG_IF_NAME",
+      "ILAG_ACCESS_SERVICE_NAME",
+      "LACP_FAST_TIMER",
+      "ILAG_IF_MTU",
+      "ILAG_SYNCE_ENABLED",
+      "ILAG_PTP_ENABLED",
+      "ILAG_PTP_PRIO",
+      "ILAG_MAC_SEC",
+      "QOS_INGRESS_CLASSIFICATION_PROFILE",
+      "QOS_INGRESS_POLICING_PROFILE",
+      "QOS_EGRESS_QOS_QUEUE_PROFILE",
+      "QOS_EGRESS_QOS_POLICY",
+      "QOS_CUST_EGRESS_REWRITE_CONFIG",
+      "CUST_SNIPPET_NAMES"
+    ]
+  },
   "cramerValidations": [
     {
       "name": "CHECK_NODE_LOCATION",

@@ -5,7 +5,7 @@ import json
 from zipfile import ZipFile
 from factoryproduct import FactoryProductConfiguration
 from lookuptable import LookupTable, LtEntry
-from identifyfunctions import IdentifyFunctions
+from cramerapis import CramerAPIs
 from debug import DBG, set_debug_level
 
 def create_zipfile(filename, *tables):
@@ -44,13 +44,17 @@ def create_lookup_tables_for_factory_product(config, nenameparam="NETWORK_ELEMEN
     lkt4 = LookupTable.from_validations(prod, trans, *config.cramer_validations)
 
     # LKT_LKT_TND_CRAMER_IDENTIFY_SERVICE
-    if prod in IdentifyFunctions:
+    api = CramerAPIs[prod][1]
+    if api:
         lkt5 = LookupTable('LKT_TND_CRAMER_IDENTIFY_SERVICE')
-        fdata = IdentifyFunctions[prod]
-        lkt5.add(LtEntry(prod+"#"+trans+"#API_NAME", fdata["api"]))
-        lkt5.add(LtEntry(prod+"#"+trans+"#PARAMETERS", ";".join("{}={}".format(*it) for it in fdata["inparams"].items())+";"))
+        lkt5.add(LtEntry(prod+"#"+trans+"#API_NAME", api))
+        inputparams = {p.jsonname: p.name for p in config.input_params if p.jsonname is not None}
+        DBG(30, "Input parameters for identify API are: {}".format(inputparams))
+        lkt5.add(LtEntry(prod+"#"+trans+"#PARAMETERS", ";".join("{}={}".format(*it) for it in inputparams.items())+";"))
         lkt5.add(LtEntry(prod+"#"+trans+"#GE_PARAMETERS", joinparams([p for p in config.input_params if p.cramerStorage == config.factoryProductName+"_GE"])))
-        lkt5.add(LtEntry(prod+"#"+trans+"#RETURN_PARAMETERS", ",".join("{}:{}".format(*it) for it in fdata["outparams"].items())))
+        returnparams = {"serviceFound": "SERVICE_FOUND"} | {p.jsonname: p.name for p in config.cramer_output_params if p.jsonname is not None}
+        DBG(30, "Return parameters for identify API are: {}".format(returnparams))
+        lkt5.add(LtEntry(prod+"#"+trans+"#RETURN_PARAMETERS", ",".join("{}:{}".format(*it) for it in returnparams.items())))
     else:
         print("No identify function defined for product {}".format(prod))
         lkt5 = None

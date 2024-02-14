@@ -10,9 +10,9 @@ from debug import DBG, set_debug_level
 
 def read_data_from_excel(xlfile, tab):
     ''' Read and return the data from the correct sheet in the excel file.'''
-    STARTROW = 6
-    COLUMNS = {'TECHNAME': 1, 'DESC': 2, 'VALUETYPE': 3, 'TYPEDETAILS': 4, 'OM': 5, 'EXAMPLE_VALUE': 6, 'CRAMERSTORAGE': 7, 'PARAMTYPE': 8, 'ACADEFAULT': 10 }
-    COLS_TO_CHECK_FOR_MAPPING = [11, 13 ,15, 17]
+    STARTROW = 7
+    COLUMNS = {'TECHNAME': 1, 'DESC': 2, 'VALUETYPE': 3, 'TYPEDETAILS': 4, 'OM': 5, 'EXAMPLE_VALUE': 6, 'CRAMERSTORAGE': 7, 'JSONNAME': 8, 'STABLENET': 9, 'PARAMTYPE': 10, 'ACADEFAULT': 12 }
+    COLS_TO_CHECK_FOR_MAPPING = [13 ,15, 17, 19]
     PRODNAME_CELL = 'B1'
     ACTION_CELL = 'B3'
     VERSION_CELL = 'B4'
@@ -40,10 +40,12 @@ def read_data_from_excel(xlfile, tab):
     version = sheet[VERSION_CELL].value
     inparams = []
     crameroutparams = []
+    stablenetparams = ([],[])
+    keyparams = []
     for row in range(STARTROW, 300):
         cellvalues = [sheet.cell(row=row, column=col).value for col in [COLUMNS[s]
-            for s in ['TECHNAME','DESC','VALUETYPE','TYPEDETAILS','OM','EXAMPLE_VALUE','PARAMTYPE', 'ACADEFAULT', 'CRAMERSTORAGE']]]
-        techname, desc, valuetype, typedetails, mo, example, paramtype, acadefault, cramerstorage = (x.strip() if isinstance(x, str) else x for x in cellvalues)
+            for s in ['TECHNAME','DESC','VALUETYPE','TYPEDETAILS','OM','EXAMPLE_VALUE','PARAMTYPE', 'ACADEFAULT', 'CRAMERSTORAGE', 'JSONNAME', 'STABLENET']]]
+        techname, desc, valuetype, typedetails, mo, example, paramtype, acadefault, cramerstorage, jsonname, stablenet = (x.strip() if isinstance(x, str) else x for x in cellvalues)
         if techname == "Version": # avoid reading version history
             break
         if techname is not None and techname.startswith("#"):
@@ -62,16 +64,26 @@ def read_data_from_excel(xlfile, tab):
             mapped = any(sheet.cell(row=row, column=col).value and sheet.cell(row=row, column=col).value.lower() == "mapped" for col in COLS_TO_CHECK_FOR_MAPPING)
             if paramtype.lower() == "input" or paramtype.lower() == "special":
                 DBG(30, "Adding parameter {} (type {}) to input parameters".format(techname, paramtype))
-                inparams.append(Param('input', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, acadefault, paramtype.lower() == "special", mapped, maxoccurs))
+                inparams.append(Param('input', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, acadefault, paramtype.lower() == "special", mapped, maxoccurs, jsonname))
+                if techname != 'NETWORK_ELEMENT_NAME' and techname != '{}_RFS_NAME'.format(prodname) and techname not in stablenetparams[0]:
+                    stablenetparams[0].append(techname)
             elif paramtype.lower() == "return":
                 DBG(30, "Adding parameter {} (type {}) to cramer output parameters".format(techname, paramtype))
-                crameroutparams.append(Param('Cramer', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, maxoccurs=maxoccurs))
+                crameroutparams.append(Param('Cramer', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, maxoccurs=maxoccurs, jsonname=jsonname))
+                if techname != 'NETWORK_ELEMENT_NAME' and techname != '{}_RFS_NAME'.format(prodname) and techname not in stablenetparams[0]:
+                    stablenetparams[0].append(techname)
             elif paramtype.lower() == "inputorreturn":
                 DBG(30, "Adding parameter {} (type {}) to input AND cramer output parameters".format(techname, paramtype))
-                inparams.append(Param('input', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, acadefault, paramtype.lower() == "special", mapped, maxoccurs))
-                crameroutparams.append(Param('Cramer', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, maxoccurs=maxoccurs))
+                inparams.append(Param('input', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, acadefault, paramtype.lower() == "special", mapped, maxoccurs, jsonname))
+                crameroutparams.append(Param('Cramer', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, maxoccurs=maxoccurs, jsonname=jsonname))
+                if techname != 'NETWORK_ELEMENT_NAME' and techname != '{}_RFS_NAME'.format(prodname) and techname not in stablenetparams[0]:
+                    stablenetparams[0].append(techname)
             else:
                 DBG(30, "Ignoring parameter {} (type {})".format(techname, paramtype))
+            if stablenet.lower() == "yes":
+                stablenetparams[1].append(techname)
+            if sheet.cell(row=row, column=COLUMNS["TECHNAME"]).font.bold:
+                keyparams.append(techname)
         elif techname and not valuetype:
             print("WARNING: No value type defined for parameter '{}'".format(techname))
         elif techname and not mo:
@@ -79,7 +91,7 @@ def read_data_from_excel(xlfile, tab):
         elif techname and not paramtype:
             print("WARNING: No param type defined for parameter '{}'".format(techname))
 
-    return prodname, action, version, inparams, crameroutparams
+    return prodname, action, version, inparams, crameroutparams, stablenetparams, keyparams
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
@@ -92,8 +104,8 @@ if __name__ == "__main__":
     args=parser.parse_args()
     set_debug_level(args.dbglevel)
 
-    prodname, transaction, version, inparams, crameroutparams = read_data_from_excel(args.filename, args.tabname)
-    config = FactoryProductConfiguration(prodname, transaction, version, inparams, crameroutparams)
+    prodname, transaction, version, inparams, crameroutparams, stablenetparams, keyparams = read_data_from_excel(args.filename, args.tabname)
+    config = FactoryProductConfiguration(prodname, transaction, version, inparams, crameroutparams, stablenetparams, keyparams)
     config.add_validation("CHECK_NODE_LOCATION", args.nename, taskname="CHECK_TARGET_NE_EXISTS")
     if "ACCESS_DEVICE_NAME" in config.input_param_names():
         config.add_validation("CHECK_NODE_LOCATION", "ACCESS_DEVICE_NAME", taskname="CHECK_ACCESS_DEVICE_EXISTS")

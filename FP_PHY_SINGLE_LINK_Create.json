@@ -1,7 +1,7 @@
 {
   "factoryProductName": "PHY_SINGLE_LINK",
   "action": "Create",
-  "version": "0.8",
+  "version": "0.9",
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
@@ -11,7 +11,8 @@
       "special": true,
       "dynamicallyMapped": false,
       "exampleValue": "ZH0004MEB101",
-      "cramerStorage": "TND device ( types to TBD)"
+      "cramerStorage": "TND device ( types to TBD)",
+      "jsonName": "networkElementName"
     },
     {
       "name": "PHYS_IF_NAME",
@@ -21,7 +22,8 @@
       "special": false,
       "dynamicallyMapped": false,
       "exampleValue": "GigabitEthernet0/1/0",
-      "cramerStorage": "TND device's  ports"
+      "cramerStorage": "TND device's  ports",
+      "jsonName": "phyIfName"
     },
     {
       "name": "PHYS_IF_MTU",
@@ -168,7 +170,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": "ING_POLICING_PROFILE1",
+      "exampleValue": "#REF!",
       "cramerStorage": "PHY_SINGLE_LINK_GE"
     },
     {
@@ -186,7 +188,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": "EGRESS_QOS_QUEUE_PROFILE1",
+      "exampleValue": "#REF!",
       "cramerStorage": "PHY_SINGLE_LINK_GE"
     },
     {
@@ -202,7 +204,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": "CORE_MPLS",
+      "exampleValue": "#REF!",
       "cramerStorage": "PHY_SINGLE_LINK_GE"
     },
     {
@@ -233,7 +235,8 @@
       "special": false,
       "dynamicallyMapped": false,
       "exampleValue": "Snippet1;Snippet2",
-      "cramerStorage": "CONFIG_SNIPPET_GE (s)"
+      "cramerStorage": "CONFIG_SNIPPET_GE (s)",
+      "jsonName": "custSnippetNames"
     }
   ],
   "cramerParameters": [
@@ -243,7 +246,8 @@
       "mandatory": true,
       "valueType": "string",
       "exampleValue": "PHYSL000000001",
-      "cramerStorage": "Service object"
+      "cramerStorage": "Service object",
+      "jsonName": "phySingleLinkRfsName"
     },
     {
       "name": "PHYS_IF_SPEED",
@@ -251,7 +255,8 @@
       "mandatory": true,
       "valueType": "integer",
       "exampleValue": "100000000",
-      "cramerStorage": "optical  module of the port"
+      "cramerStorage": "optical  module of the port",
+      "jsonName": "phyIfSpeed"
     },
     {
       "name": "PHYS_IF_TYPE",
@@ -259,7 +264,8 @@
       "mandatory": true,
       "valueType": "string",
       "exampleValue": "100GBASE-LR1",
-      "cramerStorage": "optical  module of the port"
+      "cramerStorage": "optical  module of the port",
+      "jsonName": "phyIfType"
     },
     {
       "name": "PHYS_IF_CENTER_FREQUENCY",
@@ -270,7 +276,8 @@
         "comment": "two decimal places"
       },
       "exampleValue": "1540.25",
-      "cramerStorage": "optical  module of the port"
+      "cramerStorage": "optical  module of the port",
+      "jsonName": "phyIfCenterFrequency"
     },
     {
       "name": "PHYS_IF_TX_POWER",
@@ -281,7 +288,8 @@
         "comment": "two decimal places; must support negative numbers"
       },
       "exampleValue": "-5.00",
-      "cramerStorage": "optical  module of the port"
+      "cramerStorage": "optical  module of the port",
+      "jsonName": "phyIfTxPower"
     },
     {
       "name": "PHY_ACCESS_SERVICE_NAME",
@@ -289,7 +297,8 @@
       "mandatory": true,
       "valueType": "string",
       "exampleValue": "IDN001",
-      "cramerStorage": "Service"
+      "cramerStorage": "Service",
+      "jsonName": "phyAccessServiceName"
     },
     {
       "name": "ACCESS_DEVICE_NAME",
@@ -297,7 +306,8 @@
       "mandatory": true,
       "valueType": "string",
       "exampleValue": "ONT0000000014",
-      "cramerStorage": "Access device"
+      "cramerStorage": "Access device",
+      "jsonName": "accessDeviceName"
     },
     {
       "name": "ACCESS_DEVICE_IF_NAME",
@@ -305,9 +315,68 @@
       "mandatory": true,
       "valueType": "string",
       "exampleValue": "Ge1/0",
-      "cramerStorage": "Access device port"
+      "cramerStorage": "Access device port",
+      "jsonName": "accessDeviceIfName"
     }
   ],
+  "keyParameters": [
+    "NETWORK_ELEMENT_NAME",
+    "PHYS_IF_NAME"
+  ],
+  "stablenetParameters": {
+    "preNEI": [
+      "PHYS_IF_NAME",
+      "PHYS_IF_SPEED",
+      "PHYS_IF_TYPE",
+      "PHYS_IF_MTU",
+      "PHYS_IF_CENTER_FREQUENCY",
+      "PHYS_IF_TX_POWER",
+      "PHYS_IF_AUTO_NEGOTIATION",
+      "PHYS_IF_SYNCE_ENABLED",
+      "PHYS_IF_PTP_ENABLED",
+      "PHYS_IF_PTP_PRIO",
+      "PHYS_IF_MAC_SEC",
+      "PHYS_LINK_UP_DELAY",
+      "PHYS_LINK_FLAP_DAMPENING_FLAG",
+      "PHY_ACCESS_SERVICE_NAME",
+      "PHYS_IF_8021X_ENABLED",
+      "PHYS_IF_8021X_PROFILE_NAME",
+      "ACCESS_DEVICE_NAME",
+      "ACCESS_DEVICE_IF_NAME",
+      "QOS_INGRESS_CLASSIFICATION_PROFILE",
+      "QOS_INGRESS_POLICING_PROFILE",
+      "QOS_EGRESS_QOS_QUEUE_PROFILE",
+      "QOS_EGRESS_QOS_POLICY",
+      "QOS_CUST_EGRESS_REWRITE_CONFIG",
+      "CUST_SNIPPET_NAMES"
+    ],
+    "postNEI": [
+      "PHYS_IF_NAME",
+      "PHYS_IF_SPEED",
+      "PHYS_IF_TYPE",
+      "PHYS_IF_MTU",
+      "PHYS_IF_CENTER_FREQUENCY",
+      "PHYS_IF_TX_POWER",
+      "PHYS_IF_AUTO_NEGOTIATION",
+      "PHYS_IF_SYNCE_ENABLED",
+      "PHYS_IF_PTP_ENABLED",
+      "PHYS_IF_PTP_PRIO",
+      "PHYS_IF_MAC_SEC",
+      "PHYS_LINK_UP_DELAY",
+      "PHYS_LINK_FLAP_DAMPENING_FLAG",
+      "PHY_ACCESS_SERVICE_NAME",
+      "PHYS_IF_8021X_ENABLED",
+      "PHYS_IF_8021X_PROFILE_NAME",
+      "ACCESS_DEVICE_NAME",
+      "ACCESS_DEVICE_IF_NAME",
+      "QOS_INGRESS_CLASSIFICATION_PROFILE",
+      "QOS_INGRESS_POLICING_PROFILE",
+      "QOS_EGRESS_QOS_QUEUE_PROFILE",
+      "QOS_EGRESS_QOS_POLICY",
+      "QOS_CUST_EGRESS_REWRITE_CONFIG",
+      "CUST_SNIPPET_NAMES"
+    ]
+  },
   "cramerValidations": [
     {
       "name": "CHECK_NODE_LOCATION",
