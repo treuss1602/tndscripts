@@ -76,7 +76,8 @@ def create_lookup_tables_for_factory_product(config, nenameparam="NETWORK_ELEMEN
         DBG(30, "Input parameters for identify API are: {}".format(inputparams))
         lkt.add(LtEntry(prod+"#"+trans+"#PARAMETERS", ";".join("{}={}".format(*it) for it in inputparams.items())+";"))
         lkt.add(LtEntry(prod+"#"+trans+"#GE_PARAMETERS", joinparams([p for p in config.input_params if p.cramerStorage == config.factoryProductName+"_GE"])))
-        returnparams = {"serviceFound": "SERVICE_FOUND"} | {p.jsonname: p.name for p in config.cramer_output_params if p.jsonname is not None}
+        returnparams = {"serviceFound": "SERVICE_FOUND"}
+        returnparams.update({p.jsonname: p.name for p in config.cramer_output_params if p.jsonname is not None})
         DBG(30, "Return parameters for identify API are: {}".format(returnparams))
         lkt.add(LtEntry(prod+"#"+trans+"#RETURN_PARAMETERS", ",".join("{}:{}".format(*it) for it in returnparams.items())))
     else:
