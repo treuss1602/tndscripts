@@ -205,7 +205,6 @@
   ],
   "stablenetParameters": {
     "preNEI": [
-      "EVPN_EVI_RANGE",
       "EVI_INSTANCE_ID",
       "L2_VPN_NAME",
       "EVI_NAME",
