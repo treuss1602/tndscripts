@@ -1,0 +1,3 @@
+key="PHY_SINGLE_LINK#Create#API_NAME" values="getPHYSingleLinkDetails"
+key="PHY_SINGLE_LINK#Create#PARAMETERS" values="phySingleLinkRfsName=PHY_SINGLE_LINK_RFS_NAME;"
+key="PHY_SINGLE_LINK#Create#RETURN_PARAMETERS" values="networkElementName:NETWORK_ELEMENT_NAME,phyIfName:PHYS_IF_NAME,custSnippetNames:CUST_SNIPPET_NAMES,phySingleLinkRfsName:PHY_SINGLE_LINK_RFS_NAME,phyIfSpeed:PHYS_IF_SPEED,phyIfType:PHYS_IF_TYPE,phyIfCenterFrequency:PHYS_IF_CENTER_FREQUENCY,phyIfTxPower:PHYS_IF_TX_POWER,phyAccessServiceName:PHY_ACCESS_SERVICE_NAME,accessDeviceName:ACCESS_DEVICE_NAME,accessDeviceIfName:ACCESS_DEVICE_IF_NAME"

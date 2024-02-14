@@ -1,0 +1,3 @@
+key="ELAN_CORE#Create#API_NAME" values="getELANCoreDetails"
+key="ELAN_CORE#Create#PARAMETERS" values="elanCoreRFSName=ELAN_CORE_RFS_NAME;"
+key="ELAN_CORE#Create#RETURN_PARAMETERS" values="networkElementName:NETWORK_ELEMENT_NAME,l2vpnName:L2_VPN_NAME,eviName:EVI_NAME,eviType:EVI_TYPE,custSnippetNames:CUST_SNIPPET_NAMES,elanCoreRFSName:ELAN_CORE_RFS_NAME,eviInstanceId:EVI_INSTANCE_ID,eviImportRouteTargetSet:EVI_IMPORT_ROUTE_TARGET_SET,eviExportRouteTargetSet:EVI_EXPORT_ROUTE_TARGET_SET,eviRouteDistinguisher:EVI_ROUTE_DISTINGUISHER"

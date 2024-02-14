@@ -1,0 +1,3 @@
+key="IPVPN_CORE#Create#API_NAME" values="getIPVPNCoreDetails"
+key="IPVPN_CORE#Create#PARAMETERS" values="ipvpnCoreRFSName=IPVPN_CORE_RFS_NAME;"
+key="IPVPN_CORE#Create#RETURN_PARAMETERS" values="networkElementName:NETWORK_ELEMENT_NAME,l3vpnName:L3_VPN_NAME,vrfName:VRF_NAME,vrfType:VRF_TYPE,custSnippetNames:CUST_SNIPPET_NAMES,ipvpnCoreRFSName:IPVPN_CORE_RFS_NAME,vrfImportRTSet:VRF_IMPORT_RT_SET,vrfExportRTSet:VRF_EXPORT_RT_SET,vrfRD:VRF_RD"
