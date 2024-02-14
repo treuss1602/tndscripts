@@ -170,7 +170,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": "#REF!",
+      "exampleValue": "ING_POLICING_PROFILE1",
       "cramerStorage": "PHY_SINGLE_LINK_GE"
     },
     {
@@ -188,7 +188,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": "#REF!",
+      "exampleValue": "EGRESS_QOS_QUEUE_PROFILE1",
       "cramerStorage": "PHY_SINGLE_LINK_GE"
     },
     {
@@ -204,7 +204,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": "#REF!",
+      "exampleValue": "CORE_MPLS",
       "cramerStorage": "PHY_SINGLE_LINK_GE"
     },
     {

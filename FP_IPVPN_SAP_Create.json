@@ -359,7 +359,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": "#REF!",
+      "exampleValue": "ING_POLICING_PROFILE1",
       "cramerStorage": "IPVPN_SAP_GE"
     },
     {
@@ -377,7 +377,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": "#REF!",
+      "exampleValue": "EGRESS_QOS_QUEUE_PROFILE1",
       "cramerStorage": "IPVPN_SAP_GE"
     },
     {
@@ -393,7 +393,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": "#REF!",
+      "exampleValue": "CORE_MPLS",
       "cramerStorage": "IPVPN_SAP_GE"
     },
     {
