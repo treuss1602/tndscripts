@@ -57,10 +57,10 @@ def create_lookup_tables_for_factory_product(config, nenameparam="NETWORK_ELEMEN
         lkt.add(LtEntry(prod+"#"+trans+"#API_NAME", api))
         rfsparam = config.find_return_param('{}_RFS_NAME'.format(prod))
         inputparams = {rfsparam.jsonname: rfsparam.name}
-        DBG(3, "Input parameters for query API are: {}".format(inputparams))
+        DBG(30, "Input parameters for query API are: {}".format(inputparams))
         lkt.add(LtEntry(prod+"#"+trans+"#PARAMETERS", ";".join("{}={}".format(*it) for it in inputparams.items())+";"))
         returnparams = {p.jsonname: p.name for p in config.input_params + config.cramer_output_params if p.jsonname is not None}
-        DBG(3, "Return parameters for identify API are: {}".format(returnparams))
+        DBG(30, "Return parameters for query API are: {}".format(returnparams))
         lkt.add(LtEntry(prod+"#"+trans+"#RETURN_PARAMETERS", ",".join("{}:{}".format(*it) for it in returnparams.items())))
     else:
         print("No query function defined for product {}".format(prod))

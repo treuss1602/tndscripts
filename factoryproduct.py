@@ -118,7 +118,7 @@ class Param:
 class FactoryProductConfiguration:
     ''' The full configuration, read & write json, create lookup tables, etc. '''
 
-    def __init__(self, factory_product_name, transaction, version, input_params, cramer_output_params, stablenet_params, key_params, cramer_validations = []):
+    def __init__(self, factory_product_name, transaction, version, input_params, cramer_output_params, stablenet_params, key_params, cramer_validations = None):
         self.factoryProductName = factory_product_name
         self.transaction = transaction
         self.version = str(version) if version is not None else None
@@ -126,7 +126,7 @@ class FactoryProductConfiguration:
         self.cramer_output_params = cramer_output_params
         self.stablenet_params = stablenet_params
         self.key_params = key_params
-        self.cramer_validations = cramer_validations
+        self.cramer_validations = cramer_validations if cramer_validations else []
 
     def add_validation(self, validation_name, *validation_params, taskname = None):
         if validation_name not in VALIDATIONS:
