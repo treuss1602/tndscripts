@@ -1,0 +1,4 @@
+key="ELAN_CORE#Create#API_NAME" values="identifyELANCore"
+key="ELAN_CORE#Create#PARAMETERS" values="nodeName=NETWORK_ELEMENT_NAME;l2vpnName=L3_VPN_NAME;eviName=EVI_NAME;eviType=EVI_TYPE;custSnippetName=CUST_SNIPPET_NAMES;"
+key="ELAN_CORE#Create#GE_PARAMETERS" values=";"
+key="ELAN_CORE#Create#RETURN_PARAMETERS" values="serviceReuse:SERVICE_FOUND,elanCoreName:ELAN_CORE_RFS_NAME,eviNAme:EVI_NAME"

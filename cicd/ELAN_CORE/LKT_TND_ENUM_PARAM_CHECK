@@ -1,0 +1,6 @@
+key="ELAN_CORE#Create#ENUM_PARAMS" values="EVPN_EVI_RANGE;EVI_TYPE;VRF_SR_TE_COLOR_COMMUNITY;MANAGEMENT_FLAG;IGMP_MLD_SNOOPING_FLAG;"
+key="ELAN_CORE#Create#EVPN_EVI_RANGE" values="41000->41999;20400 ->20599;"
+key="ELAN_CORE#Create#EVI_TYPE" values="E-LAN;E-Tree-Root;E-Tree-Leaf;"
+key="ELAN_CORE#Create#VRF_SR_TE_COLOR_COMMUNITY" values="SR-TE color1;SR-TE color2;"
+key="ELAN_CORE#Create#MANAGEMENT_FLAG" values="true;false;"
+key="ELAN_CORE#Create#IGMP_MLD_SNOOPING_FLAG" values="true;false;"
