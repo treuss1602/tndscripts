@@ -1,7 +1,7 @@
 {
   "factoryProductName": "ELAN_SAP",
   "action": "Create",
-  "version": "0.13",
+  "version": "0.14",
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
@@ -362,7 +362,11 @@
       "jsonName": "outerVLANId"
     }
   ],
-  "keyParameters": [],
+  "keyParameters": [
+    "NETWORK_ELEMENT_NAME",
+    "LOGICAL_SUB_IF_ID",
+    "PHY_SERVICE_NAME"
+  ],
   "stablenetParameters": {
     "preNEI": [
       "LOGICAL_SUB_IF_ID",

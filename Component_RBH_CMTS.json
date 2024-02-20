@@ -5,7 +5,7 @@
     {
       "factoryProduct": "IPVPN_CORE",
       "action": "Create",
-      "factoryProductVersion": "1.1",
+      "factoryProductVersion": "1.3",
       "parameters": [
         {
           "name": "L3_VPN_NAME",
@@ -102,10 +102,10 @@
     {
       "factoryProduct": "IPVPN_SAP",
       "action": "Create",
-      "factoryProductVersion": "0.10",
+      "factoryProductVersion": "0.16",
       "parameters": [
         {
-          "name": "LOGICAL_SUB_IF_NAME",
+          "name": "LOGICAL_SUB_IF_ID",
           "type": "static",
           "value": 9000
         },
@@ -141,13 +141,13 @@
         },
         {
           "name": "PHY_SERVICE_NAME",
-          "type": "static",
-          "value": null
+          "type": "mapped",
+          "from": "PHY_IRB_RFS_NAME"
         },
         {
           "name": "PRIMARY_IPV4_IF_ADDRESS",
           "type": "static",
-          "value": "/30#SNG"
+          "value": "/30@SNG"
         },
         {
           "name": "ADDITIONAL_IPV4_IF_ADDRESSES",
@@ -369,7 +369,7 @@
     {
       "factoryProduct": "ELAN_CORE",
       "action": "Create",
-      "factoryProductVersion": "0.9",
+      "factoryProductVersion": "0.12",
       "parameters": [
         {
           "name": "EVPN_EVI_RANGE",
@@ -421,10 +421,10 @@
     {
       "factoryProduct": "ELAN_SAP",
       "action": "Create",
-      "factoryProductVersion": "0.7",
+      "factoryProductVersion": "0.14",
       "parameters": [
         {
-          "name": "LOGICAL_SUB_IF_NAME",
+          "name": "LOGICAL_SUB_IF_ID",
           "type": "static",
           "value": 1024
         },
@@ -517,18 +517,6 @@
           "name": "CUST_SNIPPET_NAMES",
           "type": "input",
           "from": "RBH_CMTS_ELAN_SAP_CUST_SNIPPET_NAMES"
-        }
-      ]
-    },
-    {
-      "factoryProduct": "PHY_IRB",
-      "action": "Create",
-      "factoryProductVersion": "0.3",
-      "parameters": [
-        {
-          "name": "CUST_SNIPPET_NAMES",
-          "type": "input",
-          "from": "RBH_CMTS_PHY_IRB_CUST_SNIPPET_NAMES"
         }
       ]
     }

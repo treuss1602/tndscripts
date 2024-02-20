@@ -18,7 +18,7 @@ def create_zipfile(filename, *tables):
 def joinparams(*paramsets):
     return ";".join(map(lambda x: x.name, functools.reduce(lambda a,b: a+b, paramsets)))+";"
 
-def create_lookup_tables_for_factory_product(config, nenameparam="NETWORK_ELEMENT_NAME"):
+def create_lookup_tables_for_factory_product(config : FactoryProductConfiguration, nenameparam : str="NETWORK_ELEMENT_NAME"):
     ''' Create the lookup Tables '''
     prod = config.factoryProductName
     trans = config.transaction
@@ -103,9 +103,8 @@ def create_lookup_tables_for_factory_product(config, nenameparam="NETWORK_ELEMEN
         raise ValueError("Action {} not (yet) supported for Stablenet Requests.")
     lkt.add(LtEntry(prod+"#"+trans+"#TARGET_DEVICE", nenameparam))
     lkt.add(LtEntry(prod+"#"+trans+"#RFS_NAME", config.factoryProductName+"_RFS_NAME"))
-    parameters = [p for p in config.input_params if not p.special]
-    parameters += [p for p in config.cramer_output_params if p.name not in config.input_param_names()]
-    lkt.add(LtEntry(prod+"#"+trans+"#PARAMETERS", joinparams(parameters)))
+    parameters = config.stablenet_params[0]
+    lkt.add(LtEntry(prod+"#"+trans+"#PARAMETERS", ";".join(parameters)+";"))
     tables.append(lkt)
 
     return tables

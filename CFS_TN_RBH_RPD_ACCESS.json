@@ -8,7 +8,7 @@
     {
       "factoryProduct": "PHY_SINGLE_LINK",
       "action": "Create",
-      "factoryProductVersion": "0.8",
+      "factoryProductVersion": "0.11",
       "parameters": [
         {
           "name": "PHYS_IF_NAME",

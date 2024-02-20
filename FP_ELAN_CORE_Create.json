@@ -1,7 +1,7 @@
 {
   "factoryProductName": "ELAN_CORE",
   "action": "Create",
-  "version": "0.10",
+  "version": "0.12",
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
@@ -22,11 +22,12 @@
       "valueTypeDetails": {
         "enumValues": [
           "41000->41999",
-          "20400 ->20599"
+          "20400->20599"
         ]
       },
       "special": false,
       "dynamicallyMapped": false,
+      "exampleValue": "20400->20599",
       "cramerStorage": "Number range"
     },
     {
@@ -96,6 +97,7 @@
       "valueType": "string",
       "special": false,
       "dynamicallyMapped": false,
+      "exampleValue": "9000",
       "cramerStorage": "ELANCORE_GE"
     },
     {
@@ -186,6 +188,7 @@
       "valueTypeDetails": {
         "comment": "1 or multiple values separated by ;"
       },
+      "exampleValue": "6735:122556;6738:122889",
       "cramerStorage": "RT",
       "jsonName": "eviExportRouteTargetSet"
     },
