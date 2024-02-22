@@ -88,7 +88,7 @@
       "special": false,
       "dynamicallyMapped": false,
       "exampleValue": "SR-TE color1",
-      "cramerStorage": "ELANCORE_GE"
+      "cramerStorage": "ELAN_CORE_GE"
     },
     {
       "name": "RELATED_L3_LOGICAL_IF",
@@ -98,7 +98,7 @@
       "special": false,
       "dynamicallyMapped": false,
       "exampleValue": "9000",
-      "cramerStorage": "ELANCORE_GE"
+      "cramerStorage": "ELAN_CORE_GE"
     },
     {
       "name": "MANAGEMENT_FLAG",
@@ -109,7 +109,7 @@
       "dynamicallyMapped": false,
       "exampleValue": "false",
       "acadefault": false,
-      "cramerStorage": "ELANCORE_GE"
+      "cramerStorage": "ELAN_CORE_GE"
     },
     {
       "name": "IGMP_MLD_SNOOPING_FLAG",
@@ -120,7 +120,7 @@
       "dynamicallyMapped": false,
       "exampleValue": "false",
       "acadefault": false,
-      "cramerStorage": "ELANCORE_GE"
+      "cramerStorage": "ELAN_CORE_GE"
     },
     {
       "name": "CUST_SNIPPET_NAMES",

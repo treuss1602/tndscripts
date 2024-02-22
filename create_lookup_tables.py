@@ -34,7 +34,7 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
 
     # LKT_MANDATORY_PARAM_CHECK
     lkt = LookupTable('LKT_MANDATORY_PARAM_CHECK')
-    lkt.add(LtEntry('FACTORY_PRODUCT_'+prod+"#"+trans, " ".join(p.name for p in config.input_params if p.mandatory)+" ", "ORDER_TYPE IL_REQ_GROUP ORDER_EXTERNAL_ORDER_ID "))
+    lkt.add(LtEntry('FACTORY_PRODUCT_'+prod+"#"+trans, "PAUSE_AFTER_PREPARE "+" ".join(p.name for p in config.input_params if p.mandatory)+" ", "ORDER_TYPE IL_REQ_GROUP ORDER_EXTERNAL_ORDER_ID "))
     tables.append(lkt)
 
     # LKT_TND_ENUM_PARAM_CHECK

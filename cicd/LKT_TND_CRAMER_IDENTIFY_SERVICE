@@ -1,6 +1,6 @@
 key="ELAN_CORE#Create#API_NAME" values="identifyELANCore"
 key="ELAN_CORE#Create#PARAMETERS" values="networkElementName=NETWORK_ELEMENT_NAME;l2vpnName=L2_VPN_NAME;eviName=EVI_NAME;eviType=EVI_TYPE;custSnippetNames=CUST_SNIPPET_NAMES;"
-key="ELAN_CORE#Create#GE_PARAMETERS" values=";"
+key="ELAN_CORE#Create#GE_PARAMETERS" values="VRF_SR_TE_COLOR_COMMUNITY;RELATED_L3_LOGICAL_IF;MANAGEMENT_FLAG;IGMP_MLD_SNOOPING_FLAG;"
 key="ELAN_CORE#Create#RETURN_PARAMETERS" values="serviceFound:SERVICE_FOUND,elanCoreRFSName:ELAN_CORE_RFS_NAME,eviInstanceId:EVI_INSTANCE_ID,eviName:EVI_NAME,eviImportRouteTargetSet:EVI_IMPORT_ROUTE_TARGET_SET,eviExportRouteTargetSet:EVI_EXPORT_ROUTE_TARGET_SET,eviRouteDistinguisher:EVI_ROUTE_DISTINGUISHER"
 key="IPVPN_CORE#Create#API_NAME" values="identifyIPVPNCore"
 key="IPVPN_CORE#Create#PARAMETERS" values="networkElementName=NETWORK_ELEMENT_NAME;l3vpnName=L3_VPN_NAME;vrfName=VRF_NAME;vrfType=VRF_TYPE;custSnippetNames=CUST_SNIPPET_NAMES;"
