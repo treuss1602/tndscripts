@@ -21,12 +21,15 @@ def joinparams(*paramsets):
 def create_lookup_tables_for_factory_product(config : FactoryProductConfiguration, nenameparam : str="NETWORK_ELEMENT_NAME"):
     ''' Create the lookup Tables '''
     prod = config.factoryProductName
-    trans = "Create"
     tables = []
 
     # LKT_TND_FACTORY_PRODUCT_PARAMETERS
     lkt = LookupTable('LKT_TND_FACTORY_PRODUCT_PARAMETERS')
-    lkt.add(LtEntry(prod+"#"+trans,
+    lkt.add(LtEntry(prod+"#Create",
+                     joinparams(config.input_params), 
+                     joinparams([p for p in config.input_params if p.dynamically_mapped]), 
+                     ";".join(config.key_params)+";"))
+    lkt.add(LtEntry(prod+"#Delete",
                      joinparams(config.input_params), 
                      joinparams([p for p in config.input_params if p.dynamically_mapped]), 
                      ";".join(config.key_params)+";"))
@@ -34,34 +37,37 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
 
     # LKT_MANDATORY_PARAM_CHECK
     lkt = LookupTable('LKT_MANDATORY_PARAM_CHECK')
-    lkt.add(LtEntry('FACTORY_PRODUCT_'+prod+"#"+trans, "PAUSE_AFTER_PREPARE "+" ".join(p.name for p in config.input_params if p.mandatory)+" ", "ORDER_TYPE IL_REQ_GROUP ORDER_EXTERNAL_ORDER_ID "))
+    lkt.add(LtEntry('FACTORY_PRODUCT_'+prod+"#Create", "PAUSE_AFTER_PREPARE "+" ".join(p.name for p in config.input_params if p.mandatory)+" ", "ORDER_TYPE IL_REQ_GROUP ORDER_EXTERNAL_ORDER_ID "))
+    lkt.add(LtEntry('FACTORY_PRODUCT_'+prod+"#Delete", "PAUSE_AFTER_PREPARE {}_RFS_NAME ".format(prod), "ORDER_TYPE IL_REQ_GROUP ORDER_EXTERNAL_ORDER_ID "))
+    lkt.add(LtEntry('FACTORY_PRODUCT_'+prod+"#Modify", "PAUSE_AFTER_PREPARE {}_RFS_NAME ".format(prod), "ORDER_TYPE IL_REQ_GROUP ORDER_EXTERNAL_ORDER_ID "))
     tables.append(lkt)
 
     # LKT_TND_ENUM_PARAM_CHECK
     lkt = LookupTable('LKT_TND_ENUM_PARAM_CHECK')
-    lkt.add(LtEntry(prod+"#"+trans+"#ENUM_PARAMS", ";".join(p.name for p in config.input_params if p.valuetype == "enumerated" or p.valuetype == "boolean")+";"))
+    lkt.add(LtEntry(prod+"#Create#ENUM_PARAMS", ";".join(p.name for p in config.input_params if p.valuetype == "enumerated" or p.valuetype == "boolean")+";"))
     for p in config.input_params:
         if p.valuetype == "enumerated":
-            lkt.add(LtEntry(prod+"#"+trans+"#{}".format(p.name), ";".join(p.enumvalues)+";"))
+            lkt.add(LtEntry(prod+"#Create#{}".format(p.name), ";".join(p.enumvalues)+";"))
         elif p.valuetype == "boolean":
-            lkt.add(LtEntry(prod+"#"+trans+"#{}".format(p.name), "true;false;"))
+            lkt.add(LtEntry(prod+"#Create#{}".format(p.name), "true;false;"))
     tables.append(lkt)
 
     # LKT_TND_CRAMER_COMMAND_VALIDATION
-    tables.append(LookupTable.from_validations(prod, trans, *config.cramer_validations))
+    tables.append(LookupTable.from_validations(prod, "Create", *config.cramer_validations))
 
     # LKT_TND_CRAMER_QUERY_SERVICE
     api = CramerAPIs[prod][0]
     if api:
         lkt = LookupTable('LKT_TND_CRAMER_QUERY_SERVICE')
-        lkt.add(LtEntry(prod+"#"+trans+"#API_NAME", api))
-        rfsparam = config.find_return_param('{}_RFS_NAME'.format(prod))
-        inputparams = {rfsparam.jsonname: rfsparam.name}
-        DBG(30, "Input parameters for query API are: {}".format(inputparams))
-        lkt.add(LtEntry(prod+"#"+trans+"#PARAMETERS", ";".join("{}={}".format(*it) for it in inputparams.items())+";"))
-        returnparams = {p.jsonname: p.name for p in config.input_params + config.cramer_output_params if p.jsonname is not None}
-        DBG(30, "Return parameters for query API are: {}".format(returnparams))
-        lkt.add(LtEntry(prod+"#"+trans+"#RETURN_PARAMETERS", ",".join("{}:{}".format(*it) for it in returnparams.items())))
+        for trans in ["Create", "Delete", "Modify"]:
+            lkt.add(LtEntry(prod+"#"+trans+"#API_NAME", api))
+            rfsparam = config.find_return_param('{}_RFS_NAME'.format(prod))
+            inputparams = {rfsparam.jsonname: rfsparam.name}
+            DBG(30, "Input parameters for query API are: {}".format(inputparams))
+            lkt.add(LtEntry(prod+"#"+trans+"#PARAMETERS", ";".join("{}={}".format(*it) for it in inputparams.items())+";"))
+            returnparams = {p.jsonname: p.name for p in config.input_params + config.cramer_output_params if p.jsonname is not None}
+            DBG(30, "Return parameters for query API are: {}".format(returnparams))
+            lkt.add(LtEntry(prod+"#"+trans+"#RETURN_PARAMETERS", ",".join("{}:{}".format(*it) for it in returnparams.items())))
     else:
         print("No query function defined for product {}".format(prod))
         lkt = None
@@ -71,15 +77,15 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
     api = CramerAPIs[prod][1]
     if api:
         lkt = LookupTable('LKT_TND_CRAMER_IDENTIFY_SERVICE')
-        lkt.add(LtEntry(prod+"#"+trans+"#API_NAME", api))
+        lkt.add(LtEntry(prod+"#Create#API_NAME", api))
         inputparams = {p.jsonname: p.name for p in config.input_params if p.jsonname is not None}
         DBG(30, "Input parameters for identify API are: {}".format(inputparams))
-        lkt.add(LtEntry(prod+"#"+trans+"#PARAMETERS", ";".join("{}={}".format(*it) for it in inputparams.items())+";"))
-        lkt.add(LtEntry(prod+"#"+trans+"#GE_PARAMETERS", joinparams([p for p in config.input_params if p.cramerStorage == config.factoryProductName+"_GE"])))
+        lkt.add(LtEntry(prod+"#Create#PARAMETERS", ";".join("{}={}".format(*it) for it in inputparams.items())+";"))
+        lkt.add(LtEntry(prod+"#Create#GE_PARAMETERS", joinparams([p for p in config.input_params if p.cramerStorage == config.factoryProductName+"_GE"])))
         returnparams = {"serviceFound": "SERVICE_FOUND"}
         returnparams.update({p.jsonname: p.name for p in config.cramer_output_params if p.jsonname is not None})
         DBG(30, "Return parameters for identify API are: {}".format(returnparams))
-        lkt.add(LtEntry(prod+"#"+trans+"#RETURN_PARAMETERS", ",".join("{}:{}".format(*it) for it in returnparams.items())))
+        lkt.add(LtEntry(prod+"#Create#RETURN_PARAMETERS", ",".join("{}:{}".format(*it) for it in returnparams.items())))
     else:
         print("No identify function defined for product {}".format(prod))
         lkt = None
@@ -87,20 +93,25 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
 
     # LKT_TND_CRAMER_SUBORDERS
     lkt = LookupTable('LKT_TND_CRAMER_SUBORDERS')
-    lkt.add(LtEntry(prod+"#"+trans+"#SUBORDER_PRODUCT", "TECHPROD_CRAMER_FACT_PROD_"+prod))
-    lkt.add(LtEntry(prod+"#"+trans+"#PARAMETERS", joinparams([p for p in config.input_params if not p.special])))
-    lkt.add(LtEntry(prod+"#"+trans+"#RETURN_PARAMETERS", joinparams(config.cramer_output_params)))
-    lkt.add(LtEntry(prod+"#"+trans+"#GE_PARAMETERS", joinparams([p for p in config.input_params if p.cramerStorage == config.factoryProductName+"_GE"])))
+    lkt.add(LtEntry(prod+"#Create#SUBORDER_PRODUCT", "TECHPROD_CRAMER_FACT_PROD_"+prod))
+    lkt.add(LtEntry(prod+"#Delete#SUBORDER_PRODUCT", "TECHPROD_CRAMER_FACT_PROD_"+prod))
+    lkt.add(LtEntry(prod+"#Create#PARAMETERS", joinparams([p for p in config.input_params if not p.special])))
+    lkt.add(LtEntry(prod+"#Delete#PARAMETERS", "{}_RFS_NAME;".format(prod)))
+    lkt.add(LtEntry(prod+"#Create#RETURN_PARAMETERS", joinparams(config.cramer_output_params)))
+    lkt.add(LtEntry(prod+"#Delete#RETURN_PARAMETERS", ";"))
+    lkt.add(LtEntry(prod+"#Create#GE_PARAMETERS", joinparams([p for p in config.input_params if p.cramerStorage == config.factoryProductName+"_GE"])))
+    lkt.add(LtEntry(prod+"#Delete#GE_PARAMETERS", ";"))
     tables.append(lkt)
 
     # LKT_TND_STABLENET
     lkt = LookupTable('LKT_TND_STABLENET')
     lkt.add(LtEntry(prod+"#Create#ORDER_DESCRIPTION", "new_rfs"))
     lkt.add(LtEntry(prod+"#Delete#ORDER_DESCRIPTION", "cease_rfs"))
-    lkt.add(LtEntry(prod+"#"+trans+"#TARGET_DEVICE", nenameparam))
-    lkt.add(LtEntry(prod+"#"+trans+"#RFS_NAME", config.factoryProductName+"_RFS_NAME"))
-    parameters = config.stablenet_params[0]
-    lkt.add(LtEntry(prod+"#"+trans+"#PARAMETERS", ";".join(parameters)+";"))
+    for trans in ["Create", "Delete", "Modify"]:
+        lkt.add(LtEntry(prod+"#"+trans+"#TARGET_DEVICE", nenameparam))
+        lkt.add(LtEntry(prod+"#"+trans+"#RFS_NAME", config.factoryProductName+"_RFS_NAME"))
+        parameters = config.stablenet_params[0]
+        lkt.add(LtEntry(prod+"#"+trans+"#PARAMETERS", ";".join(parameters)+";"))
     tables.append(lkt)
 
     return tables
