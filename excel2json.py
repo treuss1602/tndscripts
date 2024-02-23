@@ -14,7 +14,7 @@ def read_data_from_excel(xlfile, tab):
     COLUMNS = {'TECHNAME': 1, 'DESC': 2, 'VALUETYPE': 3, 'TYPEDETAILS': 4, 'OM': 5, 'EXAMPLE_VALUE': 6, 'CRAMERSTORAGE': 7, 'JSONNAME': 8, 'STABLENET': 9, 'PARAMTYPE': 10, 'ACADEFAULT': 12 }
     COLS_TO_CHECK_FOR_MAPPING = [13 ,15, 17, 19]
     PRODNAME_CELL = 'B1'
-    ACTION_CELL = 'B3'
+    # ACTION_CELL = 'B3'
     VERSION_CELL = 'B4'
 
     DBG(10, "Reading data from excel file '{}'".format(xlfile))
@@ -34,9 +34,6 @@ def read_data_from_excel(xlfile, tab):
     prodname = sheet[PRODNAME_CELL].value
     if not prodname:
         raise ValueError("Unable to read product name from excel {}, tab {}, cell {}".format(xlfile, tab, PRODNAME_CELL))
-    action = sheet[ACTION_CELL].value
-    if not action:
-        raise ValueError("Unable to read action from excel {}, tab {}, cell {}".format(xlfile, tab, ACTION_CELL))
     version = sheet[VERSION_CELL].value
     inparams = []
     crameroutparams = []
@@ -91,7 +88,7 @@ def read_data_from_excel(xlfile, tab):
         elif techname and not paramtype:
             print("WARNING: No param type defined for parameter '{}'".format(techname))
 
-    return prodname, action, version, inparams, crameroutparams, stablenetparams, keyparams
+    return prodname, version, inparams, crameroutparams, stablenetparams, keyparams
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
@@ -104,12 +101,12 @@ if __name__ == "__main__":
     args=parser.parse_args()
     set_debug_level(args.dbglevel)
 
-    prodname, transaction, version, inparams, crameroutparams, stablenetparams, keyparams = read_data_from_excel(args.filename, args.tabname)
-    config = FactoryProductConfiguration(prodname, transaction, version, inparams, crameroutparams, stablenetparams, keyparams)
+    prodname, version, inparams, crameroutparams, stablenetparams, keyparams = read_data_from_excel(args.filename, args.tabname)
+    config = FactoryProductConfiguration(prodname, version, inparams, crameroutparams, stablenetparams, keyparams)
     config.add_validation("CHECK_NODE_LOCATION", args.nename, taskname="CHECK_TARGET_NE_EXISTS")
     if "ACCESS_DEVICE_NAME" in config.input_param_names():
         config.add_validation("CHECK_NODE_LOCATION", "ACCESS_DEVICE_NAME", taskname="CHECK_ACCESS_DEVICE_EXISTS")
-    outfile = "FP_{}_{}.json".format(prodname, transaction) if args.outfile is None else args.outfile
+    outfile = "FP_{}.json".format(prodname) if args.outfile is None else args.outfile
     DBG(10, "Writing json file '{}'".format(outfile))
     with open(outfile, "w") as fp:
         config.to_file(fp)

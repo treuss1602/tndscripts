@@ -118,9 +118,8 @@ class Param:
 class FactoryProductConfiguration:
     ''' The full configuration, read & write json, create lookup tables, etc. '''
 
-    def __init__(self, factory_product_name, transaction, version, input_params, cramer_output_params, stablenet_params, key_params, cramer_validations = None):
+    def __init__(self, factory_product_name, version, input_params, cramer_output_params, stablenet_params, key_params, cramer_validations = None):
         self.factoryProductName = factory_product_name
-        self.transaction = transaction
         self.version = str(version) if version is not None else None
         self.input_params = input_params
         self.cramer_output_params = cramer_output_params
@@ -150,7 +149,7 @@ class FactoryProductConfiguration:
         return next(p for p in self.cramer_output_params if p.name == name)
 
     def to_file(self, fp):
-        data = {"factoryProductName": self.factoryProductName, "action": self.transaction, "version": self.version}
+        data = {"factoryProductName": self.factoryProductName, "version": self.version}
         data["inputParameters"] = [p.as_dict() for p in self.input_params]
         data["cramerParameters"] = [p.as_dict() for p in self.cramer_output_params]
         data["keyParameters"] = self.key_params
@@ -164,7 +163,7 @@ class FactoryProductConfiguration:
         cramer_params = [Param.from_dict(p, "Cramer") for p in data["cramerParameters"]]
         stablenet_params = (data["stablenetParameters"]["preNEI"], data["stablenetParameters"]["postNEI"])
         key_params = data["keyParameters"]
-        prod = FactoryProductConfiguration(data["factoryProductName"], data["action"], data["version"],
+        prod = FactoryProductConfiguration(data["factoryProductName"], data["version"],
                                            input_params, cramer_params, stablenet_params, key_params)
         for v in data["cramerValidations"]:
             DBG(30, "Adding validation {}".format(v["name"]))

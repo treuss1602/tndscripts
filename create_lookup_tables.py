@@ -21,7 +21,7 @@ def joinparams(*paramsets):
 def create_lookup_tables_for_factory_product(config : FactoryProductConfiguration, nenameparam : str="NETWORK_ELEMENT_NAME"):
     ''' Create the lookup Tables '''
     prod = config.factoryProductName
-    trans = config.transaction
+    trans = "Create"
     tables = []
 
     # LKT_TND_FACTORY_PRODUCT_PARAMETERS
@@ -95,12 +95,8 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
 
     # LKT_TND_STABLENET
     lkt = LookupTable('LKT_TND_STABLENET')
-    if config.transaction == "Create":
-        lkt.add(LtEntry(prod+"#"+trans+"#ORDER_DESCRIPTION", "new_rfs"))
-    elif config.transaction == "Delete":
-        lkt.add(LtEntry(prod+"#"+trans+"#ORDER_DESCRIPTION", "cease_rfs"))
-    else:
-        raise ValueError("Action {} not (yet) supported for Stablenet Requests.")
+    lkt.add(LtEntry(prod+"#Create#ORDER_DESCRIPTION", "new_rfs"))
+    lkt.add(LtEntry(prod+"#Delete#ORDER_DESCRIPTION", "cease_rfs"))
     lkt.add(LtEntry(prod+"#"+trans+"#TARGET_DEVICE", nenameparam))
     lkt.add(LtEntry(prod+"#"+trans+"#RFS_NAME", config.factoryProductName+"_RFS_NAME"))
     parameters = config.stablenet_params[0]
@@ -156,7 +152,7 @@ if __name__ == "__main__":
                     DBG(30, "Lookup Table dump:\n"+table.debugdump())
                 else:
                     DBG(30, "No lookup table")
-            outfile = "{}_{}.zip".format(config.factoryProductName, config.transaction) if args.outfile is None else args.outfile
+            outfile = "{}.zip".format(config.factoryProductName) if args.outfile is None else args.outfile
             create_zipfile(outfile, *tables)
             print(outfile)
         elif "compositionName" in jsondata:
