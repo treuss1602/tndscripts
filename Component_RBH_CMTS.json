@@ -374,7 +374,7 @@
         {
           "name": "EVPN_EVI_RANGE",
           "type": "static",
-          "value": "20400 ->20599"
+          "value": "20400->20599"
         },
         {
           "name": "L2_VPN_NAME",
