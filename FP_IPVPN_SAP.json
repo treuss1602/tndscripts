@@ -1,6 +1,5 @@
 {
   "factoryProductName": "IPVPN_SAP",
-  "action": "Create",
   "version": "0.16",
   "inputParameters": [
     {

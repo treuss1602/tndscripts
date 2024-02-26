@@ -1,6 +1,5 @@
 {
   "factoryProductName": "PHY_SINGLE_LINK",
-  "action": "Create",
   "version": "0.11",
   "inputParameters": [
     {

@@ -2,6 +2,7 @@
 import json
 import re
 import validations
+import typing
 from debug import DBG
 from lookuptable import LookupTable, LtEntry
 
@@ -15,6 +16,18 @@ for name, cls in validations.__dict__.items():
 
 class Param:
     ''' Parameter class '''
+    type: str
+    name: str
+    desc: str
+    typedetails: str
+    mandatory: bool
+    examplevalue: str
+    cramerStorage: str
+    acadefault: str
+    special: bool
+    dynamically_mapped: bool
+    maxoccurs: int
+
     def __init__(self, type, name, desc, valuetype, typedetails, mandatory,
                  examplevalue=None, cramerStorage=None, acadefault=None, special=None, dynamically_mapped=None, maxoccurs=None,
                  jsonname=None):
@@ -117,6 +130,14 @@ class Param:
 
 class FactoryProductConfiguration:
     ''' The full configuration, read & write json, create lookup tables, etc. '''
+    factoryProductName: str
+    version: str
+    input_params: typing.List[Param]
+    cramer_output_params: typing.List[Param]
+    stablenet_params: typing.Tuple[str, str]
+    key_params: typing.List[str]
+    cramer_output_params: typing.List[validations.Validation]
+
 
     def __init__(self, factory_product_name, version, input_params, cramer_output_params, stablenet_params, key_params, cramer_validations = None):
         self.factoryProductName = factory_product_name
@@ -139,13 +160,13 @@ class FactoryProductConfiguration:
     def input_param_names(self):
         return {p.name for p in self.input_params}
     
-    def find_input_param(self, name):
+    def find_input_param(self, name: str) -> Param:
         return next(p for p in self.input_params if p.name == name)
 
     def return_param_names(self):
         return {p.name for p in self.cramer_output_params}
 
-    def find_return_param(self, name):
+    def find_return_param(self, name: str) -> Param:
         return next(p for p in self.cramer_output_params if p.name == name)
 
     def to_file(self, fp):
