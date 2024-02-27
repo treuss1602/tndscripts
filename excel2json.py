@@ -19,6 +19,7 @@ def read_data_from_excel(xlfile, tab):
     # ACTION_CELL = 'B3'
     VERSION_CELL = 'B4'
 
+
     DBG(10, "Reading data from excel file '{}'".format(xlfile))
     wb = load_workbook(xlfile, data_only=True)
     if tab is None:
@@ -40,6 +41,8 @@ def read_data_from_excel(xlfile, tab):
     inparams = []
     crameroutparams = []
     stablenetparams = ([],[])
+    stablenetblacklist = ["NETWORK_ELEMENT_NAME", '{}_RFS_NAME'.format(prodname), "EVPN_EVI_RANGE"]
+
     keyparams = []
     for row in range(STARTROW, 300):
         cellvalues = [sheet.cell(row=row, column=col).value for col in [COLUMNS[s]
@@ -67,18 +70,18 @@ def read_data_from_excel(xlfile, tab):
             if paramtype.lower() == "input" or paramtype.lower() == "special":
                 DBG(30, "Adding parameter {} (type {}) to input parameters".format(techname, paramtype))
                 inparams.append(Param('input', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, acadefault, paramtype.lower() == "special", mapped, maxoccurs, jsonname, modify))
-                if techname != 'NETWORK_ELEMENT_NAME' and techname != '{}_RFS_NAME'.format(prodname) and techname not in stablenetparams[0]:
+                if techname not in stablenetblacklist:
                     stablenetparams[0].append(techname)
             elif paramtype.lower() == "return":
                 DBG(30, "Adding parameter {} (type {}) to cramer output parameters".format(techname, paramtype))
                 crameroutparams.append(Param('Cramer', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, maxoccurs=maxoccurs, jsonname=jsonname))
-                if techname != 'NETWORK_ELEMENT_NAME' and techname != '{}_RFS_NAME'.format(prodname) and techname not in stablenetparams[0]:
+                if techname not in stablenetblacklist:
                     stablenetparams[0].append(techname)
             elif paramtype.lower() == "inputorreturn":
                 DBG(30, "Adding parameter {} (type {}) to input AND cramer output parameters".format(techname, paramtype))
                 inparams.append(Param('input', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, acadefault, paramtype.lower() == "special", mapped, maxoccurs, jsonname, modify))
                 crameroutparams.append(Param('Cramer', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, maxoccurs=maxoccurs, jsonname=jsonname))
-                if techname != 'NETWORK_ELEMENT_NAME' and techname != '{}_RFS_NAME'.format(prodname) and techname not in stablenetparams[0]:
+                if techname not in stablenetblacklist:
                     stablenetparams[0].append(techname)
             else:
                 DBG(30, "Ignoring parameter {} (type {})".format(techname, paramtype))
