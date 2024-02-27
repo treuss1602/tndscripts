@@ -124,11 +124,12 @@ def create_lookup_tables_for_composition(data):
     else:
         component = data["compositionName"]
         cfs = ""
+
+    action = "Create" # Currently no other action supported
     
     lkt = LookupTable('LKT_TND_STATIC_PARAM_VALUES')
     for fpdata in data["paramMapping"]:
         fpname = fpdata["factoryProduct"]
-        action = fpdata["action"]
         for paramdata in fpdata["parameters"]:
             pname, ptype = (paramdata[x] for x in ["name", "type"])
             key = "#".join([cfs, component, fpname, action, pname])
