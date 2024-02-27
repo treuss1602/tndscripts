@@ -4,8 +4,7 @@
   "paramMapping": [
     {
       "factoryProduct": "IPVPN_CORE",
-      "action": "Create",
-      "factoryProductVersion": "1.3",
+      "factoryProductVersion": "1.4",
       "parameters": [
         {
           "name": "L3_VPN_NAME",
@@ -101,13 +100,12 @@
     },
     {
       "factoryProduct": "IPVPN_SAP",
-      "action": "Create",
-      "factoryProductVersion": "0.16",
+      "factoryProductVersion": "0.18",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
           "type": "static",
-          "value": 9000
+          "value": 9003
         },
         {
           "name": "VPN_ACCESS_TYPE",
@@ -132,7 +130,7 @@
         {
           "name": "SERVICE_MTU",
           "type": "static",
-          "value": 9001
+          "value": 9003
         },
         {
           "name": "IPVPN_CORE_RFS_NAME",

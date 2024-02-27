@@ -9,6 +9,7 @@
       "valueType": "string",
       "special": true,
       "dynamicallyMapped": false,
+      "modifyOperation": null,
       "exampleValue": "ZH0004MEB101",
       "cramerStorage": "TND device",
       "jsonName": "networkElementName"
@@ -20,6 +21,7 @@
       "valueType": "integer",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": null,
       "exampleValue": "1024",
       "cramerStorage": "Number object",
       "jsonName": "logicalSubInterfaceId"
@@ -38,6 +40,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": null,
       "exampleValue": "ELAN",
       "acadefault": "E-LAN",
       "cramerStorage": "ELAN_SAP_GE"
@@ -55,6 +58,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": null,
       "exampleValue": "UNI",
       "acadefault": "UNI",
       "cramerStorage": "ELAN_SAP_GE"
@@ -66,6 +70,7 @@
       "valueType": "string",
       "special": false,
       "dynamicallyMapped": true,
+      "modifyOperation": null,
       "exampleValue": "ELANC000000001",
       "cramerStorage": "Service",
       "jsonName": "elanCoreRFSName"
@@ -77,6 +82,7 @@
       "valueType": "string",
       "special": false,
       "dynamicallyMapped": true,
+      "modifyOperation": null,
       "exampleValue": "PHYSL000000001",
       "cramerStorage": "Service",
       "jsonName": "phyServiceName"
@@ -92,6 +98,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "TBD",
       "exampleValue": "4000",
       "cramerStorage": "VLAN number",
       "jsonName": "innerVLANId"
@@ -106,6 +113,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "8100",
       "acadefault": "8100",
       "cramerStorage": "ELAN_SAP_GE"
@@ -121,6 +129,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "TBD",
       "exampleValue": "3000",
       "cramerStorage": "VLAN number",
       "jsonName": "outerVLANId"
@@ -135,6 +144,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "8100",
       "acadefault": "8100",
       "cramerStorage": "ELAN_SAP_GE"
@@ -152,6 +162,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "cramerStorage": "ELAN_SAP_GE"
     },
     {
@@ -165,6 +176,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "1500",
       "acadefault": 1500,
       "cramerStorage": "ELAN_SAP_GE"
@@ -183,6 +195,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "FILTER_L2_INPUT_EDGE",
       "cramerStorage": "ELAN_SAP_GE"
     },
@@ -200,6 +213,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "FILTER_L2_OUTPUT_EDGE",
       "cramerStorage": "ELAN_SAP_GE"
     },
@@ -217,6 +231,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "INGRESS_QOS_CLASSIFICATION_1",
       "cramerStorage": "ELAN_SAP_GE"
     },
@@ -235,6 +250,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "ING_POLICING_PROFILE1",
       "cramerStorage": "ELAN_SAP_GE"
     },
@@ -253,6 +269,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "EGRESS_QOS_QUEUE_PROFILE1",
       "cramerStorage": "ELAN_SAP_GE"
     },
@@ -269,6 +286,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "CORE_MPLS",
       "cramerStorage": "ELAN_SAP_GE"
     },
@@ -286,6 +304,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "rewrite_config1",
       "cramerStorage": "ELAN_SAP_GE"
     },
@@ -299,6 +318,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyCustomSnippets",
       "exampleValue": "Snippet1;Snippet2",
       "cramerStorage": "CONFIG_SNIPPET_GE (s)",
       "jsonName": "configSnippetNames"
@@ -310,6 +330,7 @@
       "description": "ELAN SAP Name",
       "mandatory": true,
       "valueType": "string",
+      "modifyOperation": null,
       "cramerStorage": "Service",
       "jsonName": "elanSAPRFSName"
     },
@@ -318,6 +339,7 @@
       "description": "L2 SAP Interface name",
       "mandatory": true,
       "valueType": "string",
+      "modifyOperation": null,
       "exampleValue": "Bundle-Ether20.1024",
       "cramerStorage": "Port",
       "jsonName": "sapIFName"
@@ -330,6 +352,7 @@
       "valueTypeDetails": {
         "comment": "Infrastructure case:\nCMTS_INET_VPN\n\nAutomatic case:\nELANCORE1234_A_IVC000000001"
       },
+      "modifyOperation": null,
       "exampleValue": "ELANCORE1234_A_IVC000000001",
       "cramerStorage": "Routing Instance VRFNAME field (Generic Entity: Routing Instance)\n\nThe VRF name is in VRFNAME field where as the RI name can not reflect the VRF name as inventory model needs to differentiate different import/export settings per RI.",
       "jsonName": "eviName"
@@ -343,6 +366,7 @@
         "minValue": 1,
         "maxValue": 4094
       },
+      "modifyOperation": null,
       "exampleValue": "4000",
       "cramerStorage": "VLAN number",
       "jsonName": "innerVLANId"
@@ -356,6 +380,7 @@
         "minValue": 1,
         "maxValue": 4094
       },
+      "modifyOperation": null,
       "exampleValue": "3000",
       "cramerStorage": "VLAN number",
       "jsonName": "outerVLANId"

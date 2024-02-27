@@ -1,6 +1,6 @@
 {
   "factoryProductName": "ELAN_CORE",
-  "version": "0.12",
+  "version": "0.14",
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
@@ -9,6 +9,7 @@
       "valueType": "string",
       "special": true,
       "dynamicallyMapped": false,
+      "modifyOperation": null,
       "exampleValue": "ZH0004MEB101",
       "cramerStorage": "TND device",
       "jsonName": "networkElementName"
@@ -26,6 +27,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": null,
       "exampleValue": "20400->20599",
       "cramerStorage": "Number range"
     },
@@ -36,6 +38,7 @@
       "valueType": "string",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": null,
       "exampleValue": "ELANT1234",
       "cramerStorage": "Toplogy name ( created by the first Factory service or manually created upfront)\nIf exsists, it implies that RTs related to topology must exist.",
       "jsonName": "l2vpnName"
@@ -50,6 +53,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": null,
       "exampleValue": "SIPCORE1234_A_IVC000000001",
       "cramerStorage": "Routing Instance VRFNAME field (Generic Entity: Routing Instance)\n\nThe VRF name is in VRFNAME field where as the RI name can not reflect the VRF name as inventory model needs to differentiate different import/export settings per RI.",
       "jsonName": "eviName"
@@ -68,6 +72,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": null,
       "exampleValue": "E-LAN",
       "acadefault": "E-LAN",
       "cramerStorage": "ELANC Topology",
@@ -86,6 +91,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "SR-TE color1",
       "cramerStorage": "ELAN_CORE_GE"
     },
@@ -96,6 +102,7 @@
       "valueType": "string",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "9000",
       "cramerStorage": "ELAN_CORE_GE"
     },
@@ -106,6 +113,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "ELAN_CORE_GE"
@@ -117,6 +125,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "ELAN_CORE_GE"
@@ -131,6 +140,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyCustomSnippets",
       "exampleValue": "Snippet1;Snippet2",
       "cramerStorage": "CONFIG_SNIPPET_GE (s)",
       "jsonName": "custSnippetNames"
@@ -142,6 +152,7 @@
       "description": "ELAN Core service name",
       "mandatory": true,
       "valueType": "string",
+      "modifyOperation": null,
       "exampleValue": "ELANC000000001",
       "cramerStorage": "Service",
       "jsonName": "elanCoreRFSName"
@@ -151,6 +162,7 @@
       "description": "EVI instance ID",
       "mandatory": true,
       "valueType": "integer",
+      "modifyOperation": null,
       "exampleValue": "41001",
       "cramerStorage": "Number object related to topology?",
       "jsonName": "eviInstanceId"
@@ -163,6 +175,7 @@
       "valueTypeDetails": {
         "comment": "Infrastructure case:\nCMTS_INET_VPN\n\nAutomatic case:\nSIPCORE1234_A_IVC000000001"
       },
+      "modifyOperation": null,
       "exampleValue": "SIPCORE1234_A_IVC000000001",
       "cramerStorage": "Routing Instance VRFNAME field (Generic Entity: Routing Instance)\n\nThe VRF name is in VRFNAME field where as the RI name can not reflect the VRF name as inventory model needs to differentiate different import/export settings per RI.",
       "jsonName": "eviName"
@@ -175,6 +188,7 @@
       "valueTypeDetails": {
         "comment": "1 or multiple values separated by ;"
       },
+      "modifyOperation": null,
       "exampleValue": "6730:122334;6730:122335",
       "cramerStorage": "RT",
       "jsonName": "eviImportRouteTargetSet"
@@ -187,6 +201,7 @@
       "valueTypeDetails": {
         "comment": "1 or multiple values separated by ;"
       },
+      "modifyOperation": null,
       "exampleValue": "6735:122556;6738:122889",
       "cramerStorage": "RT",
       "jsonName": "eviExportRouteTargetSet"
@@ -196,6 +211,7 @@
       "description": "EVI route distinguisher",
       "mandatory": true,
       "valueType": "string",
+      "modifyOperation": null,
       "exampleValue": "6730:1225555",
       "cramerStorage": "RD",
       "jsonName": "eviRouteDistinguisher"
@@ -207,6 +223,7 @@
   ],
   "stablenetParameters": {
     "preNEI": [
+      "EVPN_EVI_RANGE",
       "EVI_INSTANCE_ID",
       "L2_VPN_NAME",
       "EVI_NAME",

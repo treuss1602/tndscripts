@@ -1,6 +1,6 @@
 {
   "factoryProductName": "IPVPN_SAP",
-  "version": "0.16",
+  "version": "0.18",
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
@@ -9,6 +9,7 @@
       "valueType": "string",
       "special": true,
       "dynamicallyMapped": false,
+      "modifyOperation": null,
       "exampleValue": "ZH0004MEB101",
       "cramerStorage": "TND device ( types to TBD)",
       "jsonName": "networkElementName"
@@ -20,6 +21,7 @@
       "valueType": "string",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": null,
       "exampleValue": "1024",
       "cramerStorage": "Number object",
       "jsonName": "logicalSubInterfaceId"
@@ -38,6 +40,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": null,
       "exampleValue": "Any2Any",
       "acadefault": "Any2Any",
       "cramerStorage": "IPVPN_SAP_GE"
@@ -55,6 +58,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": null,
       "exampleValue": "UNI",
       "acadefault": "UNI",
       "cramerStorage": "IPVPN_SAP_GE"
@@ -70,6 +74,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "TBD",
       "exampleValue": "4000",
       "cramerStorage": "VLAN number",
       "jsonName": "innerVLANId"
@@ -84,6 +89,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "8100",
       "acadefault": "0x8100",
       "cramerStorage": "IPVPN_SAP_GE"
@@ -99,6 +105,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "TBD",
       "exampleValue": "3000",
       "cramerStorage": "VLAN number",
       "jsonName": "outerVLANId"
@@ -113,6 +120,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "8100",
       "acadefault": "0x8100",
       "cramerStorage": "IPVPN_SAP_GE"
@@ -128,6 +136,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "1500",
       "acadefault": 1500,
       "cramerStorage": "IPVPN_SAP_GE"
@@ -139,6 +148,7 @@
       "valueType": "string",
       "special": false,
       "dynamicallyMapped": true,
+      "modifyOperation": null,
       "exampleValue": "IVC000000001",
       "cramerStorage": "Service",
       "jsonName": "ipvpnCoreRFSName"
@@ -150,6 +160,7 @@
       "valueType": "string",
       "special": false,
       "dynamicallyMapped": true,
+      "modifyOperation": null,
       "exampleValue": "PHYSL000000001",
       "cramerStorage": "Service",
       "jsonName": "phyServiceName"
@@ -164,7 +175,8 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": "121.10.10.1/30@SNG",
+      "modifyOperation": "ModifySubnets",
+      "exampleValue": "/30@EBH LINKNET",
       "cramerStorage": "IP number,Subnet group,SNG",
       "jsonName": "primaryIPv4IFaddress"
     },
@@ -178,7 +190,8 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": "121.10.10.1/30@SNG;121.10.20.1/24#SNG",
+      "modifyOperation": "ModifySubnets",
+      "exampleValue": "121.10.10.1/30@EBH LINKNET;121.10.20.1/24@EBH LINKNET",
       "cramerStorage": "IP number,Subnet group,SNG",
       "jsonName": "additionalIPv4IFaddresses"
     },
@@ -192,7 +205,8 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": "2001:0db8:/30@SNG",
+      "modifyOperation": "ModifySubnets",
+      "exampleValue": "2001:0db8:0000:0000:0000:0000:0000:0000/64@EBH LINKNET",
       "cramerStorage": "IP number,Subnet group,SNG",
       "jsonName": "primaryIPv6IFaddress"
     },
@@ -206,7 +220,8 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "exampleValue": "2001:0db7:/30@SNG;2001:0db6/24@SNG",
+      "modifyOperation": "ModifySubnets",
+      "exampleValue": "2001:0dba:0000:0000:0000:0000:0000:0000/64@EBH LINKNET",
       "cramerStorage": "IP number,Subnet group,SNG",
       "jsonName": "additionalIPv6IFaddresses"
     },
@@ -220,6 +235,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "FILTER_INPUT_EDGE",
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -233,6 +249,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "FILTER_OUTPUT_EDGE",
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -243,6 +260,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
@@ -257,6 +275,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "2",
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -267,6 +286,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
@@ -278,6 +298,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
@@ -289,6 +310,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
@@ -300,6 +322,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
@@ -311,6 +334,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
@@ -322,6 +346,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
@@ -340,6 +365,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "INGRESS_QOS_CLASSIFICATION_1",
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -358,6 +384,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "ING_POLICING_PROFILE1",
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -376,6 +403,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "EGRESS_QOS_QUEUE_PROFILE1",
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -392,6 +420,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "CORE_MPLS",
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -409,6 +438,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "rewrite_config1",
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -422,6 +452,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "TBD",
       "exampleValue": "10.10.24.128/28-10.20.0.1-\"VRF1\"-\"22\"-2",
       "cramerStorage": "IPVPN_SAP_GE",
       "maxOccurs": 50
@@ -436,6 +467,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "TBD",
       "exampleValue": "2001:0db8:/64-fe80::dea6:32ff:fe6b:3f72-\"IPV6_VRF_NAME\"-\"IPV6_ROUTE_TAG\"-IPV6_ADMIN_DISTANCE\"",
       "cramerStorage": "IPVPN_SAP_GE",
       "maxOccurs": 50
@@ -447,6 +479,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
@@ -458,6 +491,7 @@
       "valueType": "integer",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "1",
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -471,6 +505,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "10.20.30.2;10.20.30.3",
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -481,6 +516,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
@@ -492,6 +528,7 @@
       "valueType": "integer",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "1",
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -505,6 +542,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "2001:0db7:;2001:0db8:",
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -515,6 +553,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
@@ -529,6 +568,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "abb$abc",
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -542,6 +582,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "cramerStorage": "IPVPN_SAP_GE"
     },
     {
@@ -551,6 +592,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
@@ -562,6 +604,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
@@ -573,6 +616,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
@@ -584,6 +628,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
@@ -598,6 +643,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "10.1.2.0/24-ge 32",
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -611,6 +657,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "2001:0db7:/24-ge 32",
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -624,6 +671,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "10.1.2.0/24-ge 32",
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -637,6 +685,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "2001:0db7:/24-ge 32",
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -650,6 +699,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "10.1.2.0/24-ge 32",
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -663,6 +713,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "2001:0db7:/24-ge 32",
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -676,6 +727,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "10.1.2.0/24-ge 32",
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -689,6 +741,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "2001:0db7:/24-ge 32",
       "cramerStorage": "IPVPN_SAP_GE"
     },
@@ -702,6 +755,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
@@ -716,6 +770,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyCustomSnippets",
       "exampleValue": "Snippet1;Snippet2;mcast_igmp_snippet;",
       "cramerStorage": "CONFIG_SNIPPET_GE (s)",
       "jsonName": "configSnippetNames"
@@ -727,6 +782,7 @@
       "description": "IPVPN SAP service name",
       "mandatory": true,
       "valueType": "string",
+      "modifyOperation": null,
       "exampleValue": "IPVPNSAP000000001",
       "cramerStorage": "Service",
       "jsonName": "ipvpnSAPRFSName"
@@ -736,6 +792,7 @@
       "description": "L3 SAP Interface name",
       "mandatory": true,
       "valueType": "string",
+      "modifyOperation": null,
       "exampleValue": "Bundle-Ether20.1024",
       "cramerStorage": "Port",
       "jsonName": "sapIFName"
@@ -749,6 +806,7 @@
         "minValue": 1,
         "maxValue": 4094
       },
+      "modifyOperation": null,
       "exampleValue": "4000",
       "cramerStorage": "VLAN number",
       "jsonName": "innerVLANId"
@@ -762,6 +820,7 @@
         "minValue": 1,
         "maxValue": 4094
       },
+      "modifyOperation": null,
       "exampleValue": "3000",
       "cramerStorage": "VLAN number",
       "jsonName": "outerVLANId"
@@ -774,6 +833,7 @@
       "valueTypeDetails": {
         "comment": "Infrastructure case:\nCMTS_INET_VPN\n\nAutomatic case:\nSIPCORE1234_A_IVC000000001"
       },
+      "modifyOperation": null,
       "exampleValue": "SIPCORE1234_A_IVC000000001",
       "cramerStorage": "RI name",
       "jsonName": "vrfName"
@@ -786,7 +846,8 @@
       "valueTypeDetails": {
         "comment": "one IPv4 CIDR prefixes (121.10.10.1/30@SNG;)"
       },
-      "exampleValue": "121.10.10.1/30@SNG",
+      "modifyOperation": null,
+      "exampleValue": "/30@EBH LINKNET",
       "cramerStorage": "IP number,Subnet group,SNG",
       "jsonName": "primaryIPv4IFaddress"
     },
@@ -798,7 +859,8 @@
       "valueTypeDetails": {
         "comment": "1 or more IPv4 CIDR prefixes (121.10.10.1/30@SNG;121.10.20.1/24@SNG)"
       },
-      "exampleValue": "121.10.10.1/30@SNG;121.10.20.1/24#SNG",
+      "modifyOperation": null,
+      "exampleValue": "121.10.10.1/30@EBH LINKNET;121.10.20.1/24@EBH LINKNET",
       "cramerStorage": "IP number,Subnet group,SNG",
       "jsonName": "additionalIPv4IFaddresses"
     },
@@ -810,7 +872,8 @@
       "valueTypeDetails": {
         "comment": "one IPv4 CIDR prefixes (2001:0db8:/30@SNG)"
       },
-      "exampleValue": "2001:0db8:/30@SNG",
+      "modifyOperation": null,
+      "exampleValue": "2001:0db8:0000:0000:0000:0000:0000:0000/64@EBH LINKNET",
       "cramerStorage": "IP number,Subnet group,SNG",
       "jsonName": "primaryIPv6IFaddress"
     },
@@ -822,7 +885,8 @@
       "valueTypeDetails": {
         "comment": "1 or more IPv4 CIDR prefixes (2001:0db7:/30@SNG;2001:0db6/24@SNG)"
       },
-      "exampleValue": "2001:0db7:/30@SNG;2001:0db6/24@SNG",
+      "modifyOperation": null,
+      "exampleValue": "2001:0dba:0000:0000:0000:0000:0000:0000/64@EBH LINKNET",
       "cramerStorage": "IP number,Subnet group,SNG",
       "jsonName": "additionalIPv6IFaddresses"
     }

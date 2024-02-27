@@ -11,8 +11,10 @@ from debug import DBG, set_debug_level
 def read_data_from_excel(xlfile, tab):
     ''' Read and return the data from the correct sheet in the excel file.'''
     STARTROW = 7
-    COLUMNS = {'TECHNAME': 1, 'DESC': 2, 'VALUETYPE': 3, 'TYPEDETAILS': 4, 'OM': 5, 'EXAMPLE_VALUE': 6, 'CRAMERSTORAGE': 7, 'JSONNAME': 8, 'STABLENET': 9, 'PARAMTYPE': 10, 'ACADEFAULT': 12 }
-    COLS_TO_CHECK_FOR_MAPPING = [13 ,15, 17, 19]
+    COLUMNS = {'TECHNAME': 1, 'DESC': 2, 'VALUETYPE': 3, 'TYPEDETAILS': 4, 'OM': 5,
+               'EXAMPLE_VALUE': 6, 'CRAMERSTORAGE': 7, 'JSONNAME': 8, 'STABLENET': 9,
+               'MODIFY': 10, 'PARAMTYPE': 11, 'ACADEFAULT': 13 }
+    COLS_TO_CHECK_FOR_MAPPING = [14 ,16, 18, 20]
     PRODNAME_CELL = 'B1'
     # ACTION_CELL = 'B3'
     VERSION_CELL = 'B4'
@@ -41,8 +43,9 @@ def read_data_from_excel(xlfile, tab):
     keyparams = []
     for row in range(STARTROW, 300):
         cellvalues = [sheet.cell(row=row, column=col).value for col in [COLUMNS[s]
-            for s in ['TECHNAME','DESC','VALUETYPE','TYPEDETAILS','OM','EXAMPLE_VALUE','PARAMTYPE', 'ACADEFAULT', 'CRAMERSTORAGE', 'JSONNAME', 'STABLENET']]]
-        techname, desc, valuetype, typedetails, mo, example, paramtype, acadefault, cramerstorage, jsonname, stablenet = (x.strip() if isinstance(x, str) else x for x in cellvalues)
+            for s in COLUMNS.keys()]]
+        techname, desc, valuetype, typedetails, mo, example, cramerstorage, jsonname, stablenet, modify, paramtype, acadefault = \
+            (x.strip() if isinstance(x, str) else x for x in cellvalues)
         if techname == "Version": # avoid reading version history
             break
         if techname is not None and techname.startswith("#"):
@@ -59,9 +62,11 @@ def read_data_from_excel(xlfile, tab):
             else:
                 maxoccurs = None
             mapped = any(sheet.cell(row=row, column=col).value and sheet.cell(row=row, column=col).value.lower() == "mapped" for col in COLS_TO_CHECK_FOR_MAPPING)
+            if modify.lower() == "n/a":
+                modify = None
             if paramtype.lower() == "input" or paramtype.lower() == "special":
                 DBG(30, "Adding parameter {} (type {}) to input parameters".format(techname, paramtype))
-                inparams.append(Param('input', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, acadefault, paramtype.lower() == "special", mapped, maxoccurs, jsonname))
+                inparams.append(Param('input', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, acadefault, paramtype.lower() == "special", mapped, maxoccurs, jsonname, modify))
                 if techname != 'NETWORK_ELEMENT_NAME' and techname != '{}_RFS_NAME'.format(prodname) and techname not in stablenetparams[0]:
                     stablenetparams[0].append(techname)
             elif paramtype.lower() == "return":
@@ -71,7 +76,7 @@ def read_data_from_excel(xlfile, tab):
                     stablenetparams[0].append(techname)
             elif paramtype.lower() == "inputorreturn":
                 DBG(30, "Adding parameter {} (type {}) to input AND cramer output parameters".format(techname, paramtype))
-                inparams.append(Param('input', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, acadefault, paramtype.lower() == "special", mapped, maxoccurs, jsonname))
+                inparams.append(Param('input', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, acadefault, paramtype.lower() == "special", mapped, maxoccurs, jsonname, modify))
                 crameroutparams.append(Param('Cramer', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, maxoccurs=maxoccurs, jsonname=jsonname))
                 if techname != 'NETWORK_ELEMENT_NAME' and techname != '{}_RFS_NAME'.format(prodname) and techname not in stablenetparams[0]:
                     stablenetparams[0].append(techname)

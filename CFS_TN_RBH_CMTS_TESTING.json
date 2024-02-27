@@ -1,13 +1,11 @@
 {
-  "compositionName": "TN_RBH_RPD_ACCESS",
+  "compositionName": "TN_RBH_CMTS_ACCESS",
   "compositionType": "cfs",
-  "includedComponents": [
-    "RBH_RPD"
-  ],
   "paramMapping": [
     {
       "factoryProduct": "PHY_SINGLE_LINK",
-      "factoryProductVersion": "0.12",
+      "action": "Create",
+      "factoryProductVersion": "0.8",
       "parameters": [
         {
           "name": "PHYS_IF_NAME",
@@ -56,8 +54,8 @@
         },
         {
           "name": "PHYS_IF_8021X_ENABLED",
-          "type": "input",
-          "from": "PHYS_IF_8021X_ENABLED"
+          "type": "static",
+          "value": "false"
         },
         {
           "name": "PHYS_IF_8021X_PROFILE_NAME",

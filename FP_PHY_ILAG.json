@@ -1,6 +1,6 @@
 {
   "factoryProductName": "PHY_ILAG",
-  "version": "0.9",
+  "version": "0.10",
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
@@ -9,6 +9,7 @@
       "valueType": "string",
       "special": true,
       "dynamicallyMapped": false,
+      "modifyOperation": null,
       "exampleValue": "ZH0004MEB101",
       "cramerStorage": "TND device ( types to TBD)",
       "jsonName": "networkElementName"
@@ -20,6 +21,7 @@
       "valueType": "string[32]",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": null,
       "exampleValue": "GigabitEthernet0/1/0",
       "cramerStorage": "TND device's  port",
       "jsonName": "phyIfDetails.phyIfName"
@@ -31,6 +33,7 @@
       "valueType": "integer",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "cramerStorage": "PHY_ILAG_GE"
     },
     {
@@ -40,6 +43,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "PHY_ILAG_GE"
@@ -59,6 +63,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "On",
       "acadefault": "On",
       "cramerStorage": "PHY_ILAG_GE"
@@ -70,6 +75,7 @@
       "valueType": "string",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": null,
       "cramerStorage": "IF name",
       "jsonName": "phyILagIfName"
     },
@@ -80,6 +86,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "PHY_ILAG_GE"
@@ -91,6 +98,7 @@
       "valueType": "integer",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "cramerStorage": "PHY_ILAG_GE"
     },
     {
@@ -100,6 +108,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "PHY_ILAG_GE"
@@ -111,6 +120,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "PHY_ILAG_GE"
@@ -122,6 +132,7 @@
       "valueType": "integer",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "255",
       "cramerStorage": "PHY_ILAG_GE"
     },
@@ -132,6 +143,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "PHY_ILAG_GE"
@@ -150,6 +162,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyQoS",
       "exampleValue": "INGRESS_QOS_CLASSIFICATION_1",
       "cramerStorage": "PHY_ILAG_GE"
     },
@@ -168,6 +181,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyQoS",
       "exampleValue": "Common link parameters are grouped",
       "cramerStorage": "PHY_ILAG_GE"
     },
@@ -186,6 +200,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyQoS",
       "exampleValue": "0",
       "cramerStorage": "PHY_ILAG_GE"
     },
@@ -202,6 +217,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyQoS",
       "exampleValue": "0",
       "cramerStorage": "PHY_ILAG_GE"
     },
@@ -219,6 +235,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyQoS",
       "exampleValue": "rewrite_config1",
       "cramerStorage": "PHY_ILAG_GE"
     },
@@ -232,6 +249,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
+      "modifyOperation": "ModifyCustomSnippets",
       "exampleValue": "Snippet1;Snippet2",
       "cramerStorage": "CONFIG_SNIPPET_GE (s)",
       "jsonName": "custSnippetNames"
@@ -243,6 +261,7 @@
       "description": "PHY ILAG service name",
       "mandatory": true,
       "valueType": "string",
+      "modifyOperation": null,
       "exampleValue": "PHYILAG00000001",
       "cramerStorage": "PHY Service",
       "jsonName": "phyILagRfsName"
@@ -252,6 +271,7 @@
       "description": "Physical interface type",
       "mandatory": true,
       "valueType": "string[32]",
+      "modifyOperation": null,
       "exampleValue": "100GBASE-LR1",
       "cramerStorage": "optical  module of the port",
       "jsonName": "phyIfDetails.phyIfType"
@@ -264,6 +284,7 @@
       "valueTypeDetails": {
         "comment": "two decimal places"
       },
+      "modifyOperation": null,
       "exampleValue": "1540.25",
       "cramerStorage": "optical  module of the port",
       "jsonName": "phyIfDetails.phyIfCenterFrequency"
@@ -276,6 +297,7 @@
       "valueTypeDetails": {
         "comment": "two decimal places; must support negative numbers"
       },
+      "modifyOperation": null,
       "exampleValue": "-5.00",
       "cramerStorage": "optical  module of the port",
       "jsonName": "phyIfDetails.phyIfTxPower"
@@ -285,6 +307,7 @@
       "description": "Access service ( IDN service)",
       "mandatory": true,
       "valueType": "string[32]",
+      "modifyOperation": null,
       "exampleValue": "IDN001",
       "cramerStorage": "Service",
       "jsonName": "phyIfDetails.phyAccessServiceName"
@@ -294,6 +317,7 @@
       "description": "Remote access device name",
       "mandatory": true,
       "valueType": "string[32]",
+      "modifyOperation": null,
       "exampleValue": "ONT0000000014",
       "cramerStorage": "Access device",
       "jsonName": "phyIfDetails.accessDeviceName"
@@ -303,6 +327,7 @@
       "description": "Remote access device interface name",
       "mandatory": true,
       "valueType": "string[32]",
+      "modifyOperation": null,
       "exampleValue": "Ge1/0",
       "cramerStorage": "Access device port",
       "jsonName": "phyIfDetails.accessDeviceIfName"
@@ -312,6 +337,7 @@
       "description": "Physical interface speed (Kbit/s)",
       "mandatory": true,
       "valueType": "integer",
+      "modifyOperation": null,
       "exampleValue": "100000000",
       "cramerStorage": "optical  module of the port",
       "jsonName": "phyIfSpeed"
@@ -321,6 +347,7 @@
       "description": "ILAG service identifier",
       "mandatory": true,
       "valueType": "string",
+      "modifyOperation": null,
       "exampleValue": "ILAG0001",
       "cramerStorage": "Service",
       "jsonName": "iLagAccessServiceName"

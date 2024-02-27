@@ -68,25 +68,22 @@ def read_data_from_excel(xlfile, cfsname, componentname):
     wb = load_workbook(xlfile, data_only=True)
     rv = []
     for tab in wb.sheetnames:
-        if re.match(r'[A-Z_]* [A-Z][a-z]*', tab):
+        if re.match(r'[A-Z_]*', tab):
             DBG(20, "Checking tab {}".format(tab))
             sheet = wb[tab]
 
             prodname = sheet[PRODNAME_CELL].value
             if not prodname:
                 raise ValueError("Unable to read product name from excel {}, tab {}, cell {}".format(xlfile, tab, PRODNAME_CELL))
-            action = sheet[ACTION_CELL].value
-            if not action:
-                raise ValueError("Unable to read action from excel {}, tab {}, cell {}".format(xlfile, tab, ACTION_CELL))
             version = sheet[VERSION_CELL].value
 
-            for col in range(1,20):
+            for col in range(1,26):
                 cellval = sheet.cell(row=HEADERROW, column=col).value
                 if  (componentname and cellval == componentname) or (cfsname and cellval == "CFS " + cfsname):
                     col1, col2 = col, col+1
-                    DBG(10, "Reading parameters for product {}, action {} from tab {}, columns {},{}".format(prodname, action, tab, col1, col2))
+                    DBG(10, "Reading parameters for product {} version {} from tab {}, columns {},{}".format(prodname, version, tab, col1, col2))
                     data = read_data_from_sheet(sheet, col1, col2, cfsname, componentname, prodname)
-                    rv.append({"factoryProduct": prodname, "action": action, "factoryProductVersion": str(version), "parameters": data})
+                    rv.append({"factoryProduct": prodname, "factoryProductVersion": str(version), "parameters": data})
                     break
     
     return rv

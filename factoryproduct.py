@@ -27,10 +27,12 @@ class Param:
     special: bool
     dynamically_mapped: bool
     maxoccurs: int
+    jsonname: str
+    modifyOperation: str
 
     def __init__(self, type, name, desc, valuetype, typedetails, mandatory,
                  examplevalue=None, cramerStorage=None, acadefault=None, special=None, dynamically_mapped=None, maxoccurs=None,
-                 jsonname=None):
+                 jsonname=None, modifyOperation=None):
         DBG(50, "Param.init called with type={}, name={}, desc={}, valuetype={}, typedetails={}, mandatory={}, examplevalue={}, "
                 "cramerStorage={}, acadefault={}, special={}, dynamically_mapped={}, jsonname={}".format(
                     type, name, desc, valuetype, typedetails, mandatory, examplevalue, cramerStorage, acadefault, special, dynamically_mapped, jsonname))
@@ -79,6 +81,7 @@ class Param:
         self.dynamically_mapped = dynamically_mapped
         self.maxoccurs = maxoccurs
         self.jsonname = jsonname
+        self.modifyOperation = modifyOperation
 
     def as_dict(self):
         param = {"name": self.name, "description": self.desc, "mandatory": self.mandatory, "valueType": self.valuetype}
@@ -92,6 +95,7 @@ class Param:
             param["special"] = self.special
         if self.dynamically_mapped is not None:
             param["dynamicallyMapped"] = self.dynamically_mapped
+        param["modifyOperation"] = self.modifyOperation
         if self.examplevalue is not None:
             if self.type == "boolean":
                 param["exampleValue"] = "true" if self.examplevalue else "false"
@@ -120,7 +124,7 @@ class Param:
             typedetails = None
         return Param(paramtype, data["name"], data["description"], data["valueType"], typedetails, data["mandatory"],
                      data.get("exampleValue"), data.get("cramerStorage"), data.get("acadefault"), data.get("special"),
-                     data.get("dynamicallyMapped", False), data.get("maxOccurs"), data.get("jsonName"))
+                     data.get("dynamicallyMapped", False), data.get("maxOccurs"), data.get("jsonName"), data.get("modifyOperation"))
 
     def __str__(self):
         return self.name
