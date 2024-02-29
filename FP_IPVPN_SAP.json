@@ -171,7 +171,7 @@
       "mandatory": false,
       "valueType": "string",
       "valueTypeDetails": {
-        "comment": "one IPv4 CIDR prefixes (121.10.10.1/30@SNG;)"
+        "comment": "IP number/Size@SNG\nor\n/Size@SNG"
       },
       "special": false,
       "dynamicallyMapped": false,
@@ -186,7 +186,7 @@
       "mandatory": false,
       "valueType": "string",
       "valueTypeDetails": {
-        "comment": "1 or more IPv4 CIDR prefixes (121.10.10.1/30@SNG;121.10.20.1/24@SNG)"
+        "comment": "1 or more (semicolon-separated item) like\nIP number/Size@SNG\nor\n/Size@SNG"
       },
       "special": false,
       "dynamicallyMapped": false,
@@ -201,7 +201,7 @@
       "mandatory": false,
       "valueType": "string",
       "valueTypeDetails": {
-        "comment": "one IPv4 CIDR prefixes (2001:0db8:/30@SNG)"
+        "comment": "IP number/Size@SNG\nor\n/Size@SNG"
       },
       "special": false,
       "dynamicallyMapped": false,
@@ -216,7 +216,7 @@
       "mandatory": false,
       "valueType": "string",
       "valueTypeDetails": {
-        "comment": "1 or more IPv4 CIDR prefixes (2001:0db7:/30@SNG;2001:0db6/24@SNG)"
+        "comment": "1 or more (semicolon-separated item) like\nIP number/Size@SNG\nor\n/Size@SNG"
       },
       "special": false,
       "dynamicallyMapped": false,
@@ -844,7 +844,7 @@
       "mandatory": false,
       "valueType": "string",
       "valueTypeDetails": {
-        "comment": "one IPv4 CIDR prefixes (121.10.10.1/30@SNG;)"
+        "comment": "IP number/Size@SNG\nor\n/Size@SNG"
       },
       "modifyOperation": null,
       "exampleValue": "/30@EBH LINKNET",
@@ -857,7 +857,7 @@
       "mandatory": false,
       "valueType": "string",
       "valueTypeDetails": {
-        "comment": "1 or more IPv4 CIDR prefixes (121.10.10.1/30@SNG;121.10.20.1/24@SNG)"
+        "comment": "1 or more (semicolon-separated item) like\nIP number/Size@SNG\nor\n/Size@SNG"
       },
       "modifyOperation": null,
       "exampleValue": "121.10.10.1/30@EBH LINKNET;121.10.20.1/24@EBH LINKNET",
@@ -870,7 +870,7 @@
       "mandatory": false,
       "valueType": "string",
       "valueTypeDetails": {
-        "comment": "one IPv4 CIDR prefixes (2001:0db8:/30@SNG)"
+        "comment": "IP number/Size@SNG\nor\n/Size@SNG"
       },
       "modifyOperation": null,
       "exampleValue": "2001:0db8:0000:0000:0000:0000:0000:0000/64@EBH LINKNET",
@@ -883,7 +883,7 @@
       "mandatory": false,
       "valueType": "string",
       "valueTypeDetails": {
-        "comment": "1 or more IPv4 CIDR prefixes (2001:0db7:/30@SNG;2001:0db6/24@SNG)"
+        "comment": "1 or more (semicolon-separated item) like\nIP number/Size@SNG\nor\n/Size@SNG"
       },
       "modifyOperation": null,
       "exampleValue": "2001:0dba:0000:0000:0000:0000:0000:0000/64@EBH LINKNET",

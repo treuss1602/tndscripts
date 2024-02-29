@@ -2,6 +2,7 @@
 import argparse
 import functools
 import json
+import re
 from zipfile import ZipFile
 from factoryproduct import FactoryProductConfiguration
 from lookuptable import LookupTable, LtEntry
@@ -67,7 +68,7 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
             lkt.add(LtEntry(prod+"#"+trans+"#PARAMETERS", ";".join("{}={}".format(*it) for it in inputparams.items())+";"))
             returnparams = {p.jsonname: p.name for p in config.input_params + config.cramer_output_params if p.jsonname is not None}
             DBG(30, "Return parameters for query API are: {}".format(returnparams))
-            lkt.add(LtEntry(prod+"#"+trans+"#RETURN_PARAMETERS", ",".join("{}:{}".format(*it) for it in returnparams.items())))
+            lkt.add(LtEntry(prod+"#"+trans+"#RETURN_PARAMETERS", ",".join("{}:{}".format(k, re.sub(r'\<N\>$','',v)) for k,v in returnparams.items())))
     else:
         print("No query function defined for product {}".format(prod))
         lkt = None
@@ -85,7 +86,7 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
         returnparams = {"serviceFound": "SERVICE_FOUND"}
         returnparams.update({p.jsonname: p.name for p in config.cramer_output_params if p.jsonname is not None})
         DBG(30, "Return parameters for identify API are: {}".format(returnparams))
-        lkt.add(LtEntry(prod+"#Create#RETURN_PARAMETERS", ",".join("{}:{}".format(*it) for it in returnparams.items())))
+        lkt.add(LtEntry(prod+"#Create#RETURN_PARAMETERS", ",".join("{}:{}".format(k,re.sub(r'\<N\>$','',v)) for k,v in returnparams.items())))
     else:
         print("No identify function defined for product {}".format(prod))
         lkt = None
