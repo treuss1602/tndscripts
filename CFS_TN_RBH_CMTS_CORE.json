@@ -8,7 +8,7 @@
   "paramMapping": [
     {
       "factoryProduct": "PHY_ILAG",
-      "factoryProductVersion": "0.10",
+      "factoryProductVersion": "0.11",
       "parameters": [
         {
           "name": "PHYS_IF_NAME_<N>",
