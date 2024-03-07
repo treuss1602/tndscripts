@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 import argparse
 
-from factoryproduct import FactoryProductConfiguration
 from debug import DBG, set_debug_level
+from factoryproduct import FactoryProductConfiguration
 
 def create_confluence_table_create(productconfig : FactoryProductConfiguration, headers=True):
     if headers:
