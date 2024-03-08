@@ -30,10 +30,7 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
                      joinparams(config.input_params), 
                      joinparams([p for p in config.input_params if p.dynamically_mapped]), 
                      ";".join(config.key_params)+";"))
-    lkt.add(LtEntry(prod+"#Delete",
-                     joinparams(config.input_params), 
-                     joinparams([p for p in config.input_params if p.dynamically_mapped]), 
-                     ";".join(config.key_params)+";"))
+    lkt.add(LtEntry(prod+"#Delete", "{}_RFS_NAME;".format(prod), ";", ";".join(config.key_params)+";"))
     tables.append(lkt)
 
     # LKT_MANDATORY_PARAM_CHECK
