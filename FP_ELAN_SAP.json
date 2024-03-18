@@ -1,6 +1,6 @@
 {
   "factoryProductName": "ELAN_SAP",
-  "version": "0.14",
+  "version": "0.16",
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
@@ -322,6 +322,44 @@
       "exampleValue": "Snippet1;Snippet2",
       "cramerStorage": "CONFIG_SNIPPET_GE (s)",
       "jsonName": "configSnippetNames"
+    },
+    {
+      "name": "IPV4_DHCP_RELAY_FLAG",
+      "description": "Specifies if DHCP relay is active on SAP",
+      "mandatory": true,
+      "valueType": "boolean",
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "false",
+      "acadefault": false,
+      "cramerStorage": "ELAN_SAP_GE"
+    },
+    {
+      "name": "IPV4_DHCP_CIRCUITID_FORMAT",
+      "description": "Format of DHCP relay circuit id option",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "%portname:%svlan.%cvlan %sysname/0/0/0/0/0"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "cramerStorage": "ELAN_SAP_GE"
+    },
+    {
+      "name": "IPV4_DHCP_REMOTEID_FORMAT",
+      "description": "Format of DHCP relay remote id option",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "%mac"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "cramerStorage": "ELAN_SAP_GE"
     }
   ],
   "cramerParameters": [
@@ -413,7 +451,10 @@
       "QOS_EGRESS_QOS_QUEUE_PROFILE",
       "QOS_EGRESS_QOS_POLICY",
       "QOS_CUST_EGRESS_REWRITE_CONFIG",
-      "CUST_SNIPPET_NAMES"
+      "CUST_SNIPPET_NAMES",
+      "IPV4_DHCP_RELAY_FLAG",
+      "IPV4_DHCP_CIRCUITID_FORMAT",
+      "IPV4_DHCP_REMOTEID_FORMAT"
     ],
     "postNEI": [
       "LOGICAL_SUB_IF_ID",
@@ -436,7 +477,10 @@
       "QOS_EGRESS_QOS_QUEUE_PROFILE",
       "QOS_EGRESS_QOS_POLICY",
       "QOS_CUST_EGRESS_REWRITE_CONFIG",
-      "CUST_SNIPPET_NAMES"
+      "CUST_SNIPPET_NAMES",
+      "IPV4_DHCP_RELAY_FLAG",
+      "IPV4_DHCP_CIRCUITID_FORMAT",
+      "IPV4_DHCP_REMOTEID_FORMAT"
     ]
   },
   "cramerValidations": [

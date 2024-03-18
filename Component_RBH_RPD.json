@@ -4,7 +4,7 @@
   "paramMapping": [
     {
       "factoryProduct": "IPVPN_CORE",
-      "factoryProductVersion": "1.4",
+      "factoryProductVersion": "1.6",
       "parameters": [
         {
           "name": "L3_VPN_NAME",
@@ -95,12 +95,17 @@
           "name": "CUST_SNIPPET_NAMES",
           "type": "input",
           "from": "RBH_RPD_IPVPN_CORE_CUST_SNIPPET_NAMES"
+        },
+        {
+          "name": "DHCP_RELAY_LOOPBACK_ID",
+          "type": "static",
+          "value": 200
         }
       ]
     },
     {
       "factoryProduct": "IPVPN_SAP",
-      "factoryProductVersion": "0.18",
+      "factoryProductVersion": "2.1",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
@@ -361,12 +366,27 @@
           "name": "CUST_SNIPPET_NAMES",
           "type": "input",
           "from": "RBH_RPD_IPVPN_SAP_CUST_SNIPPET_NAMES"
+        },
+        {
+          "name": "PE_CE_EBGP_IPV4_PEERS",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "PE_CE_EBGP_IPV6_PEERS",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "PE_CE_EBGP_LOCAL_ASN",
+          "type": "static",
+          "value": null
         }
       ]
     },
     {
       "factoryProduct": "ELAN_CORE",
-      "factoryProductVersion": "0.14",
+      "factoryProductVersion": "0.15",
       "parameters": [
         {
           "name": "EVPN_EVI_RANGE",
@@ -391,7 +411,7 @@
         {
           "name": "VRF_SR_TE_COLOR_COMMUNITY",
           "type": "static",
-          "value": "ELANCORE_GE"
+          "value": "SR-TE color1"
         },
         {
           "name": "RELATED_L3_LOGICAL_IF",
@@ -417,7 +437,7 @@
     },
     {
       "factoryProduct": "ELAN_SAP",
-      "factoryProductVersion": "0.14",
+      "factoryProductVersion": "0.16",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
@@ -513,6 +533,21 @@
           "name": "CUST_SNIPPET_NAMES",
           "type": "input",
           "from": "RBH_RPD_ELAN_SAP_CUST_SNIPPET_NAMES"
+        },
+        {
+          "name": "IPV4_DHCP_RELAY_FLAG",
+          "type": "static",
+          "value": "true"
+        },
+        {
+          "name": "IPV4_DHCP_CIRCUITID_FORMAT",
+          "type": "static",
+          "value": "%portname:%svlan.%cvlan %sysname/0/0/0/0/0"
+        },
+        {
+          "name": "IPV4_DHCP_REMOTEID_FORMAT",
+          "type": "static",
+          "value": "%mac"
         }
       ]
     }

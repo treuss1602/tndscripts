@@ -1,6 +1,6 @@
 {
   "factoryProductName": "PHY_ILAG",
-  "version": "0.11",
+  "version": "0.12",
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
@@ -24,7 +24,7 @@
       "modifyOperation": null,
       "exampleValue": "GigabitEthernet0/1/0",
       "cramerStorage": "TND device's  port",
-      "jsonName": "phyIfDetails[].phyIfName"
+      "jsonName": "phyIfNames[].phyIfName"
     },
     {
       "name": "PHYS_LINK_UP_DELAY",
@@ -253,6 +253,17 @@
       "exampleValue": "Snippet1;Snippet2",
       "cramerStorage": "CONFIG_SNIPPET_GE (s)",
       "jsonName": "custSnippetNames"
+    },
+    {
+      "name": "PHYS_LACP_KEY",
+      "description": null,
+      "mandatory": false,
+      "valueType": "string",
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "AbCd1234",
+      "cramerStorage": "PHY_ILAG_GE"
     }
   ],
   "cramerParameters": [
@@ -383,7 +394,8 @@
       "QOS_EGRESS_QOS_QUEUE_PROFILE",
       "QOS_EGRESS_QOS_POLICY",
       "QOS_CUST_EGRESS_REWRITE_CONFIG",
-      "CUST_SNIPPET_NAMES"
+      "CUST_SNIPPET_NAMES",
+      "PHYS_LACP_KEY"
     ],
     "postNEI": [
       "PHYS_IF_NAMES",
@@ -410,7 +422,8 @@
       "QOS_EGRESS_QOS_QUEUE_PROFILE",
       "QOS_EGRESS_QOS_POLICY",
       "QOS_CUST_EGRESS_REWRITE_CONFIG",
-      "CUST_SNIPPET_NAMES"
+      "CUST_SNIPPET_NAMES",
+      "PHYS_LACP_KEY"
     ]
   },
   "cramerValidations": [

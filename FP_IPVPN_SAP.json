@@ -1,6 +1,6 @@
 {
   "factoryProductName": "IPVPN_SAP",
-  "version": "0.18",
+  "version": "2.1",
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
@@ -122,7 +122,7 @@
       "dynamicallyMapped": false,
       "modifyOperation": "ModifyParameter",
       "exampleValue": "8100",
-      "acadefault": "0x8100",
+      "acadefault": "8100",
       "cramerStorage": "IPVPN_SAP_GE"
     },
     {
@@ -452,7 +452,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "modifyOperation": "TBD",
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "10.10.24.128/28-10.20.0.1-\"VRF1\"-\"22\"-2",
       "cramerStorage": "IPVPN_SAP_GE",
       "maxOccurs": 50
@@ -467,7 +467,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "modifyOperation": "TBD",
+      "modifyOperation": "ModifyParameter",
       "exampleValue": "2001:0db8:/64-fe80::dea6:32ff:fe6b:3f72-\"IPV6_VRF_NAME\"-\"IPV6_ROUTE_TAG\"-IPV6_ADMIN_DISTANCE\"",
       "cramerStorage": "IPVPN_SAP_GE",
       "maxOccurs": 50
@@ -774,6 +774,43 @@
       "exampleValue": "Snippet1;Snippet2;mcast_igmp_snippet;",
       "cramerStorage": "CONFIG_SNIPPET_GE (s)",
       "jsonName": "configSnippetNames"
+    },
+    {
+      "name": "PE_CE_EBGP_IPV4_PEERS",
+      "description": "contains list of IPv4 addressses",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or more IPv4 address , non IPAM no , separated by ';'"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "cramerStorage": "IPVPN_SAP_GE"
+    },
+    {
+      "name": "PE_CE_EBGP_IPV6_PEERS",
+      "description": "contains list of IPv6 addressses",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or more IPv6 address , non IPAM no , separated by ';'"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "cramerStorage": "IPVPN_SAP_GE"
+    },
+    {
+      "name": "PE_CE_EBGP_LOCAL_ASN",
+      "description": "contains 16 or 32 bit AS number",
+      "mandatory": false,
+      "valueType": "integer",
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "4200000000",
+      "cramerStorage": "IPVPN_SAP_GE"
     }
   ],
   "cramerParameters": [
@@ -889,6 +926,30 @@
       "exampleValue": "2001:0dba:0000:0000:0000:0000:0000:0000/64@EBH LINKNET",
       "cramerStorage": "IP number,Subnet group,SNG",
       "jsonName": "additionalIPv6IFaddresses"
+    },
+    {
+      "name": "DHCP_RELAY_SOURCE_IPV4_ADDRESS",
+      "description": "contains single IPv4 address",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1  IPv4 address, IPAM number"
+      },
+      "modifyOperation": null,
+      "exampleValue": "192.168.1.2",
+      "cramerStorage": "IF (IPV4_DHCP_RELAY_FLAG is True) AND (ACAST_IPV4_FLAG is True) THEN:\n\n\u2002\u2002\u2002\u2002\u2002\u2002DHCP_RELAY_SOURCE_IPV4_ADDRESS should be an IPv4 address assigned as host address in IPAM, getting next free address from same subnet as PRIMARY_IPV4_IF_ADDRESS\n\nELSE:\n\n\u2002\u2002\u2002\u2002\u2002\u2002DHCP_RELAY_SOURCE_IPV4_ADDRESS  is \"n/a\"(nothing to be done)"
+    },
+    {
+      "name": "DHCP_RELAY_SOURCE_IPV6_ADDRESS",
+      "description": "contains single IPv6 address",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 IPv6 address, IPAM  number"
+      },
+      "modifyOperation": null,
+      "exampleValue": "2001:0db8:0000:0000:0000:0000:0000:0000",
+      "cramerStorage": "IF (IPV6_DHCP_RELAY_FLAG is True) AND (ACAST_IPV6_FLAG is True), THEN:\n\n\u2002\u2002\u2002\u2002\u2002\u2002DHCP_RELAY_SOURCE_IPV6_ADDRESS should be an IPv6 address assigned as host address in IPAM, getting next free address from same subnet as PRIMARY_IPV6_IF_ADDRESS\n\nELSE:\n\n\u2002\u2002\u2002\u2002\u2002\u2002DHCP_RELAY_SOURCE_IPV6_ADDRESS  is \"n/a\""
     }
   ],
   "keyParameters": [
@@ -953,7 +1014,12 @@
       "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTERS_DENIED",
       "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTERS_DENIED",
       "PE_CE_EBGP_STD_TE_COMMUNITY_HANDLING",
-      "CUST_SNIPPET_NAMES"
+      "CUST_SNIPPET_NAMES",
+      "PE_CE_EBGP_IPV4_PEERS",
+      "PE_CE_EBGP_IPV6_PEERS",
+      "PE_CE_EBGP_LOCAL_ASN",
+      "DHCP_RELAY_SOURCE_IPV4_ADDRESS",
+      "DHCP_RELAY_SOURCE_IPV6_ADDRESS"
     ],
     "postNEI": [
       "LOGICAL_SUB_IF_ID",
@@ -1019,7 +1085,12 @@
       "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTERS_DENIED",
       "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTERS_DENIED",
       "PE_CE_EBGP_STD_TE_COMMUNITY_HANDLING",
-      "CUST_SNIPPET_NAMES"
+      "CUST_SNIPPET_NAMES",
+      "PE_CE_EBGP_IPV4_PEERS",
+      "PE_CE_EBGP_IPV6_PEERS",
+      "PE_CE_EBGP_LOCAL_ASN",
+      "DHCP_RELAY_SOURCE_IPV4_ADDRESS",
+      "DHCP_RELAY_SOURCE_IPV6_ADDRESS"
     ]
   },
   "cramerValidations": [

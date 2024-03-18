@@ -1,6 +1,6 @@
 {
   "factoryProductName": "IPVPN_CORE",
-  "version": "1.4",
+  "version": "1.6",
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
@@ -272,6 +272,17 @@
       "exampleValue": "Snippet1;Snippet2",
       "cramerStorage": "CONFIG_SNIPPET_GE (s)",
       "jsonName": "custSnippetNames"
+    },
+    {
+      "name": "DHCP_RELAY_LOOPBACK_ID",
+      "description": "numeric ID of loopback interface to be used",
+      "mandatory": false,
+      "valueType": "integer",
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "200",
+      "cramerStorage": "IPVPN_CORE_GE"
     }
   ],
   "cramerParameters": [
@@ -333,6 +344,16 @@
       "exampleValue": "6730:1225555",
       "cramerStorage": "RD",
       "jsonName": "vrfRD"
+    },
+    {
+      "name": "NODE_ASN",
+      "description": "AS number assigned to node in Cramer (could be 16 or 32 bit ASN) - is attribute of EBH topology or MPLS Core topology, can be found via relation to node",
+      "mandatory": true,
+      "valueType": "integer",
+      "modifyOperation": null,
+      "exampleValue": "4200000000",
+      "cramerStorage": "contains AS number assigned to node in Cramer (could be 16 or 32 bit ASN) - is attribute of EBH topology or MPLS Core topology, can be found via relation to node",
+      "jsonName": "nodeASN?"
     }
   ],
   "keyParameters": [
@@ -363,7 +384,9 @@
       "IPV6_DHCP_SERVER_VRF",
       "IPV6_DHCP_SERVER_IP_ADDRESSES",
       "MANAGED_SR_DHCP_FLAG",
-      "CUST_SNIPPET_NAMES"
+      "CUST_SNIPPET_NAMES",
+      "DHCP_RELAY_LOOPBACK_ID",
+      "NODE_ASN"
     ],
     "postNEI": [
       "L3_VPN_NAME",
@@ -387,7 +410,9 @@
       "IPV6_DHCP_SERVER_VRF",
       "IPV6_DHCP_SERVER_IP_ADDRESSES",
       "MANAGED_SR_DHCP_FLAG",
-      "CUST_SNIPPET_NAMES"
+      "CUST_SNIPPET_NAMES",
+      "DHCP_RELAY_LOOPBACK_ID",
+      "NODE_ASN"
     ]
   },
   "cramerValidations": [

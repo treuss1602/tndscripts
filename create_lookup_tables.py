@@ -66,6 +66,10 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
             returnparams = {p.jsonname: p.name for p in config.input_params + config.cramer_output_params if p.jsonname is not None}
             DBG(30, "Return parameters for query API are: {}".format(returnparams))
             lkt.add(LtEntry(prod+"#"+trans+"#RETURN_PARAMETERS", ",".join("{}:{}".format(k, re.sub(r'\<N\>$','',v)) for k,v in returnparams.items())))
+            gereturnparams =  set(p.name for p in config.input_params + config.cramer_output_params if p.cramerStorage == config.factoryProductName+"_GE")
+            DBG(30, "Return GE parameters for query API are: {}".format(gereturnparams))
+            lkt.add(LtEntry(prod+"#"+trans+"#RETURN_GE_PARAMETERS", ";".join(gereturnparams)+";"))
+
     else:
         print("No query function defined for product {}".format(prod))
         lkt = None

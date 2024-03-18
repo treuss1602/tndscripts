@@ -4,7 +4,7 @@ import argparse
 from debug import DBG, set_debug_level
 from factoryproduct import FactoryProductConfiguration
 
-def create_confluence_table_create(productconfig : FactoryProductConfiguration, headers=True):
+def create_confluence_table_create(productconfig: FactoryProductConfiguration, headers=True):
     if headers:
         print("h3. {}".format('Create (Action "Create")'))
     print("||Parameter name (without prefix)||Section||Description||Example Value||M/O/C||")
@@ -19,7 +19,7 @@ def create_confluence_table_create(productconfig : FactoryProductConfiguration, 
         print("|{}|{}|{}|".format(pname, param.desc, param.examplevalue))
     print()
 
-def create_confluence_table_delete(productconfig : FactoryProductConfiguration, headers=True):
+def create_confluence_table_delete(productconfig: FactoryProductConfiguration, headers=True):
     rfsnameparam = "{}_RFS_NAME".format(productconfig.factoryProductName)
     rfsnameexample = productconfig.find_return_param(rfsnameparam).examplevalue
     if headers:

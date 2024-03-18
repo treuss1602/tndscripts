@@ -8,7 +8,7 @@
   "paramMapping": [
     {
       "factoryProduct": "PHY_ILAG",
-      "factoryProductVersion": "0.11",
+      "factoryProductVersion": "0.12",
       "parameters": [
         {
           "name": "PHYS_IF_NAME_<N>",
@@ -89,6 +89,11 @@
           "name": "CUST_SNIPPET_NAMES",
           "type": "input",
           "from": "PHY_ILAG_CUST_SNIPPET_NAMES"
+        },
+        {
+          "name": "PHYS_LACP_KEY",
+          "type": "static",
+          "value": "AbCd1234"
         }
       ]
     }

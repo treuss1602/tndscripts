@@ -1,6 +1,6 @@
 {
   "factoryProductName": "ELAN_CORE",
-  "version": "0.14",
+  "version": "0.15",
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",

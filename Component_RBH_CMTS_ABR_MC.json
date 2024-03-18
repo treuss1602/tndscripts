@@ -4,7 +4,7 @@
   "paramMapping": [
     {
       "factoryProduct": "IPVPN_CORE",
-      "factoryProductVersion": "1.4",
+      "factoryProductVersion": "1.6",
       "parameters": [
         {
           "name": "L3_VPN_NAME",
@@ -100,7 +100,7 @@
     },
     {
       "factoryProduct": "IPVPN_SAP",
-      "factoryProductVersion": "0.18",
+      "factoryProductVersion": "2.1",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
@@ -361,6 +361,21 @@
           "name": "CUST_SNIPPET_NAMES",
           "type": "input",
           "from": "RBH_CMTS_ABR_MC_IPVPN_SAP_CUST_SNIPPET_NAMES"
+        },
+        {
+          "name": "PE_CE_EBGP_IPV4_PEERS",
+          "type": "input",
+          "from": "RBH_CMTS_ABR_MC_PE_CE_EBGP_IPV4_PEERS"
+        },
+        {
+          "name": "PE_CE_EBGP_IPV6_PEERS",
+          "type": "input",
+          "from": "RBH_CMTS_ABR_MC_PE_CE_EBGP_IPV6_PEERS"
+        },
+        {
+          "name": "PE_CE_EBGP_LOCAL_ASN",
+          "type": "static",
+          "value": null
         }
       ]
     }
