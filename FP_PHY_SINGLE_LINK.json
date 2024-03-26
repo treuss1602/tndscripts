@@ -244,7 +244,7 @@
     },
     {
       "name": "CUST_SNIPPET_NAMES",
-      "description": "custom snippet name(s) , name also includes the version of the snippet, delimeter as ';'",
+      "description": "Custom configuration snippet(s) for configuring the PHY_SINGLE_LINK service",
       "mandatory": false,
       "valueType": "string",
       "valueTypeDetails": {
