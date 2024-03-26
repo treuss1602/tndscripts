@@ -196,7 +196,8 @@
           "EGRESS_QOS_QUEUE_PROFILE1",
           "EGRESS_QOS_QUEUE_PROFILE2",
           "EGRESS_QOS_QUEUE_PROFILE3",
-          "EGRESS_BESTEFFORT"
+          "EGRESS_BESTEFFORT",
+          "NOQOS"
         ]
       },
       "special": false,
@@ -208,12 +209,13 @@
     {
       "name": "QOS_EGRESS_QOS_POLICY",
       "description": "Egress QoS policy",
-      "mandatory": false,
+      "mandatory": true,
       "valueType": "enumerated",
       "valueTypeDetails": {
         "enumValues": [
           "CORE_MPLS",
-          "EGRESS_PROFILE1"
+          "EGRESS_PROFILE1",
+          "NOQOS"
         ]
       },
       "special": false,

@@ -8,13 +8,8 @@
   "paramMapping": [
     {
       "factoryProduct": "PHY_ILAG",
-      "factoryProductVersion": "0.12",
+      "factoryProductVersion": "0.15",
       "parameters": [
-        {
-          "name": "PHYS_IF_NAME_<N>",
-          "type": "input",
-          "from": "PHYS_IF_NAME_<N>"
-        },
         {
           "name": "PHYS_LINK_UP_DELAY",
           "type": "static",
@@ -29,6 +24,11 @@
           "name": "PHYS_IF_AUTO_NEGOTIATION",
           "type": "static",
           "value": "On"
+        },
+        {
+          "name": "ILAG_IF_NAME",
+          "type": "input",
+          "from": "ILAG_IF_NAME"
         },
         {
           "name": "LACP_FAST_TIMER",
@@ -94,6 +94,11 @@
           "name": "PHYS_LACP_KEY",
           "type": "static",
           "value": "AbCd1234"
+        },
+        {
+          "name": "PHYS_LLDP_FLAG",
+          "type": "static",
+          "value": "true"
         }
       ]
     }

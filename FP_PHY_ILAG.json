@@ -1,6 +1,6 @@
 {
   "factoryProductName": "PHY_ILAG",
-  "version": "0.12",
+  "version": "0.15",
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
@@ -13,18 +13,6 @@
       "exampleValue": "ZH0004MEB101",
       "cramerStorage": "TND device ( types to TBD)",
       "jsonName": "networkElementName"
-    },
-    {
-      "name": "PHYS_IF_NAME_<N>",
-      "description": "Physical interface name(s)\nUpto 32 interfaces or members links possible in",
-      "mandatory": true,
-      "valueType": "string[32]",
-      "special": false,
-      "dynamicallyMapped": false,
-      "modifyOperation": null,
-      "exampleValue": "GigabitEthernet0/1/0",
-      "cramerStorage": "TND device's  port",
-      "jsonName": "phyIfNames[].phyIfName"
     },
     {
       "name": "PHYS_LINK_UP_DELAY",
@@ -188,31 +176,33 @@
     {
       "name": "QOS_EGRESS_QOS_QUEUE_PROFILE",
       "description": "Egress QoS queue profile",
-      "mandatory": false,
+      "mandatory": true,
       "valueType": "enumerated",
       "valueTypeDetails": {
         "enumValues": [
           "EGRESS_QOS_QUEUE_PROFILE1",
           "EGRESS_QOS_QUEUE_PROFILE2",
           "EGRESS_QOS_QUEUE_PROFILE3",
-          "EGRESS_BESTEFFORT"
+          "EGRESS_BESTEFFORT",
+          "NOQOS"
         ]
       },
       "special": false,
       "dynamicallyMapped": false,
       "modifyOperation": "ModifyQoS",
-      "exampleValue": "0",
+      "exampleValue": "NOQOS",
       "cramerStorage": "PHY_ILAG_GE"
     },
     {
       "name": "QOS_EGRESS_QOS_POLICY",
       "description": "Egress QoS policy",
-      "mandatory": false,
+      "mandatory": true,
       "valueType": "enumerated",
       "valueTypeDetails": {
         "enumValues": [
           "CORE_MPLS",
-          "EGRESS_PROFILE1"
+          "EGRESS_PROFILE1",
+          "NOQOS"
         ]
       },
       "special": false,
@@ -264,6 +254,18 @@
       "modifyOperation": "ModifyParameter",
       "exampleValue": "AbCd1234",
       "cramerStorage": "PHY_ILAG_GE"
+    },
+    {
+      "name": "PHYS_LLDP_FLAG",
+      "description": "If set to \"True\", LLDP is enabled on interface.",
+      "mandatory": false,
+      "valueType": "boolean",
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "false",
+      "acadefault": false,
+      "cramerStorage": "PHY_ILAG_GE"
     }
   ],
   "cramerParameters": [
@@ -276,6 +278,16 @@
       "exampleValue": "PHYILAG00000001",
       "cramerStorage": "PHY Service",
       "jsonName": "phyILagRfsName"
+    },
+    {
+      "name": "PHYS_IF_NAME_<N>",
+      "description": "Physical interface name(s)\nUpto 32 interfaces or members links possible in",
+      "mandatory": true,
+      "valueType": "string[32]",
+      "modifyOperation": null,
+      "exampleValue": "GigabitEthernet0/1/0",
+      "cramerStorage": "TND device's  port",
+      "jsonName": "phyIfDetails[].phyIfName"
     },
     {
       "name": "PHYS_IF_TYPE_<N>",
@@ -395,7 +407,8 @@
       "QOS_EGRESS_QOS_POLICY",
       "QOS_CUST_EGRESS_REWRITE_CONFIG",
       "CUST_SNIPPET_NAMES",
-      "PHYS_LACP_KEY"
+      "PHYS_LACP_KEY",
+      "PHYS_LLDP_FLAG"
     ],
     "postNEI": [
       "PHYS_IF_NAMES",
@@ -423,7 +436,8 @@
       "QOS_EGRESS_QOS_POLICY",
       "QOS_CUST_EGRESS_REWRITE_CONFIG",
       "CUST_SNIPPET_NAMES",
-      "PHYS_LACP_KEY"
+      "PHYS_LACP_KEY",
+      "PHYS_LLDP_FLAG"
     ]
   },
   "cramerValidations": [

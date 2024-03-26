@@ -105,7 +105,7 @@
     },
     {
       "factoryProduct": "IPVPN_SAP",
-      "factoryProductVersion": "2.1",
+      "factoryProductVersion": "2.4",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
@@ -123,9 +123,19 @@
           "value": "UNI"
         },
         {
+          "name": "INNER_VLAN_ID",
+          "type": "static",
+          "value": "untagged"
+        },
+        {
           "name": "INNER_TPI",
           "type": "static",
           "value": null
+        },
+        {
+          "name": "OUTER_VLAN_ID",
+          "type": "static",
+          "value": "untagged"
         },
         {
           "name": "OUTER_TPI",
@@ -437,7 +447,7 @@
     },
     {
       "factoryProduct": "ELAN_SAP",
-      "factoryProductVersion": "0.16",
+      "factoryProductVersion": "0.17",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
@@ -467,7 +477,7 @@
         {
           "name": "INNER_VLAN_ID",
           "type": "static",
-          "value": 4000
+          "value": "untagged"
         },
         {
           "name": "INNER_TPI",
@@ -477,7 +487,7 @@
         {
           "name": "OUTER_VLAN_ID",
           "type": "static",
-          "value": 3000
+          "value": "untagged"
         },
         {
           "name": "OUTER_TPI",

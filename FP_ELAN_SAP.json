@@ -1,6 +1,6 @@
 {
   "factoryProductName": "ELAN_SAP",
-  "version": "0.16",
+  "version": "0.17",
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
@@ -91,10 +91,9 @@
       "name": "INNER_VLAN_ID",
       "description": "VLAN - inner VLAN ID",
       "mandatory": false,
-      "valueType": "integer",
+      "valueType": "string",
       "valueTypeDetails": {
-        "minValue": 1,
-        "maxValue": 4094
+        "comment": "values are between 1-4094 or untagged"
       },
       "special": false,
       "dynamicallyMapped": false,
@@ -122,10 +121,9 @@
       "name": "OUTER_VLAN_ID",
       "description": "VLAN - outer VLAN ID",
       "mandatory": false,
-      "valueType": "integer",
+      "valueType": "string",
       "valueTypeDetails": {
-        "minValue": 1,
-        "maxValue": 4094
+        "comment": "values are between 1-4094 or untagged"
       },
       "special": false,
       "dynamicallyMapped": false,
@@ -257,14 +255,15 @@
     {
       "name": "QOS_EGRESS_QOS_QUEUE_PROFILE",
       "description": "Egress QoS queue profile",
-      "mandatory": false,
+      "mandatory": true,
       "valueType": "enumerated",
       "valueTypeDetails": {
         "enumValues": [
           "EGRESS_QOS_QUEUE_PROFILE1",
           "EGRESS_QOS_QUEUE_PROFILE2",
           "EGRESS_QOS_QUEUE_PROFILE3",
-          "EGRESS_BESTEFFORT"
+          "EGRESS_BESTEFFORT",
+          "NOQOS"
         ]
       },
       "special": false,
@@ -276,12 +275,13 @@
     {
       "name": "QOS_EGRESS_QOS_POLICY",
       "description": "Egress QoS policy",
-      "mandatory": false,
+      "mandatory": true,
       "valueType": "enumerated",
       "valueTypeDetails": {
         "enumValues": [
           "CORE_MPLS",
-          "EGRESS_PROFILE1"
+          "EGRESS_PROFILE1",
+          "NOQOS"
         ]
       },
       "special": false,
@@ -399,10 +399,9 @@
       "name": "INNER_VLAN_ID",
       "description": "VLAN - inner VLAN ID",
       "mandatory": false,
-      "valueType": "integer",
+      "valueType": "string",
       "valueTypeDetails": {
-        "minValue": 1,
-        "maxValue": 4094
+        "comment": "values are between 1-4094 or untagged"
       },
       "modifyOperation": null,
       "exampleValue": "4000",
@@ -413,10 +412,9 @@
       "name": "OUTER_VLAN_ID",
       "description": "VLAN - outer VLAN ID",
       "mandatory": false,
-      "valueType": "integer",
+      "valueType": "string",
       "valueTypeDetails": {
-        "minValue": 1,
-        "maxValue": 4094
+        "comment": "values are between 1-4094 or untagged"
       },
       "modifyOperation": null,
       "exampleValue": "3000",
