@@ -8,17 +8,13 @@ from openpyxl import load_workbook
 from factoryproduct import Param, FactoryProductConfiguration
 from debug import DBG, set_debug_level
 
+FP_DEPENDENCIES = {"ELAN_SAP": ("ELAN_CORE", "ELAN_CORE_RFS_NAME"),
+                   "IPVPN_SAP": ("IPVPN_CORE", "IPVPN_CORE_RFS_NAME")}
+
 def read_data_from_excel(xlfile, tab):
     ''' Read and return the data from the correct sheet in the excel file.'''
-    STARTROW = 7
-    COLUMNS = {'TECHNAME': 1, 'DESC': 2, 'VALUETYPE': 3, 'TYPEDETAILS': 4, 'OM': 5,
-               'EXAMPLE_VALUE': 6, 'CRAMERSTORAGE': 7, 'JSONNAME': 8, 'STABLENET': 9,
-               'MODIFY': 10, 'PARAMTYPE': 11, 'ACADEFAULT': 13 }
-    COLS_TO_CHECK_FOR_MAPPING = [14 ,16, 18, 20]
     PRODNAME_CELL = 'B1'
-    # ACTION_CELL = 'B3'
     VERSION_CELL = 'B4'
-
 
     DBG(10, "Reading data from excel file '{}'".format(xlfile))
     wb = load_workbook(xlfile, data_only=True)
@@ -38,10 +34,35 @@ def read_data_from_excel(xlfile, tab):
     if not prodname:
         raise ValueError("Unable to read product name from excel {}, tab {}, cell {}".format(xlfile, tab, PRODNAME_CELL))
     version = sheet[VERSION_CELL].value
+
+    inparams, crameroutparams, stablenetparams, keyparams = read_params_from_sheet(sheet, prodname)
+    # Add prerequisite parameters to Stablenet
+    if prodname in FP_DEPENDENCIES:
+        depprod = FP_DEPENDENCIES[prodname][0]
+        try:
+            sheet = wb[depprod]
+        except KeyError:
+            raise KeyError("Unable to open tab '{}' for prerequisite product.".format(depprod))
+        _, _, additional_stablenetparams, _ = read_params_from_sheet(sheet, depprod)
+        stablenetparams = tuple(stablenetparams[i] + ["{}_{}".format(depprod, pname) for pname in additional_stablenetparams[i]] for i in range(2))
+
+    return prodname, version, inparams, crameroutparams, stablenetparams, keyparams
+
+def read_params_from_sheet(sheet, prodname):
+    ''' Read data from an excel sheet '''
+    STARTROW = 7
+    COLUMNS = {'TECHNAME': 1, 'DESC': 2, 'VALUETYPE': 3, 'TYPEDETAILS': 4, 'OM': 5,
+               'EXAMPLE_VALUE': 6, 'CRAMERSTORAGE': 7, 'JSONNAME': 8, 'STABLENET': 9,
+               'MODIFY': 10, 'PARAMTYPE': 11, 'ACADEFAULT': 13 }
+    COLS_TO_CHECK_FOR_MAPPING = [14 ,16, 18, 20]
+    # ACTION_CELL = 'B3'
+
     inparams = []
     crameroutparams = []
     stablenetparams = ([],[])
     stablenetblacklist = ["NETWORK_ELEMENT_NAME", '{}_RFS_NAME'.format(prodname), "EVPN_EVI_RANGE"]
+
+    description_overrides = {"CUST_SNIPPET_NAMES": "Custom configuration snippet(s) for configuring the {} service".format(prodname)}
 
     keyparams = []
     for row in range(STARTROW, 300):
@@ -65,6 +86,8 @@ def read_data_from_excel(xlfile, tab):
             else:
                 maxoccurs = None
             mapped = any(sheet.cell(row=row, column=col).value and sheet.cell(row=row, column=col).value.lower() == "mapped" for col in COLS_TO_CHECK_FOR_MAPPING)
+            if techname in description_overrides:
+                desc = description_overrides[techname]
             if modify.lower() == "n/a":
                 modify = None
             if paramtype.lower() == "input" or paramtype.lower() == "special":
@@ -96,7 +119,7 @@ def read_data_from_excel(xlfile, tab):
         elif techname and not paramtype:
             print("WARNING: No param type defined for parameter '{}'".format(techname))
 
-    return prodname, version, inparams, crameroutparams, stablenetparams, keyparams
+    return inparams, crameroutparams, stablenetparams, keyparams
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
@@ -111,6 +134,9 @@ if __name__ == "__main__":
 
     prodname, version, inparams, crameroutparams, stablenetparams, keyparams = read_data_from_excel(args.filename, args.tabname)
     config = FactoryProductConfiguration(prodname, version, inparams, crameroutparams, stablenetparams, keyparams)
+    if prodname in FP_DEPENDENCIES:
+        config.add_prerequisite_product(*FP_DEPENDENCIES[prodname])
+
     config.add_validation("CHECK_NODE_LOCATION", args.nename, taskname="CHECK_TARGET_NE_EXISTS")
     if "ACCESS_DEVICE_NAME" in config.input_param_names():
         config.add_validation("CHECK_NODE_LOCATION", "ACCESS_DEVICE_NAME", taskname="CHECK_ACCESS_DEVICE_EXISTS")

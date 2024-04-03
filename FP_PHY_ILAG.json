@@ -1,6 +1,7 @@
 {
   "factoryProductName": "PHY_ILAG",
   "version": "0.15",
+  "prerequisite": null,
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",

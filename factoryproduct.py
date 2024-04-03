@@ -151,6 +151,7 @@ class FactoryProductConfiguration:
         self.stablenet_params = stablenet_params
         self.key_params = key_params
         self.cramer_validations = cramer_validations if cramer_validations else []
+        self.prerequisite_product = None
 
     def add_validation(self, validation_name, *validation_params, taskname = None):
         if validation_name not in VALIDATIONS:
@@ -160,6 +161,9 @@ class FactoryProductConfiguration:
         else:
             val = VALIDATIONS[validation_name](*validation_params)
         self.cramer_validations.append(val)
+
+    def add_prerequisite_product(self, name, referenceparam):
+        self.prerequisite_product = (name, referenceparam)
 
     def input_param_names(self):
         return {p.name for p in self.input_params}
@@ -175,6 +179,7 @@ class FactoryProductConfiguration:
 
     def to_file(self, fp):
         data = {"factoryProductName": self.factoryProductName, "version": self.version}
+        data["prerequisite"] = {"product": self.prerequisite_product[0], "referenceParameter": self.prerequisite_product[1]} if self.prerequisite_product else None
         data["inputParameters"] = [p.as_dict() for p in self.input_params]
         data["cramerParameters"] = [p.as_dict() for p in self.cramer_output_params]
         data["keyParameters"] = self.key_params
@@ -190,6 +195,8 @@ class FactoryProductConfiguration:
         key_params = data["keyParameters"]
         prod = FactoryProductConfiguration(data["factoryProductName"], data["version"],
                                            input_params, cramer_params, stablenet_params, key_params)
+        if data["prerequisite"]:
+            prod.add_prerequisite_product(data["prerequisite"]["product"], data["prerequisite"]["referenceParameter"])
         for v in data["cramerValidations"]:
             DBG(30, "Adding validation {}".format(v["name"]))
             if "taskname" in v:

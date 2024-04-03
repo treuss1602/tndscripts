@@ -65,10 +65,10 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
             lkt.add(LtEntry(prod+"#"+trans+"#PARAMETERS", ";".join("{}={}".format(*it) for it in inputparams.items())+";"))
             returnparams = {p.jsonname: p.name for p in config.input_params + config.cramer_output_params if p.jsonname is not None}
             DBG(30, "Return parameters for query API are: {}".format(returnparams))
-            lkt.add(LtEntry(prod+"#"+trans+"#RETURN_PARAMETERS", ",".join("{}:{}".format(k, re.sub(r'\<N\>$','',v)) for k,v in returnparams.items())))
+            lkt.add(LtEntry(prod+"#"+trans+"#RETURN_PARAMETERS", ",".join("{}:{}".format(k, re.sub(r'\<N\>$','',v)) for k,v in sorted(returnparams.items()))))
             gereturnparams =  set(p.name for p in config.input_params + config.cramer_output_params if p.cramerStorage == config.factoryProductName+"_GE")
             DBG(30, "Return GE parameters for query API are: {}".format(gereturnparams))
-            lkt.add(LtEntry(prod+"#"+trans+"#RETURN_GE_PARAMETERS", ";".join(gereturnparams)+";"))
+            lkt.add(LtEntry(prod+"#"+trans+"#RETURN_GE_PARAMETERS", ";".join(sorted(gereturnparams))+";"))
 
     else:
         print("No query function defined for product {}".format(prod))
@@ -127,22 +127,36 @@ def create_lookup_tables_for_composition(data):
         component = data["compositionName"]
         cfs = ""
 
-    action = "Create" # Currently no other action supported
-    
-    lkt = LookupTable('LKT_TND_STATIC_PARAM_VALUES')
+    lkt1 = LookupTable('LKT_TND_STATIC_PARAM_VALUES')
     for fpdata in data["paramMapping"]:
         fpname = fpdata["factoryProduct"]
         for paramdata in fpdata["parameters"]:
             pname, ptype = (paramdata[x] for x in ["name", "type"])
-            key = "#".join([cfs, component, fpname, action, pname])
+            key = "#".join([cfs, component, fpname, "Create", pname])
             DBG(30, "Key is {}".format(key))
             if ptype == "static":
                 values = (paramdata["value"] if paramdata["value"] is not None else "<NULL>", "S")
             elif ptype in ["input", "mapped"]:
                 values = (paramdata["from"], "D")
             DBG(30, "Values are {}".format(values))
-            lkt.add(LtEntry(key, *values))
-    return lkt
+            lkt1.add(LtEntry(key, *values))
+
+    lkt2 = LookupTable('LKT_TND_DISPLAY_PARAMETERS')
+    for fpdata in data["paramMapping"]:
+        fpname = fpdata["factoryProduct"]
+        rfsname = {"name": "{}_RFS_NAME".format(fpname),
+                   "type": "input",
+                   "from": "{}_{}_RFS_NAME".format(component, fpname) if component else "{}_RFS_NAME".format(fpname)}
+        for paramdata in [rfsname] + fpdata["parameters"]:
+            pname, ptype = (paramdata[x] for x in ["name", "type"])
+            key = "#".join([cfs, component, fpname, "Display", pname])
+            DBG(30, "Key is {}".format(key))
+            if ptype == "input":
+                values = paramdata["from"]
+                DBG(30, "Values are {}".format(values))
+                lkt2.add(LtEntry(key, values))
+
+    return [lkt1, lkt2]
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
@@ -170,9 +184,10 @@ if __name__ == "__main__":
             create_zipfile(outfile, *tables)
             print(outfile)
         elif "compositionName" in jsondata:
-            table = create_lookup_tables_for_composition(jsondata)
-            DBG(30, "Lookup Table dump:\n"+table.debugdump())
+            tables = create_lookup_tables_for_composition(jsondata)
+            for table in tables:
+                DBG(30, "Lookup Table dump:\n"+table.debugdump())
             outfile = "{}.zip".format(jsondata["compositionName"]) if args.outfile is None else args.outfile
-            create_zipfile(outfile, table)
+            create_zipfile(outfile, *tables)
             print(outfile)
         
