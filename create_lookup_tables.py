@@ -106,14 +106,22 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
     tables.append(lkt)
 
     # LKT_TND_STABLENET
+    TRANSACTIONS = {"Create": "new_rfs",
+                    "Delete": "cease_rfs",
+                    "ModifyParameter": "modify_rfs_generic",
+                    "ModifyCustomSnippets": "modify_rfs_custom_snippets",
+                    "ModifyQoS": "modify_rfs_qos",
+                    "ModifySubnets": "modify_rfs_ip_subnets"}
+    supported_transactions = {"Create", "Detele"}.union({p.modifyOperation for p in config.input_params})
+
     lkt = LookupTable('LKT_TND_STABLENET')
-    lkt.add(LtEntry(prod+"#Create#ORDER_DESCRIPTION", "new_rfs"))
-    lkt.add(LtEntry(prod+"#Delete#ORDER_DESCRIPTION", "cease_rfs"))
-    for trans in ["Create", "Delete", "Modify"]:
-        lkt.add(LtEntry(prod+"#"+trans+"#TARGET_DEVICE", nenameparam))
-        lkt.add(LtEntry(prod+"#"+trans+"#RFS_NAME", config.factoryProductName+"_RFS_NAME"))
-        parameters = config.stablenet_params[0]
-        lkt.add(LtEntry(prod+"#"+trans+"#PARAMETERS", ";".join(parameters)+";"))
+    for trans, orderdesc in TRANSACTIONS.items():
+        if trans in supported_transactions:
+            lkt.add(LtEntry(prod+"#"+trans+"#ORDER_DESCRIPTION", orderdesc))
+            lkt.add(LtEntry(prod+"#"+trans+"#TARGET_DEVICE", nenameparam))
+            lkt.add(LtEntry(prod+"#"+trans+"#RFS_NAME", config.factoryProductName+"_RFS_NAME"))
+            parameters = config.stablenet_params[0]
+            lkt.add(LtEntry(prod+"#"+trans+"#PARAMETERS", ";".join(parameters)+";"))
     tables.append(lkt)
 
     return tables
