@@ -1,6 +1,6 @@
 {
   "factoryProductName": "IPVPN_SAP",
-  "version": "2.4",
+  "version": "2.5",
   "prerequisite": {
     "product": "IPVPN_CORE",
     "referenceParameter": "IPVPN_CORE_RFS_NAME"
@@ -336,7 +336,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "modifyOperation": "ModifySubnets",
+      "modifyOperation": null,
       "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
@@ -348,7 +348,7 @@
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,
-      "modifyOperation": "ModifySubnets",
+      "modifyOperation": null,
       "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "IPVPN_SAP_GE"
