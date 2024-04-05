@@ -31,23 +31,38 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
                      joinparams([p for p in config.input_params if p.dynamically_mapped]), 
                      ";".join(config.key_params)+";"))
     lkt.add(LtEntry(prod+"#Delete", "{}_RFS_NAME;".format(prod), ";", ";".join(config.key_params)+";"))
+    for tr in {p.modifyOperation for p in config.input_params if p.modifyOperation is not None}:
+        lkt.add(LtEntry(prod+"#"+tr,
+                        joinparams([p for p in config.input_params if p.modifyOperation == tr]), 
+                        ";", 
+                        ";".join(config.key_params)+";"))
     tables.append(lkt)
 
     # LKT_MANDATORY_PARAM_CHECK
     lkt = LookupTable('LKT_MANDATORY_PARAM_CHECK')
     lkt.add(LtEntry('FACTORY_PRODUCT_'+prod+"#Create", "PAUSE_AFTER_PREPARE "+" ".join(p.name.replace('_<N>','_1') for p in config.input_params if p.mandatory)+" ", "ORDER_TYPE IL_REQ_GROUP ORDER_EXTERNAL_ORDER_ID "))
     lkt.add(LtEntry('FACTORY_PRODUCT_'+prod+"#Delete", "PAUSE_AFTER_PREPARE {}_RFS_NAME ".format(prod), "ORDER_TYPE IL_REQ_GROUP ORDER_EXTERNAL_ORDER_ID "))
-    lkt.add(LtEntry('FACTORY_PRODUCT_'+prod+"#Modify", "PAUSE_AFTER_PREPARE {}_RFS_NAME ".format(prod), "ORDER_TYPE IL_REQ_GROUP ORDER_EXTERNAL_ORDER_ID "))
+    for tr in {p.modifyOperation for p in config.input_params if p.modifyOperation is not None}:
+        lkt.add(LtEntry('FACTORY_PRODUCT_'+prod+"#"+tr, "PAUSE_AFTER_PREPARE {}_RFS_NAME ".format(prod), "ORDER_TYPE IL_REQ_GROUP ORDER_EXTERNAL_ORDER_ID "))
     tables.append(lkt)
 
     # LKT_TND_ENUM_PARAM_CHECK
     lkt = LookupTable('LKT_TND_ENUM_PARAM_CHECK')
-    lkt.add(LtEntry(prod+"#Create#ENUM_PARAMS", ";".join(p.name for p in config.input_params if p.valuetype == "enumerated" or p.valuetype == "boolean")+";"))
+    lkt.add(LtEntry(prod+"#Create#ENUM_PARAMS", ";".join(p.name for p in config.input_params if p.valuetype in ["enumerated", "boolean"])+";"))
     for p in config.input_params:
         if p.valuetype == "enumerated":
             lkt.add(LtEntry(prod+"#Create#{}".format(p.name), ";".join(p.enumvalues)+";"))
         elif p.valuetype == "boolean":
             lkt.add(LtEntry(prod+"#Create#{}".format(p.name), "true;false;"))
+    for tr in {p.modifyOperation for p in config.input_params if p.modifyOperation is not None}:
+        params = [p for p in config.input_params if p.modifyOperation == tr and p.valuetype in ["enumerated", "boolean"]]
+        if params:
+            lkt.add(LtEntry(prod+"#"+tr+"#ENUM_PARAMS", ";".join([p.name for p in params])+";"))
+            for p in params:
+                if p.valuetype == "enumerated":
+                    lkt.add(LtEntry(prod+"#"+tr+"#{}".format(p.name), ";".join(p.enumvalues)+";"))
+                elif p.valuetype == "boolean":
+                    lkt.add(LtEntry(prod+"#"+tr+"#{}".format(p.name), "true;false;"))
     tables.append(lkt)
 
     # LKT_TND_CRAMER_COMMAND_VALIDATION
