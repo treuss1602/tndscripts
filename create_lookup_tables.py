@@ -3,6 +3,7 @@ import argparse
 import functools
 import json
 import re
+import os
 from zipfile import ZipFile
 from factoryproduct import FactoryProductConfiguration
 from lookuptable import LookupTable, LtEntry
@@ -15,6 +16,14 @@ def create_zipfile(filename, *tables):
         for table in tables:
             if table:
                 z.writestr(table.name, table.dump())
+
+def create_update_files_in_targetdir(dirname, *tables):
+    DBG(10, "Writing Lookup Tables to files in '{}'".format(dirname))
+    for table in tables:
+        if table:
+            filename = dirname + os.sep + table.name
+            with open(filename, "a") as fp:
+                fp.write(table.dump())
 
 def joinparams(*paramsets):
     return ";".join(map(lambda x: x.name, functools.reduce(lambda a,b: a+b, paramsets)))+";"
@@ -184,6 +193,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('-D', dest='dbglevel', action='store', default=10,    help='Print Debug information')
     parser.add_argument('-o', dest='outfile', metavar='<OUTPUT_FILE>', help='Name of the output file (overrides default name)')
+    parser.add_argument('-d', dest='targetdir', metavar='<TARGET_DIR>', help='Save to directory rather than creating zipfile')
     parser.add_argument('filenames', metavar='<FILENAME>', nargs='+', help='JSON input file(s)')
 
     args=parser.parse_args()
@@ -202,14 +212,20 @@ if __name__ == "__main__":
                     DBG(30, "Lookup Table dump:\n"+table.debugdump())
                 else:
                     DBG(30, "No lookup table")
-            outfile = "{}.zip".format(config.factoryProductName) if args.outfile is None else args.outfile
-            create_zipfile(outfile, *tables)
-            print(outfile)
+            if args.targetdir:
+                create_update_files_in_targetdir(args.targetdir, *tables)
+            else:
+                outfile = "{}.zip".format(config.factoryProductName) if args.outfile is None else args.outfile
+                create_zipfile(outfile, *tables)
+                print(outfile)
         elif "compositionName" in jsondata:
             tables = create_lookup_tables_for_composition(jsondata)
             for table in tables:
                 DBG(30, "Lookup Table dump:\n"+table.debugdump())
-            outfile = "{}.zip".format(jsondata["compositionName"]) if args.outfile is None else args.outfile
-            create_zipfile(outfile, *tables)
-            print(outfile)
+            if args.targetdir:
+                create_update_files_in_targetdir(args.targetdir, *tables)
+            else:
+                outfile = "{}.zip".format(jsondata["compositionName"]) if args.outfile is None else args.outfile
+                create_zipfile(outfile, *tables)
+                print(outfile)
         
