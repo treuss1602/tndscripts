@@ -72,18 +72,17 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
     api = CramerAPIs[prod][0]
     if api:
         lkt = LookupTable('LKT_TND_CRAMER_QUERY_SERVICE')
-        for trans in ["Create", "Delete", "Modify"]:
-            lkt.add(LtEntry(prod+"#"+trans+"#API_NAME", api))
-            rfsparam = config.find_return_param('{}_RFS_NAME'.format(prod))
-            inputparams = {rfsparam.jsonname: rfsparam.name}
-            DBG(30, "Input parameters for query API are: {}".format(inputparams))
-            lkt.add(LtEntry(prod+"#"+trans+"#PARAMETERS", ";".join("{}={}".format(*it) for it in inputparams.items())+";"))
-            returnparams = {p.jsonname: p.name for p in config.input_params + config.cramer_output_params if p.jsonname is not None}
-            DBG(30, "Return parameters for query API are: {}".format(returnparams))
-            lkt.add(LtEntry(prod+"#"+trans+"#RETURN_PARAMETERS", ",".join("{}:{}".format(k, re.sub(r'\<N\>$','',v)) for k,v in sorted(returnparams.items()))))
-            gereturnparams =  set(p.name for p in config.input_params + config.cramer_output_params if p.cramerStorage == config.factoryProductName+"_GE")
-            DBG(30, "Return GE parameters for query API are: {}".format(gereturnparams))
-            lkt.add(LtEntry(prod+"#"+trans+"#RETURN_GE_PARAMETERS", ";".join(sorted(gereturnparams))+";"))
+        lkt.add(LtEntry(prod+"#API_NAME", api))
+        rfsparam = config.find_return_param('{}_RFS_NAME'.format(prod))
+        inputparams = {rfsparam.jsonname: rfsparam.name}
+        DBG(30, "Input parameters for query API are: {}".format(inputparams))
+        lkt.add(LtEntry(prod+"#PARAMETERS", ";".join("{}={}".format(*it) for it in inputparams.items())+";"))
+        returnparams = {p.jsonname: p.name for p in config.input_params + config.cramer_output_params if p.jsonname is not None}
+        DBG(30, "Return parameters for query API are: {}".format(returnparams))
+        lkt.add(LtEntry(prod+"#RETURN_PARAMETERS", ",".join("{}:{}".format(k, re.sub(r'\<N\>$','',v)) for k,v in sorted(returnparams.items()))))
+        gereturnparams =  set(p.name for p in config.input_params + config.cramer_output_params if p.cramerStorage == config.factoryProductName+"_GE")
+        DBG(30, "Return GE parameters for query API are: {}".format(gereturnparams))
+        lkt.add(LtEntry(prod+"#RETURN_GE_PARAMETERS", ";".join(sorted(gereturnparams))+";"))
 
     else:
         print("No query function defined for product {}".format(prod))
@@ -94,15 +93,15 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
     api = CramerAPIs[prod][1]
     if api:
         lkt = LookupTable('LKT_TND_CRAMER_IDENTIFY_SERVICE')
-        lkt.add(LtEntry(prod+"#Create#API_NAME", api))
+        lkt.add(LtEntry(prod+"#API_NAME", api))
         inputparams = {p.jsonname: p.name for p in config.input_params if p.jsonname is not None}
         DBG(30, "Input parameters for identify API are: {}".format(inputparams))
-        lkt.add(LtEntry(prod+"#Create#PARAMETERS", ";".join("{}={}".format(*it) for it in inputparams.items())+";"))
-        lkt.add(LtEntry(prod+"#Create#GE_PARAMETERS", joinparams([p for p in config.input_params if p.cramerStorage == config.factoryProductName+"_GE"])))
+        lkt.add(LtEntry(prod+"#PARAMETERS", ";".join("{}={}".format(*it) for it in inputparams.items())+";"))
+        lkt.add(LtEntry(prod+"#GE_PARAMETERS", joinparams([p for p in config.input_params if p.cramerStorage == config.factoryProductName+"_GE"])))
         returnparams = {"serviceFound": "SERVICE_FOUND"}
         returnparams.update({p.jsonname: p.name for p in config.cramer_output_params if p.jsonname is not None})
         DBG(30, "Return parameters for identify API are: {}".format(returnparams))
-        lkt.add(LtEntry(prod+"#Create#RETURN_PARAMETERS", ",".join("{}:{}".format(k,re.sub(r'\<N\>$','',v)) for k,v in returnparams.items())))
+        lkt.add(LtEntry(prod+"#RETURN_PARAMETERS", ",".join("{}:{}".format(k,re.sub(r'\<N\>$','',v)) for k,v in returnparams.items())))
     else:
         print("No identify function defined for product {}".format(prod))
         lkt = None
