@@ -7,7 +7,7 @@
   "paramMapping": [
     {
       "factoryProduct": "PHY_SINGLE_LINK",
-      "factoryProductVersion": "0.12",
+      "factoryProductVersion": "0.13",
       "parameters": [
         {
           "name": "PHYS_IF_NAME",
@@ -93,6 +93,11 @@
           "name": "CUST_SNIPPET_NAMES",
           "type": "input",
           "from": "PHY_SINGLE_LINK_CUST_SNIPPET_NAMES"
+        },
+        {
+          "name": "PHYS_LLDP_FLAG",
+          "type": "static",
+          "value": "true"
         }
       ]
     }

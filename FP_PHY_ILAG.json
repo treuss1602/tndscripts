@@ -259,7 +259,7 @@
     {
       "name": "PHYS_LLDP_FLAG",
       "description": "If set to \"True\", LLDP is enabled on interface.",
-      "mandatory": false,
+      "mandatory": true,
       "valueType": "boolean",
       "special": false,
       "dynamicallyMapped": false,

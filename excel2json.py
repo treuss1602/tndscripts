@@ -90,8 +90,12 @@ def read_params_from_sheet(sheet, prodname):
                 desc = description_overrides[techname]
             if modify.lower() == "n/a":
                 modify = None
+            if jsonname:
+                jsonname = re.sub(r'[^a-zA-Z0-9\[\]\.]', '', jsonname)
             if paramtype.lower() == "input" or paramtype.lower() == "special":
                 DBG(30, "Adding parameter {} (type {}) to input parameters".format(techname, paramtype))
+                DBG(50, "valuetype is {}".format(valuetype))
+                DBG(50, "acadefault is {}".format(acadefault))
                 inparams.append(Param('input', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, acadefault, paramtype.lower() == "special", mapped, maxoccurs, jsonname, modify))
                 if techname not in stablenetblacklist:
                     stablenetparams[0].append(techname)

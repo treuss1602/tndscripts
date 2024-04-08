@@ -1,6 +1,6 @@
 {
   "factoryProductName": "IPVPN_CORE",
-  "version": "1.6",
+  "version": "1.7",
   "prerequisite": null,
   "inputParameters": [
     {
@@ -61,6 +61,34 @@
       "acadefault": "Any2Any",
       "cramerStorage": "Behaviour attribute of RI.",
       "jsonName": "vrfType"
+    },
+    {
+      "name": "VRF_IMPORT_ADDITIONAL_RT_SET",
+      "description": "VRF import additional route target set",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or multiple values separated by ;"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "6730:122334;6730:122335",
+      "cramerStorage": "IPVPN_CORE_GE"
+    },
+    {
+      "name": "VRF_EXPORT_ADDITIONAL_RT_SET",
+      "description": "VRF export additional  route target set",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or multiple values separated by ;"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "6730:122334;6730:122335",
+      "cramerStorage": "IPVPN_CORE_GE"
     },
     {
       "name": "VRF_SR_TE_COLOR",
@@ -354,7 +382,7 @@
       "modifyOperation": null,
       "exampleValue": "4200000000",
       "cramerStorage": "contains AS number assigned to node in Cramer (could be 16 or 32 bit ASN) - is attribute of EBH topology or MPLS Core topology, can be found via relation to node",
-      "jsonName": "nodeASN?"
+      "jsonName": "nodeASN"
     }
   ],
   "keyParameters": [
@@ -369,6 +397,8 @@
       "VRF_TYPE",
       "VRF_IMPORT_RT_SET",
       "VRF_EXPORT_RT_SET",
+      "VRF_IMPORT_ADDITIONAL_RT_SET",
+      "VRF_EXPORT_ADDITIONAL_RT_SET",
       "VRF_SR_TE_COLOR",
       "VRF_RD",
       "UCAST_IPV4_FLAG",

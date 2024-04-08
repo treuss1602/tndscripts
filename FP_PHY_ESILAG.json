@@ -24,7 +24,7 @@
       "dynamicallyMapped": false,
       "modifyOperation": null,
       "cramerStorage": "Logical port on the device",
-      "jsonName": "phyELAGIfName"
+      "jsonName": "esilagIfName"
     },
     {
       "name": "ESI_SERVICE_NAME",
@@ -250,7 +250,7 @@
       "modifyOperation": null,
       "exampleValue": "PHYELAG00000001",
       "cramerStorage": "PHY ESILAG Service",
-      "jsonName": "phyELAGRfsName"
+      "jsonName": "phyEsilagRfsName"
     },
     {
       "name": "PHYS_IF_NAME_<N>",
@@ -260,7 +260,7 @@
       "modifyOperation": null,
       "exampleValue": "GigabitEthernet0/1/0",
       "cramerStorage": "TND device's  port",
-      "jsonName": "phyIfDetails[].phyIfName"
+      "jsonName": "phyIfDetails[].physIfName"
     },
     {
       "name": "PHYS_IF_TYPE_<N>",
@@ -270,7 +270,7 @@
       "modifyOperation": null,
       "exampleValue": "100GBASE-LR1",
       "cramerStorage": "optical  module of the port",
-      "jsonName": "phyIfDetails[].phyIfType"
+      "jsonName": "phyIfDetails[].physIfType"
     },
     {
       "name": "PHYS_IF_CENTER_FREQUENCY_<N>",
@@ -283,7 +283,7 @@
       "modifyOperation": null,
       "exampleValue": "1540.25",
       "cramerStorage": "optical  module of the port",
-      "jsonName": "phyIfDetails[].phyIfCenterFrequency"
+      "jsonName": "phyIfDetails[].physIfCenterFrequency"
     },
     {
       "name": "PHYS_IF_TX_POWER_<N>",
@@ -296,7 +296,7 @@
       "modifyOperation": null,
       "exampleValue": "-5.00",
       "cramerStorage": "optical  module of the port",
-      "jsonName": "phyIfDetails[].phyIfTxPower"
+      "jsonName": "phyIfDetails[].physIfTxPower"
     },
     {
       "name": "PHYS_IDN_ACCESS_SERVICE_NAME_<N>",
@@ -306,7 +306,7 @@
       "modifyOperation": null,
       "exampleValue": "IDN001",
       "cramerStorage": "Service",
-      "jsonName": "phyIfDetails[].phyIdnAccessServiceName"
+      "jsonName": "phyIfDetails[].physIdnAccessServiceName"
     },
     {
       "name": "ACCESS_DEVICE_NAME_<N>",
@@ -336,7 +336,7 @@
       "modifyOperation": null,
       "exampleValue": "ILAG0000000001",
       "cramerStorage": "Service",
-      "jsonName": "elagServiceName"
+      "jsonName": "esilagServiceName"
     },
     {
       "name": "ESI_NUMBER",
@@ -355,7 +355,7 @@
       "modifyOperation": null,
       "exampleValue": "100000000",
       "cramerStorage": "optical  module of the port",
-      "jsonName": "phyIfSpeed"
+      "jsonName": "physIfSpeed"
     }
   ],
   "keyParameters": [
