@@ -325,7 +325,7 @@
       "modifyOperation": "ModifyCustomSnippets",
       "exampleValue": "Snippet1;Snippet2",
       "cramerStorage": "CONFIG_SNIPPET_GE (s)",
-      "jsonName": "configSnippetNames"
+      "jsonName": "custSnippetNames"
     },
     {
       "name": "IPV4_DHCP_RELAY_FLAG",

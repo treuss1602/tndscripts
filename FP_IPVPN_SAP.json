@@ -777,7 +777,7 @@
       "modifyOperation": "ModifyCustomSnippets",
       "exampleValue": "Snippet1;Snippet2;mcast_igmp_snippet;",
       "cramerStorage": "CONFIG_SNIPPET_GE (s)",
-      "jsonName": "configSnippetNames"
+      "jsonName": "custSnippetNames"
     },
     {
       "name": "PE_CE_EBGP_IPV4_PEERS",

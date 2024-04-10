@@ -382,7 +382,7 @@
       "modifyOperation": null,
       "exampleValue": "4200000000",
       "cramerStorage": "contains AS number assigned to node in Cramer (could be 16 or 32 bit ASN) - is attribute of EBH topology or MPLS Core topology, can be found via relation to node",
-      "jsonName": "nodeASN"
+      "jsonName": "nodeAsn"
     }
   ],
   "keyParameters": [
