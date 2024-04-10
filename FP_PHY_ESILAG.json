@@ -239,6 +239,33 @@
       "modifyOperation": "ModifyQoS",
       "exampleValue": "rewrite_config1",
       "cramerStorage": "PHY_ESILAG_GE"
+    },
+    {
+      "name": "CUST_SNIPPET_NAMES",
+      "description": "Custom configuration snippet(s) for configuring the PHY_ESILAG service",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or multiple values separated by ;"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyCustomSnippets",
+      "exampleValue": "Snippet1;Snippet2",
+      "cramerStorage": "CONFIG_SNIPPET_GE (s)",
+      "jsonName": "custSnippetNames"
+    },
+    {
+      "name": "PHYS_LLDP_FLAG",
+      "description": "If set to \"True\", LLDP is enabled on interface.",
+      "mandatory": true,
+      "valueType": "boolean",
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "false",
+      "acadefault": false,
+      "cramerStorage": "PHY_ESILAG_GE"
     }
   ],
   "cramerParameters": [
@@ -390,7 +417,9 @@
       "QOS_INGRESS_POLICING_PROFILE",
       "QOS_EGRESS_QOS_QUEUE_PROFILE",
       "QOS_EGRESS_QOS_POLICY",
-      "QOS_CUST_EGRESS_REWRITE_CONFIG"
+      "QOS_CUST_EGRESS_REWRITE_CONFIG",
+      "CUST_SNIPPET_NAMES",
+      "PHYS_LLDP_FLAG"
     ],
     "postNEI": [
       "PHY_ESILAG_RFS_NAME",
