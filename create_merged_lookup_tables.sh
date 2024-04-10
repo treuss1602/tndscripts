@@ -8,17 +8,17 @@ TABLES="LKT_TND_FACTORY_PRODUCT_PARAMETERS LKT_MANDATORY_PARAM_CHECK LKT_TND_ENU
 test -d cicd || mkdir cicd
 rm -f cicd/LKT*
 for fp in $FACTORY_PRODUCTS; do
-    ./create_lookup_tables.py -D0 "FP_${fp}.json" -d cicd
+    ./create_lookup_tables.py -D10 "FP_${fp}.json" -d cicd
     #test -d cicd/$fp || mkdir cicd/$fp
     #unzip -d cicd/$fp -o -q "${fp}.zip"
 done
 for comp in $COMPONENTS; do
-    ./create_lookup_tables.py -D0 "Component_${comp}.json" -d cicd
+    ./create_lookup_tables.py -D10 "Component_${comp}.json" -d cicd
     #test -d cicd/$comp || mkdir cicd/$comp
     #unzip -d cicd/$comp -o -q "${comp}.zip"
 done
 for cfs in $CFSES; do
-    ./create_lookup_tables.py -D0 "CFS_${cfs}.json" -d cicd
+    ./create_lookup_tables.py -D10 "CFS_${cfs}.json" -d cicd
     #test -d cicd/$cfs || mkdir cicd/$cfs
     #unzip -d cicd/$cfs -o -q "${cfs}.zip"
 done

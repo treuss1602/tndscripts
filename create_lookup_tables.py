@@ -32,6 +32,8 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
     ''' Create the lookup Tables '''
     prod = config.factoryProductName
     tables = []
+    MODIFY_OPS = ["ModifyParameter", "ModifyCustomSnippets", "ModifyQoS", "ModifySubnets"]
+    ALL_OPS = ["Create", "Delete"] + MODIFY_OPS
 
     # LKT_TND_FACTORY_PRODUCT_PARAMETERS
     lkt = LookupTable('LKT_TND_FACTORY_PRODUCT_PARAMETERS')
@@ -40,11 +42,12 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
                      joinparams([p for p in config.input_params if p.dynamically_mapped]), 
                      ";".join(config.key_params)+";"))
     lkt.add(LtEntry(prod+"#Delete", "{}_RFS_NAME;".format(prod), ";", ";".join(config.key_params)+";"))
-    for tr in {p.modifyOperation for p in config.input_params if p.modifyOperation is not None}:
-        lkt.add(LtEntry(prod+"#"+tr,
-                        joinparams([p for p in config.input_params if p.modifyOperation == tr]), 
-                        ";", 
-                        ";".join(config.key_params)+";"))
+    for tr in MODIFY_OPS:
+        if tr in {p.modifyOperation for p in config.input_params}:
+            lkt.add(LtEntry(prod+"#"+tr,
+                            joinparams([p for p in config.input_params if p.modifyOperation == tr]), 
+                            ";", 
+                            ";".join(config.key_params)+";"))
     tables.append(lkt)
 
     # LKT_MANDATORY_PARAM_CHECK
@@ -63,15 +66,16 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
             lkt.add(LtEntry(prod+"#Create#{}".format(p.name), ";".join(p.enumvalues)+";"))
         elif p.valuetype == "boolean":
             lkt.add(LtEntry(prod+"#Create#{}".format(p.name), "true;false;"))
-    for tr in {p.modifyOperation for p in config.input_params if p.modifyOperation is not None}:
-        params = [p for p in config.input_params if p.modifyOperation == tr and p.valuetype in ["enumerated", "boolean"]]
-        if params:
-            lkt.add(LtEntry(prod+"#"+tr+"#ENUM_PARAMS", ";".join([p.name for p in params])+";"))
-            for p in params:
-                if p.valuetype == "enumerated":
-                    lkt.add(LtEntry(prod+"#"+tr+"#{}".format(p.name), ";".join(p.enumvalues)+";"))
-                elif p.valuetype == "boolean":
-                    lkt.add(LtEntry(prod+"#"+tr+"#{}".format(p.name), "true;false;"))
+    for tr in MODIFY_OPS:
+        if tr in {p.modifyOperation for p in config.input_params}:
+            params = [p for p in config.input_params if p.modifyOperation == tr and p.valuetype in ["enumerated", "boolean"]]
+            if params:
+                lkt.add(LtEntry(prod+"#"+tr+"#ENUM_PARAMS", ";".join([p.name for p in params])+";"))
+                for p in params:
+                    if p.valuetype == "enumerated":
+                        lkt.add(LtEntry(prod+"#"+tr+"#{}".format(p.name), ";".join(p.enumvalues)+";"))
+                    elif p.valuetype == "boolean":
+                        lkt.add(LtEntry(prod+"#"+tr+"#{}".format(p.name), "true;false;"))
     tables.append(lkt)
 
     # LKT_TND_CRAMER_COMMAND_VALIDATION
@@ -172,6 +176,7 @@ def create_lookup_tables_for_composition(data):
             DBG(30, "Values are {}".format(values))
             lkt1.add(LtEntry(key, *values))
 
+    DISPLAY_PARAM_BLACKLIST = ["EVPN_EVI_RANGE"]
     lkt2 = LookupTable('LKT_TND_DISPLAY_PARAMETERS')
     for fpdata in data["paramMapping"]:
         fpname = fpdata["factoryProduct"]
@@ -180,12 +185,13 @@ def create_lookup_tables_for_composition(data):
                    "from": "{}_{}_RFS_NAME".format(component, fpname) if component else "{}_RFS_NAME".format(fpname)}
         for paramdata in [rfsname] + fpdata["parameters"]:
             pname, ptype = (paramdata[x] for x in ["name", "type"])
-            key = "#".join([cfs, component, fpname, "Display", pname])
-            DBG(30, "Key is {}".format(key))
-            if ptype == "input":
-                values = paramdata["from"]
-                DBG(30, "Values are {}".format(values))
-                lkt2.add(LtEntry(key, values))
+            if pname not in DISPLAY_PARAM_BLACKLIST:
+                key = "#".join([cfs, component, fpname, "Display", pname])
+                DBG(30, "Key is {}".format(key))
+                if ptype == "input":
+                    values = paramdata["from"]
+                    DBG(30, "Values are {}".format(values))
+                    lkt2.add(LtEntry(key, values))
 
     return [lkt1, lkt2]
 

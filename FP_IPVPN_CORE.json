@@ -425,6 +425,8 @@
       "VRF_TYPE",
       "VRF_IMPORT_RT_SET",
       "VRF_EXPORT_RT_SET",
+      "VRF_IMPORT_ADDITIONAL_RT_SET",
+      "VRF_EXPORT_ADDITIONAL_RT_SET",
       "VRF_SR_TE_COLOR",
       "VRF_RD",
       "UCAST_IPV4_FLAG",
