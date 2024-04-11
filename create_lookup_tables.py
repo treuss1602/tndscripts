@@ -54,8 +54,9 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
     lkt = LookupTable('LKT_MANDATORY_PARAM_CHECK')
     lkt.add(LtEntry('FACTORY_PRODUCT_'+prod+"#Create", "PAUSE_AFTER_PREPARE "+" ".join(p.name.replace('_<N>','_1') for p in config.input_params if p.mandatory)+" ", "ORDER_TYPE IL_REQ_GROUP ORDER_EXTERNAL_ORDER_ID "))
     lkt.add(LtEntry('FACTORY_PRODUCT_'+prod+"#Delete", "PAUSE_AFTER_PREPARE {}_RFS_NAME ".format(prod), "ORDER_TYPE IL_REQ_GROUP ORDER_EXTERNAL_ORDER_ID "))
-    for tr in {p.modifyOperation for p in config.input_params if p.modifyOperation is not None}:
-        lkt.add(LtEntry('FACTORY_PRODUCT_'+prod+"#"+tr, "PAUSE_AFTER_PREPARE {}_RFS_NAME ".format(prod), "ORDER_TYPE IL_REQ_GROUP ORDER_EXTERNAL_ORDER_ID "))
+    for tr in MODIFY_OPS:
+        if tr in {p.modifyOperation for p in config.input_params}:
+            lkt.add(LtEntry('FACTORY_PRODUCT_'+prod+"#"+tr, "PAUSE_AFTER_PREPARE {}_RFS_NAME ".format(prod), "ORDER_TYPE IL_REQ_GROUP ORDER_EXTERNAL_ORDER_ID "))
     tables.append(lkt)
 
     # LKT_TND_ENUM_PARAM_CHECK
@@ -73,9 +74,9 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
                 lkt.add(LtEntry(prod+"#"+tr+"#ENUM_PARAMS", ";".join([p.name for p in params])+";"))
                 for p in params:
                     if p.valuetype == "enumerated":
-                        lkt.add(LtEntry(prod+"#"+tr+"#{}".format(p.name), ";".join(p.enumvalues)+";"))
+                        lkt.add(LtEntry(prod+"#"+tr+"#{}".format(p.name), ";".join(p.enumvalues)+(";" if p.mandatory else ";__NULL__;")))
                     elif p.valuetype == "boolean":
-                        lkt.add(LtEntry(prod+"#"+tr+"#{}".format(p.name), "true;false;"))
+                        lkt.add(LtEntry(prod+"#"+tr+"#{}".format(p.name), "true;false"+(";" if p.mandatory else ";__NULL__;")))
     tables.append(lkt)
 
     # LKT_TND_CRAMER_COMMAND_VALIDATION
@@ -143,7 +144,7 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
                     "ModifyCustomSnippets": "modify_rfs_custom_snippets",
                     "ModifyQoS": "modify_rfs_qos",
                     "ModifySubnets": "modify_rfs_ip_subnets"}
-    supported_transactions = {"Create", "Detele"}.union({p.modifyOperation for p in config.input_params})
+    supported_transactions = {"Create", "Delete"}.union({p.modifyOperation for p in config.input_params})
 
     lkt = LookupTable('LKT_TND_STABLENET')
     for trans, orderdesc in TRANSACTIONS.items():
