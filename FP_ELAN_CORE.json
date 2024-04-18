@@ -30,7 +30,7 @@
       "dynamicallyMapped": false,
       "modifyOperation": null,
       "exampleValue": "20400->20599",
-      "cramerStorage": "Number range"
+      "cramerStorage": "TRANSIENT"
     },
     {
       "name": "L2_VPN_NAME",
@@ -114,14 +114,14 @@
       "valueType": "enumerated",
       "valueTypeDetails": {
         "enumValues": [
-          "SR-TE color1",
-          "SR-TE color2"
+          "0:128",
+          "0:130"
         ]
       },
       "special": false,
       "dynamicallyMapped": false,
       "modifyOperation": "ModifyParameter",
-      "exampleValue": "SR-TE color1",
+      "exampleValue": "0:130",
       "cramerStorage": "ELAN_CORE_GE"
     },
     {

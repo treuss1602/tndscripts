@@ -22,8 +22,8 @@ def read_data_from_sheet(sheet, col1, col2, cfsname, componentname, fpname):
 
     rv = []
     for row in range(STARTROW, 300):
-        cellvalues = [sheet.cell(row=row, column=col).value for col in [1, col1, col2]]
-        techname, paramtype, paramdetails = (x.strip() if isinstance(x, str) else x for x in cellvalues)
+        cellvalues = [sheet.cell(row=row, column=col).value for col in [1, 3, 4, col1, col2]]
+        techname, valuetype, valuedetails, paramtype, paramdetails = (x.strip() if isinstance(x, str) else x for x in cellvalues)
         if techname == "Version": # avoid reading version history
             break
         if sheet.cell(row=row, column=1).font.strike:
@@ -43,6 +43,10 @@ def read_data_from_sheet(sheet, col1, col2, cfsname, componentname, fpname):
                         input_param = "{}_{}".format(componentname, techname)
                 rv.append({"name": techname, "type": "input", "from": input_param})
             elif paramtype == 'static value':
+                if valuetype == "Enumerated" and paramdetails not in [x.strip() for x in valuedetails.split(";")]:
+                    print("Warning: Value '{}' for parameter {} is not a valid enum value.".format(paramdetails, techname))
+                if valuetype == "Integer" and not isinstance(paramdetails, int):
+                    print("Warning: Value '{}' for parameter {} is not a valid integer.".format(paramdetails, techname))
                 rv.append({"name": techname, "type": "static", "value": paramdetails})
             elif paramtype == 'static "null"':
                 rv.append({"name": techname, "type": "static", "value": None})
@@ -59,7 +63,6 @@ def read_data_from_sheet(sheet, col1, col2, cfsname, componentname, fpname):
 def read_data_from_excel(xlfile, cfsname, componentname):
     ''' Read and return the data from the correct sheet in the excel file.'''
     PRODNAME_CELL = 'B1'
-    ACTION_CELL = 'B3'
     VERSION_CELL = 'B4'
 
     HEADERROW = 5 # Row that contains the Component/CFS names

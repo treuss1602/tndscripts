@@ -9,7 +9,12 @@
         {
           "name": "L3_VPN_NAME",
           "type": "static",
-          "value": "CMTS_INET"
+          "value": "CMTS_ABR_MC"
+        },
+        {
+          "name": "VRF_NAME",
+          "type": "static",
+          "value": "CMTS_ABR_MC"
         },
         {
           "name": "VRF_TYPE",
@@ -19,7 +24,7 @@
         {
           "name": "VRF_SR_TE_COLOR",
           "type": "static",
-          "value": "RBH-SR-TE color1"
+          "value": null
         },
         {
           "name": "UCAST_IPV4_FLAG",
@@ -39,17 +44,17 @@
         {
           "name": "MCAST_IPV4_FLAG",
           "type": "static",
-          "value": "false"
+          "value": "true"
         },
         {
           "name": "MCAST_IPV4_SSM_GROUPS",
           "type": "static",
-          "value": "232.0.0.0/24"
+          "value": "232.0.0.0/24;234.0.0.0/16;239.232.0.0/16;"
         },
         {
           "name": "MCAST_IPV4_SSM_MAP_SOURCES",
           "type": "static",
-          "value": "232.0.0.1"
+          "value": null
         },
         {
           "name": "MCAST_IPV6_FLAG",
@@ -64,12 +69,12 @@
         {
           "name": "IPV4_DHCP_SERVER_VRF",
           "type": "static",
-          "value": "DHCP_VRF_dummy"
+          "value": null
         },
         {
           "name": "IPV4_DHCP_SERVER_IP_ADDRESSES",
           "type": "static",
-          "value": "10.0.0.1"
+          "value": null
         },
         {
           "name": "IPV6_DHCP_RELAY_FLAG",
@@ -79,12 +84,12 @@
         {
           "name": "IPV6_DHCP_SERVER_VRF",
           "type": "static",
-          "value": "DHCP_VRF_dummy"
+          "value": null
         },
         {
           "name": "IPV6_DHCP_SERVER_IP_ADDRESSES",
           "type": "static",
-          "value": "ff06:0:0:0:0:0:0:c3"
+          "value": null
         },
         {
           "name": "MANAGED_SR_DHCP_FLAG",
@@ -95,6 +100,11 @@
           "name": "CUST_SNIPPET_NAMES",
           "type": "input",
           "from": "RBH_CMTS_ABR_MC_IPVPN_CORE_CUST_SNIPPET_NAMES"
+        },
+        {
+          "name": "DHCP_RELAY_LOOPBACK_ID",
+          "type": "static",
+          "value": null
         }
       ]
     },
@@ -105,7 +115,7 @@
         {
           "name": "LOGICAL_SUB_IF_ID",
           "type": "static",
-          "value": 9003
+          "value": 1200
         },
         {
           "name": "VPN_ACCESS_TYPE",
@@ -130,7 +140,7 @@
         {
           "name": "OUTER_VLAN_ID",
           "type": "static",
-          "value": "untagged"
+          "value": 120
         },
         {
           "name": "OUTER_TPI",
@@ -140,7 +150,7 @@
         {
           "name": "SERVICE_MTU",
           "type": "static",
-          "value": 9003
+          "value": 1518
         },
         {
           "name": "IPVPN_CORE_RFS_NAME",
@@ -175,12 +185,12 @@
         {
           "name": "INGRESS_L3_ACL_NAME",
           "type": "static",
-          "value": "RBH_FILTER_INPUT_EDGE"
+          "value": null
         },
         {
           "name": "EGRESS_L3_ACL_NAME",
           "type": "static",
-          "value": "RBH_FILTER_OUTPUT_EDGE"
+          "value": null
         },
         {
           "name": "IPV4_MCAST_IGMP_FLAG",
@@ -190,7 +200,7 @@
         {
           "name": "IPV4_MCAST_IGMP_VERSION",
           "type": "static",
-          "value": null
+          "value": 3
         },
         {
           "name": "IPV4_MCAST_PIM_FLAG",
@@ -225,27 +235,27 @@
         {
           "name": "QOS_INGRESS_CLASSIFICATION_PROFILE",
           "type": "static",
-          "value": "INGRESS_QOS_CLASSIFICATION_1"
+          "value": "ACCESS_IN_CLASS_DSCP"
         },
         {
           "name": "QOS_INGRESS_POLICING_PROFILE",
           "type": "static",
-          "value": "ING_POLICING_PROFILE2"
+          "value": null
         },
         {
           "name": "QOS_EGRESS_QOS_QUEUE_PROFILE",
           "type": "static",
-          "value": "EGRESS_QOS_QUEUE_PROFILE1"
+          "value": "NOQOS"
         },
         {
           "name": "QOS_EGRESS_QOS_POLICY",
           "type": "static",
-          "value": "CORE_MPLS"
+          "value": null
         },
         {
           "name": "QOS_CUST_EGRESS_REWRITE_CONFIG",
           "type": "static",
-          "value": "rewrite_config1"
+          "value": null
         },
         {
           "name": "IPV4_STATIC_ROUTE_<N>",
@@ -265,12 +275,12 @@
         {
           "name": "VRRP_IPV4_PRIORITY",
           "type": "static",
-          "value": 1
+          "value": null
         },
         {
           "name": "VRRP_IPV4_VIRTUAL_IP",
           "type": "static",
-          "value": "10.20.30.2;10.20.30.3"
+          "value": null
         },
         {
           "name": "VRRP_IPV6_FLAG",
@@ -280,22 +290,22 @@
         {
           "name": "VRRP_IPV6_PRIORITY",
           "type": "static",
-          "value": 1
+          "value": null
         },
         {
           "name": "VRRP_IPV6_VIRTUAL_IP",
           "type": "static",
-          "value": "2001:0db7:;2001:0db8:"
+          "value": null
         },
         {
           "name": "PE_CE_EBGP_FLAG",
           "type": "static",
-          "value": "false"
+          "value": "true"
         },
         {
           "name": "PE_CE_EBGP_AUTHENTICATION_KEY",
           "type": "static",
-          "value": "abb$abc"
+          "value": "ABC"
         },
         {
           "name": "PE_CE_EBGP_PEER_ASN",
@@ -320,7 +330,7 @@
         {
           "name": "PE_CE_EBGP_MAIN_BACKUP_SELECTOR",
           "type": "static",
-          "value": "false"
+          "value": "true"
         },
         {
           "name": "PE_CE_EBGP_IPV4_INGRESS_PREFIX_FILTERS_ALLOWED",
@@ -379,13 +389,13 @@
         },
         {
           "name": "PE_CE_EBGP_IPV6_PEERS",
-          "type": "input",
-          "from": "RBH_CMTS_ABR_MC_PE_CE_EBGP_IPV6_PEERS"
+          "type": "static",
+          "value": null
         },
         {
           "name": "PE_CE_EBGP_LOCAL_ASN",
           "type": "static",
-          "value": null
+          "value": 6730
         }
       ]
     }

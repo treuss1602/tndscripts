@@ -97,8 +97,8 @@
       "valueType": "enumerated",
       "valueTypeDetails": {
         "enumValues": [
-          "SR-TE color1",
-          "SR-TE color2"
+          "0:130",
+          "0:128"
         ]
       },
       "special": false,

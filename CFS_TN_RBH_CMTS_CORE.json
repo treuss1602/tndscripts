@@ -13,7 +13,7 @@
         {
           "name": "PHYS_LINK_UP_DELAY",
           "type": "static",
-          "value": 0
+          "value": 6000
         },
         {
           "name": "PHYS_LINK_FLAP_DAMPENING_FLAG",
@@ -38,7 +38,7 @@
         {
           "name": "ILAG_IF_MTU",
           "type": "static",
-          "value": 9188
+          "value": 1518
         },
         {
           "name": "ILAG_SYNCE_ENABLED",
@@ -53,7 +53,7 @@
         {
           "name": "ILAG_PTP_PRIO",
           "type": "static",
-          "value": 255
+          "value": null
         },
         {
           "name": "ILAG_MAC_SEC",
@@ -63,27 +63,27 @@
         {
           "name": "QOS_INGRESS_CLASSIFICATION_PROFILE",
           "type": "static",
-          "value": "NGRESS_QOS_CLASSIFICATION_1"
+          "value": "ACCESS_IN_CLASS_DSCP"
         },
         {
           "name": "QOS_INGRESS_POLICING_PROFILE",
           "type": "static",
-          "value": "ING_POLICING_PROFILE2"
+          "value": null
         },
         {
           "name": "QOS_EGRESS_QOS_QUEUE_PROFILE",
           "type": "static",
-          "value": "EGRESS_QOS_QUEUE_PROFILE1"
+          "value": "ACCESS_OUT_QUEUE_CMTS_CORE"
         },
         {
           "name": "QOS_EGRESS_QOS_POLICY",
           "type": "static",
-          "value": "CORE_MPLS"
+          "value": null
         },
         {
           "name": "QOS_CUST_EGRESS_REWRITE_CONFIG",
           "type": "static",
-          "value": "rewrite_config1"
+          "value": null
         },
         {
           "name": "CUST_SNIPPET_NAMES",

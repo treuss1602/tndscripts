@@ -154,15 +154,16 @@
       "valueType": "enumerated",
       "valueTypeDetails": {
         "enumValues": [
-          "INGRESS_QOS_CLASSIFICATION_1",
-          "INGRESS_QOS_CLASSIFICATION_2",
-          "INGRESS_QOS_CLASSIFICATION_3"
+          "ACCESS_IN_CLASS_DSCP",
+          "ACCESS_IN_CLASS_8021P",
+          "ACCESS_IN_CLASS_IPP",
+          "ACCESS_IN_CLASS_UNTRUST"
         ]
       },
       "special": false,
       "dynamicallyMapped": false,
       "modifyOperation": "ModifyQoS",
-      "exampleValue": "INGRESS_QOS_CLASSIFICATION_1",
+      "exampleValue": "ACCESS_IN_CLASS_DSCP",
       "cramerStorage": "PHY_ESILAG_GE"
     },
     {
@@ -191,17 +192,16 @@
       "valueType": "enumerated",
       "valueTypeDetails": {
         "enumValues": [
-          "EGRESS_QOS_QUEUE_PROFILE1",
-          "EGRESS_QOS_QUEUE_PROFILE2",
-          "EGRESS_QOS_QUEUE_PROFILE3",
-          "EGRESS_BESTEFFORT",
-          "NOQOS"
+          "ACCESS_OUT_QUEUE_RPD_ACCESS",
+          "ACCESS_OUT_QUEUE_CMTS_ACCESS",
+          "ACCESS_OUT_QUEUE_CMTS_CORE",
+          "EGRESS_BESTEFFORT"
         ]
       },
       "special": false,
       "dynamicallyMapped": false,
       "modifyOperation": "ModifyQoS",
-      "exampleValue": "EGRESS_QOS_QUEUE_PROFILE1",
+      "exampleValue": "ACCESS_OUT_QUEUE_RPD_ACCESS",
       "cramerStorage": "PHY_ESILAG_GE"
     },
     {

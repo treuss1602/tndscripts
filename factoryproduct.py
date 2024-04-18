@@ -66,7 +66,10 @@ class Param:
         self.mandatory = mandatory
         if self.valuetype == "boolean":
             self.examplevalue = "true" if (isinstance(examplevalue, bool) and examplevalue) or examplevalue.lower().strip() == "true" else "false"
-            self.acadefault =  acadefault if isinstance(acadefault, bool) else acadefault.lower().strip() == "true"
+            if acadefault is None:
+                self.acadefault = False if self.mandatory else None
+            else:
+                self.acadefault = acadefault if isinstance(acadefault, bool) else acadefault.lower().strip() == "true"
         elif self.valuetype == "integer":
             self.examplevalue = str(examplevalue) if examplevalue else None;
             self.acadefault = int(acadefault) if acadefault else None;
