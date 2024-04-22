@@ -410,8 +410,8 @@
         },
         {
           "name": "L2_VPN_NAME",
-          "type": "static",
-          "value": "RBH_CMTS_L2"
+          "type": "input",
+          "from": "RBH_CMTS_L2_VPN_NAME"
         },
         {
           "name": "EVI_NAME",
