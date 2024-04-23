@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 import argparse
-from datetime import datetime
 from debug import DBG, set_debug_level
 from factoryproduct import FactoryProductConfiguration, Param
 
@@ -113,7 +112,7 @@ def print_confluence_markup_header(config, supported_modify_ops):
     print()
 
 def print_confluence_html_header(config, supported_modify_ops):
-    print('<p>NBI Specification for {}, based on version {} of the Parameter Excel Sheet. Generated {}.</p>'.format(config.factoryProductName, config.version, datetime.today().strftime("%Y-%m-%d %H:%M:%S")))
+    print('<p>NBI Specification for {}, based on version {} of the Parameter Excel Sheet.</p>'.format(config.factoryProductName, config.version))
     print('<p>Supported actions:</p>')
     print('<ul>')
     for (action, title) in [("Create", "Create"), ("Delete", "Delete")] + supported_modify_ops + [("Display", "Display")]:
