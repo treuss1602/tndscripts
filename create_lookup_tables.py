@@ -61,22 +61,26 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
 
     # LKT_TND_ENUM_PARAM_CHECK
     lkt = LookupTable('LKT_TND_ENUM_PARAM_CHECK')
-    lkt.add(LtEntry(prod+"#Create#ENUM_PARAMS", ";".join(p.name for p in config.input_params if p.valuetype in ["enumerated", "boolean"])+";"))
+    lkt.add(LtEntry(prod+"#Create#ENUM_PARAMS", ";".join(p.name for p in config.input_params if p.valuetype in ["enumerated", "boolean"])+";PAUSE_AFTER_PREPARE;"))
     for p in config.input_params:
         if p.valuetype == "enumerated":
             lkt.add(LtEntry(prod+"#Create#{}".format(p.name), ";".join(p.enumvalues)+";"))
         elif p.valuetype == "boolean":
             lkt.add(LtEntry(prod+"#Create#{}".format(p.name), "true;false;"))
+    lkt.add(LtEntry(prod+"#Create#PAUSE_AFTER_PREPARE", "true;false;"))
+    lkt.add(LtEntry(prod+"#Delete#ENUM_PARAMS", "PAUSE_AFTER_PREPARE;"))
+    lkt.add(LtEntry(prod+"#Delete#PAUSE_AFTER_PREPARE", "true;false;"))
     for tr in MODIFY_OPS:
         if tr in {p.modifyOperation for p in config.input_params}:
             params = [p for p in config.input_params if p.modifyOperation == tr and p.valuetype in ["enumerated", "boolean"]]
             if params:
-                lkt.add(LtEntry(prod+"#"+tr+"#ENUM_PARAMS", ";".join([p.name for p in params])+";"))
+                lkt.add(LtEntry(prod+"#"+tr+"#ENUM_PARAMS", ";".join([p.name for p in params])+";PAUSE_AFTER_PREPARE;"))
                 for p in params:
                     if p.valuetype == "enumerated":
                         lkt.add(LtEntry(prod+"#"+tr+"#{}".format(p.name), ";".join(p.enumvalues)+(";" if p.mandatory else ";__NULL__;")))
                     elif p.valuetype == "boolean":
                         lkt.add(LtEntry(prod+"#"+tr+"#{}".format(p.name), "true;false"+(";" if p.mandatory else ";__NULL__;")))
+                lkt.add(LtEntry(prod+"#"+tr+"#PAUSE_AFTER_PREPARE", "true;false;"))
     tables.append(lkt)
 
     # LKT_TND_CRAMER_COMMAND_VALIDATION

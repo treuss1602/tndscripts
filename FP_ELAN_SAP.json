@@ -370,6 +370,7 @@
       "mandatory": true,
       "valueType": "string",
       "modifyOperation": null,
+      "exampleValue": "ELANSAP000000001",
       "cramerStorage": "Service",
       "jsonName": "elanSAPRFSName"
     },
