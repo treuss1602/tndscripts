@@ -4,11 +4,14 @@ import argparse
 from debug import DBG, set_debug_level
 from factoryproduct import FactoryProductConfiguration, Param
 
+def quote(s):
+    return str(s).replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;')
+
 def tableheader(*values):
-    return '<tr>' + ''.join('<th class="confluenceTh"><p>'+str(s)+'</p></th>' for s in values) + '</tr>'
+    return '<tr>' + ''.join('<th class="confluenceTh"><p>'+quote(s)+'</p></th>' for s in values) + '</tr>'
 
 def tablerow(*values):
-    return '<tr>' + ''.join('<td class="confluenceTd"><p>'+str(s)+'</p></td>' for s in values) + '</tr>'
+    return '<tr>' + ''.join('<td class="confluenceTd"><p>'+quote(s)+'</p></td>' for s in values) + '</tr>'
 
 def create_confluence_html(heading, name, action, inputparams, outputparams):
     print('<h2 id="FactoryProduct{}-{}">{}</h2>'.format(name, heading.replace(" ",""), heading))
