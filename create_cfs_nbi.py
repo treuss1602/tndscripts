@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 import argparse
 import json
-from random import randint
 
 from factoryproduct import FactoryProductConfiguration, Param
 from debug import DBG, set_debug_level
@@ -16,9 +15,9 @@ def get_sample_rfs_name(fpname):
                 #"ELAN_SAP": "ELANSAP"
                 }
     try:
-        return "{}{:0>9d}".format(prefixes[fpname], randint(1,100000))
+        return "{}000000001".format(prefixes[fpname])
     except KeyError:
-        return "{}{:0>9d}".format(fpname.replace("_",""), randint(1,100000))
+        return "{}000000001".format(fpname.replace("_",""))
 
 def quote(s):
     return str(s).replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;')
@@ -77,7 +76,7 @@ def create_confluence_html(cfsname, input_parameters, display_parameters, fpvers
 
 
 def create_confluence_table(cfsname, input_parameters, display_parameters, header=True, fpversions=None):
-    samplename = "{}{:0>9d}".format(cfsname, randint(1, 100000))
+    samplename = "{}000000001".format(cfsname)
     if header:
         print("NBI Specification for {}, based on the following factory product versions in the Parameter Excel Sheet.".format(cfsname))
         for fpname, fpversion in fpversions.items():
