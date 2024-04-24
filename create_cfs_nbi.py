@@ -36,9 +36,9 @@ def tablerow(*values, alignments=None):
         return '<tr>' + ''.join('<td class="confluenceTd"{}><p>'.format(' style="text-align:{};"'.format(a) if a else '')+quote(s)+'</p></td>' for s,a in zip(values, alignments)) + '</tr>'
 
 def create_confluence_html_section(heading, name, action, inputparams, outputparams):
-    IWIDTHS = [350, 90, 340, 250, 70]
+    IWIDTHS = [400, 90, 340, 300, 70]
     IALIGNS = [None, None, None, None, "center"]
-    OWIDTHS = [350, 500, 250]
+    OWIDTHS = [400, 500, 300]
     print('<h2 id="CFS{}-{}">{}</h2>'.format(name, heading.replace(" ",""), heading))
     print('<p>Below order parameters are applicable for orders with LINE_x_NAME=PRODUCT_{} and LINE_x_ACTION={}</p>'.format(name, action))
     print('<div class="table-wrap"><table class="confluenceTable"><tbody>')
@@ -170,4 +170,3 @@ if __name__ == "__main__":
         create_confluence_html(cfsname, [(p[0], *paramdetails[p[0]]) for p in inputparams], [(p[0], *paramdetails[p[0]]) for p in displayparams], fpversions)
     else:
         create_confluence_table(cfsname, [(p[0], *paramdetails[p[0]]) for p in inputparams], [(p[0], *paramdetails[p[0]]) for p in displayparams], True, fpversions)
-
