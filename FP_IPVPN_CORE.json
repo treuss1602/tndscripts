@@ -1,6 +1,6 @@
 {
   "factoryProductName": "IPVPN_CORE",
-  "version": "1.8",
+  "version": "1.9",
   "prerequisite": null,
   "inputParameters": [
     {
@@ -235,7 +235,7 @@
       "special": false,
       "dynamicallyMapped": false,
       "modifyOperation": "ModifyParameter",
-      "exampleValue": "10.0.0.1",
+      "exampleValue": "62.2.31.74;62.2.31.75;62.2.3.71",
       "cramerStorage": "IPVPN_CORE_GE"
     },
     {
