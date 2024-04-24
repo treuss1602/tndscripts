@@ -1,6 +1,6 @@
 {
   "factoryProductName": "IPVPN_SAP",
-  "version": "2.5",
+  "version": "2.6",
   "prerequisite": {
     "product": "IPVPN_CORE",
     "referenceParameter": "IPVPN_CORE_RFS_NAME"
@@ -77,7 +77,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "modifyOperation": "TBD",
+      "modifyOperation": "ModifyVlan",
       "exampleValue": "4000",
       "cramerStorage": "VLAN number",
       "jsonName": "innerVLANId"
@@ -107,7 +107,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "modifyOperation": "TBD",
+      "modifyOperation": "ModifyVlan",
       "exampleValue": "3000",
       "cramerStorage": "VLAN number",
       "jsonName": "outerVLANId"

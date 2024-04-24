@@ -153,7 +153,7 @@ if __name__ == "__main__":
                  ("ModifyCustomSnippets", "Modify Custom Snippets"),
                  ("ModifyQoS", "Modify QoS"),
                  ("ModifySubnets", "Modify IP Subnets"),
-                 ("ModifyVLAN", "Modify VLAN")]
+                 ("ModifyVlan", "Modify VLAN")]
 
     for f in args.filename:
         DBG(10, "Reading json file '{}'".format(f))

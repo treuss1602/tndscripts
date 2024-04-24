@@ -1,6 +1,6 @@
 {
   "factoryProductName": "ELAN_SAP",
-  "version": "0.17",
+  "version": "0.18",
   "prerequisite": {
     "product": "ELAN_CORE",
     "referenceParameter": "ELAN_CORE_RFS_NAME"
@@ -101,7 +101,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "modifyOperation": "TBD",
+      "modifyOperation": "ModifyVlan",
       "exampleValue": "4000",
       "cramerStorage": "VLAN number",
       "jsonName": "innerVLANId"
@@ -131,7 +131,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "modifyOperation": "TBD",
+      "modifyOperation": "ModifyVlan",
       "exampleValue": "3000",
       "cramerStorage": "VLAN number",
       "jsonName": "outerVLANId"

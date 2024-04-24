@@ -110,7 +110,7 @@
     },
     {
       "factoryProduct": "IPVPN_SAP",
-      "factoryProductVersion": "2.5",
+      "factoryProductVersion": "2.6",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
