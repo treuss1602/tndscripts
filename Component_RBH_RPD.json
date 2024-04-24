@@ -4,7 +4,7 @@
   "paramMapping": [
     {
       "factoryProduct": "IPVPN_CORE",
-      "factoryProductVersion": "1.8",
+      "factoryProductVersion": "1.9",
       "parameters": [
         {
           "name": "L3_VPN_NAME",
@@ -49,7 +49,7 @@
         {
           "name": "MCAST_IPV4_SSM_GROUPS",
           "type": "static",
-          "value": "232.0.0.0/24;234.0.0.0/16;239.232.0.0/16"
+          "value": "232.0.0.0/8;233.0.0.0/8;234.0.0.0/8"
         },
         {
           "name": "MCAST_IPV4_SSM_MAP_SOURCES",
@@ -73,8 +73,8 @@
         },
         {
           "name": "IPV4_DHCP_SERVER_IP_ADDRESSES",
-          "type": "static",
-          "value": "1.2.3.4"
+          "type": "input",
+          "from": "RBH_RPD_IPV4_DHCP_SERVER_IP_ADDRESSES"
         },
         {
           "name": "IPV6_DHCP_RELAY_FLAG",

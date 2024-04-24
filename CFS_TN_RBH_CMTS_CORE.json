@@ -93,7 +93,7 @@
         {
           "name": "PHYS_LACP_KEY",
           "type": "static",
-          "value": "AbCd1234"
+          "value": 65123
         },
         {
           "name": "PHYS_LLDP_FLAG",

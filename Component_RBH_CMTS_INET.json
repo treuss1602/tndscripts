@@ -4,7 +4,7 @@
   "paramMapping": [
     {
       "factoryProduct": "IPVPN_CORE",
-      "factoryProductVersion": "1.8",
+      "factoryProductVersion": "1.9",
       "parameters": [
         {
           "name": "L3_VPN_NAME",
@@ -304,8 +304,8 @@
         },
         {
           "name": "PE_CE_EBGP_AUTHENTICATION_KEY",
-          "type": "static",
-          "value": "ABC"
+          "type": "input",
+          "from": "RBH_CMTS_INET_PE_CE_EBGP_AUTHENTICATION_KEY"
         },
         {
           "name": "PE_CE_EBGP_PEER_ASN",

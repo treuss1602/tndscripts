@@ -4,7 +4,7 @@
   "paramMapping": [
     {
       "factoryProduct": "IPVPN_CORE",
-      "factoryProductVersion": "1.8",
+      "factoryProductVersion": "1.9",
       "parameters": [
         {
           "name": "L3_VPN_NAME",
@@ -39,17 +39,17 @@
         {
           "name": "MCAST_SITE_TYPE",
           "type": "static",
-          "value": "receiver"
+          "value": null
         },
         {
           "name": "MCAST_IPV4_FLAG",
           "type": "static",
-          "value": "true"
+          "value": "false"
         },
         {
           "name": "MCAST_IPV4_SSM_GROUPS",
           "type": "static",
-          "value": "232.0.0.0/24;234.0.0.0/16;239.232.0.0/16"
+          "value": null
         },
         {
           "name": "MCAST_IPV4_SSM_MAP_SOURCES",
