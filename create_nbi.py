@@ -97,7 +97,11 @@ def create_confluence_table_modify(productconfig: FactoryProductConfiguration, a
                 desc += '\nIf the parameter is to be cleared, the string "{}" is sent as value.'.format(NULL)
             example = param.examplevalue
             if not param.mandatory:
-                example = example + '\nor\n{}'.format(NULL) if example else NULL
+                if html:
+                    example = example + '<br/>or<br/>{}'.format(NULL) if example else NULL
+                else:
+                    example = example + '\nor\n{}'.format(NULL) if example else NULL
+
             inparams.append(Param("input", param.name, desc, "String", "", False, example))
     if html:
         create_confluence_html(title, productconfig.factoryProductName, action, inparams, [])
