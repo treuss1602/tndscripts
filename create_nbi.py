@@ -4,7 +4,7 @@ from debug import DBG, set_debug_level
 from factoryproduct import FactoryProductConfiguration, Param
 
 def quote(s):
-    return str(s).replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;')
+    return str(s).replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;').replace('\n', '<br/>')
 
 def tableheader(*values, widths=None):
     if widths is None:
@@ -97,10 +97,7 @@ def create_confluence_table_modify(productconfig: FactoryProductConfiguration, a
                 desc += '\nIf the parameter is to be cleared, the string "{}" is sent as value.'.format(NULL)
             example = param.examplevalue
             if not param.mandatory:
-                if html:
-                    example = example + '<br/>or<br/>{}'.format(NULL) if example else NULL
-                else:
-                    example = example + '\nor\n{}'.format(NULL) if example else NULL
+                example = example + '\nor\n{}'.format(NULL) if example else NULL
 
             inparams.append(Param("input", param.name, desc, "String", "", False, example))
     if html:
