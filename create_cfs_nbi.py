@@ -2,17 +2,14 @@
 import argparse
 import json
 
-from factoryproduct import FactoryProductConfiguration, Param
+from factoryproduct import FactoryProductConfiguration
 from debug import DBG, set_debug_level
 
 def get_sample_rfs_name(fpname):
     prefixes = {"PHY_SINGLE_LINK": "PHYSL",
-                #"PHY_ILAG": "PHYILAG",
                 "PHY_ESILAG": "PHYELAG",
                 "IPVPN_CORE": "IVC",
-                #"IPVPN_SAP": "IPVPNSAP",
-                "ELAN_CORE": "ELANC",
-                #"ELAN_SAP": "ELANSAP"
+                "ELAN_CORE": "ELANC"
                 }
     try:
         return "{}000000001".format(prefixes[fpname])
