@@ -86,6 +86,7 @@ def create_confluence_table_delete(productconfig: FactoryProductConfiguration, h
                         [])
 
 def create_confluence_table_modify(productconfig: FactoryProductConfiguration, action: str, title: str, headers=True, html=False):
+    NULL = '__NULL__' if html else r'\_\_NULL\_\_'
     rfsnameparam = "{}_RFS_NAME".format(productconfig.factoryProductName)
     rfsnameexample = productconfig.find_return_param(rfsnameparam).examplevalue
     inparams = [Param("input", rfsnameparam, "The Cramer RFS Name of the service to be modified.", "String", "", True, rfsnameexample)]
@@ -93,10 +94,10 @@ def create_confluence_table_modify(productconfig: FactoryProductConfiguration, a
         if param.modifyOperation == action:
             desc = "New value for the parameter. If the parameter is not provided, it will remain unchanged."
             if not param.mandatory:
-                desc += '\nIf the parameter is to be cleared, the string "\\_\\_NULL\\_\\_" is sent as value.'
+                desc += '\nIf the parameter is to be cleared, the string "{}" is sent as value.'.format(NULL)
             example = param.examplevalue
             if not param.mandatory:
-                example = example + '\nor\n\\_\\_NULL\\_\\_' if example else "\\_\\_NULL\\_\\_"
+                example = example + '\nor\n{}'.format(NULL) if example else NULL
             inparams.append(Param("input", param.name, desc, "String", "", False, example))
     if html:
         create_confluence_html(title, productconfig.factoryProductName, action, inparams, [])
