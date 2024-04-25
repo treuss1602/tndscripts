@@ -32,7 +32,7 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
     ''' Create the lookup Tables '''
     prod = config.factoryProductName
     tables = []
-    MODIFY_OPS = ["ModifyParameter", "ModifyCustomSnippets", "ModifyQoS", "ModifySubnets"]
+    MODIFY_OPS = ["ModifyParameter", "ModifyCustomSnippets", "ModifyQoS", "ModifySubnets", "ModifyVlan"]
     ALL_OPS = ["Create", "Delete"] + MODIFY_OPS
 
     # LKT_TND_FACTORY_PRODUCT_PARAMETERS
@@ -148,7 +148,7 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
                     "ModifyCustomSnippets": "modify_rfs_custom_snippets",
                     "ModifyQoS": "modify_rfs_qos",
                     "ModifySubnets": "modify_rfs_ip_subnets",
-                    "ModivyVlan": "modify_rfs_vlan"}
+                    "ModifyVlan": "modify_rfs_vlan"}
     supported_transactions = {"Create", "Delete"}.union({p.modifyOperation for p in config.input_params})
 
     lkt = LookupTable('LKT_TND_STABLENET')
