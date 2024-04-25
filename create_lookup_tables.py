@@ -138,7 +138,8 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
     for tr in MODIFY_OPS:
         if tr in {p.modifyOperation for p in config.input_params}:
             params = [p for p in config.input_params if p.modifyOperation == tr and p.cramerStorage == config.factoryProductName+"_GE"]
-            lkt.add(LtEntry(prod+"#"+tr+"#GE_PARAMETERS", joinparams(params)))
+            if params:
+                lkt.add(LtEntry(prod+"#"+tr+"#GE_PARAMETERS", joinparams(params)))
     tables.append(lkt)
 
     # LKT_TND_STABLENET
