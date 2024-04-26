@@ -1,6 +1,6 @@
 {
   "factoryProductName": "IPVPN_CORE",
-  "version": "1.9",
+  "version": "1.10",
   "prerequisite": null,
   "inputParameters": [
     {
@@ -104,7 +104,7 @@
       "special": false,
       "dynamicallyMapped": false,
       "modifyOperation": "ModifyParameter",
-      "exampleValue": "SR-TE color1",
+      "exampleValue": "0:130",
       "cramerStorage": "IPVPN_CORE_GE"
     },
     {

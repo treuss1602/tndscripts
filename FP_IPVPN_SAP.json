@@ -1,6 +1,6 @@
 {
   "factoryProductName": "IPVPN_SAP",
-  "version": "2.6",
+  "version": "2.7",
   "prerequisite": {
     "product": "IPVPN_CORE",
     "referenceParameter": "IPVPN_CORE_RFS_NAME"
@@ -404,7 +404,7 @@
       "special": false,
       "dynamicallyMapped": false,
       "modifyOperation": "ModifyParameter",
-      "exampleValue": "#VALUE!",
+      "exampleValue": "NOQOS",
       "cramerStorage": "IPVPN_SAP_GE"
     },
     {
