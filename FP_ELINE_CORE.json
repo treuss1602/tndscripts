@@ -1,0 +1,182 @@
+{
+  "factoryProductName": "ELINE_CORE",
+  "version": "0.4",
+  "prerequisite": null,
+  "inputParameters": [
+    {
+      "name": "NETWORK_ELEMENT_NAME",
+      "description": "Network element name",
+      "mandatory": true,
+      "valueType": "string",
+      "special": true,
+      "dynamicallyMapped": false,
+      "modifyOperation": null,
+      "exampleValue": "ZH0004MEB101",
+      "cramerStorage": "TND device"
+    },
+    {
+      "name": "EVPN_EVI_RANGE",
+      "description": "EVPN ranges for B2B and B2C/Infrastructure services.",
+      "mandatory": true,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "41000->41999",
+          "20400->20599"
+        ]
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": null,
+      "exampleValue": "20400->20599",
+      "cramerStorage": "TRANSIENT"
+    },
+    {
+      "name": "L2_VPN_NAME",
+      "description": "ELINE Topology name in Cramer\nIt is the key identifier of the L2 VPN.",
+      "mandatory": true,
+      "valueType": "string",
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": null,
+      "exampleValue": "ELINET1234",
+      "cramerStorage": "Toplogy name ( created by the first Factory service or manually created upfront)\nIf exsists, it implies that RTs related to topology must exist.",
+      "jsonName": "l2vpnName"
+    },
+    {
+      "name": "EVI_NAME",
+      "description": "VRF name",
+      "mandatory": true,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "Infrastructure case:\nCMTS_INET_VPN\n\nAutomatic case:\nSIPCORE1234_A_IVC000000001"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": null,
+      "exampleValue": "SIPCORE1234_A_IVC000000001",
+      "cramerStorage": "Routing Instance VRFNAME field (Generic Entity: Routing Instance)\n\nThe VRF name is in VRFNAME field where as the RI name can not reflect the VRF name as inventory model needs to differentiate different import/export settings per RI.",
+      "jsonName": "eviName"
+    },
+    {
+      "name": "VRF_SR_TE_COLOR_COMMUNITY",
+      "description": "VRF SR-TE color community",
+      "mandatory": false,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "0:128",
+          "0:130"
+        ]
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "0:130",
+      "cramerStorage": "ELINE_CORE_GE"
+    },
+    {
+      "name": "CUST_SNIPPET_NAMES",
+      "description": "Custom configuration snippet(s) for configuring the ELINE_CORE service",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or multiple values separated by ;"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyCustomSnippets",
+      "exampleValue": "Snippet1;Snippet2",
+      "cramerStorage": "CONFIG_SNIPPET_GE (s)"
+    }
+  ],
+  "cramerParameters": [
+    {
+      "name": "ELINE_CORE_RFS_NAME",
+      "description": "ELINE Core service name",
+      "mandatory": true,
+      "valueType": "string",
+      "modifyOperation": null,
+      "exampleValue": "ELINECC000000001",
+      "cramerStorage": "Service"
+    },
+    {
+      "name": "EVI_INSTANCE_ID",
+      "description": "EVI instance ID",
+      "mandatory": true,
+      "valueType": "integer",
+      "modifyOperation": null,
+      "exampleValue": "41001",
+      "jsonName": "eviInstanceId"
+    },
+    {
+      "name": "EVI_NAME",
+      "description": "VRF name",
+      "mandatory": true,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "Infrastructure case:\nCMTS_INET_VPN\n\nAutomatic case:\nSIPCORE1234_A_IVC000000001"
+      },
+      "modifyOperation": null,
+      "exampleValue": "SIPCORE1234_A_IVC000000001",
+      "cramerStorage": "Routing Instance VRFNAME field (Generic Entity: Routing Instance)\n\nThe VRF name is in VRFNAME field where as the RI name can not reflect the VRF name as inventory model needs to differentiate different import/export settings per RI.",
+      "jsonName": "eviName"
+    },
+    {
+      "name": "EVI_ROUTE_TARGET",
+      "description": "EVI route target",
+      "mandatory": true,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or multiple values separated by ;"
+      },
+      "modifyOperation": null,
+      "exampleValue": "6730:122334;6730:122335",
+      "cramerStorage": "RT",
+      "jsonName": "eviRouteTargetSet"
+    },
+    {
+      "name": "EVI_ROUTE_DISTINGUISHER",
+      "description": "EVI route distinguisher",
+      "mandatory": true,
+      "valueType": "string",
+      "modifyOperation": null,
+      "exampleValue": "6730:1225555",
+      "cramerStorage": "RD",
+      "jsonName": "eviRouteDistinguisher"
+    }
+  ],
+  "keyParameters": [
+    "NETWORK_ELEMENT_NAME",
+    "L2_VPN_NAME"
+  ],
+  "stablenetParameters": {
+    "preNEI": [
+      "EVI_INSTANCE_ID",
+      "L2_VPN_NAME",
+      "EVI_NAME",
+      "EVI_ROUTE_TARGET",
+      "EVI_ROUTE_DISTINGUISHER",
+      "VRF_SR_TE_COLOR_COMMUNITY",
+      "CUST_SNIPPET_NAMES"
+    ],
+    "postNEI": [
+      "EVI_INSTANCE_ID",
+      "L2_VPN_NAME",
+      "EVI_NAME",
+      "EVI_ROUTE_TARGET",
+      "EVI_ROUTE_DISTINGUISHER",
+      "VRF_SR_TE_COLOR_COMMUNITY",
+      "CUST_SNIPPET_NAMES"
+    ]
+  },
+  "cramerValidations": [
+    {
+      "name": "CHECK_NODE_LOCATION",
+      "parameters": [
+        "NETWORK_ELEMENT_NAME"
+      ],
+      "taskname": "CHECK_TARGET_NE_EXISTS"
+    }
+  ]
+}

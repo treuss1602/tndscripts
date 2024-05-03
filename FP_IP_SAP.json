@@ -1,0 +1,956 @@
+{
+  "factoryProductName": "IP_SAP",
+  "version": "0.4",
+  "prerequisite": null,
+  "inputParameters": [
+    {
+      "name": "NETWORK_ELEMENT_NAME",
+      "description": "Network element name",
+      "mandatory": true,
+      "valueType": "string",
+      "special": true,
+      "dynamicallyMapped": false,
+      "modifyOperation": null,
+      "exampleValue": "ZH0004MEB101",
+      "cramerStorage": "TND device ( types to TBD)"
+    },
+    {
+      "name": "LOGICAL_SUB_IF_ID",
+      "description": "Logical subinterface identifier",
+      "mandatory": true,
+      "valueType": "string",
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": null,
+      "exampleValue": "1024",
+      "cramerStorage": "Number object",
+      "jsonName": "logicalSubInterfaceId"
+    },
+    {
+      "name": "INNER_VLAN_ID",
+      "description": "VLAN - inner VLAN ID",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "values are between 1-4094 or untagged"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyVlan",
+      "exampleValue": "4000",
+      "cramerStorage": "VLAN number",
+      "jsonName": "innerVLANId"
+    },
+    {
+      "name": "INNER_TPI",
+      "description": "VLAN - inner TPI",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "2byte hex value"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "8100",
+      "acadefault": "0x8100",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "OUTER_VLAN_ID",
+      "description": "VLAN - outer VLAN ID",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "values are between 1-4094 or untagged"
+      },
+      "special": false,
+      "dynamicallyMapped": true,
+      "modifyOperation": "ModifyVlan",
+      "exampleValue": "3000",
+      "cramerStorage": "VLAN number",
+      "jsonName": "outerVLANId"
+    },
+    {
+      "name": "OUTER_TPI",
+      "description": "VLAN - outer TPI",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "2byte hex value"
+      },
+      "special": false,
+      "dynamicallyMapped": true,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "8100",
+      "acadefault": "8100",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "SERVICE_MTU",
+      "description": "Service MTU",
+      "mandatory": true,
+      "valueType": "integer",
+      "valueTypeDetails": {
+        "comment": "value should be within 576 to 9000"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "1500",
+      "acadefault": 1500,
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "PHY_SERVICE_NAME",
+      "description": "PHY_SINGLE_LINK  or PHY_ILAG   Service name",
+      "mandatory": true,
+      "valueType": "string",
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": null,
+      "exampleValue": "PHYSL000000001",
+      "cramerStorage": "Service",
+      "jsonName": "phyServiceName"
+    },
+    {
+      "name": "PRIMARY_IPV4_IF_ADDRESS",
+      "description": "Primary IPv4 address in CIDR format",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "IP number/Size@SNG\nor\n/Size@SNG"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifySubnets",
+      "exampleValue": "/30@EBH LINKNET",
+      "cramerStorage": "IP number,Subnet group,SNG",
+      "jsonName": "primaryIPv4IFaddress"
+    },
+    {
+      "name": "ADDITIONAL_IPV4_IF_ADDRESSES",
+      "description": "Set of additional IPv4 address in CIDR format",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or more (semicolon-separated item) like\nIP number/Size@SNG\nor\n/Size@SNG"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifySubnets",
+      "exampleValue": "121.10.10.1/30@EBH LINKNET;121.10.20.1/24@EBH LINKNET",
+      "cramerStorage": "IP number,Subnet group,SNG",
+      "jsonName": "additionalIPv4IFaddresses"
+    },
+    {
+      "name": "PRIMARY_IPV6_IF_ADDRESS",
+      "description": "Primary IPv6 address in CIDR format",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "IP number/Size@SNG\nor\n/Size@SNG"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifySubnets",
+      "exampleValue": "2001:0db8:0000:0000:0000:0000:0000:0000/64@EBH LINKNET",
+      "cramerStorage": "IP number,Subnet group,SNG",
+      "jsonName": "primaryIPv6IFaddress"
+    },
+    {
+      "name": "ADDITIONAL_IPV6_IF_ADDRESSES",
+      "description": "Set of additional IPv6 address in CIDR format",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or more (semicolon-separated item) like\nIP number/Size@SNG\nor\n/Size@SNG"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifySubnets",
+      "exampleValue": "2001:0dba:0000:0000:0000:0000:0000:0000/64@EBH LINKNET",
+      "cramerStorage": "IP number,Subnet group,SNG",
+      "jsonName": "additionalIPv6IFaddresses"
+    },
+    {
+      "name": "INGRESS_L3_ACL_NAME",
+      "description": "Ingress L3 ACL",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or multiple string values separated by ;"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "FILTER_INPUT_EDGE",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "EGRESS_L3_ACL_NAME",
+      "description": "Egress L3 ACL",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or multiple values separated by ;"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "FILTER_OUTPUT_EDGE",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "ACAST_IPV4_FLAG",
+      "description": "Anycast - IPv4 flag",
+      "mandatory": true,
+      "valueType": "boolean",
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": null,
+      "exampleValue": "false",
+      "acadefault": false,
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "ACAST_IPV6_FLAG",
+      "description": "Anycast - IPv6 flag",
+      "mandatory": true,
+      "valueType": "boolean",
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": null,
+      "exampleValue": "false",
+      "acadefault": false,
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "UNICAST_RPF_IPV4",
+      "description": "List of values (Off, loose, strict (default))",
+      "mandatory": true,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "Off",
+          "loose",
+          "strict"
+        ]
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "strict",
+      "acadefault": "strict",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "UNICAST_RPF_IPV6",
+      "description": "List of values (Off, loose, strict (default))",
+      "mandatory": true,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "Off",
+          "loose",
+          "strict"
+        ]
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "strict",
+      "acadefault": "strict",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "QOS_INGRESS_CLASSIFICATION_PROFILE",
+      "description": "Ingress classification profile",
+      "mandatory": false,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "ACCESS_IN_CLASS_DSCP",
+          "ACCESS_IN_CLASS_8021P",
+          "ACCESS_IN_CLASS_IPP",
+          "ACCESS_IN_CLASS_UNTRUST"
+        ]
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "ACCESS_IN_CLASS_DSCP",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "QOS_INGRESS_POLICING_PROFILE",
+      "description": "Ingress policing profile",
+      "mandatory": false,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "ING_POLICING_PROFILE1",
+          "ING_POLICING_PROFILE2",
+          "ING_POLICING_PROFILE3",
+          "ING_POLICING_BESTEFFORT"
+        ]
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "ING_POLICING_PROFILE1",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "QOS_EGRESS_QOS_QUEUE_PROFILE",
+      "description": "Egress QoS queue profile",
+      "mandatory": true,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "NOQOS"
+        ]
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "#VALUE!",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "QOS_EGRESS_QOS_POLICY",
+      "description": "Egress QoS policy",
+      "mandatory": false,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "CORE_MPLS",
+          "EGRESS_PROFILE1",
+          "NOQOS"
+        ]
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "CORE_MPLS",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "QOS_CUST_EGRESS_REWRITE_CONFIG",
+      "description": "Egress rewrite configuration",
+      "mandatory": false,
+      "valueType": "enumerated",
+      "valueTypeDetails": {
+        "enumValues": [
+          "rewrite_config1",
+          "rewrite_config2",
+          "rewrite_config3"
+        ]
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "rewrite_config1",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "IPV4_STATIC_ROUTE_<N>",
+      "description": "Array (multiple parameters) with IPV4 Static routes including next hop address,VRF name,route tag and admin distance",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "String consisting of 4-5 parts, separated by ASCII dash:\n1. The target network for the route (CIDR)\n2. The next hop host IP address\n3. VRF Name in double quotes\n4. Route Tag in double quotes\n5. Optionally: Admin distance\nIf VRF Name or Route Tag are not applicable, the string will contain empty quotes"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "10.10.24.128/28-10.20.0.1-\"VRF1\"-\"22\"-2",
+      "cramerStorage": "IP_SAP_GE",
+      "maxOccurs": 50
+    },
+    {
+      "name": "IPV6_STATIC_ROUTE_<N>",
+      "description": "Array (multiple parameters) with IPV6 Static routes including next hop address,VRF name,route tag and admin distance",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "String consisting of 4-5 parts, separated by ASCII dash:\n1. The target network for the route (CIDR)\n2. The next hop host IP address\n3. VRF Name in double quotes\n4. Route Tag in double quotes\n5. Optionally: Admin distance\nIf VRF Name or Route Tag are not applicable, the string will contain empty quotes"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "2001:0db8:/64-fe80::dea6:32ff:fe6b:3f72-\"IPV6_VRF_NAME\"-\"IPV6_ROUTE_TAG\"-IPV6_ADMIN_DISTANCE\"",
+      "cramerStorage": "IP_SAP_GE",
+      "maxOccurs": 50
+    },
+    {
+      "name": "VRRP_IPV4_FLAG",
+      "description": "VRRP IPv4 flag",
+      "mandatory": true,
+      "valueType": "boolean",
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "false",
+      "acadefault": false,
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "VRRP_IPV4_PRIORITY",
+      "description": "VRRP IPv4 priority",
+      "mandatory": false,
+      "valueType": "integer",
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "1",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "VRRP_IPV4_VIRTUAL_IP",
+      "description": "VRRP IPv4 virtual IP",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or more IPv4 address , non IPAM no , separated by ';'"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "10.20.30.2;10.20.30.3",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "VRRP_IPV6_FLAG",
+      "description": "VRRP IPv6 flag",
+      "mandatory": true,
+      "valueType": "boolean",
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "false",
+      "acadefault": false,
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "VRRP_IPV6_PRIORITY",
+      "description": "VRRP IPv6 priority",
+      "mandatory": false,
+      "valueType": "integer",
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "1",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "VRRP_IPV6_VIRTUAL_IP",
+      "description": "VRRP IPv6 virtual IP",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or more IPv6 address , non IPAM no , separated by ';'"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "2001:0db7:;2001:0db8:",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "PE_CE_EBGP_FLAG",
+      "description": "PE-CE eBGP flag",
+      "mandatory": true,
+      "valueType": "boolean",
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "false",
+      "acadefault": false,
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "PE_CE_EBGP_AUTHENTICATION_KEY",
+      "description": null,
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "character with special chars"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "abb$abc",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "PE_CE_EBGP_PEER_ASN",
+      "description": "PE-CE eBGP - peer ASN",
+      "mandatory": false,
+      "valueType": "integer",
+      "valueTypeDetails": {
+        "comment": "16bit or 32bit ASN"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "PE_CE_EBGP_BFD_FLAG",
+      "description": "PE-CE eBGP - BFD flag",
+      "mandatory": true,
+      "valueType": "boolean",
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "false",
+      "acadefault": false,
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "PE_CE_EBGP_IPV4_DEFAULT_FLAG",
+      "description": "PE-CE eBGP - IPv4 default flag",
+      "mandatory": true,
+      "valueType": "boolean",
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "false",
+      "acadefault": false,
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "PE_CE_EBGP_IPV6_DEFAULT_FLAG",
+      "description": "PE-CE eBGP - IPv6 default flag",
+      "mandatory": true,
+      "valueType": "boolean",
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "false",
+      "acadefault": false,
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "PE_CE_EBGP_MAIN_BACKUP_SELECTOR",
+      "description": "PE-CE eBGP - main backup selector\nIf it is true = Main, false= backup",
+      "mandatory": true,
+      "valueType": "boolean",
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "false",
+      "acadefault": false,
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "PE_CE_EBGP_IPV4_INGRESS_PREFIX_FILTERS_ALLOWED",
+      "description": "PE-CE eBGP - IPv4 ingress prefix filters",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "Allowed Set of IPv4 CIDR prefixes"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "10.1.2.0/24-ge 32",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "PE_CE_EBGP_IPV6_INGRESS_PREFIX_FILTERS_ALLOWED",
+      "description": "PE-CE eBGP - IPv6 ingress prefix filters",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "Allowed Set of IPv6 prefixes"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "2001:0db7:/24-ge 32",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTERS_ALLOWED",
+      "description": "PE-CE eBGP - IPv4 egress prefix filters",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "Allowed Set of IPv4 CIDR prefixes"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "10.1.2.0/24-ge 32",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTERS_ALLOWED",
+      "description": "PE-CE eBGP - IPv6 egress prefix filters",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "Allowed Set of IPv6 prefixes"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "2001:0db7:/24-ge 32",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "PE_CE_EBGP_IPV4_INGRESS_PREFIX_FILTERS_DENIED",
+      "description": "PE-CE eBGP - IPv4 ingress prefix filters",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "Denied Set of IPv4 CIDR prefixes"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "10.1.2.0/24-ge 32",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "PE_CE_EBGP_IPV6_INGRESS_PREFIX_FILTERS_DENIED",
+      "description": "PE-CE eBGP - IPv6 ingress prefix filters",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "Denied  Set of IPv6 prefixes"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "2001:0db7:/24-ge 32",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTERS_DENIED",
+      "description": "PE-CE eBGP - IPv4 egress prefix filters",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "Denied  Set of IPv4 CIDR prefixes"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "10.1.2.0/24-ge 32",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTERS_DENIED",
+      "description": "PE-CE eBGP - IPv6 egress prefix filters",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "Set of IPv6 prefixes"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "2001:0db7:/24-ge 32",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "PE_CE_EBGP_STD_TE_COMMUNITY_HANDLING",
+      "description": "PE-CE eBGP - standard TE community handling",
+      "mandatory": true,
+      "valueType": "boolean",
+      "valueTypeDetails": {
+        "comment": "boolean (default off/0)"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "false",
+      "acadefault": false,
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "CUST_SNIPPET_NAMES",
+      "description": "Custom configuration snippet(s) for configuring the IP_SAP service",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or multiple values separated by ;"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyCustomSnippets",
+      "exampleValue": "Snippet1;Snippet2;mcast_igmp_snippet;",
+      "cramerStorage": "CONFIG_SNIPPET_GE (s)",
+      "jsonName": "custSnippetNames"
+    },
+    {
+      "name": "PE_CE_EBGP_IPV4_PEERS",
+      "description": "contains list of IPv4 addressses",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or more IPv4 address , non IPAM no , separated by ';'"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "PE_CE_EBGP_IPV6_PEERS",
+      "description": "contains list of IPv6 addressses",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or more IPv6 address , non IPAM no , separated by ';'"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "PE_CE_EBGP_LOCAL_ASN",
+      "description": "contains 16 or 32 bit AS number",
+      "mandatory": false,
+      "valueType": "integer",
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "4200000000",
+      "cramerStorage": "IP_SAP_GE"
+    }
+  ],
+  "cramerParameters": [
+    {
+      "name": "IP_SAP_RFS_NAME",
+      "description": "IPVPN SAP service name",
+      "mandatory": true,
+      "valueType": "string",
+      "modifyOperation": null,
+      "exampleValue": "IPSAP000000001",
+      "cramerStorage": "Service"
+    },
+    {
+      "name": "SAP_IF_NAME",
+      "description": "L3 SAP Interface name",
+      "mandatory": true,
+      "valueType": "string",
+      "modifyOperation": null,
+      "exampleValue": "Bundle-Ether20.1024",
+      "cramerStorage": "Port",
+      "jsonName": "sapIFName"
+    },
+    {
+      "name": "INNER_VLAN_ID",
+      "description": "VLAN - inner VLAN ID",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "values are between 1-4094 or untagged"
+      },
+      "modifyOperation": null,
+      "exampleValue": "4000",
+      "cramerStorage": "VLAN number",
+      "jsonName": "innerVLANId"
+    },
+    {
+      "name": "OUTER_VLAN_ID",
+      "description": "VLAN - outer VLAN ID",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "values are between 1-4094 or untagged"
+      },
+      "modifyOperation": null,
+      "exampleValue": "3000",
+      "cramerStorage": "VLAN number",
+      "jsonName": "outerVLANId"
+    },
+    {
+      "name": "PRIMARY_IPV4_IF_ADDRESS",
+      "description": "Primary IPv4 address in CIDR format",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "IP number/Size@SNG\nor\n/Size@SNG"
+      },
+      "modifyOperation": null,
+      "exampleValue": "/30@EBH LINKNET",
+      "cramerStorage": "IP number,Subnet group,SNG",
+      "jsonName": "primaryIPv4IFaddress"
+    },
+    {
+      "name": "ADDITIONAL_IPV4_IF_ADDRESSES",
+      "description": "Set of additional IPv4 address in CIDR format",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or more (semicolon-separated item) like\nIP number/Size@SNG\nor\n/Size@SNG"
+      },
+      "modifyOperation": null,
+      "exampleValue": "121.10.10.1/30@EBH LINKNET;121.10.20.1/24@EBH LINKNET",
+      "cramerStorage": "IP number,Subnet group,SNG",
+      "jsonName": "additionalIPv4IFaddresses"
+    },
+    {
+      "name": "PRIMARY_IPV6_IF_ADDRESS",
+      "description": "Primary IPv6 address in CIDR format",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "IP number/Size@SNG\nor\n/Size@SNG"
+      },
+      "modifyOperation": null,
+      "exampleValue": "2001:0db8:0000:0000:0000:0000:0000:0000/64@EBH LINKNET",
+      "cramerStorage": "IP number,Subnet group,SNG",
+      "jsonName": "primaryIPv6IFaddress"
+    },
+    {
+      "name": "ADDITIONAL_IPV6_IF_ADDRESSES",
+      "description": "Set of additional IPv6 address in CIDR format",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or more (semicolon-separated item) like\nIP number/Size@SNG\nor\n/Size@SNG"
+      },
+      "modifyOperation": null,
+      "exampleValue": "2001:0dba:0000:0000:0000:0000:0000:0000/64@EBH LINKNET",
+      "cramerStorage": "IP number,Subnet group,SNG",
+      "jsonName": "additionalIPv6IFaddresses"
+    }
+  ],
+  "keyParameters": [
+    "NETWORK_ELEMENT_NAME",
+    "LOGICAL_SUB_IF_ID",
+    "PHY_SERVICE_NAME"
+  ],
+  "stablenetParameters": {
+    "preNEI": [
+      "LOGICAL_SUB_IF_ID",
+      "SAP_IF_NAME",
+      "INNER_VLAN_ID",
+      "INNER_TPI",
+      "OUTER_VLAN_ID",
+      "OUTER_TPI",
+      "SERVICE_MTU",
+      "PHY_SERVICE_NAME",
+      "PRIMARY_IPV4_IF_ADDRESS",
+      "ADDITIONAL_IPV4_IF_ADDRESSES",
+      "PRIMARY_IPV6_IF_ADDRESS",
+      "ADDITIONAL_IPV6_IF_ADDRESSES",
+      "INGRESS_L3_ACL_NAME",
+      "EGRESS_L3_ACL_NAME",
+      "ACAST_IPV4_FLAG",
+      "ACAST_IPV6_FLAG",
+      "UNICAST_RPF_IPV4",
+      "UNICAST_RPF_IPV6",
+      "QOS_INGRESS_CLASSIFICATION_PROFILE",
+      "QOS_INGRESS_POLICING_PROFILE",
+      "QOS_EGRESS_QOS_QUEUE_PROFILE",
+      "QOS_EGRESS_QOS_POLICY",
+      "QOS_CUST_EGRESS_REWRITE_CONFIG",
+      "IPV4_STATIC_ROUTE_<N>",
+      "IPV6_STATIC_ROUTE_<N>",
+      "VRRP_IPV4_FLAG",
+      "VRRP_IPV4_PRIORITY",
+      "VRRP_IPV4_VIRTUAL_IP",
+      "VRRP_IPV6_FLAG",
+      "VRRP_IPV6_PRIORITY",
+      "VRRP_IPV6_VIRTUAL_IP",
+      "PE_CE_EBGP_FLAG",
+      "PE_CE_EBGP_AUTHENTICATION_KEY",
+      "PE_CE_EBGP_PEER_ASN",
+      "PE_CE_EBGP_BFD_FLAG",
+      "PE_CE_EBGP_IPV4_DEFAULT_FLAG",
+      "PE_CE_EBGP_IPV6_DEFAULT_FLAG",
+      "PE_CE_EBGP_MAIN_BACKUP_SELECTOR",
+      "PE_CE_EBGP_IPV4_INGRESS_PREFIX_FILTERS_ALLOWED",
+      "PE_CE_EBGP_IPV6_INGRESS_PREFIX_FILTERS_ALLOWED",
+      "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTERS_ALLOWED",
+      "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTERS_ALLOWED",
+      "PE_CE_EBGP_IPV4_INGRESS_PREFIX_FILTERS_DENIED",
+      "PE_CE_EBGP_IPV6_INGRESS_PREFIX_FILTERS_DENIED",
+      "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTERS_DENIED",
+      "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTERS_DENIED",
+      "PE_CE_EBGP_STD_TE_COMMUNITY_HANDLING",
+      "CUST_SNIPPET_NAMES",
+      "PE_CE_EBGP_IPV4_PEERS",
+      "PE_CE_EBGP_IPV6_PEERS",
+      "PE_CE_EBGP_LOCAL_ASN"
+    ],
+    "postNEI": [
+      "LOGICAL_SUB_IF_ID",
+      "SAP_IF_NAME",
+      "INNER_VLAN_ID",
+      "INNER_TPI",
+      "OUTER_VLAN_ID",
+      "OUTER_TPI",
+      "SERVICE_MTU",
+      "PHY_SERVICE_NAME",
+      "PRIMARY_IPV4_IF_ADDRESS",
+      "ADDITIONAL_IPV4_IF_ADDRESSES",
+      "PRIMARY_IPV6_IF_ADDRESS",
+      "ADDITIONAL_IPV6_IF_ADDRESSES",
+      "INGRESS_L3_ACL_NAME",
+      "EGRESS_L3_ACL_NAME",
+      "ACAST_IPV4_FLAG",
+      "ACAST_IPV6_FLAG",
+      "UNICAST_RPF_IPV4",
+      "UNICAST_RPF_IPV6",
+      "QOS_INGRESS_CLASSIFICATION_PROFILE",
+      "QOS_INGRESS_POLICING_PROFILE",
+      "QOS_EGRESS_QOS_QUEUE_PROFILE",
+      "QOS_EGRESS_QOS_POLICY",
+      "QOS_CUST_EGRESS_REWRITE_CONFIG",
+      "IPV4_STATIC_ROUTES_SUBNETS",
+      "IPV4_STATIC_ROUTES_NEXTHOP_ADDRESSES",
+      "IPV4_STATIC_ROUTES_VRF_NAMES",
+      "IPV4_STATIC_ROUTES_ROUTE_TAGS",
+      "IPV4_STATIC_ROUTES_ADMIN_DISTANCES",
+      "IPV6_STATIC_ROUTES_SUBNETS",
+      "IPV6_STATIC_ROUTES_NEXTHOP_ADDRESSES",
+      "IPV6_STATIC_ROUTES_VRF_NAMES",
+      "IPV6_STATIC_ROUTES_ROUTE_TAGS",
+      "IPV6_STATIC_ROUTES_ADMIN_DISTANCES",
+      "VRRP_IPV4_FLAG",
+      "VRRP_IPV4_PRIORITY",
+      "VRRP_IPV4_VIRTUAL_IP",
+      "VRRP_IPV6_FLAG",
+      "VRRP_IPV6_PRIORITY",
+      "VRRP_IPV6_VIRTUAL_IP",
+      "PE_CE_EBGP_FLAG",
+      "PE_CE_EBGP_AUTHENTICATION_KEY",
+      "PE_CE_EBGP_PEER_ASN",
+      "PE_CE_EBGP_BFD_FLAG",
+      "PE_CE_EBGP_IPV4_DEFAULT_FLAG",
+      "PE_CE_EBGP_IPV6_DEFAULT_FLAG",
+      "PE_CE_EBGP_MAIN_BACKUP_SELECTOR",
+      "PE_CE_EBGP_IPV4_INGRESS_PREFIX_FILTERS_ALLOWED",
+      "PE_CE_EBGP_IPV6_INGRESS_PREFIX_FILTERS_ALLOWED",
+      "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTERS_ALLOWED",
+      "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTERS_ALLOWED",
+      "PE_CE_EBGP_IPV4_INGRESS_PREFIX_FILTERS_DENIED",
+      "PE_CE_EBGP_IPV6_INGRESS_PREFIX_FILTERS_DENIED",
+      "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTERS_DENIED",
+      "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTERS_DENIED",
+      "PE_CE_EBGP_STD_TE_COMMUNITY_HANDLING",
+      "CUST_SNIPPET_NAMES",
+      "PE_CE_EBGP_IPV4_PEERS",
+      "PE_CE_EBGP_IPV6_PEERS",
+      "PE_CE_EBGP_LOCAL_ASN"
+    ]
+  },
+  "cramerValidations": [
+    {
+      "name": "CHECK_NODE_LOCATION",
+      "parameters": [
+        "NETWORK_ELEMENT_NAME"
+      ],
+      "taskname": "CHECK_TARGET_NE_EXISTS"
+    }
+  ]
+}

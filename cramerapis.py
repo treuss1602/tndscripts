@@ -6,6 +6,9 @@ CramerAPIs = { "PHY_SINGLE_LINK": ("getPHYSingleLinkDetails", "identifyPHYSingle
                "PHY_ESILAG":      ("getPHYESILAGDetails",     "identifyPHYESILAG"),
                "IPVPN_CORE":      ("getIPVPNCoreDetails",     "identifyIPVPNCore"),
                "IPVPN_SAP":       ("getIPVPNSAPDetails",      "identifyIPVPNSap"),
+               "IP_SAP":          ("getIPSAPDetails",         "identifyIPSap"),
                "ELAN_CORE":       ("getELANCoreDetails",      "identifyELANCore"),
                "ELAN_SAP":        ("getELANSAPDetails",       None),
+               "ELINE_CORE":      ("getELINECoreDetails",     "identifyELINECore"),
+               "ELINE_SAP":       ("getELINESAPDetails",      None),
 }
