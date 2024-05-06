@@ -1,6 +1,6 @@
 {
   "factoryProductName": "PHY_ESILAG",
-  "version": "0.7",
+  "version": "1.0",
   "prerequisite": null,
   "inputParameters": [
     {
@@ -266,6 +266,19 @@
       "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "PHY_ESILAG_GE"
+    },
+    {
+      "name": "ESILAG_MINIMUM_LINKS",
+      "description": "Defines the value of \"minimum-links\" for the ILAG interface. If \"0\", no minimum-link value is enforced.",
+      "mandatory": false,
+      "valueType": "integer",
+      "valueTypeDetails": {
+        "comment": "valid range: 0 up to number of ESILAG member links.\nDefault value is \"0\""
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "cramerStorage": "PHY_ESILAG_GE"
     }
   ],
   "cramerParameters": [
@@ -419,7 +432,8 @@
       "QOS_EGRESS_QOS_POLICY",
       "QOS_CUST_EGRESS_REWRITE_CONFIG",
       "CUST_SNIPPET_NAMES",
-      "PHYS_LLDP_FLAG"
+      "PHYS_LLDP_FLAG",
+      "ESILAG_MINIMUM_LINKS"
     ],
     "postNEI": [
       "PHY_ESILAG_RFS_NAME",
@@ -451,7 +465,8 @@
       "QOS_EGRESS_QOS_POLICY",
       "QOS_CUST_EGRESS_REWRITE_CONFIG",
       "CUST_SNIPPET_NAMES",
-      "PHYS_LLDP_FLAG"
+      "PHYS_LLDP_FLAG",
+      "ESILAG_MINIMUM_LINKS"
     ]
   },
   "cramerValidations": [

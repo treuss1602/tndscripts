@@ -8,7 +8,7 @@
   "paramMapping": [
     {
       "factoryProduct": "PHY_ILAG",
-      "factoryProductVersion": "0.16",
+      "factoryProductVersion": "0.18",
       "parameters": [
         {
           "name": "PHYS_LINK_UP_DELAY",
@@ -99,6 +99,11 @@
           "name": "PHYS_LLDP_FLAG",
           "type": "static",
           "value": "true"
+        },
+        {
+          "name": "ILAG_MINIMUM_LINKS",
+          "type": "static",
+          "value": 0
         }
       ]
     }

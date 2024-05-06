@@ -1,6 +1,6 @@
 {
   "factoryProductName": "PHY_ILAG",
-  "version": "0.16",
+  "version": "0.18",
   "prerequisite": null,
   "inputParameters": [
     {
@@ -65,6 +65,7 @@
       "special": false,
       "dynamicallyMapped": false,
       "modifyOperation": null,
+      "exampleValue": "LAG999",
       "cramerStorage": "IF name",
       "jsonName": "phyILagIfName"
     },
@@ -267,6 +268,19 @@
       "exampleValue": "false",
       "acadefault": false,
       "cramerStorage": "PHY_ILAG_GE"
+    },
+    {
+      "name": "ILAG_MINIMUM_LINKS",
+      "description": "Defines the value of \"minimum-links\" for the ILAG interface. If \"0\", no minimum-link value is enforced.",
+      "mandatory": false,
+      "valueType": "integer",
+      "valueTypeDetails": {
+        "comment": "valid range: 0 up to number of ILAG member links.\nDefault value is \"0\""
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "cramerStorage": "PHY_ILAG_GE"
     }
   ],
   "cramerParameters": [
@@ -409,7 +423,8 @@
       "QOS_CUST_EGRESS_REWRITE_CONFIG",
       "CUST_SNIPPET_NAMES",
       "PHYS_LACP_KEY",
-      "PHYS_LLDP_FLAG"
+      "PHYS_LLDP_FLAG",
+      "ILAG_MINIMUM_LINKS"
     ],
     "postNEI": [
       "PHYS_IF_NAMES",
@@ -438,7 +453,8 @@
       "QOS_CUST_EGRESS_REWRITE_CONFIG",
       "CUST_SNIPPET_NAMES",
       "PHYS_LACP_KEY",
-      "PHYS_LLDP_FLAG"
+      "PHYS_LLDP_FLAG",
+      "ILAG_MINIMUM_LINKS"
     ]
   },
   "cramerValidations": [
