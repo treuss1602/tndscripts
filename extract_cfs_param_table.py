@@ -14,6 +14,7 @@ CFS_COMPONENT_MAPPING = {
     "TN_RBH_RPD_ACCESS": ["RBH_RPD"],
     "TN_RBH_CMTS_ACCESS": ["RBH_CMTS"],
     "TN_RBH_CMTS_CORE": ["RBH_CMTS_INET", "RBH_CMTS_ABR_MC"],
+    "TN_B2C_OLT_ACCESS": ["RTL_PROV", "RTL_MGT", "RTL_INET", "RTL_VOIP", "INF_DHCPTRAFFIC", "INF_MGT", "RTL_IPTV", "RTL_CGN"]
 }
 
 def read_data_from_sheet(sheet, col1, col2, cfsname, componentname, fpname):
@@ -80,7 +81,7 @@ def read_data_from_excel(xlfile, cfsname, componentname):
                 raise ValueError("Unable to read product name from excel {}, tab {}, cell {}".format(xlfile, tab, PRODNAME_CELL))
             version = sheet[VERSION_CELL].value
 
-            for col in range(1,26):
+            for col in range(1,60):
                 cellval = sheet.cell(row=HEADERROW, column=col).value
                 if  (componentname and cellval == componentname) or (cfsname and cellval == "CFS " + cfsname):
                     col1, col2 = col, col+1
