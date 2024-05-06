@@ -92,6 +92,14 @@ def read_params_from_sheet(sheet, prodname):
                 modify = None
             if jsonname:
                 jsonname = re.sub(r'[^a-zA-Z0-9\[\]\.]', '', jsonname)
+            if valuetype == "Enumerated" or valuetype == "Boolean":
+                poss_values = ["true", "false"] if valuetype == "Boolean" else typedetails.split(";")
+                if example is not None and example not in poss_values:
+                    print("WARNING: Invalid example value '{}' for parameter {}".format(example, techname))
+                if acadefault is not None and acadefault not in poss_values:
+                    print("WARNING: Invalid default value '{}' for parameter {}".format(acadefault, techname))
+            if mo.upper() == "M" and example is None:
+                print("WARNING: No example value provided for mandatory parameter {}".format(techname))
             if paramtype.lower() == "input" or paramtype.lower() == "special":
                 DBG(30, "Adding parameter {} (type {}) to input parameters".format(techname, paramtype))
                 DBG(50, "valuetype is {}".format(valuetype))
