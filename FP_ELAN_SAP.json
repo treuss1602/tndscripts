@@ -1,6 +1,6 @@
 {
   "factoryProductName": "ELAN_SAP",
-  "version": "0.19",
+  "version": "0.20",
   "prerequisite": {
     "product": "ELAN_CORE",
     "referenceParameter": "ELAN_CORE_RFS_NAME"
@@ -45,7 +45,7 @@
       "special": false,
       "dynamicallyMapped": false,
       "modifyOperation": null,
-      "exampleValue": "ELAN",
+      "exampleValue": "E-LAN",
       "acadefault": "E-LAN",
       "cramerStorage": "ELAN_SAP_GE"
     },
@@ -165,7 +165,6 @@
       "special": false,
       "dynamicallyMapped": false,
       "modifyOperation": "ModifyParameter",
-      "exampleValue": "Push",
       "cramerStorage": "ELAN_SAP_GE"
     },
     {

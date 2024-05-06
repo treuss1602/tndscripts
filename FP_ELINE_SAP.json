@@ -1,6 +1,6 @@
 {
   "factoryProductName": "ELINE_SAP",
-  "version": "0.4",
+  "version": "0.5",
   "prerequisite": null,
   "inputParameters": [
     {
@@ -210,7 +210,7 @@
       "special": false,
       "dynamicallyMapped": false,
       "modifyOperation": "ModifyParameter",
-      "exampleValue": "FILTER_L2_INPUT_EDGE",
+      "exampleValue": "FILTER_L2_INPUT_EDGE1",
       "cramerStorage": "ELINE_SAP_GE"
     },
     {
@@ -228,7 +228,7 @@
       "special": false,
       "dynamicallyMapped": false,
       "modifyOperation": "ModifyParameter",
-      "exampleValue": "FILTER_L2_OUTPUT_EDGE",
+      "exampleValue": "FILTER_L2_OUTPUT_EDGE1",
       "cramerStorage": "ELINE_SAP_GE"
     },
     {
@@ -247,7 +247,7 @@
       "special": false,
       "dynamicallyMapped": false,
       "modifyOperation": "ModifyParameter",
-      "exampleValue": "INGRESS_QOS_CLASSIFICATION_1",
+      "exampleValue": "ACCESS_IN_CLASS_DSCP",
       "cramerStorage": "ELINE_SAP_GE"
     },
     {

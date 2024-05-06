@@ -1,6 +1,6 @@
 {
   "factoryProductName": "IP_SAP",
-  "version": "0.4",
+  "version": "0.5",
   "prerequisite": null,
   "inputParameters": [
     {
@@ -239,7 +239,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "modifyOperation": "ModifyParameter",
+      "modifyOperation": null,
       "exampleValue": "strict",
       "acadefault": "strict",
       "cramerStorage": "IP_SAP_GE"
@@ -258,7 +258,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "modifyOperation": "ModifyParameter",
+      "modifyOperation": null,
       "exampleValue": "strict",
       "acadefault": "strict",
       "cramerStorage": "IP_SAP_GE"
@@ -314,7 +314,7 @@
       "special": false,
       "dynamicallyMapped": false,
       "modifyOperation": "ModifyParameter",
-      "exampleValue": "#VALUE!",
+      "exampleValue": "NOQOS",
       "cramerStorage": "IP_SAP_GE"
     },
     {

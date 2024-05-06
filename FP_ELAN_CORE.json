@@ -1,6 +1,6 @@
 {
   "factoryProductName": "ELAN_CORE",
-  "version": "0.16",
+  "version": "0.18",
   "prerequisite": null,
   "inputParameters": [
     {
@@ -193,7 +193,6 @@
       "valueType": "integer",
       "modifyOperation": null,
       "exampleValue": "41001",
-      "cramerStorage": "Number object related to topology?",
       "jsonName": "eviInstanceId"
     },
     {

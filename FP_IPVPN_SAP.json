@@ -1,6 +1,6 @@
 {
   "factoryProductName": "IPVPN_SAP",
-  "version": "2.7",
+  "version": "2.8",
   "prerequisite": {
     "product": "IPVPN_CORE",
     "referenceParameter": "IPVPN_CORE_RFS_NAME"
@@ -157,7 +157,7 @@
     },
     {
       "name": "PHY_SERVICE_NAME",
-      "description": "PHY_SINGLE_LINK or PHY_IRB or PHY_ILAG   Service name",
+      "description": "PHY_SINGLE_LINK or PHY_IRB or PHY_ILAG,PHY_ESILAG   Service name",
       "mandatory": true,
       "valueType": "string",
       "special": false,
