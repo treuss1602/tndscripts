@@ -4,7 +4,7 @@
   "paramMapping": [
     {
       "factoryProduct": "IPVPN_CORE",
-      "factoryProductVersion": "1.11",
+      "factoryProductVersion": "2.2",
       "parameters": [
         {
           "name": "L3_VPN_NAME",
@@ -44,12 +44,12 @@
         {
           "name": "MCAST_IPV4_SSM_GROUPS",
           "type": "static",
-          "value": "232.0.0.0/24"
+          "value": null
         },
         {
           "name": "MCAST_IPV4_SSM_MAP_SOURCES",
           "type": "static",
-          "value": "232.0.0.1"
+          "value": null
         },
         {
           "name": "MCAST_IPV6_FLAG",
@@ -64,12 +64,12 @@
         {
           "name": "IPV4_DHCP_SERVER_VRF",
           "type": "static",
-          "value": "DHCP_VRF_dummy"
+          "value": null
         },
         {
           "name": "IPV4_DHCP_SERVER_IP_ADDRESSES",
           "type": "static",
-          "value": "10.0.0.1"
+          "value": null
         },
         {
           "name": "IPV6_DHCP_RELAY_FLAG",
@@ -79,12 +79,12 @@
         {
           "name": "IPV6_DHCP_SERVER_VRF",
           "type": "static",
-          "value": "DHCP_VRF_dummy"
+          "value": null
         },
         {
           "name": "IPV6_DHCP_SERVER_IP_ADDRESSES",
           "type": "static",
-          "value": "ff06:0:0:0:0:0:0:c3"
+          "value": null
         },
         {
           "name": "MANAGED_SR_DHCP_FLAG",
@@ -99,13 +99,13 @@
         {
           "name": "DHCP_RELAY_LOOPBACK_ID",
           "type": "static",
-          "value": 200
+          "value": null
         }
       ]
     },
     {
       "factoryProduct": "IPVPN_SAP",
-      "factoryProductVersion": "2.8",
+      "factoryProductVersion": "2.10",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
@@ -180,12 +180,12 @@
         {
           "name": "INGRESS_L3_ACL_NAME",
           "type": "static",
-          "value": "RTL_FILTER_INPUT_EDGE"
+          "value": null
         },
         {
           "name": "EGRESS_L3_ACL_NAME",
           "type": "static",
-          "value": "RTL_FILTER_OUTPUT_EDGE"
+          "value": null
         },
         {
           "name": "IPV4_MCAST_IGMP_FLAG",
@@ -245,12 +245,12 @@
         {
           "name": "QOS_EGRESS_QOS_POLICY",
           "type": "static",
-          "value": "CORE_MPLS"
+          "value": null
         },
         {
           "name": "QOS_CUST_EGRESS_REWRITE_CONFIG",
           "type": "static",
-          "value": "rewrite_config1"
+          "value": null
         },
         {
           "name": "IPV4_STATIC_ROUTE_<N>",
@@ -270,12 +270,12 @@
         {
           "name": "VRRP_IPV4_PRIORITY",
           "type": "static",
-          "value": 1
+          "value": null
         },
         {
           "name": "VRRP_IPV4_VIRTUAL_IP",
           "type": "static",
-          "value": "10.20.30.2;10.20.30.3"
+          "value": null
         },
         {
           "name": "VRRP_IPV6_FLAG",
@@ -285,12 +285,12 @@
         {
           "name": "VRRP_IPV6_PRIORITY",
           "type": "static",
-          "value": 1
+          "value": null
         },
         {
           "name": "VRRP_IPV6_VIRTUAL_IP",
           "type": "static",
-          "value": "2001:0db7:;2001:0db8:"
+          "value": null
         },
         {
           "name": "PE_CE_EBGP_FLAG",
@@ -396,7 +396,7 @@
     },
     {
       "factoryProduct": "ELAN_CORE",
-      "factoryProductVersion": "0.18",
+      "factoryProductVersion": "0.19",
       "parameters": [
         {
           "name": "EVPN_EVI_RANGE",
@@ -411,7 +411,17 @@
         {
           "name": "EVI_NAME",
           "type": "static",
-          "value": "BD_RBH_RPD"
+          "value": "INF_DHCPTRAFFIC"
+        },
+        {
+          "name": "EVI_IMPORT_ADDITIONAL_ROUTE_TARGET_SET",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "EVI_EXPORT_ADDITIONAL_ROUTE_TARGET_SET",
+          "type": "static",
+          "value": null
         },
         {
           "name": "EVI_TYPE",
@@ -421,7 +431,7 @@
         {
           "name": "VRF_SR_TE_COLOR_COMMUNITY",
           "type": "static",
-          "value": null
+          "value": "0:130"
         },
         {
           "name": "RELATED_L3_LOGICAL_IF",
@@ -447,7 +457,7 @@
     },
     {
       "factoryProduct": "ELAN_SAP",
-      "factoryProductVersion": "0.20",
+      "factoryProductVersion": "1.0",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
@@ -482,7 +492,7 @@
         {
           "name": "INNER_TPI",
           "type": "static",
-          "value": 8100
+          "value": null
         },
         {
           "name": "OUTER_VLAN_ID",
@@ -492,7 +502,7 @@
         {
           "name": "OUTER_TPI",
           "type": "static",
-          "value": 8100
+          "value": null
         },
         {
           "name": "VLAN_TAG_OPERATION",
@@ -552,7 +562,7 @@
         {
           "name": "IPV4_DHCP_CIRCUITID_FORMAT",
           "type": "static",
-          "value": "%portname:%svlan.%cvlan %sysname/0/0/0/0/0"
+          "value": "\"%portname:%svlan.%cvlan %sysname/0/0/0/0/0\""
         },
         {
           "name": "IPV4_DHCP_REMOTEID_FORMAT",

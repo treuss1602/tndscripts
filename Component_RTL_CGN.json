@@ -4,7 +4,7 @@
   "paramMapping": [
     {
       "factoryProduct": "IPVPN_CORE",
-      "factoryProductVersion": "1.11",
+      "factoryProductVersion": "2.2",
       "parameters": [
         {
           "name": "L3_VPN_NAME",
@@ -44,12 +44,12 @@
         {
           "name": "MCAST_IPV4_SSM_GROUPS",
           "type": "static",
-          "value": "232.0.0.0/24"
+          "value": null
         },
         {
           "name": "MCAST_IPV4_SSM_MAP_SOURCES",
           "type": "static",
-          "value": "232.0.0.1"
+          "value": null
         },
         {
           "name": "MCAST_IPV6_FLAG",
@@ -64,12 +64,12 @@
         {
           "name": "IPV4_DHCP_SERVER_VRF",
           "type": "static",
-          "value": "DHCP_VRF_dummy"
+          "value": null
         },
         {
           "name": "IPV4_DHCP_SERVER_IP_ADDRESSES",
           "type": "static",
-          "value": "10.0.0.1"
+          "value": null
         },
         {
           "name": "IPV6_DHCP_RELAY_FLAG",
@@ -79,12 +79,12 @@
         {
           "name": "IPV6_DHCP_SERVER_VRF",
           "type": "static",
-          "value": "DHCP_VRF_dummy"
+          "value": null
         },
         {
           "name": "IPV6_DHCP_SERVER_IP_ADDRESSES",
           "type": "static",
-          "value": "ff06:0:0:0:0:0:0:c3"
+          "value": null
         },
         {
           "name": "MANAGED_SR_DHCP_FLAG",
@@ -99,7 +99,7 @@
         {
           "name": "DHCP_RELAY_LOOPBACK_ID",
           "type": "static",
-          "value": 200
+          "value": null
         }
       ]
     }

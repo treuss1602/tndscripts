@@ -1,6 +1,6 @@
 {
   "factoryProductName": "IPVPN_SAP",
-  "version": "2.8",
+  "version": "2.10",
   "prerequisite": {
     "product": "IPVPN_CORE",
     "referenceParameter": "IPVPN_CORE_RFS_NAME"
@@ -936,7 +936,8 @@
       },
       "modifyOperation": null,
       "exampleValue": "192.168.1.2",
-      "cramerStorage": "IF (IPV4_DHCP_RELAY_FLAG is True) AND (ACAST_IPV4_FLAG is True) THEN:\n\n\u2002\u2002\u2002\u2002\u2002\u2002DHCP_RELAY_SOURCE_IPV4_ADDRESS should be an IPv4 address assigned as host address in IPAM, getting next free address from same subnet as PRIMARY_IPV4_IF_ADDRESS\n\nELSE:\n\n\u2002\u2002\u2002\u2002\u2002\u2002DHCP_RELAY_SOURCE_IPV4_ADDRESS  is \"n/a\"(nothing to be done)"
+      "cramerStorage": "IF (IPV4_DHCP_RELAY_FLAG is True) AND (ACAST_IPV4_FLAG is True) THEN:\n\n\u2002\u2002\u2002\u2002\u2002\u2002DHCP_RELAY_SOURCE_IPV4_ADDRESS should be an IPv4 address assigned as host address in IPAM, getting next free address from same subnet as PRIMARY_IPV4_IF_ADDRESS\n\nELSE:\n\n\u2002\u2002\u2002\u2002\u2002\u2002DHCP_RELAY_SOURCE_IPV4_ADDRESS  is \"n/a\"(nothing to be done)",
+      "jsonName": "dhcpRelaySourceIPv4Address"
     },
     {
       "name": "DHCP_RELAY_SOURCE_IPV6_ADDRESS",
@@ -948,7 +949,8 @@
       },
       "modifyOperation": null,
       "exampleValue": "2001:0db8:0000:0000:0000:0000:0000:0000",
-      "cramerStorage": "IF (IPV6_DHCP_RELAY_FLAG is True) AND (ACAST_IPV6_FLAG is True), THEN:\n\n\u2002\u2002\u2002\u2002\u2002\u2002DHCP_RELAY_SOURCE_IPV6_ADDRESS should be an IPv6 address assigned as host address in IPAM, getting next free address from same subnet as PRIMARY_IPV6_IF_ADDRESS\n\nELSE:\n\n\u2002\u2002\u2002\u2002\u2002\u2002DHCP_RELAY_SOURCE_IPV6_ADDRESS  is \"n/a\""
+      "cramerStorage": "IF (IPV6_DHCP_RELAY_FLAG is True) AND (ACAST_IPV6_FLAG is True), THEN:\n\n\u2002\u2002\u2002\u2002\u2002\u2002DHCP_RELAY_SOURCE_IPV6_ADDRESS should be an IPv6 address assigned as host address in IPAM, getting next free address from same subnet as PRIMARY_IPV6_IF_ADDRESS\n\nELSE:\n\n\u2002\u2002\u2002\u2002\u2002\u2002DHCP_RELAY_SOURCE_IPV6_ADDRESS  is \"n/a\"",
+      "jsonName": "dhcpRelaySourceIPv6Address"
     }
   ],
   "keyParameters": [
