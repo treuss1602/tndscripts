@@ -405,7 +405,7 @@
         },
         {
           "name": "L2_VPN_NAME",
-          "type": "input",
+          "type": "mapped",
           "from": "INF_DHCPTRAFFIC_L2_VPN_NAME"
         },
         {

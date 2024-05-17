@@ -22,11 +22,6 @@
           "from": "ESILAG_IF_NAME"
         },
         {
-          "name": "ESI_SERVICE_NAME",
-          "type": "mapped",
-          "from": null
-        },
-        {
           "name": "PHYS_LINK_UP_DELAY",
           "type": "static",
           "value": 6000

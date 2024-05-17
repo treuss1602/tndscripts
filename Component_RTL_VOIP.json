@@ -405,7 +405,7 @@
         },
         {
           "name": "L2_VPN_NAME",
-          "type": "input",
+          "type": "mapped",
           "from": "RTL_VOIP_L2_VPN_NAME"
         },
         {

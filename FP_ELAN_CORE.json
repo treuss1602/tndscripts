@@ -38,7 +38,7 @@
       "mandatory": true,
       "valueType": "string",
       "special": false,
-      "dynamicallyMapped": false,
+      "dynamicallyMapped": true,
       "modifyOperation": null,
       "exampleValue": "ELANT1234",
       "cramerStorage": "Toplogy name ( created by the first Factory service or manually created upfront)\nIf exsists, it implies that RTs related to topology must exist.",
