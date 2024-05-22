@@ -182,7 +182,7 @@ def create_lookup_tables_for_composition(data):
             key = "#".join([cfs, component, fpname, "Create", pname])
             DBG(30, "Key is {}".format(key))
             if ptype == "static":
-                values = (paramdata["value"] if paramdata["value"] is not None else "<NULL>", "S")
+                values = (str(paramdata["value"]).replace('*', '\\*').replace('"', '*') if paramdata["value"] is not None else "<NULL>", "S")
             elif ptype in ["input", "mapped"]:
                 values = (paramdata["from"], "D")
             DBG(30, "Values are {}".format(values))
