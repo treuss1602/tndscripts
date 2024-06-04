@@ -47,7 +47,7 @@
     {
       "name": "EVI_NAME",
       "description": "VRF name",
-      "mandatory": true,
+      "mandatory": false,
       "valueType": "string",
       "valueTypeDetails": {
         "comment": "Infrastructure case:\nCMTS_INET_VPN\n\nAutomatic case:\nSIPCORE1234_A_IVC000000001"

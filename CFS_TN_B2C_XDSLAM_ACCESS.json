@@ -1,15 +1,26 @@
 {
-  "compositionName": "TN_RBH_CMTS_CORE",
+  "compositionName": "TN_B2C_XDSLAM_ACCESS",
   "compositionType": "cfs",
   "includedComponents": [
-    "RBH_CMTS_INET",
-    "RBH_CMTS_ABR_MC"
+    "RTL_PROV",
+    "RTL_MGT",
+    "RTL_INET",
+    "RTL_VOIP",
+    "INF_DHCPTRAFFIC",
+    "INF_MGT",
+    "RTL_IPTV",
+    "RTL_CGN"
   ],
   "paramMapping": [
     {
-      "factoryProduct": "PHY_ILAG",
-      "factoryProductVersion": "0.19",
+      "factoryProduct": "PHY_ESILAG",
+      "factoryProductVersion": "1.0",
       "parameters": [
+        {
+          "name": "ESILAG_IF_NAME",
+          "type": "input",
+          "from": "ESILAG_IF_NAME"
+        },
         {
           "name": "PHYS_LINK_UP_DELAY",
           "type": "static",
@@ -26,37 +37,32 @@
           "value": "On"
         },
         {
-          "name": "ILAG_IF_NAME",
-          "type": "input",
-          "from": "ILAG_IF_NAME"
-        },
-        {
-          "name": "LACP_FAST_TIMER",
+          "name": "ESILAG_LACP_FAST_TIMER",
           "type": "static",
           "value": "true"
         },
         {
-          "name": "ILAG_IF_MTU",
+          "name": "ESILAG_IF_MTU",
           "type": "static",
-          "value": 1518
+          "value": 9188
         },
         {
-          "name": "ILAG_SYNCE_ENABLED",
-          "type": "static",
-          "value": "true"
-        },
-        {
-          "name": "ILAG_PTP_ENABLED",
+          "name": "ESILAG_SYNCE_ENABLED",
           "type": "static",
           "value": "true"
         },
         {
-          "name": "ILAG_PTP_PRIO",
+          "name": "ESILAG_PTP_ENABLED",
           "type": "static",
-          "value": null
+          "value": "true"
         },
         {
-          "name": "ILAG_MAC_SEC",
+          "name": "ESILAG_PTP_PRIO",
+          "type": "static",
+          "value": 255
+        },
+        {
+          "name": "ESILAG_MAC_SEC",
           "type": "static",
           "value": "false"
         },
@@ -73,27 +79,22 @@
         {
           "name": "QOS_EGRESS_QOS_QUEUE_PROFILE",
           "type": "static",
-          "value": "ACCESS_OUT_QUEUE_CMTS_CORE"
+          "value": "EGRESS_BESTEFFORT"
         },
         {
           "name": "QOS_EGRESS_QOS_POLICY",
           "type": "static",
-          "value": null
+          "value": "CORE_MPLS"
         },
         {
           "name": "QOS_CUST_EGRESS_REWRITE_CONFIG",
           "type": "static",
-          "value": null
+          "value": "rewrite_config1"
         },
         {
           "name": "CUST_SNIPPET_NAMES",
           "type": "input",
-          "from": "PHY_ILAG_CUST_SNIPPET_NAMES"
-        },
-        {
-          "name": "PHYS_LACP_KEY",
-          "type": "static",
-          "value": 65123
+          "from": "PHY_ESILAG_CUST_SNIPPET_NAMES"
         },
         {
           "name": "PHYS_LLDP_FLAG",
@@ -101,7 +102,7 @@
           "value": "true"
         },
         {
-          "name": "ILAG_MINIMUM_LINKS",
+          "name": "ESILAG_MINIMUM_LINKS",
           "type": "static",
           "value": 0
         }

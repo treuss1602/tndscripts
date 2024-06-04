@@ -1,5 +1,5 @@
 {
-  "compositionName": "TN_RBH_CMTS_CORE",
+  "compositionName": "TN_CMTS_ACCESS",
   "compositionType": "cfs",
   "includedComponents": [
     "RBH_CMTS_INET",

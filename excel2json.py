@@ -100,7 +100,7 @@ def read_params_from_sheet(sheet, prodname):
                     print("WARNING: Invalid default value '{}' for parameter {}".format(acadefault, techname))
             if mo.upper() == "M" and example is None:
                 print("WARNING: No example value provided for mandatory parameter {}".format(techname))
-            if paramtype.lower() in ["input", "return", "inputorreturn"] and cramerstorage not in ["n/a", "{}_GE".format(prodname)] and jsonname is None:
+            if paramtype.lower() in ["input", "return", "inputorreturn"] and cramerstorage not in ["n/a", "{}_GE".format(prodname), "TRANSIENT"] and jsonname is None:
                 print("WARNING: No JSON-Name specified for parameter {} with Cramer storage {}".format(techname, cramerstorage.replace("\n", "\\n")))
             if paramtype.lower() == "input" or paramtype.lower() == "special":
                 DBG(30, "Adding parameter {} (type {}) to input parameters".format(techname, paramtype))
@@ -116,7 +116,7 @@ def read_params_from_sheet(sheet, prodname):
                     stablenetparams[0].append(techname)
             elif paramtype.lower() == "inputorreturn":
                 DBG(30, "Adding parameter {} (type {}) to input AND cramer output parameters".format(techname, paramtype))
-                inparams.append(Param('input', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, acadefault, paramtype.lower() == "special", mapped, maxoccurs, jsonname, modify))
+                inparams.append(Param('input', techname, desc, valuetype, typedetails, False, example, cramerstorage, acadefault, paramtype.lower() == "special", mapped, maxoccurs, jsonname, modify))
                 crameroutparams.append(Param('Cramer', techname, desc, valuetype, typedetails, mo.upper() == "M", example, cramerstorage, maxoccurs=maxoccurs, jsonname=jsonname))
                 if techname not in stablenetblacklist:
                     stablenetparams[0].append(techname)

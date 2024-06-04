@@ -23,17 +23,19 @@
       "special": false,
       "dynamicallyMapped": false,
       "modifyOperation": null,
+      "exampleValue": "LAG006",
       "cramerStorage": "Logical port on the device",
       "jsonName": "esilagIfName"
     },
     {
       "name": "ESI_SERVICE_NAME",
       "description": "ESI service name",
-      "mandatory": true,
+      "mandatory": false,
       "valueType": "string",
       "special": false,
       "dynamicallyMapped": false,
       "modifyOperation": null,
+      "exampleValue": "ESI000002325",
       "cramerStorage": "Created by Cramer for the first ESI-LAG service for an ESI number",
       "jsonName": "esiServiceName"
     },
@@ -384,6 +386,7 @@
       "mandatory": true,
       "valueType": "string",
       "modifyOperation": null,
+      "exampleValue": "00:02:02:02:02:02:02:02:FF:0A",
       "cramerStorage": "ESI number allocated in Cramer from the ESI range",
       "jsonName": "esiNumber"
     },
@@ -393,6 +396,7 @@
       "mandatory": true,
       "valueType": "string",
       "modifyOperation": null,
+      "exampleValue": "ESI000002325",
       "cramerStorage": "Created by Cramer for the first ESI-LAG service for an ESI number",
       "jsonName": "esiServiceName"
     },
