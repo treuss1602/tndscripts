@@ -110,7 +110,7 @@
     },
     {
       "factoryProduct": "IPVPN_SAP",
-      "factoryProductVersion": "2.11",
+      "factoryProductVersion": "2.12",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
@@ -462,7 +462,7 @@
     },
     {
       "factoryProduct": "ELAN_SAP",
-      "factoryProductVersion": "1.0",
+      "factoryProductVersion": "1.1",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",

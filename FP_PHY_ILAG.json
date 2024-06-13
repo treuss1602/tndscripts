@@ -1,6 +1,6 @@
 {
   "factoryProductName": "PHY_ILAG",
-  "version": "0.19",
+  "version": "1.1",
   "prerequisite": null,
   "inputParameters": [
     {
@@ -67,7 +67,7 @@
       "modifyOperation": null,
       "exampleValue": "LAG999",
       "cramerStorage": "IF name",
-      "jsonName": "phyILagIfName"
+      "jsonName": "ilagIfName"
     },
     {
       "name": "LACP_FAST_TIMER",
@@ -272,7 +272,7 @@
     {
       "name": "ILAG_MINIMUM_LINKS",
       "description": "Defines the value of \"minimum-links\" for the ILAG interface. If \"0\", no minimum-link value is enforced.",
-      "mandatory": false,
+      "mandatory": true,
       "valueType": "integer",
       "valueTypeDetails": {
         "comment": "valid range: 0 up to number of ILAG member links.\nDefault value is \"0\""
@@ -302,7 +302,7 @@
       "modifyOperation": null,
       "exampleValue": "GigabitEthernet0/1/0",
       "cramerStorage": "TND device's  port",
-      "jsonName": "phyIfDetails[].phyIfName"
+      "jsonName": "phyIfDetails[].physIfName"
     },
     {
       "name": "PHYS_IF_TYPE_<N>",
@@ -312,7 +312,7 @@
       "modifyOperation": null,
       "exampleValue": "100GBASE-LR1",
       "cramerStorage": "optical  module of the port",
-      "jsonName": "phyIfDetails[].phyIfType"
+      "jsonName": "phyIfDetails[].physIfType"
     },
     {
       "name": "PHYS_IF_CENTER_FREQUENCY_<N>",
@@ -325,7 +325,7 @@
       "modifyOperation": null,
       "exampleValue": "1540.25",
       "cramerStorage": "optical  module of the port",
-      "jsonName": "phyIfDetails[].phyIfCenterFrequency"
+      "jsonName": "phyIfDetails[].physIfCenterFrequency"
     },
     {
       "name": "PHYS_IF_TX_POWER_<N>",
@@ -338,7 +338,7 @@
       "modifyOperation": null,
       "exampleValue": "-5.00",
       "cramerStorage": "optical  module of the port",
-      "jsonName": "phyIfDetails[].phyIfTxPower"
+      "jsonName": "phyIfDetails[].physIfTxPowerr"
     },
     {
       "name": "PHYS_IDN_ACCESS_SERVICE_NAME_<N>",
@@ -348,7 +348,7 @@
       "modifyOperation": null,
       "exampleValue": "IDN001",
       "cramerStorage": "Service",
-      "jsonName": "phyIfDetails[].phyAccessServiceName"
+      "jsonName": "phyIfDetails[].physIdnAccessServiceName"
     },
     {
       "name": "ACCESS_DEVICE_NAME_<N>",
@@ -378,7 +378,7 @@
       "modifyOperation": null,
       "exampleValue": "100000000",
       "cramerStorage": "optical  module of the port",
-      "jsonName": "phyIfSpeed"
+      "jsonName": "physIfSpeed"
     },
     {
       "name": "ILAG_ACCESS_SERVICE_NAME",
@@ -388,7 +388,7 @@
       "modifyOperation": null,
       "exampleValue": "ILAG0001",
       "cramerStorage": "Service",
-      "jsonName": "iLagAccessServiceName"
+      "jsonName": "ilagAccessServiceName"
     }
   ],
   "keyParameters": [

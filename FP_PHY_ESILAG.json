@@ -272,7 +272,7 @@
     {
       "name": "ESILAG_MINIMUM_LINKS",
       "description": "Defines the value of \"minimum-links\" for the ILAG interface. If \"0\", no minimum-link value is enforced.",
-      "mandatory": false,
+      "mandatory": true,
       "valueType": "integer",
       "valueTypeDetails": {
         "comment": "valid range: 0 up to number of ESILAG member links.\nDefault value is \"0\""

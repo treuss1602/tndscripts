@@ -1,6 +1,6 @@
 {
   "factoryProductName": "PHY_SINGLE_LINK",
-  "version": "0.14",
+  "version": "0.15",
   "prerequisite": null,
   "inputParameters": [
     {
@@ -25,7 +25,7 @@
       "modifyOperation": null,
       "exampleValue": "GigabitEthernet0/1/0",
       "cramerStorage": "TND device's  ports",
-      "jsonName": "phyIfName"
+      "jsonName": "physIfName"
     },
     {
       "name": "PHYS_IF_MTU",
@@ -290,7 +290,7 @@
       "modifyOperation": null,
       "exampleValue": "100000000",
       "cramerStorage": "optical  module of the port",
-      "jsonName": "phyIfSpeed"
+      "jsonName": "physIfSpeed"
     },
     {
       "name": "PHYS_IF_TYPE",
@@ -300,7 +300,7 @@
       "modifyOperation": null,
       "exampleValue": "100GBASE-LR1",
       "cramerStorage": "optical  module of the port",
-      "jsonName": "phyIfType"
+      "jsonName": "physIfType"
     },
     {
       "name": "PHYS_IF_CENTER_FREQUENCY",
@@ -313,7 +313,7 @@
       "modifyOperation": null,
       "exampleValue": "1540.25",
       "cramerStorage": "optical  module of the port",
-      "jsonName": "phyIfCenterFrequency"
+      "jsonName": "physIfCenterFrequency"
     },
     {
       "name": "PHYS_IF_TX_POWER",
@@ -326,7 +326,7 @@
       "modifyOperation": null,
       "exampleValue": "-5.00",
       "cramerStorage": "optical  module of the port",
-      "jsonName": "phyIfTxPower"
+      "jsonName": "physIfTxPower"
     },
     {
       "name": "PHY_ACCESS_SERVICE_NAME",
