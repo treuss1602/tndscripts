@@ -38,16 +38,21 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
     # LKT_TND_FACTORY_PRODUCT_PARAMETERS
     lkt = LookupTable('LKT_TND_FACTORY_PRODUCT_PARAMETERS')
     lkt.add(LtEntry(prod+"#Create",
-                     joinparams(config.input_params), 
-                     joinparams([p for p in config.input_params if p.dynamically_mapped]), 
+                     joinparams(config.input_params),
+                     joinparams([p for p in config.input_params if p.dynamically_mapped]),
                      ";".join(config.key_params)+";"))
     lkt.add(LtEntry(prod+"#Delete", "{}_RFS_NAME;".format(prod), ";", ";".join(config.key_params)+";"))
     for tr in MODIFY_OPS:
         if tr in {p.modifyOperation for p in config.input_params}:
             lkt.add(LtEntry(prod+"#"+tr,
-                            joinparams([p for p in config.input_params if p.modifyOperation == tr]), 
-                            ";", 
+                            joinparams([p for p in config.input_params if p.modifyOperation == tr]),
+                            ";",
                             ";".join(config.key_params)+";"))
+    if prod == "PHY_SIGNLE_LINK":
+        lkt.add(LtEntry(prod+"#MoveLink", ";".join(["PHY_SINGLE_LINK_RFS_NAME", "TARGET_NETWORK_ELEMENT_NAME", "TARGET_PHYS_IF_NAME"])+";",
+                        ";",
+                        ";".join(config.key_params)+";"))
+
     tables.append(lkt)
 
     # LKT_MANDATORY_PARAM_CHECK
@@ -246,4 +251,4 @@ if __name__ == "__main__":
                 outfile = "{}.zip".format(jsondata["compositionName"]) if args.outfile is None else args.outfile
                 create_zipfile(outfile, *tables)
                 print(outfile)
-        
+
