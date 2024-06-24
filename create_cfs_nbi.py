@@ -132,8 +132,10 @@ if __name__ == "__main__":
     fpversions = {fp["factoryProduct"]: fp["factoryProductVersion"] for fp in config["paramMapping"]}
     for fp in config["paramMapping"]:
         inputparams = [(p["from"], p["name"], fp["factoryProduct"]) for p in fp["parameters"] if p["type"] == "input"]
-        displayparams = [("{}_RFS_NAME".format(fp["factoryProduct"]), fp["factoryProduct"])] + [(t[0],t[2]) for t in inputparams]
+        displayparams = [("{}_RFS_NAME".format(fp["factoryProduct"]), fp["factoryProduct"]),
+                         ("{}_PROVISION_STATUS".format(fp["factoryProduct"]), fp["factoryProduct"])] + [(t[0],t[2]) for t in inputparams]
         paramdetails["{}_RFS_NAME".format(fp["factoryProduct"])] = ("Name of the RFS of the {} service as given by Cramer.".format(fp["factoryProduct"]), get_sample_rfs_name(fp["factoryProduct"]), "M")
+        paramdetails["{}_PROVISION_STATUS".format(fp["factoryProduct"])] = ("Provision Status of the {} service in Cramer.".format(fp["factoryProduct"]), "SERVICE - ACTIVE", "M")
     DBG(10, paramdetails)
     if "includedComponents" in config:
         for component in config["includedComponents"]:
@@ -145,8 +147,10 @@ if __name__ == "__main__":
                 for fp in comp_config["paramMapping"] :
                     inputparams += [(p["from"], p["name"], fp["factoryProduct"]) for p in fp["parameters"] if p["type"] == "input"]
                     displayparams += [("{}_{}_RFS_NAME".format(component, fp["factoryProduct"]), fp["factoryProduct"])]
+                    displayparams += [("{}_{}_PROVISION_STATUS".format(component, fp["factoryProduct"]), fp["factoryProduct"])]
                     displayparams += [(p["from"], fp["factoryProduct"]) for p in fp["parameters"] if p["type"] == "input"]
                     paramdetails["{}_{}_RFS_NAME".format(component, fp["factoryProduct"])] = ("Name of the RFS of the {} service (part of the {} component) as given by Cramer.".format(fp["factoryProduct"], component), get_sample_rfs_name(fp["factoryProduct"]), "M")
+                    paramdetails["{}_{}_PROVISION_STATUS".format(component, fp["factoryProduct"])] = ("Provision Status of the {} service (part of the {} component) in Cramer.".format(fp["factoryProduct"], component), "SERVICE - ACTIVE", "M")
     DBG(10, "Display Params: {}".format(displayparams))
     fps = {p[2] for p in inputparams}
     for fp in fps:
