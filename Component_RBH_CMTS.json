@@ -110,7 +110,7 @@
     },
     {
       "factoryProduct": "IPVPN_SAP",
-      "factoryProductVersion": "2.12",
+      "factoryProductVersion": "2.14",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
@@ -532,7 +532,7 @@
         {
           "name": "QOS_INGRESS_CLASSIFICATION_PROFILE",
           "type": "static",
-          "value": null
+          "value": "ACCESS_IN_CLASS_DSCP"
         },
         {
           "name": "QOS_INGRESS_POLICING_PROFILE",
@@ -542,7 +542,7 @@
         {
           "name": "QOS_EGRESS_QOS_QUEUE_PROFILE",
           "type": "static",
-          "value": "NOQOS"
+          "value": "ACCESS_OUT_QUEUE_CMTS_ACCESS"
         },
         {
           "name": "QOS_EGRESS_QOS_POLICY",

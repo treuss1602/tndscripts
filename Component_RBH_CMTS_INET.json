@@ -110,12 +110,12 @@
     },
     {
       "factoryProduct": "IPVPN_SAP",
-      "factoryProductVersion": "2.12",
+      "factoryProductVersion": "2.14",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
-          "type": "static",
-          "value": 1100
+          "type": "input",
+          "from": "RBH_CMTS_INET_LOGICAL_SUB_IF_ID"
         },
         {
           "name": "VPN_ACCESS_TYPE",
@@ -139,8 +139,8 @@
         },
         {
           "name": "OUTER_VLAN_ID",
-          "type": "static",
-          "value": 110
+          "type": "input",
+          "from": "RBH_CMTS_INET_OUTER_VLAN_ID"
         },
         {
           "name": "OUTER_TPI",
@@ -245,7 +245,7 @@
         {
           "name": "QOS_EGRESS_QOS_QUEUE_PROFILE",
           "type": "static",
-          "value": "NOQOS"
+          "value": "ACCESS_OUT_QUEUE_CMTS_CORE"
         },
         {
           "name": "QOS_EGRESS_QOS_POLICY",
@@ -304,8 +304,8 @@
         },
         {
           "name": "PE_CE_EBGP_AUTHENTICATION_KEY",
-          "type": "input",
-          "from": "RBH_CMTS_INET_PE_CE_EBGP_AUTHENTICATION_KEY"
+          "type": "static",
+          "value": "TND-RBH_BGP-CMTS"
         },
         {
           "name": "PE_CE_EBGP_PEER_ASN",
@@ -329,48 +329,48 @@
         },
         {
           "name": "PE_CE_EBGP_MAIN_BACKUP_SELECTOR",
-          "type": "static",
-          "value": "true"
+          "type": "input",
+          "from": "RBH_CMTS_INET_PE_CE_EBGP_MAIN_BACKUP_SELECTOR"
         },
         {
           "name": "PE_CE_EBGP_IPV4_INGRESS_PREFIX_FILTERS_ALLOWED",
           "type": "static",
-          "value": "10.1.2.0/24-ge 32"
+          "value": null
         },
         {
           "name": "PE_CE_EBGP_IPV6_INGRESS_PREFIX_FILTERS_ALLOWED",
           "type": "static",
-          "value": "2001:0db7:/24-ge 32"
+          "value": null
         },
         {
           "name": "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTERS_ALLOWED",
-          "type": "static",
-          "value": "10.1.2.0/24-ge 32"
+          "type": "input",
+          "from": "RBH_CMTS_INET_PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTERS_ALLOWED"
         },
         {
           "name": "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTERS_ALLOWED",
-          "type": "static",
-          "value": "2001:0db7:/24-ge 32"
+          "type": "input",
+          "from": "RBH_CMTS_INET_PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTERS_ALLOWED"
         },
         {
           "name": "PE_CE_EBGP_IPV4_INGRESS_PREFIX_FILTERS_DENIED",
           "type": "static",
-          "value": "10.1.2.0/24-ge 32"
+          "value": null
         },
         {
           "name": "PE_CE_EBGP_IPV6_INGRESS_PREFIX_FILTERS_DENIED",
           "type": "static",
-          "value": "2001:0db7:/24-ge 32"
+          "value": null
         },
         {
           "name": "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTERS_DENIED",
           "type": "static",
-          "value": "10.1.2.0/24-ge 32"
+          "value": null
         },
         {
           "name": "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTERS_DENIED",
           "type": "static",
-          "value": "2001:0db7:/24-ge 32"
+          "value": null
         },
         {
           "name": "PE_CE_EBGP_STD_TE_COMMUNITY_HANDLING",

@@ -1,6 +1,6 @@
 {
   "factoryProductName": "IPVPN_SAP",
-  "version": "2.12",
+  "version": "2.14",
   "prerequisite": {
     "product": "IPVPN_CORE",
     "referenceParameter": "IPVPN_CORE_RFS_NAME"
@@ -398,7 +398,9 @@
       "valueType": "enumerated",
       "valueTypeDetails": {
         "enumValues": [
-          "NOQOS"
+          "NOQOS",
+          "ACCESS_OUT_QUEUE_CMTS_CORE",
+          "ACCESS_OUT_QUEUE_CMTS_ACCESS"
         ]
       },
       "special": false,

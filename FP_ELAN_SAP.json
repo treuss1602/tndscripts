@@ -264,7 +264,9 @@
       "valueType": "enumerated",
       "valueTypeDetails": {
         "enumValues": [
-          "NOQOS"
+          "NOQOS",
+          "ACCESS_OUT_QUEUE_CMTS_CORE",
+          "ACCESS_OUT_QUEUE_CMTS_ACCESS"
         ]
       },
       "special": false,

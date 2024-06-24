@@ -8,7 +8,7 @@
   "paramMapping": [
     {
       "factoryProduct": "PHY_ILAG",
-      "factoryProductVersion": "1.1",
+      "factoryProductVersion": "1.2",
       "parameters": [
         {
           "name": "PHYS_LINK_UP_DELAY",
@@ -43,7 +43,7 @@
         {
           "name": "ILAG_SYNCE_ENABLED",
           "type": "static",
-          "value": "true"
+          "value": "false"
         },
         {
           "name": "ILAG_PTP_ENABLED",
@@ -92,8 +92,8 @@
         },
         {
           "name": "PHYS_LACP_KEY",
-          "type": "static",
-          "value": 65123
+          "type": "input",
+          "from": "PHYS_LACP_KEY"
         },
         {
           "name": "PHYS_LLDP_FLAG",
