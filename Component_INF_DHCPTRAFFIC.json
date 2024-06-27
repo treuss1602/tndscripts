@@ -105,7 +105,7 @@
     },
     {
       "factoryProduct": "IPVPN_SAP",
-      "factoryProductVersion": "2.14",
+      "factoryProductVersion": "2.15",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
@@ -389,6 +389,26 @@
         },
         {
           "name": "PE_CE_EBGP_LOCAL_ASN",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "PE_CE_EBGP_IPV4_INGRESS_PREFIX_FILTER_NAME",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "PE_CE_EBGP_IPV6_INGRESS_PREFIX_FILTER_NAME",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTER_NAME",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTER_NAME",
           "type": "static",
           "value": null
         }

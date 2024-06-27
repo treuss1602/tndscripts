@@ -110,12 +110,12 @@
     },
     {
       "factoryProduct": "IPVPN_SAP",
-      "factoryProductVersion": "2.14",
+      "factoryProductVersion": "2.15",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
-          "type": "input",
-          "from": "RBH_CMTS_ABR_MC_LOGICAL_SUB_IF_ID"
+          "type": "static",
+          "value": 161
         },
         {
           "name": "VPN_ACCESS_TYPE",
@@ -139,8 +139,8 @@
         },
         {
           "name": "OUTER_VLAN_ID",
-          "type": "input",
-          "from": "RBH_CMTS_ABR_MC_OUTER_VLAN_ID"
+          "type": "static",
+          "value": 161
         },
         {
           "name": "OUTER_TPI",
@@ -329,8 +329,8 @@
         },
         {
           "name": "PE_CE_EBGP_MAIN_BACKUP_SELECTOR",
-          "type": "input",
-          "from": "RBH_CMTS_ABR_MC_PE_CE_EBGP_MAIN_BACKUP_SELECTOR"
+          "type": "static",
+          "value": "false"
         },
         {
           "name": "PE_CE_EBGP_IPV4_INGRESS_PREFIX_FILTERS_ALLOWED",
@@ -344,13 +344,13 @@
         },
         {
           "name": "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTERS_ALLOWED",
-          "type": "input",
-          "from": "RBH_CMTS_ABR_MC_PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTERS_ALLOWED"
+          "type": "static",
+          "value": null
         },
         {
           "name": "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTERS_ALLOWED",
-          "type": "input",
-          "from": "RBH_CMTS_ABR_MC_PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTERS_ALLOWED"
+          "type": "static",
+          "value": null
         },
         {
           "name": "PE_CE_EBGP_IPV4_INGRESS_PREFIX_FILTERS_DENIED",
@@ -396,6 +396,26 @@
           "name": "PE_CE_EBGP_LOCAL_ASN",
           "type": "static",
           "value": 6730
+        },
+        {
+          "name": "PE_CE_EBGP_IPV4_INGRESS_PREFIX_FILTER_NAME",
+          "type": "static",
+          "value": "IMPORT_CMTS_IPV4_POLICY"
+        },
+        {
+          "name": "PE_CE_EBGP_IPV6_INGRESS_PREFIX_FILTER_NAME",
+          "type": "static",
+          "value": "IMPORT_CMTS_IPV6_POLICY"
+        },
+        {
+          "name": "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTER_NAME",
+          "type": "static",
+          "value": "EXPORT_BMI_IPV4_POLICY"
+        },
+        {
+          "name": "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTER_NAME",
+          "type": "static",
+          "value": "EXPORT_BMI_IPV6_POLICY"
         }
       ]
     }

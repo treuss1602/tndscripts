@@ -1,6 +1,6 @@
 {
   "factoryProductName": "IPVPN_SAP",
-  "version": "2.14",
+  "version": "2.15",
   "prerequisite": {
     "product": "IPVPN_CORE",
     "referenceParameter": "IPVPN_CORE_RFS_NAME"
@@ -814,6 +814,62 @@
       "modifyOperation": "ModifyParameter",
       "exampleValue": "4200000000",
       "cramerStorage": "IPVPN_SAP_GE"
+    },
+    {
+      "name": "PE_CE_EBGP_IPV4_INGRESS_PREFIX_FILTER_NAME",
+      "description": "Name of a preexisting prefix filter",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "one string"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "IMPORT_CMTS_IPV4_POLICY",
+      "cramerStorage": "IPVPN_SAP_GE"
+    },
+    {
+      "name": "PE_CE_EBGP_IPV6_INGRESS_PREFIX_FILTER_NAME",
+      "description": "Name of a preexisting prefix filter",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "one string"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "IMPORT_CMTS_IPV6_POLICY",
+      "cramerStorage": "IPVPN_SAP_GE"
+    },
+    {
+      "name": "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTER_NAME",
+      "description": "Name of a preexisting prefix filter",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "one string"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "EXPORT_BMI_IPV4_POLICY",
+      "cramerStorage": "IPVPN_SAP_GE"
+    },
+    {
+      "name": "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTER_NAME",
+      "description": "Name of a preexisting prefix filter",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "one string"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "EXPORT_BMI_IPV6_POLICY",
+      "cramerStorage": "IPVPN_SAP_GE"
     }
   ],
   "cramerParameters": [
@@ -1023,6 +1079,10 @@
       "PE_CE_EBGP_LOCAL_ASN",
       "DHCP_RELAY_SOURCE_IPV4_ADDRESS",
       "DHCP_RELAY_SOURCE_IPV6_ADDRESS",
+      "PE_CE_EBGP_IPV4_INGRESS_PREFIX_FILTER_NAME",
+      "PE_CE_EBGP_IPV6_INGRESS_PREFIX_FILTER_NAME",
+      "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTER_NAME",
+      "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTER_NAME",
       "IPVPN_CORE_L3_VPN_NAME",
       "IPVPN_CORE_VRF_NAME",
       "IPVPN_CORE_VRF_TYPE",
@@ -1120,6 +1180,10 @@
       "PE_CE_EBGP_LOCAL_ASN",
       "DHCP_RELAY_SOURCE_IPV4_ADDRESS",
       "DHCP_RELAY_SOURCE_IPV6_ADDRESS",
+      "PE_CE_EBGP_IPV4_INGRESS_PREFIX_FILTER_NAME",
+      "PE_CE_EBGP_IPV6_INGRESS_PREFIX_FILTER_NAME",
+      "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTER_NAME",
+      "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTER_NAME",
       "IPVPN_CORE_L3_VPN_NAME",
       "IPVPN_CORE_VRF_NAME",
       "IPVPN_CORE_VRF_TYPE",
