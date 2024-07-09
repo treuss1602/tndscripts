@@ -48,10 +48,18 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
                             joinparams([p for p in config.input_params if p.modifyOperation == tr]),
                             ";",
                             ";".join(config.key_params)+";"))
-    if prod == "PHY_SIGNLE_LINK":
+    if prod == "PHY_SINGLE_LINK":
         lkt.add(LtEntry(prod+"#MoveLink", ";".join(["PHY_SINGLE_LINK_RFS_NAME", "TARGET_NETWORK_ELEMENT_NAME", "TARGET_PHYS_IF_NAME"])+";",
                         ";",
                         ";".join(config.key_params)+";"))
+    elif prod in ["PHY_ILAG", "PHY_ESILAG"]:
+        lkt.add(LtEntry(prod+"#AddMemberLinks", ";".join(["{}_RFS_NAME;".format(prod), "IDN_SERVICES"])+";",
+                        ";",
+                        ";".join(config.key_params)+";"))
+        lkt.add(LtEntry(prod+"#RemoveMemberLinks", ";".join(["{}_RFS_NAME;".format(prod), "IDN_SERVICES"])+";",
+                        ";",
+                        ";".join(config.key_params)+";"))
+
 
     tables.append(lkt)
 
@@ -155,8 +163,13 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
                     "ModifyCustomSnippets": "modify_rfs_custom_snippets",
                     "ModifyQoS": "modify_rfs_qos",
                     "ModifySubnets": "modify_rfs_ip_subnets",
-                    "ModifyVlan": "modify_rfs_vlan"}
+                    "ModifyVlan": "modify_rfs_vlan",
+                    "AddMemberLinks": "placeholder_add_member_links",
+                    "RemoveMemberLinks": "placeholder_remove_member_links"}
     supported_transactions = {"Create", "Delete"}.union({p.modifyOperation for p in config.input_params})
+    if prod in ["PHY_ILAG", "PHY_ESILAG"]:
+        supported_transactions.add("AddMemberLinks")
+        supported_transactions.add("RemoveMemberLinks")
 
     lkt = LookupTable('LKT_TND_STABLENET')
     for trans, orderdesc in TRANSACTIONS.items():
