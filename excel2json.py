@@ -156,5 +156,5 @@ if __name__ == "__main__":
         config.add_validation("CHECK_NODE_LOCATION", "ACCESS_DEVICE_NAME", taskname="CHECK_ACCESS_DEVICE_EXISTS")
     outfile = "FP_{}.json".format(prodname) if args.outfile is None else args.outfile
     DBG(10, "Writing json file '{}'".format(outfile))
-    with open(outfile, "w") as fp:
+    with open(outfile, "w", newline='\n') as fp:
         config.to_file(fp)

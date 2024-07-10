@@ -123,5 +123,5 @@ if __name__ == "__main__":
 
         outfile = "{}_{}.json".format("CFS" if cfsname else "Component", composite) if args.outfile is None else args.outfile
         DBG(10, "Writing json file '{}'".format(outfile))
-        with open(outfile, "w") as fp:
+        with open(outfile, "w", newline='\n') as fp:
             json.dump(jsondata, fp, indent=2)
