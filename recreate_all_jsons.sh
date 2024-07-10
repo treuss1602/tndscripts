@@ -5,10 +5,18 @@ COMPONENTS="RBH_RPD RBH_CMTS RBH_CMTS_INET RBH_CMTS_ABR_MC RTL_PROV RTL_MGT RTL_
 CFSES="TN_RBH_RPD_ACCESS TN_RBH_CMTS_ACCESS TN_RBH_CMTS_CORE TN_B2C_OLT_ACCESS TN_B2C_XDSLAM_ACCESS TN_CMTS_ACCESS"
 TABLES="LKT_TND_FACTORY_PRODUCT_PARAMETERS LKT_MANDATORY_PARAM_CHECK LKT_TND_ENUM_PARAM_CHECK LKT_TND_CRAMER_COMMAND_VALIDATION LKT_TND_CRAMER_QUERY_SERVICE LKT_TND_CRAMER_IDENTIFY_SERVICE LKT_TND_CRAMER_SUBORDERS LKT_TND_STABLENET"
 
-XLS="`ls -1t ../Factory*.xlsx | head -1`"
+if [ $# -ne 1 ]; then
+	echo "Usage: recreate_all_jsons.sh <XLS-FILE>"
+	exit 1
+fi
+XLS=$1
+if [ ! -f "$XLS" ]; then
+	echo "No such file: $XLS"
+	exit 1
+fi
 for fp in $FACTORY_PRODUCTS; do
-    ./excel2json.py -t $fp "$XLS"
+    python ./excel2json.py -t $fp "$XLS"
 done
 for com in $COMPONENTS $CFSES; do
-    ./extract_cfs_param_table.py "$XLS" $com
+    python ./extract_cfs_param_table.py "$XLS" $com
 done
