@@ -4,7 +4,7 @@
   "paramMapping": [
     {
       "factoryProduct": "IPVPN_CORE",
-      "factoryProductVersion": "2.3",
+      "factoryProductVersion": "2.4",
       "parameters": [
         {
           "name": "L3_VPN_NAME",
@@ -110,7 +110,7 @@
     },
     {
       "factoryProduct": "IPVPN_SAP",
-      "factoryProductVersion": "2.15",
+      "factoryProductVersion": "2.17",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
@@ -165,7 +165,7 @@
         {
           "name": "PRIMARY_IPV4_IF_ADDRESS",
           "type": "static",
-          "value": "/30@EBH LINKNET"
+          "value": "/30@CMTS LINKNETS"
         },
         {
           "name": "ADDITIONAL_IPV4_IF_ADDRESSES",
@@ -175,7 +175,7 @@
         {
           "name": "PRIMARY_IPV6_IF_ADDRESS",
           "type": "static",
-          "value": null
+          "value": "/64@IPv6 CMTS LINKNETS"
         },
         {
           "name": "ADDITIONAL_IPV6_IF_ADDRESSES",
@@ -310,7 +310,7 @@
         {
           "name": "PE_CE_EBGP_PEER_ASN",
           "type": "static",
-          "value": null
+          "value": 65503
         },
         {
           "name": "PE_CE_EBGP_BFD_FLAG",

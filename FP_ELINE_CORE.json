@@ -1,6 +1,6 @@
 {
   "factoryProductName": "ELINE_CORE",
-  "version": "0.5",
+  "version": "0.7",
   "prerequisite": null,
   "inputParameters": [
     {
@@ -12,7 +12,8 @@
       "dynamicallyMapped": false,
       "modifyOperation": null,
       "exampleValue": "ZH0004MEB101",
-      "cramerStorage": "TND device"
+      "cramerStorage": "TND device",
+      "jsonName": "networkElementName"
     },
     {
       "name": "EVPN_EVI_RANGE",
@@ -39,22 +40,22 @@
       "special": false,
       "dynamicallyMapped": false,
       "modifyOperation": null,
-      "exampleValue": "ELINET1234",
+      "exampleValue": "ELINET123456789",
       "cramerStorage": "Toplogy name ( created by the first Factory service or manually created upfront)\nIf exsists, it implies that RTs related to topology must exist.",
       "jsonName": "l2vpnName"
     },
     {
       "name": "EVI_NAME",
       "description": "VRF name",
-      "mandatory": true,
+      "mandatory": false,
       "valueType": "string",
       "valueTypeDetails": {
-        "comment": "Infrastructure case:\nCMTS_INET_VPN\n\nAutomatic case:\nSIPCORE1234_A_IVC000000001"
+        "comment": "Infrastructure case:\n??\n\nAutomatic case:\nSIPCORE1234 or ELINET123456789"
       },
       "special": false,
       "dynamicallyMapped": false,
       "modifyOperation": null,
-      "exampleValue": "SIPCORE1234_A_IVC000000001",
+      "exampleValue": "SIPCORE1234  or ELINET123456789",
       "cramerStorage": "Routing Instance VRFNAME field (Generic Entity: Routing Instance)\n\nThe VRF name is in VRFNAME field where as the RI name can not reflect the VRF name as inventory model needs to differentiate different import/export settings per RI.",
       "jsonName": "eviName"
     },
@@ -87,7 +88,8 @@
       "dynamicallyMapped": false,
       "modifyOperation": "ModifyCustomSnippets",
       "exampleValue": "Snippet1;Snippet2",
-      "cramerStorage": "CONFIG_SNIPPET_GE (s)"
+      "cramerStorage": "CONFIG_SNIPPET_GE (s)",
+      "jsonName": "custSnippetNames"
     }
   ],
   "cramerParameters": [
@@ -98,7 +100,8 @@
       "valueType": "string",
       "modifyOperation": null,
       "exampleValue": "ELINECC000000001",
-      "cramerStorage": "Service"
+      "cramerStorage": "Service",
+      "jsonName": "elineCoreRFSName"
     },
     {
       "name": "EVI_INSTANCE_ID",
@@ -115,10 +118,10 @@
       "mandatory": true,
       "valueType": "string",
       "valueTypeDetails": {
-        "comment": "Infrastructure case:\nCMTS_INET_VPN\n\nAutomatic case:\nSIPCORE1234_A_IVC000000001"
+        "comment": "Infrastructure case:\n??\n\nAutomatic case:\nSIPCORE1234 or ELINET123456789"
       },
       "modifyOperation": null,
-      "exampleValue": "SIPCORE1234_A_IVC000000001",
+      "exampleValue": "SIPCORE1234  or ELINET123456789",
       "cramerStorage": "Routing Instance VRFNAME field (Generic Entity: Routing Instance)\n\nThe VRF name is in VRFNAME field where as the RI name can not reflect the VRF name as inventory model needs to differentiate different import/export settings per RI.",
       "jsonName": "eviName"
     },
@@ -128,12 +131,12 @@
       "mandatory": true,
       "valueType": "string",
       "valueTypeDetails": {
-        "comment": "1 or multiple values separated by ;"
+        "comment": "one value"
       },
       "modifyOperation": null,
-      "exampleValue": "6730:122334;6730:122335",
+      "exampleValue": "6730:122334",
       "cramerStorage": "RT",
-      "jsonName": "eviRouteTargetSet"
+      "jsonName": "eviRouteTarget"
     },
     {
       "name": "EVI_ROUTE_DISTINGUISHER",
@@ -144,6 +147,16 @@
       "exampleValue": "6730:1225555",
       "cramerStorage": "RD",
       "jsonName": "eviRouteDistinguisher"
+    },
+    {
+      "name": "VC_ID_RANGE",
+      "description": "VC ID range attached to ELINE Topology",
+      "mandatory": true,
+      "valueType": "string",
+      "modifyOperation": null,
+      "exampleValue": "1->16777215",
+      "cramerStorage": "VC ID range",
+      "jsonName": "vcIdRange"
     }
   ],
   "keyParameters": [
@@ -158,7 +171,8 @@
       "EVI_ROUTE_TARGET",
       "EVI_ROUTE_DISTINGUISHER",
       "VRF_SR_TE_COLOR_COMMUNITY",
-      "CUST_SNIPPET_NAMES"
+      "CUST_SNIPPET_NAMES",
+      "VC_ID_RANGE"
     ],
     "postNEI": [
       "EVI_INSTANCE_ID",
@@ -167,7 +181,8 @@
       "EVI_ROUTE_TARGET",
       "EVI_ROUTE_DISTINGUISHER",
       "VRF_SR_TE_COLOR_COMMUNITY",
-      "CUST_SNIPPET_NAMES"
+      "CUST_SNIPPET_NAMES",
+      "VC_ID_RANGE"
     ]
   },
   "cramerValidations": [

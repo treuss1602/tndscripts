@@ -4,7 +4,7 @@
   "paramMapping": [
     {
       "factoryProduct": "IPVPN_CORE",
-      "factoryProductVersion": "2.3",
+      "factoryProductVersion": "2.4",
       "parameters": [
         {
           "name": "L3_VPN_NAME",
@@ -105,7 +105,7 @@
     },
     {
       "factoryProduct": "IPVPN_SAP",
-      "factoryProductVersion": "2.15",
+      "factoryProductVersion": "2.17",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",

@@ -1,6 +1,6 @@
 {
   "factoryProductName": "ELINE_SAP",
-  "version": "0.5",
+  "version": "0.7",
   "prerequisite": null,
   "inputParameters": [
     {
@@ -12,7 +12,8 @@
       "dynamicallyMapped": false,
       "modifyOperation": null,
       "exampleValue": "ZH0004MEB101",
-      "cramerStorage": "TND device"
+      "cramerStorage": "TND device",
+      "jsonName": "networkElementName"
     },
     {
       "name": "LOGICAL_SUB_IF_ID",
@@ -24,27 +25,29 @@
       "modifyOperation": null,
       "exampleValue": "1024",
       "cramerStorage": "Number object",
-      "jsonName": "logicalSubInterfaceId"
+      "jsonName": "logicalSubIfId"
     },
     {
       "name": "ELINE_LOCAL_VC_ID",
       "description": "Must be unique inside EVI instance",
-      "mandatory": true,
+      "mandatory": false,
       "valueType": "integer",
       "special": false,
       "dynamicallyMapped": false,
       "modifyOperation": null,
-      "cramerStorage": "Number object"
+      "cramerStorage": "Number object",
+      "jsonName": "elineLocalVcId"
     },
     {
       "name": "ELINE_REMOTE_VC_ID",
       "description": "Must be unique inside EVI instance",
-      "mandatory": true,
+      "mandatory": false,
       "valueType": "integer",
       "special": false,
       "dynamicallyMapped": false,
       "modifyOperation": null,
-      "cramerStorage": "Number object"
+      "cramerStorage": "Number object",
+      "jsonName": "elineRemoteVcId"
     },
     {
       "name": "ACCESS_TYPE",
@@ -276,7 +279,9 @@
       "valueType": "enumerated",
       "valueTypeDetails": {
         "enumValues": [
-          "NOQOS"
+          "NOQOS",
+          "ACCESS_OUT_QUEUE_CMTS_CORE",
+          "ACCESS_OUT_QUEUE_CMTS_ACCESS"
         ]
       },
       "special": false,
@@ -343,7 +348,27 @@
       "description": "ELINE SAP Name",
       "mandatory": true,
       "valueType": "string",
-      "modifyOperation": null
+      "modifyOperation": null,
+      "exampleValue": "ELINESAP000000001",
+      "jsonName": "elineSapRFSName"
+    },
+    {
+      "name": "ELINE_LOCAL_VC_ID",
+      "description": "Must be unique inside EVI instance",
+      "mandatory": true,
+      "valueType": "integer",
+      "modifyOperation": null,
+      "cramerStorage": "Number object",
+      "jsonName": "elineLocalVcId"
+    },
+    {
+      "name": "ELINE_REMOTE_VC_ID",
+      "description": "Must be unique inside EVI instance",
+      "mandatory": true,
+      "valueType": "integer",
+      "modifyOperation": null,
+      "cramerStorage": "Number object",
+      "jsonName": "elineRemoteVcId"
     },
     {
       "name": "INNER_VLAN_ID",
@@ -370,6 +395,29 @@
       "exampleValue": "3000",
       "cramerStorage": "VLAN number",
       "jsonName": "outerVLANId"
+    },
+    {
+      "name": "SAP_IF_NAME",
+      "description": "L2 SAP Interface name",
+      "mandatory": true,
+      "valueType": "string",
+      "modifyOperation": null,
+      "exampleValue": "Bundle-Ether20.1024",
+      "cramerStorage": "Port",
+      "jsonName": "sapIfName"
+    },
+    {
+      "name": "EVI_NAME",
+      "description": "VRF name",
+      "mandatory": true,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "automatic case:\nELANCORE1234"
+      },
+      "modifyOperation": null,
+      "exampleValue": "ELANCORE1234",
+      "cramerStorage": "Routing Instance VRFNAME field (Generic Entity: Routing Instance)\n\nThe VRF name is in VRFNAME field where as the RI name can not reflect the VRF name as inventory model needs to differentiate different import/export settings per RI.",
+      "jsonName": "eviName"
     }
   ],
   "keyParameters": [
@@ -399,7 +447,9 @@
       "QOS_EGRESS_QOS_QUEUE_PROFILE",
       "QOS_EGRESS_QOS_POLICY",
       "QOS_CUST_EGRESS_REWRITE_CONFIG",
-      "CUST_SNIPPET_NAMES"
+      "CUST_SNIPPET_NAMES",
+      "SAP_IF_NAME",
+      "EVI_NAME"
     ],
     "postNEI": [
       "LOGICAL_SUB_IF_ID",
@@ -422,7 +472,9 @@
       "QOS_EGRESS_QOS_QUEUE_PROFILE",
       "QOS_EGRESS_QOS_POLICY",
       "QOS_CUST_EGRESS_REWRITE_CONFIG",
-      "CUST_SNIPPET_NAMES"
+      "CUST_SNIPPET_NAMES",
+      "SAP_IF_NAME",
+      "EVI_NAME"
     ]
   },
   "cramerValidations": [

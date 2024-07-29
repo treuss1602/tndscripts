@@ -42,6 +42,9 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
                      joinparams([p for p in config.input_params if p.dynamically_mapped]),
                      ";".join(config.key_params)+";"))
     lkt.add(LtEntry(prod+"#Delete", "{}_RFS_NAME;".format(prod), ";", ";".join(config.key_params)+";"))
+    lkt.add(LtEntry(prod+"#Provision", "{}_RFS_NAME;".format(prod), ";", ";".join(config.key_params)+";"))
+    lkt.add(LtEntry(prod+"#Deprovision", "{}_RFS_NAME;".format(prod), ";", ";".join(config.key_params)+";"))
+    lkt.add(LtEntry(prod+"#RemoveModelling", "{}_RFS_NAME;".format(prod), ";", ";".join(config.key_params)+";"))
     for tr in MODIFY_OPS:
         if tr in {p.modifyOperation for p in config.input_params}:
             lkt.add(LtEntry(prod+"#"+tr,
@@ -65,11 +68,13 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
 
     # LKT_MANDATORY_PARAM_CHECK
     lkt = LookupTable('LKT_MANDATORY_PARAM_CHECK')
-    lkt.add(LtEntry('FACTORY_PRODUCT_'+prod+"#Create", "PAUSE_AFTER_PREPARE "+" ".join(p.name.replace('_<N>','_1') for p in config.input_params if p.mandatory)+" ", "ORDER_TYPE IL_REQ_GROUP ORDER_EXTERNAL_ORDER_ID "))
-    lkt.add(LtEntry('FACTORY_PRODUCT_'+prod+"#Delete", "PAUSE_AFTER_PREPARE {}_RFS_NAME ".format(prod), "ORDER_TYPE IL_REQ_GROUP ORDER_EXTERNAL_ORDER_ID "))
+    lkt.add(LtEntry('FACTORY_PRODUCT_'+prod+"#Create", " ".join(p.name.replace('_<N>','_1') for p in config.input_params if p.mandatory)+" ", "ORDER_TYPE IL_REQ_GROUP ORDER_EXTERNAL_ORDER_ID "))
+    lkt.add(LtEntry('FACTORY_PRODUCT_'+prod+"#Delete", "{}_RFS_NAME ".format(prod), "ORDER_TYPE IL_REQ_GROUP ORDER_EXTERNAL_ORDER_ID "))
+    lkt.add(LtEntry('FACTORY_PRODUCT_'+prod+"#Provision", "{}_RFS_NAME CRAMER_CONTEXT_ID".format(prod), "ORDER_TYPE IL_REQ_GROUP ORDER_EXTERNAL_ORDER_ID "))
+    lkt.add(LtEntry('FACTORY_PRODUCT_'+prod+"#Deprovision", "{}_RFS_NAME CRAMER_CONTEXT_ID".format(prod), "ORDER_TYPE IL_REQ_GROUP ORDER_EXTERNAL_ORDER_ID "))
     for tr in MODIFY_OPS:
         if tr in {p.modifyOperation for p in config.input_params}:
-            lkt.add(LtEntry('FACTORY_PRODUCT_'+prod+"#"+tr, "PAUSE_AFTER_PREPARE {}_RFS_NAME ".format(prod), "ORDER_TYPE IL_REQ_GROUP ORDER_EXTERNAL_ORDER_ID "))
+            lkt.add(LtEntry('FACTORY_PRODUCT_'+prod+"#"+tr, "{}_RFS_NAME ".format(prod), "ORDER_TYPE IL_REQ_GROUP ORDER_EXTERNAL_ORDER_ID "))
     tables.append(lkt)
 
     # LKT_TND_ENUM_PARAM_CHECK
@@ -213,6 +218,7 @@ def create_lookup_tables_for_composition(data):
         rfsname = {"name": "{}_RFS_NAME".format(fpname),
                    "type": "input",
                    "from": "{}_{}_RFS_NAME".format(component, fpname) if component else "{}_RFS_NAME".format(fpname)}
+        parameters = []
         for paramdata in [rfsname] + fpdata["parameters"]:
             pname, ptype = (paramdata[x] for x in ["name", "type"])
             if pname not in DISPLAY_PARAM_BLACKLIST:
@@ -222,6 +228,8 @@ def create_lookup_tables_for_composition(data):
                     values = paramdata["from"]
                     DBG(30, "Values are {}".format(values))
                     lkt2.add(LtEntry(key, values))
+                    parameters.append(pname)
+        lkt2.add(LtEntry("#".join([cfs, component, fpname, "Display", "Parameters"]), ";".join(parameters)+ ";"))
 
     return [lkt1, lkt2]
 
