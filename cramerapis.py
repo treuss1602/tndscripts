@@ -10,5 +10,5 @@ CramerAPIs = { "PHY_SINGLE_LINK": ("getPHYSingleLinkDetails", "identifyPHYSingle
                "ELAN_CORE":       ("getELANCoreDetails",      "identifyELANCore"),
                "ELAN_SAP":        ("getELANSAPDetails",       None),
                "ELINE_CORE":      ("getElineCoreDetails",     "identifyElineCore"),
-               "ELINE_SAP":       ("getElineSAPDetails",      None),
+               "ELINE_SAP":       ("getElineSapDetails",      None),
 }

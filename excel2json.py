@@ -9,6 +9,7 @@ from factoryproduct import Param, FactoryProductConfiguration
 from debug import DBG, set_debug_level
 
 FP_DEPENDENCIES = {"ELAN_SAP": ("ELAN_CORE", "ELAN_CORE_RFS_NAME"),
+                   "ELINE_SAP": ("ELINE_CORE", "ELINE_CORE_RFS_NAME"),
                    "IPVPN_SAP": ("IPVPN_CORE", "IPVPN_CORE_RFS_NAME")}
 
 def read_data_from_excel(xlfile, tab):
