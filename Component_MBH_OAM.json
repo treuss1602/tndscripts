@@ -1,0 +1,600 @@
+{
+  "compositionName": "MBH_OAM",
+  "compositionType": "component",
+  "paramMapping": [
+    {
+      "factoryProduct": "IPVPN_CORE",
+      "factoryProductVersion": "2.5",
+      "parameters": [
+        {
+          "name": "L3_VPN_NAME",
+          "type": "static",
+          "value": "MBH_OAM"
+        },
+        {
+          "name": "VRF_NAME",
+          "type": "static",
+          "value": "MBH_OAM"
+        },
+        {
+          "name": "VRF_TYPE",
+          "type": "static",
+          "value": "Any2Any"
+        },
+        {
+          "name": "VRF_SR_TE_COLOR",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "UCAST_IPV4_FLAG",
+          "type": "static",
+          "value": "true"
+        },
+        {
+          "name": "UCAST_IPV6_FLAG",
+          "type": "static",
+          "value": "true"
+        },
+        {
+          "name": "MCAST_SITE_TYPE",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "MCAST_IPV4_FLAG",
+          "type": "static",
+          "value": "false"
+        },
+        {
+          "name": "MCAST_IPV4_SSM_GROUPS",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "MCAST_IPV4_SSM_MAP_SOURCES",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "MCAST_IPV6_FLAG",
+          "type": "static",
+          "value": "false"
+        },
+        {
+          "name": "IPV4_DHCP_RELAY_FLAG",
+          "type": "static",
+          "value": "false"
+        },
+        {
+          "name": "IPV4_DHCP_SERVER_VRF",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "IPV4_DHCP_SERVER_IP_ADDRESSES",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "IPV6_DHCP_RELAY_FLAG",
+          "type": "static",
+          "value": "false"
+        },
+        {
+          "name": "IPV6_DHCP_SERVER_VRF",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "IPV6_DHCP_SERVER_IP_ADDRESSES",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "MANAGED_SR_DHCP_FLAG",
+          "type": "static",
+          "value": "false"
+        },
+        {
+          "name": "CUST_SNIPPET_NAMES",
+          "type": "input",
+          "from": "MBH_OAM_IPVPN_CORE_CUST_SNIPPET_NAMES"
+        },
+        {
+          "name": "DHCP_RELAY_LOOPBACK_ID",
+          "type": "static",
+          "value": null
+        }
+      ]
+    },
+    {
+      "factoryProduct": "IPVPN_SAP",
+      "factoryProductVersion": "2.18",
+      "parameters": [
+        {
+          "name": "LOGICAL_SUB_IF_ID",
+          "type": "input",
+          "from": "MBH_OAM_LOGICAL_SUB_IF_ID"
+        },
+        {
+          "name": "VPN_ACCESS_TYPE",
+          "type": "static",
+          "value": "Any2Any"
+        },
+        {
+          "name": "ACCESS_TYPE",
+          "type": "static",
+          "value": "UNI"
+        },
+        {
+          "name": "INNER_VLAN_ID",
+          "type": "static",
+          "value": "untagged"
+        },
+        {
+          "name": "INNER_TPI",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "OUTER_VLAN_ID",
+          "type": "static",
+          "value": 1400
+        },
+        {
+          "name": "OUTER_TPI",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "SERVICE_MTU",
+          "type": "static",
+          "value": 1518
+        },
+        {
+          "name": "IPVPN_CORE_RFS_NAME",
+          "type": "mapped",
+          "from": "MBH_OAM_IPVPN_CORE_RFS_NAME"
+        },
+        {
+          "name": "PHY_SERVICE_NAME",
+          "type": "mapped",
+          "from": "PHY_IRB_RFS_NAME"
+        },
+        {
+          "name": "PRIMARY_IPV4_IF_ADDRESS",
+          "type": "static",
+          "value": "/30@EBH LINKNET"
+        },
+        {
+          "name": "ADDITIONAL_IPV4_IF_ADDRESSES",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "PRIMARY_IPV6_IF_ADDRESS",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "ADDITIONAL_IPV6_IF_ADDRESSES",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "INGRESS_L3_ACL_NAME",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "EGRESS_L3_ACL_NAME",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "IPV4_MCAST_IGMP_FLAG",
+          "type": "static",
+          "value": "false"
+        },
+        {
+          "name": "IPV4_MCAST_IGMP_VERSION",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "IPV4_MCAST_PIM_FLAG",
+          "type": "static",
+          "value": "false"
+        },
+        {
+          "name": "IPV6_MCAST_IF_FLAG",
+          "type": "static",
+          "value": "false"
+        },
+        {
+          "name": "IPV4_DHCP_RELAY_FLAG",
+          "type": "static",
+          "value": "false"
+        },
+        {
+          "name": "IPV6_DHCP_RELAY_FLAG",
+          "type": "static",
+          "value": "false"
+        },
+        {
+          "name": "ACAST_IPV4_FLAG",
+          "type": "static",
+          "value": "false"
+        },
+        {
+          "name": "ACAST_IPV6_FLAG",
+          "type": "static",
+          "value": "false"
+        },
+        {
+          "name": "QOS_INGRESS_CLASSIFICATION_PROFILE",
+          "type": "static",
+          "value": "ACCESS_IN_CLASS_DSCP"
+        },
+        {
+          "name": "QOS_INGRESS_POLICING_PROFILE",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "QOS_EGRESS_QOS_QUEUE_PROFILE",
+          "type": "static",
+          "value": "NOQOS"
+        },
+        {
+          "name": "QOS_EGRESS_QOS_POLICY",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "QOS_CUST_EGRESS_REWRITE_CONFIG",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "IPV4_STATIC_ROUTE_<N>",
+          "type": "input",
+          "from": "MBH_OAM_IPV4_STATIC_ROUTE_<N>"
+        },
+        {
+          "name": "IPV6_STATIC_ROUTE_<N>",
+          "type": "input",
+          "from": "MBH_OAM_IPV6_STATIC_ROUTE_<N>"
+        },
+        {
+          "name": "VRRP_IPV4_FLAG",
+          "type": "static",
+          "value": "false"
+        },
+        {
+          "name": "VRRP_IPV4_PRIORITY",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "VRRP_IPV4_VIRTUAL_IP",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "VRRP_IPV6_FLAG",
+          "type": "static",
+          "value": "false"
+        },
+        {
+          "name": "VRRP_IPV6_PRIORITY",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "VRRP_IPV6_VIRTUAL_IP",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "PE_CE_EBGP_FLAG",
+          "type": "static",
+          "value": "true"
+        },
+        {
+          "name": "PE_CE_EBGP_AUTHENTICATION_KEY",
+          "type": "input",
+          "from": "MBH_OAM_PE_CE_EBGP_AUTHENTICATION_KEY"
+        },
+        {
+          "name": "PE_CE_EBGP_PEER_ASN",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "PE_CE_EBGP_BFD_FLAG",
+          "type": "static",
+          "value": "false"
+        },
+        {
+          "name": "PE_CE_EBGP_IPV4_DEFAULT_FLAG",
+          "type": "static",
+          "value": "false"
+        },
+        {
+          "name": "PE_CE_EBGP_IPV6_DEFAULT_FLAG",
+          "type": "static",
+          "value": "false"
+        },
+        {
+          "name": "PE_CE_EBGP_MAIN_BACKUP_SELECTOR",
+          "type": "static",
+          "value": "true"
+        },
+        {
+          "name": "PE_CE_EBGP_IPV4_INGRESS_PREFIX_FILTERS_ALLOWED",
+          "type": "static",
+          "value": "10.1.2.0/24-ge 32"
+        },
+        {
+          "name": "PE_CE_EBGP_IPV6_INGRESS_PREFIX_FILTERS_ALLOWED",
+          "type": "static",
+          "value": "2001:0db7:/24-ge 32"
+        },
+        {
+          "name": "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTERS_ALLOWED",
+          "type": "static",
+          "value": "10.1.2.0/24-ge 32"
+        },
+        {
+          "name": "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTERS_ALLOWED",
+          "type": "static",
+          "value": "2001:0db7:/24-ge 32"
+        },
+        {
+          "name": "PE_CE_EBGP_IPV4_INGRESS_PREFIX_FILTERS_DENIED",
+          "type": "static",
+          "value": "10.1.2.0/24-ge 32"
+        },
+        {
+          "name": "PE_CE_EBGP_IPV6_INGRESS_PREFIX_FILTERS_DENIED",
+          "type": "static",
+          "value": "2001:0db7:/24-ge 32"
+        },
+        {
+          "name": "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTERS_DENIED",
+          "type": "static",
+          "value": "10.1.2.0/24-ge 32"
+        },
+        {
+          "name": "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTERS_DENIED",
+          "type": "static",
+          "value": "2001:0db7:/24-ge 32"
+        },
+        {
+          "name": "PE_CE_EBGP_STD_TE_COMMUNITY_HANDLING",
+          "type": "static",
+          "value": "false"
+        },
+        {
+          "name": "CUST_SNIPPET_NAMES",
+          "type": "input",
+          "from": "MBH_OAM_IPVPN_SAP_CUST_SNIPPET_NAMES"
+        },
+        {
+          "name": "PE_CE_EBGP_IPV4_PEERS",
+          "type": "input",
+          "from": "MBH_OAM_PE_CE_EBGP_IPV4_PEERS"
+        },
+        {
+          "name": "PE_CE_EBGP_IPV6_PEERS",
+          "type": "input",
+          "from": "MBH_OAM_PE_CE_EBGP_IPV6_PEERS"
+        },
+        {
+          "name": "PE_CE_EBGP_LOCAL_ASN",
+          "type": "static",
+          "value": 6730
+        },
+        {
+          "name": "PE_CE_EBGP_IPV4_INGRESS_PREFIX_FILTER_NAME",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "PE_CE_EBGP_IPV6_INGRESS_PREFIX_FILTER_NAME",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTER_NAME",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTER_NAME",
+          "type": "static",
+          "value": null
+        }
+      ]
+    },
+    {
+      "factoryProduct": "ELAN_CORE",
+      "factoryProductVersion": "2.2",
+      "parameters": [
+        {
+          "name": "EVPN_EVI_RANGE",
+          "type": "static",
+          "value": "20400->20599"
+        },
+        {
+          "name": "L2_VPN_NAME",
+          "type": "mapped",
+          "from": "MBH_OAM_L2_VPN_NAME"
+        },
+        {
+          "name": "EVI_NAME",
+          "type": "static",
+          "value": "MBH_OAM"
+        },
+        {
+          "name": "EVI_IMPORT_ADDITIONAL_ROUTE_TARGET_SET",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "EVI_EXPORT_ADDITIONAL_ROUTE_TARGET_SET",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "EVI_TYPE",
+          "type": "static",
+          "value": "E-LAN"
+        },
+        {
+          "name": "VRF_SR_TE_COLOR_COMMUNITY",
+          "type": "static",
+          "value": "0:130"
+        },
+        {
+          "name": "RELATED_L3_LOGICAL_IF",
+          "type": "static",
+          "value": 9009
+        },
+        {
+          "name": "MANAGEMENT_FLAG",
+          "type": "static",
+          "value": "false"
+        },
+        {
+          "name": "IGMP_MLD_SNOOPING_FLAG",
+          "type": "static",
+          "value": "false"
+        },
+        {
+          "name": "CUST_SNIPPET_NAMES",
+          "type": "input",
+          "from": "MBH_OAM_ELAN_CORE_CUST_SNIPPET_NAMES"
+        }
+      ]
+    },
+    {
+      "factoryProduct": "ELAN_SAP",
+      "factoryProductVersion": "1.3",
+      "parameters": [
+        {
+          "name": "LOGICAL_SUB_IF_ID",
+          "type": "static",
+          "value": 1031
+        },
+        {
+          "name": "ELAN_ACCESS_TYPE",
+          "type": "static",
+          "value": "E-LAN"
+        },
+        {
+          "name": "ACCESS_TYPE",
+          "type": "static",
+          "value": "UNI"
+        },
+        {
+          "name": "ELAN_CORE_RFS_NAME",
+          "type": "mapped",
+          "from": "MBH_OAM_ELAN_CORE_RFS_NAME"
+        },
+        {
+          "name": "PHY_SERVICE_NAME",
+          "type": "mapped",
+          "from": "PHY_ESILAG_RFS_NAME"
+        },
+        {
+          "name": "INNER_VLAN_ID",
+          "type": "static",
+          "value": "untagged"
+        },
+        {
+          "name": "INNER_TPI",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "OUTER_VLAN_ID",
+          "type": "static",
+          "value": 1000
+        },
+        {
+          "name": "OUTER_TPI",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "VLAN_TAG_OPERATION",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "SERVICE_MTU",
+          "type": "static",
+          "value": 1500
+        },
+        {
+          "name": "INGRESS_L2_ACL_NAME",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "EGRESS_L2_ACL_NAME",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "QOS_INGRESS_CLASSIFICATION_PROFILE",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "QOS_INGRESS_POLICING_PROFILE",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "QOS_EGRESS_QOS_QUEUE_PROFILE",
+          "type": "static",
+          "value": "NOQOS"
+        },
+        {
+          "name": "QOS_EGRESS_QOS_POLICY",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "QOS_CUST_EGRESS_REWRITE_CONFIG",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "CUST_SNIPPET_NAMES",
+          "type": "input",
+          "from": "MBH_OAM_ELAN_SAP_CUST_SNIPPET_NAMES"
+        },
+        {
+          "name": "IPV4_DHCP_RELAY_FLAG",
+          "type": "static",
+          "value": "true"
+        },
+        {
+          "name": "IPV4_DHCP_CIRCUITID_FORMAT",
+          "type": "static",
+          "value": "\"%portname:%svlan.%cvlan %sysname/0/0/0/0/0\""
+        },
+        {
+          "name": "IPV4_DHCP_REMOTEID_FORMAT",
+          "type": "static",
+          "value": "%mac"
+        }
+      ]
+    }
+  ]
+}
