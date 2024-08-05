@@ -17,6 +17,10 @@ CFS_COMPONENT_MAPPING = {
     "TN_B2C_OLT_ACCESS": ["RTL_PROV", "RTL_MGT", "RTL_INET", "RTL_VOIP", "INF_DHCPTRAFFIC", "INF_MGT", "RTL_IPTV", "RTL_CGN"],
     "TN_B2C_XDSLAM_ACCESS": ["RTL_PROV", "RTL_MGT", "RTL_INET", "RTL_VOIP", "INF_DHCPTRAFFIC", "INF_MGT", "RTL_IPTV", "RTL_CGN"],
     "TN_CMTS_ACCESS": ["RBH_CMTS_INET", "RBH_CMTS_ABR_MC"],
+    "TN_MBH_MAD": ["MBH_OAM_MAD", "MBH_UPCP_MAD", "MBH_TLMGT_MAD", "MBH_S1_4G_MAD", "MBH_S1_5G_MAD"],
+    "TN_MBH_MSA": ["MBH_OAM", "MBH_UPCP", "MBH_TLMGT", "MBH_S1_4G", "MBH_S1_5G"],
+    "TN_MBH_4G5G": ["MBH_OAM", "MBH_UPCP", "MBH_S1_4G", "MBH_S1_5G"],
+    "TN_MBH_3G": ["MBH_OAM", "MBH_UPCP"],
 }
 
 def read_data_from_sheet(sheet, col1, col2, cfsname, componentname, fpname):
@@ -91,17 +95,41 @@ def read_data_from_excel(xlfile, cfsname, componentname):
                     data = read_data_from_sheet(sheet, col1, col2, cfsname, componentname, prodname)
                     rv.append({"factoryProduct": prodname, "factoryProductVersion": str(version), "parameters": data})
                     break
+                else:
+                    if cellval:
+                        DBG(50, "Ignoring header {} - not '{}'".format(cellval, "CFS "+cfsname if cfsname else componentname))
     
     return rv
 
 
-
+def extract_data_to_file(composite, recursive=False, outfile=None):
+    if composite.startswith("TN_"):
+        cfsname = composite
+        jsondata = {"compositionName": cfsname, "compositionType": "cfs"}
+        jsondata["includedComponents"] = CFS_COMPONENT_MAPPING.get(cfsname, [])
+        jsondata["paramMapping"] = read_data_from_excel(args.filename, cfsname, None)
+    else:
+        componentname = composite
+        jsondata = {"compositionName": componentname, "compositionType": "component"}
+        jsondata["paramMapping"] = read_data_from_excel(args.filename, None, componentname)
+        cfsname = None
+    
+    if outfile is None:
+        outfile = "{}_{}.json".format("CFS" if cfsname else "Component", composite)
+    DBG(10, "Writing json file '{}'".format(outfile))
+    with open(outfile, "w", newline='\n') as fp:
+        json.dump(jsondata, fp, indent=2)
+    if recursive and cfsname:
+        for component in CFS_COMPONENT_MAPPING.get(cfsname, []):
+            extract_data_to_file(component)
+        
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('-D', dest='dbglevel', action='store', default=10,    help='Print Debug information')
-    parser.add_argument('-o', dest='outfile', metavar='<OUTPUT_FILE>', help='Name of the output file (overrides default name)')
+    parser.add_argument('-o', dest='outfile', metavar='<OUTPUT_FILE>', default=None, help='Name of the output file (overrides default name)')
+    parser.add_argument('-r', dest='recursive', action="store_true", help='Recurse into creating component jsons if argument is CFS')
     parser.add_argument('filename', metavar='<FILENAME>', help='Excel input file')
     parser.add_argument('composite', metavar='<COMPOSITE>', nargs='+', help='CFS or Component name for which to extract data')
 
@@ -109,19 +137,14 @@ if __name__ == "__main__":
     set_debug_level(args.dbglevel)
 
     for composite in args.composite:
-        if composite.startswith("TN_"):
-            cfsname = composite
-            componentname = None
-        else:
-            componentname = composite
-            cfsname = None
+        extract_data_to_file(composite, args.recursive, args.outfile)
 
-        jsondata = {"compositionName": composite, "compositionType": "cfs" if cfsname else "component"}
-        if cfsname:
-            jsondata["includedComponents"] = CFS_COMPONENT_MAPPING.get(cfsname, [])
-        jsondata["paramMapping"] = read_data_from_excel(args.filename, cfsname, componentname)
+        # jsondata = {"compositionName": composite, "compositionType": "cfs" if cfsname else "component"}
+        # if cfsname:
+        #     jsondata["includedComponents"] = CFS_COMPONENT_MAPPING.get(cfsname, [])
+        # jsondata["paramMapping"] = read_data_from_excel(args.filename, cfsname, componentname)
 
-        outfile = "{}_{}.json".format("CFS" if cfsname else "Component", composite) if args.outfile is None else args.outfile
-        DBG(10, "Writing json file '{}'".format(outfile))
-        with open(outfile, "w", newline='\n') as fp:
-            json.dump(jsondata, fp, indent=2)
+        # outfile = "{}_{}.json".format("CFS" if cfsname else "Component", composite) if args.outfile is None else args.outfile
+        # DBG(10, "Writing json file '{}'".format(outfile))
+        # with open(outfile, "w", newline='\n') as fp:
+        #     json.dump(jsondata, fp, indent=2)
