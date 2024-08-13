@@ -792,7 +792,7 @@
       "modifyOperation": null,
       "exampleValue": "IPSAP000000001",
       "cramerStorage": "Service",
-      "jsonName": "ipSapRfsName"
+      "jsonName": "ipSapRFSName"
     },
     {
       "name": "SAP_IF_NAME",

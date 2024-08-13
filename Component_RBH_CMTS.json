@@ -4,7 +4,7 @@
   "paramMapping": [
     {
       "factoryProduct": "IPVPN_CORE",
-      "factoryProductVersion": "2.4",
+      "factoryProductVersion": "2.5",
       "parameters": [
         {
           "name": "L3_VPN_NAME",
@@ -110,7 +110,7 @@
     },
     {
       "factoryProduct": "IPVPN_SAP",
-      "factoryProductVersion": "2.17",
+      "factoryProductVersion": "2.18",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
@@ -421,7 +421,7 @@
     },
     {
       "factoryProduct": "ELAN_CORE",
-      "factoryProductVersion": "ELAN and ETREE or 2 separate products or combined one? How is it is  modelled in Cramer?",
+      "factoryProductVersion": "2.2",
       "parameters": [
         {
           "name": "EVPN_EVI_RANGE",
@@ -482,7 +482,7 @@
     },
     {
       "factoryProduct": "ELAN_SAP",
-      "factoryProductVersion": "1.2",
+      "factoryProductVersion": "1.3",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",

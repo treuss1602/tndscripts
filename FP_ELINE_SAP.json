@@ -1,7 +1,10 @@
 {
   "factoryProductName": "ELINE_SAP",
-  "version": "0.7",
-  "prerequisite": null,
+  "version": "0.8",
+  "prerequisite": {
+    "product": "ELINE_CORE",
+    "referenceParameter": "ELINE_CORE_RFS_NAME"
+  },
   "inputParameters": [
     {
       "name": "NETWORK_ELEMENT_NAME",
@@ -29,23 +32,25 @@
     },
     {
       "name": "ELINE_LOCAL_VC_ID",
-      "description": "Must be unique inside EVI instance",
+      "description": "Must be unique inside EVI instance(ELINE Core), assigned from VC range defined for ELINE Core",
       "mandatory": false,
       "valueType": "integer",
       "special": false,
       "dynamicallyMapped": false,
       "modifyOperation": null,
+      "exampleValue": "1",
       "cramerStorage": "Number object",
       "jsonName": "elineLocalVcId"
     },
     {
       "name": "ELINE_REMOTE_VC_ID",
-      "description": "Must be unique inside EVI instance",
+      "description": "Must be unique inside EVI instance(ELINE Core), assigned from VC range defined for ELINE Core",
       "mandatory": false,
       "valueType": "integer",
       "special": false,
       "dynamicallyMapped": false,
       "modifyOperation": null,
+      "exampleValue": "2",
       "cramerStorage": "Number object",
       "jsonName": "elineRemoteVcId"
     },
@@ -354,19 +359,21 @@
     },
     {
       "name": "ELINE_LOCAL_VC_ID",
-      "description": "Must be unique inside EVI instance",
+      "description": "Must be unique inside EVI instance(ELINE Core), assigned from VC range defined for ELINE Core",
       "mandatory": true,
       "valueType": "integer",
       "modifyOperation": null,
+      "exampleValue": "1",
       "cramerStorage": "Number object",
       "jsonName": "elineLocalVcId"
     },
     {
       "name": "ELINE_REMOTE_VC_ID",
-      "description": "Must be unique inside EVI instance",
+      "description": "Must be unique inside EVI instance(ELINE Core), assigned from VC range defined for ELINE Core",
       "mandatory": true,
       "valueType": "integer",
       "modifyOperation": null,
+      "exampleValue": "2",
       "cramerStorage": "Number object",
       "jsonName": "elineRemoteVcId"
     },
@@ -449,7 +456,15 @@
       "QOS_CUST_EGRESS_REWRITE_CONFIG",
       "CUST_SNIPPET_NAMES",
       "SAP_IF_NAME",
-      "EVI_NAME"
+      "EVI_NAME",
+      "ELINE_CORE_EVI_INSTANCE_ID",
+      "ELINE_CORE_L2_VPN_NAME",
+      "ELINE_CORE_EVI_NAME",
+      "ELINE_CORE_EVI_ROUTE_TARGET",
+      "ELINE_CORE_EVI_ROUTE_DISTINGUISHER",
+      "ELINE_CORE_VRF_SR_TE_COLOR_COMMUNITY",
+      "ELINE_CORE_CUST_SNIPPET_NAMES",
+      "ELINE_CORE_VC_ID_RANGE"
     ],
     "postNEI": [
       "LOGICAL_SUB_IF_ID",
@@ -474,7 +489,15 @@
       "QOS_CUST_EGRESS_REWRITE_CONFIG",
       "CUST_SNIPPET_NAMES",
       "SAP_IF_NAME",
-      "EVI_NAME"
+      "EVI_NAME",
+      "ELINE_CORE_EVI_INSTANCE_ID",
+      "ELINE_CORE_L2_VPN_NAME",
+      "ELINE_CORE_EVI_NAME",
+      "ELINE_CORE_EVI_ROUTE_TARGET",
+      "ELINE_CORE_EVI_ROUTE_DISTINGUISHER",
+      "ELINE_CORE_VRF_SR_TE_COLOR_COMMUNITY",
+      "ELINE_CORE_CUST_SNIPPET_NAMES",
+      "ELINE_CORE_VC_ID_RANGE"
     ]
   },
   "cramerValidations": [

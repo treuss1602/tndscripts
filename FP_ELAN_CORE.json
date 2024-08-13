@@ -1,6 +1,6 @@
 {
   "factoryProductName": "ELAN_CORE",
-  "version": "ELAN and ETREE or 2 separate products or combined one? How is it is  modelled in Cramer?",
+  "version": "2.2",
   "prerequisite": null,
   "inputParameters": [
     {
