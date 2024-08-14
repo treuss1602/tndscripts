@@ -18,6 +18,9 @@ def create_sample_request(productconfig : FactoryProductConfiguration, orderno =
     req = CreateRequest(ilReqGroup="TND", orderNo=orderno, replyToAddress=replyto_address)
     req.add_parameter("ORDER_EXTERNAL_ORDER_ID", externalOrderId)
     ol = OrderLine("OL_1", "FACTORY_PRODUCT_{}".format(productconfig.factoryProductName), "Create")
+    if not mandatory_only:
+        ol.add_parameter("PAUSE_AFTER_PREPARE", "true")
+        ol.add_parameter("SKIP_PROVISIONING", "false")
     for p in productconfig.input_params:
         if p.mandatory or not mandatory_only:
             if p.examplevalue is not None:
@@ -41,6 +44,9 @@ def create_cfs_sample_request(cfsname, parameters, orderno = None, replyto_addre
     req.add_parameter("ORDER_EXTERNAL_ORDER_ID", externalOrderId)
     ol = OrderLine("OL_1", "PRODUCT_{}".format(cfsname), "Create")
     ol.add_parameter("NETWORK_ELEMENT_NAME", "ZH0004MEB101")
+    if not mandatory_only:
+        ol.add_parameter("PAUSE_AFTER_PREPARE", "true")
+        ol.add_parameter("SKIP_PROVISIONING", "false")
     for p in parameters:
         if p[3] or not mandatory_only:
             if p[2] is not None:
@@ -92,7 +98,7 @@ if __name__ == "__main__":
         fps = {p[2] for p in inputparams}
         paramdetails = {}
         for fp in fps:
-            fp_definition_filename = "FP_{}_Create.json".format(fp)
+            fp_definition_filename = "FP_{}.json".format(fp)
             DBG(10, "Loading additional json file '{}'".format(fp_definition_filename))
             try:
                 with open(fp_definition_filename, "r") as f:
@@ -104,7 +110,7 @@ if __name__ == "__main__":
                 print("WARNING: Unable to extract information for factory product {}. JSON File missing?".format(fp))
                 raise(e)
             
-        req = create_cfs_sample_request(cfsname, [(p[0], *paramdetails[p[0]]) for p in inputparams])
+        req = create_cfs_sample_request(cfsname, [(p[0], *paramdetails[p[0]]) for p in inputparams], mandatory_only=args.mandatory_only)
         if args.outfile:
             with open(args.outfile, "w") as fp:
                 fp.write(req.xml())
