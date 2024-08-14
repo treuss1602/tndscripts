@@ -14,32 +14,32 @@ class ExtraTasks:
         self.after = after if after is not None else {}
 
 
-CFSs = {
-    "TN_RBH_RPD_ACCESS" : [
-        "PHY_SINGLE_LINK",
-        ("RBH_RPD", ["IPVPN_CORE", "IPVPN_SAP", "ELAN_CORE", "ELAN_SAP"])
-    ],
-    "TN_RBH_CMTS_ACCESS" : [
-        "PHY_SINGLE_LINK",
-        ("RBH_CMTS", ["IPVPN_CORE", "IPVPN_SAP", "ELAN_CORE", "ELAN_SAP"])
-    ],
-    "TN_RBH_CMTS_CORE" : [
-        "PHY_ILAG",
-        ("RBH_CMTS_INET", ["IPVPN_CORE", "IPVPN_SAP"]),
-        ("RBH_CMTS_ABR_MC", ["IPVPN_CORE", "IPVPN_SAP"])
-    ],
-    "TN_B2C_OLT_ACCESS" : [
-        "PHY_ESILAG",
-        ("RTL_PROV", ["IPVPN_CORE", "IPVPN_SAP", "ELAN_CORE", "ELAN_SAP"]),
-        ("RTL_MGT", ["IPVPN_CORE", "IPVPN_SAP", "ELAN_CORE", "ELAN_SAP"]),
-        ("RTL_INET", ["IPVPN_CORE", "IPVPN_SAP", "ELAN_CORE", "ELAN_SAP"]),
-        ("RTL_VOIP", ["IPVPN_CORE", "IPVPN_SAP", "ELAN_CORE", "ELAN_SAP"]),
-        ("INF_DHCPTRAFFIC", ["IPVPN_CORE", "IPVPN_SAP", "ELAN_CORE", "ELAN_SAP"]),
-        ("INF_MGT", ["IPVPN_CORE", "IPVPN_SAP", "ELAN_CORE", "ELAN_SAP"]),
-        ("RTL_IPTV", ["IPVPN_CORE", "IPVPN_SAP"]),
-        ("RTL_CGN", ["IPVPN_CORE"]),
-    ],
-}
+# CFSs = {
+#     "TN_RBH_RPD_ACCESS" : [
+#         "PHY_SINGLE_LINK",
+#         ("RBH_RPD", ["IPVPN_CORE", "IPVPN_SAP", "ELAN_CORE", "ELAN_SAP"])
+#     ],
+#     "TN_RBH_CMTS_ACCESS" : [
+#         "PHY_SINGLE_LINK",
+#         ("RBH_CMTS", ["IPVPN_CORE", "IPVPN_SAP", "ELAN_CORE", "ELAN_SAP"])
+#     ],
+#     "TN_RBH_CMTS_CORE" : [
+#         "PHY_ILAG",
+#         ("RBH_CMTS_INET", ["IPVPN_CORE", "IPVPN_SAP"]),
+#         ("RBH_CMTS_ABR_MC", ["IPVPN_CORE", "IPVPN_SAP"])
+#     ],
+#     "TN_B2C_OLT_ACCESS" : [
+#         "PHY_ESILAG",
+#         ("RTL_PROV", ["IPVPN_CORE", "IPVPN_SAP", "ELAN_CORE", "ELAN_SAP"]),
+#         ("RTL_MGT", ["IPVPN_CORE", "IPVPN_SAP", "ELAN_CORE", "ELAN_SAP"]),
+#         ("RTL_INET", ["IPVPN_CORE", "IPVPN_SAP", "ELAN_CORE", "ELAN_SAP"]),
+#         ("RTL_VOIP", ["IPVPN_CORE", "IPVPN_SAP", "ELAN_CORE", "ELAN_SAP"]),
+#         ("INF_DHCPTRAFFIC", ["IPVPN_CORE", "IPVPN_SAP", "ELAN_CORE", "ELAN_SAP"]),
+#         ("INF_MGT", ["IPVPN_CORE", "IPVPN_SAP", "ELAN_CORE", "ELAN_SAP"]),
+#         ("RTL_IPTV", ["IPVPN_CORE", "IPVPN_SAP"]),
+#         ("RTL_CGN", ["IPVPN_CORE"]),
+#     ],
+# }
 
 def quote(s):
     return str(s).replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;')
@@ -56,7 +56,7 @@ def tablerow(*values, alignments=None):
     else:
         return '<tr>' + ''.join('<td class="confluenceTd"{}><p>'.format(' style="text-align:{};"'.format(a) if a else '')+quote(s)+'</p></td>' for s,a in zip(values, alignments)) + '</tr>'
 
-def describe_flow(cfs, action, cfstasks, componenttasks, *, reverse=False, empty_phases=[]):
+def describe_flow(cfs, structure, action, cfstasks, componenttasks, *, reverse=False, empty_phases=[]):
     rfslink = f"[the generic RFS {action} flow|\\[TND\\] (F1) Process Flows - Factory Products RFS generic flow#{action}]"
     print(f"h1. {action}")
     print(f"The following describes the {action} {cfs} flow:\n")
@@ -69,7 +69,7 @@ def describe_flow(cfs, action, cfstasks, componenttasks, *, reverse=False, empty
             print(f"# {phase} phase")
             for ptask in cfs_ptasks.at_start:
                 print(f"## {ptask}")
-            for element in reversed(CFSs[cfs]) if reverse else CFSs[cfs]:
+            for element in reversed(structure) if reverse else structure:
                 if isinstance(element, str):
                     print(f"## Execute {phase} phase for the {element} factory product RFS (Cf. {rfslink})")
                     for ptask in cfs_ptasks.after.get(element, []):
@@ -93,7 +93,7 @@ def describe_flow(cfs, action, cfstasks, componenttasks, *, reverse=False, empty
             for ptask in cfs_ptasks.at_end:
                 print(f"## {ptask}")
 
-def describe_flow2(cfs, action, cfstasks, componenttasks, *, reverse=False, empty_phases=[]):
+def describe_flow2(cfs, structure, action, cfstasks, componenttasks, *, reverse=False, empty_phases=[]):
     rfslink = f"[the generic RFS {action} flow|\\[TND\\] (F1) Process Flows - Factory Products RFS generic flow#{action}]"
     print(f"h1. {action}")
     print(f"The following describes the {action} {cfs} flow:\n")
@@ -106,7 +106,7 @@ def describe_flow2(cfs, action, cfstasks, componenttasks, *, reverse=False, empt
             print(f"# {phase} phase")
             for ptask in cfs_ptasks.at_start:
                 print(f"## {ptask[0]}")
-            for element in reversed(CFSs[cfs]) if reverse else CFSs[cfs]:
+            for element in reversed(structure) if reverse else structure:
                 if isinstance(element, str):
                     print(f"## Execute {phase} phase for the {element} factory product RFS (Cf. {rfslink})")
                     for ptask in cfs_ptasks.after.get(element, []):
@@ -132,7 +132,7 @@ def describe_flow2(cfs, action, cfstasks, componenttasks, *, reverse=False, empt
 
 
 
-def create_flow(cfs):
+def create_flow(cfs, structure):
     createContext =   (r'[Create a "context" in Cramer|\[TND\] (F1) Cramer APIs#Create Context]',
                        'Cramer\nCreate Context')
     createCFS     =   (r'[Create a CFS in Cramer|\[TND\] (F1) Cramer APIs#Create CFS]',
@@ -149,19 +149,20 @@ def create_flow(cfs):
                          'Order Hub\nConfirm Modelling')
     applyContext  =   (r'[Apply the "context" in Cramer|\[TND\] (F1) Cramer APIs#Apply Context]',
                        'Cramer\nApply Context')
+    ponr = ('PONR', 'PONR')
 
     cfstasks = {"Prepare": ExtraTasks(at_start=[createContext, createCFS], at_end=[skipProvsioning], after={'PHY_SINGLE_LINK': [createIRB], 'PHY_ESILAG': [createIRB]} ),
-                "Provision": ExtraTasks(at_start=[pauseAfterPrepare], at_end=["PONR"]),
+                "Provision": ExtraTasks(at_start=[pauseAfterPrepare], at_end=[ponr]),
                 "Finalize": ExtraTasks(at_end=[applyContext])}
     comptasks = {}
-    for compname, items in [c for c in CFSs[cfs] if isinstance(c, tuple)]:
+    for compname, items in [c for c in structure if isinstance(c, tuple)]:
         if "ELAN_CORE" in items:
             comptasks[compname] = {"Prepare": ExtraTasks(at_start=[createComponent, (generateL2Name[0].format(compname), generateL2Name[1])])}
         else:
             comptasks[compname] = {"Prepare": ExtraTasks(at_start=[createComponent])}
-    describe_flow2(cfs, "Create", cfstasks, comptasks)
+    describe_flow2(cfs, structure, "Create", cfstasks, comptasks)
 
-def delete_flow(cfs):
+def delete_flow(cfs, structure):
     queryCFS = r'[Query Child Services of the '+cfs+r' CFS from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]'
     queryComponent = r'[Query Child Services of the {} component from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]'
     createContext =   r'[Create a "context" in Cramer|\[TND\] (F1) Cramer APIs#Create Context]'
@@ -178,14 +179,14 @@ def delete_flow(cfs):
                 "Provision": ExtraTasks(at_start=[pauseAfterPrepare, "PONR"]),
                 "Finalize": ExtraTasks(at_end=[deleteCFS, applyContext])}
     comptasks = {}
-    for compname, items in [c for c in CFSs[cfs] if isinstance(c, tuple)]:
+    for compname, items in [c for c in structure if isinstance(c, tuple)]:
         comptasks[compname] = {"Validate": ExtraTasks(at_start=[queryComponent.format(compname)]),
                                 "Prepare": ExtraTasks(at_start=[updateCompPS]),
                                 "Finalize": ExtraTasks(at_end=[deleteComponent])}
 
-    describe_flow(cfs, "Delete", cfstasks, comptasks, reverse=True)
+    describe_flow(cfs, structure, "Delete", cfstasks, comptasks, reverse=True)
 
-def provision_flow(cfs):
+def provision_flow(cfs, structure):
     queryCFS = r'[Query Child Services of the '+cfs+r' CFS from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]'
     queryComponent = r'[Query Child Services of the {} component from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]'
     applyContext  =   r'[Apply the "context" in Cramer|\[TND\] (F1) Cramer APIs#Apply Context]'
@@ -193,11 +194,11 @@ def provision_flow(cfs):
     cfstasks = {"Validate": ExtraTasks(at_start=[queryCFS]),
                 "Finalize": ExtraTasks(at_end=[applyContext])}
     comptasks = {}
-    for compname, items in [c for c in CFSs[cfs] if isinstance(c, tuple)]:
+    for compname, items in [c for c in structure if isinstance(c, tuple)]:
         comptasks[compname] = {"Validate": ExtraTasks(at_start=[queryComponent.format(compname)])}
-    describe_flow(cfs, "Provision", cfstasks, comptasks, empty_phases=["Prepare"])
+    describe_flow(cfs, structure, "Provision", cfstasks, comptasks, empty_phases=["Prepare"])
 
-def deprovision_flow(cfs):
+def deprovision_flow(cfs, structure):
     queryCFS        = r'[Query Child Services of the '+cfs+r' CFS from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]'
     queryComponent  = r'[Query Child Services of the {} component from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]'
     deleteCFS       = r'[Delete the CFS in Cramer|\[TND\] (F1) Cramer APIs#Delete CFS]'
@@ -207,13 +208,13 @@ def deprovision_flow(cfs):
     cfstasks = {"Validate": ExtraTasks(at_start=[queryCFS]),
                 "Finalize": ExtraTasks(at_end=[deleteCFS, applyContext])}
     comptasks = {}
-    for compname, items in [c for c in CFSs[cfs] if isinstance(c, tuple)]:
+    for compname, items in [c for c in structure if isinstance(c, tuple)]:
         comptasks[compname] = {"Validate": ExtraTasks(at_start=[queryComponent.format(compname)]),
                                "Finalize": ExtraTasks(at_end=[deleteComponent])}
 
-    describe_flow(cfs, "Deprovision", cfstasks, comptasks, reverse=True, empty_phases=["Prepare"])
+    describe_flow(cfs, structure, "Deprovision", cfstasks, comptasks, reverse=True, empty_phases=["Prepare"])
 
-def remove_modelling_flow(cfs):
+def remove_modelling_flow(cfs, structure):
     queryCFS        = r'[Query Child Services of the '+cfs+r' CFS from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]'
     queryComponent  = r'[Query Child Services of the {} component from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]'
     deleteCFS       = r'[Remove the CFS in Cramer|\[TND\] (F1) Cramer APIs#Remove CFS]'
@@ -223,11 +224,39 @@ def remove_modelling_flow(cfs):
     cfstasks = {"Validate": ExtraTasks(at_start=[queryCFS]),
                 "Finalize": ExtraTasks(at_end=[deleteCFS, rollbackContext])}
     comptasks = {}
-    for compname, items in [c for c in CFSs[cfs] if isinstance(c, tuple)]:
+    for compname, items in [c for c in structure if isinstance(c, tuple)]:
         comptasks[compname] = {"Validate": ExtraTasks(at_start=[queryComponent.format(compname)]),
                                 "Finalize": ExtraTasks(at_end=[deleteComponent])}
 
-    describe_flow(cfs, "RemoveModelling", cfstasks, comptasks, reverse=True, empty_phases=["Provision"])
+    describe_flow(cfs, structure, "RemoveModelling", cfstasks, comptasks, reverse=True, empty_phases=["Provision"])
+
+def explain_structure(cfs, structure):
+    print("h1. CFS Structure")
+    print(f"The CFS {cfs} (Catalog item PRODUCT_{cfs}) consists of ", end="")
+    fps = [it for it in structure if isinstance(it, str)]
+    if len(fps) > 1:
+        print("the factory products "+", ".join(fps[:-1])+" and "+fps[-1]+" ", end="")
+    elif len(fps) == 1:
+        print("the factory product "+fps[0]+" ", end="")
+    components = [it[0] for it in structure if isinstance(it, tuple)]
+    if fps and components:
+        print("and ", end="")
+    if len(components) > 1:
+        print("the components "+", ".join(components[:-1])+" and "+components[-1]+", each of which consists of ", end="")
+        fps = [it[1] for it in structure if isinstance(it, tuple)][0]
+        if len(fps) > 1:
+            print("the factory products "+", ".join(fps[:-1])+" and "+fps[-1]+" ", end="")
+        elif len(fps) == 1:
+            print("the factory product "+fps[0]+" ", end="")
+    elif len(components) == 1:
+        print("the component "+components[0]+", which consists of ", end="")
+        fps = [it[1] for it in structure if isinstance(it, tuple)][0]
+        if len(fps) > 1:
+            print("the factory products "+", ".join(fps[:-1])+" and "+fps[-1]+" ", end="")
+        elif len(fps) == 1:
+            print("the factory product "+fps[0]+" ", end="")
+    print(".")
+
 
 FLOWS = {"Create": create_flow,
          "Delete": delete_flow,
@@ -259,11 +288,12 @@ if __name__ == "__main__":
             DBG(10, "Loading additional json file '{}'".format(component_definition_filename))
             with open (component_definition_filename, "r") as f:
                 comp_config = json.load(f)
-                cfsstructure.append((component, [fp["factoryProduct"] for fp in config["paramMapping"]]))
+                cfsstructure.append((component, [fp["factoryProduct"] for fp in comp_config["paramMapping"]]))
 
     if args.flow == ":ALL:":
+        explain_structure(cfsname, cfsstructure)
         for f in FLOWS.values():
-            f(cfsname)
+            f(cfsname, cfsstructure)
             print("\n")
     else:
-        FLOWS[args.flow](cfsname)
+        FLOWS[args.flow](cfsname, cfsstructure)
