@@ -695,11 +695,12 @@
       "mandatory": false,
       "valueType": "string",
       "valueTypeDetails": {
-        "comment": "1 or more IPv4 address , non IPAM no , separated by ';'"
+        "comment": "1 or more IPv4 address , non IPAM no , separated by ';'\nor the value 'DERIVED'"
       },
       "special": false,
       "dynamicallyMapped": false,
       "modifyOperation": "ModifyParameter",
+      "exampleValue": "DERIVED",
       "cramerStorage": "IP_SAP_GE"
     },
     {
@@ -708,11 +709,12 @@
       "mandatory": false,
       "valueType": "string",
       "valueTypeDetails": {
-        "comment": "1 or more IPv6 address , non IPAM no , separated by ';'"
+        "comment": "1 or more IPv6 address , non IPAM no , separated by ';'\nor the value 'DERIVED'"
       },
       "special": false,
       "dynamicallyMapped": false,
       "modifyOperation": "ModifyParameter",
+      "exampleValue": "DERIVED",
       "cramerStorage": "IP_SAP_GE"
     },
     {

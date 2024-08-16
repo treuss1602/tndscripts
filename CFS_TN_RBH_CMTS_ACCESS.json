@@ -7,7 +7,7 @@
   "paramMapping": [
     {
       "factoryProduct": "PHY_SINGLE_LINK",
-      "factoryProductVersion": "0.16",
+      "factoryProductVersion": "0.17",
       "parameters": [
         {
           "name": "PHYS_IF_NAME",

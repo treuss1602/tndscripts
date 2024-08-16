@@ -4,7 +4,7 @@
   "paramMapping": [
     {
       "factoryProduct": "IPVPN_CORE",
-      "factoryProductVersion": "2.5",
+      "factoryProductVersion": "2.6",
       "parameters": [
         {
           "name": "L3_VPN_NAME",
@@ -19,7 +19,7 @@
         {
           "name": "VRF_SR_TE_COLOR",
           "type": "static",
-          "value": null
+          "value": "0:130"
         },
         {
           "name": "UCAST_IPV4_FLAG",
@@ -105,7 +105,7 @@
     },
     {
       "factoryProduct": "IPVPN_SAP",
-      "factoryProductVersion": "2.18",
+      "factoryProductVersion": "2.21",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
