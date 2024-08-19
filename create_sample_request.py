@@ -15,6 +15,8 @@ def create_sample_request(productconfig : FactoryProductConfiguration, orderno =
         else:
             orderno = str(uuid.uuid4())
             externalOrderId = orderno
+    else:
+        externalOrderId = orderno
     req = CreateRequest(ilReqGroup="TND", orderNo=orderno, replyToAddress=replyto_address)
     req.add_parameter("ORDER_EXTERNAL_ORDER_ID", externalOrderId)
     ol = OrderLine("OL_1", "FACTORY_PRODUCT_{}".format(productconfig.factoryProductName), "Create")

@@ -103,7 +103,7 @@ def read_params_from_sheet(sheet, prodname):
                 print("WARNING: No example value provided for mandatory parameter {}".format(techname))
             if paramtype.lower() in ["input", "return", "inputorreturn"] and cramerstorage not in ["n/a", "{}_GE".format(prodname), "TRANSIENT"] and jsonname is None:
                 print("WARNING: No JSON-Name specified for parameter {} with Cramer storage {}".format(techname, cramerstorage.replace("\n", "\\n")))
-            if stablenet.lower() not in ["yes", "no"]:
+            if not isinstance(stablenet, str) or stablenet.lower() not in ["yes", "no"]:
                 print("WARNING: Stablenet column for parameter {} is {}. Assuming 'yes'.".format(techname, stablenet))
                 stablenet = "yes"
             if paramtype.lower() == "input" or paramtype.lower() == "special":

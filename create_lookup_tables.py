@@ -22,7 +22,7 @@ def create_update_files_in_targetdir(dirname, *tables):
     for table in tables:
         if table:
             filename = dirname + os.sep + table.name
-            with open(filename, "a") as fp:
+            with open(filename, "a", newline='\n') as fp:
                 fp.write(table.dump())
 
 def joinparams(*paramsets):
