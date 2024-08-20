@@ -1,6 +1,6 @@
 {
   "factoryProductName": "IPVPN_SAP",
-  "version": "2.21",
+  "version": "2.24",
   "prerequisite": {
     "product": "IPVPN_CORE",
     "referenceParameter": "IPVPN_CORE_RFS_NAME"
@@ -872,6 +872,21 @@
       "modifyOperation": "ModifyParameter",
       "exampleValue": "EXPORT_BMI_IPV6_POLICY",
       "cramerStorage": "IPVPN_SAP_GE"
+    },
+    {
+      "name": "PE_CE_EBGP_ASN_OVERWRITE",
+      "description": "PE-CE eBGP overwrite received ASN flag.",
+      "mandatory": false,
+      "valueType": "boolean",
+      "valueTypeDetails": {
+        "comment": "default to false"
+      },
+      "special": false,
+      "dynamicallyMapped": false,
+      "modifyOperation": "ModifyParameter",
+      "exampleValue": "false",
+      "acadefault": false,
+      "cramerStorage": "IPVPN_SAP_GE"
     }
   ],
   "cramerParameters": [
@@ -987,6 +1002,30 @@
       "jsonName": "additionalIPv6IfAddresses"
     },
     {
+      "name": "PE_CE_EBGP_IPV4_PEERS",
+      "description": "contains list of IPv4 addressses",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or more IPv4 address , non IPAM no , separated by ';'\nor the value 'DERIVED'"
+      },
+      "modifyOperation": null,
+      "exampleValue": "DERIVED",
+      "cramerStorage": "IPVPN_SAP_GE"
+    },
+    {
+      "name": "PE_CE_EBGP_IPV6_PEERS",
+      "description": "contains list of IPv6 addressses",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or more IPv6 address , non IPAM no , separated by ';'\nor the value 'DERIVED'"
+      },
+      "modifyOperation": null,
+      "exampleValue": "DERIVED",
+      "cramerStorage": "IPVPN_SAP_GE"
+    },
+    {
       "name": "DHCP_RELAY_SOURCE_IPV4_ADDRESS",
       "description": "contains single IPv4 address",
       "mandatory": false,
@@ -1085,6 +1124,7 @@
       "PE_CE_EBGP_IPV6_INGRESS_PREFIX_FILTER_NAME",
       "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTER_NAME",
       "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTER_NAME",
+      "PE_CE_EBGP_ASN_OVERWRITE",
       "IPVPN_CORE_L3_VPN_NAME",
       "IPVPN_CORE_VRF_NAME",
       "IPVPN_CORE_VRF_TYPE",
@@ -1186,6 +1226,7 @@
       "PE_CE_EBGP_IPV6_INGRESS_PREFIX_FILTER_NAME",
       "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTER_NAME",
       "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTER_NAME",
+      "PE_CE_EBGP_ASN_OVERWRITE",
       "IPVPN_CORE_L3_VPN_NAME",
       "IPVPN_CORE_VRF_NAME",
       "IPVPN_CORE_VRF_TYPE",

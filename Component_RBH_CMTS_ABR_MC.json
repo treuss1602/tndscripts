@@ -110,7 +110,7 @@
     },
     {
       "factoryProduct": "IPVPN_SAP",
-      "factoryProductVersion": "2.21",
+      "factoryProductVersion": "2.24",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
@@ -384,8 +384,8 @@
         },
         {
           "name": "PE_CE_EBGP_IPV4_PEERS",
-          "type": "input",
-          "from": "RBH_CMTS_ABR_MC_PE_CE_EBGP_IPV4_PEERS"
+          "type": "static",
+          "value": "DERIVED"
         },
         {
           "name": "PE_CE_EBGP_IPV6_PEERS",
@@ -416,6 +416,11 @@
           "name": "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTER_NAME",
           "type": "static",
           "value": "EXPORT_BMI_IPV6_POLICY"
+        },
+        {
+          "name": "PE_CE_EBGP_ASN_OVERWRITE",
+          "type": "static",
+          "value": "false"
         }
       ]
     }

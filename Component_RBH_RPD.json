@@ -110,7 +110,7 @@
     },
     {
       "factoryProduct": "IPVPN_SAP",
-      "factoryProductVersion": "2.21",
+      "factoryProductVersion": "2.24",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
@@ -416,6 +416,11 @@
           "name": "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTER_NAME",
           "type": "static",
           "value": null
+        },
+        {
+          "name": "PE_CE_EBGP_ASN_OVERWRITE",
+          "type": "static",
+          "value": "false"
         }
       ]
     },

@@ -1,6 +1,6 @@
 {
   "factoryProductName": "IP_SAP",
-  "version": "0.5",
+  "version": "1",
   "prerequisite": null,
   "inputParameters": [
     {
@@ -883,6 +883,30 @@
       "exampleValue": "2001:0dba:0000:0000:0000:0000:0000:0000/64@EBH LINKNET",
       "cramerStorage": "IP number,Subnet group,SNG",
       "jsonName": "additionalIPv6IFaddresses"
+    },
+    {
+      "name": "PE_CE_EBGP_IPV4_PEERS",
+      "description": "contains list of IPv4 addressses",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or more IPv4 address , non IPAM no , separated by ';'\nor the value 'DERIVED'"
+      },
+      "modifyOperation": null,
+      "exampleValue": "DERIVED",
+      "cramerStorage": "IP_SAP_GE"
+    },
+    {
+      "name": "PE_CE_EBGP_IPV6_PEERS",
+      "description": "contains list of IPv6 addressses",
+      "mandatory": false,
+      "valueType": "string",
+      "valueTypeDetails": {
+        "comment": "1 or more IPv6 address , non IPAM no , separated by ';'\nor the value 'DERIVED'"
+      },
+      "modifyOperation": null,
+      "exampleValue": "DERIVED",
+      "cramerStorage": "IP_SAP_GE"
     }
   ],
   "keyParameters": [
