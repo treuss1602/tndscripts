@@ -5,6 +5,7 @@ import json
 from factoryproduct import FactoryProductConfiguration
 from debug import DBG, set_debug_level
 from collections import namedtuple
+from flowcharts import CFS, Component, FactoryProduct, Task, Phase
 
 class ExtraTasks:
 
@@ -12,34 +13,6 @@ class ExtraTasks:
         self.at_start = at_start if at_start is not None else []
         self.at_end = at_end if at_end is not None else []
         self.after = after if after is not None else {}
-
-
-# CFSs = {
-#     "TN_RBH_RPD_ACCESS" : [
-#         "PHY_SINGLE_LINK",
-#         ("RBH_RPD", ["IPVPN_CORE", "IPVPN_SAP", "ELAN_CORE", "ELAN_SAP"])
-#     ],
-#     "TN_RBH_CMTS_ACCESS" : [
-#         "PHY_SINGLE_LINK",
-#         ("RBH_CMTS", ["IPVPN_CORE", "IPVPN_SAP", "ELAN_CORE", "ELAN_SAP"])
-#     ],
-#     "TN_RBH_CMTS_CORE" : [
-#         "PHY_ILAG",
-#         ("RBH_CMTS_INET", ["IPVPN_CORE", "IPVPN_SAP"]),
-#         ("RBH_CMTS_ABR_MC", ["IPVPN_CORE", "IPVPN_SAP"])
-#     ],
-#     "TN_B2C_OLT_ACCESS" : [
-#         "PHY_ESILAG",
-#         ("RTL_PROV", ["IPVPN_CORE", "IPVPN_SAP", "ELAN_CORE", "ELAN_SAP"]),
-#         ("RTL_MGT", ["IPVPN_CORE", "IPVPN_SAP", "ELAN_CORE", "ELAN_SAP"]),
-#         ("RTL_INET", ["IPVPN_CORE", "IPVPN_SAP", "ELAN_CORE", "ELAN_SAP"]),
-#         ("RTL_VOIP", ["IPVPN_CORE", "IPVPN_SAP", "ELAN_CORE", "ELAN_SAP"]),
-#         ("INF_DHCPTRAFFIC", ["IPVPN_CORE", "IPVPN_SAP", "ELAN_CORE", "ELAN_SAP"]),
-#         ("INF_MGT", ["IPVPN_CORE", "IPVPN_SAP", "ELAN_CORE", "ELAN_SAP"]),
-#         ("RTL_IPTV", ["IPVPN_CORE", "IPVPN_SAP"]),
-#         ("RTL_CGN", ["IPVPN_CORE"]),
-#     ],
-# }
 
 def quote(s):
     return str(s).replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;').replace('"', '&quot;')
@@ -131,8 +104,72 @@ def describe_flow2(cfs, structure, action, cfstasks, componenttasks, *, reverse=
                 print(f"## {ptask[0]}")
 
 
+def create_drawing(cfsname, structure, action, cfstasks, componenttasks, *, reverse=False, empty_phases=[]):
 
-def create_flow(cfs, structure):
+    #PHASE_VALIDATE = Phase("Validate")
+    #PHASE_PREPARE = Phase("Prepare")
+    #PHASE_PROVISION = Phase("Provision")
+    #PHASE_FINALIZE = Phase("Finalize")
+
+    #phases = {"Validate": PHASE_VALIDATE, "Prepare": PHASE_PREPARE, "Provision": PHASE_PROVISION, "Finalize": PHASE_FINALIZE}
+    phases = {s: Phase(s, empty=s in empty_phases) for s in ["Validate", "Prepare", "Provision", "Finalize"]}
+    lc = "Prepare" in empty_phases
+
+    cfs = CFS("CFS {} - {}".format(cfsname, action), phases.values())
+
+    for phase, tasks in cfstasks.items():
+        for ptask in tasks.at_start:
+            if ptask[1]:
+                cfs.embed(Task(ptask[1], phases[phase]))
+    last_component = None
+    for element in reversed(structure) if reverse else structure:
+        if isinstance(element, str):
+            cfs.embed(FactoryProduct("FP {}".format(element), lowcaption=lc))
+            for phase, tasks in cfstasks.items():
+                for ptask in tasks.after.get(element, []):
+                    if ptask[1]:
+                        cfs.embed(Task(ptask[1], phases[phase]))
+        elif isinstance(element, tuple):
+            component, subelements = element
+            if last_component is not None and subelements == last_component[1]:
+                comp = Component("Component {}".format(component), last_component[0], lowcaption=lc)
+                #print(f"## Execute {phase} phase for the {component} component (same tasks as for {last_component[0]})")
+            else:
+                comp = Component("Component {}".format(component))
+                for phase, tasks in componenttasks[component].items():
+                    for ptask in tasks.at_start:
+                        if ptask[1]:
+                            comp.embed(Task(ptask[1], phases[phase]))
+                for subelement in reversed(subelements) if reverse else subelements:
+                    comp.embed(FactoryProduct("FP {}".format(subelement), lowcaption=lc))
+                for phase, tasks in componenttasks[component].items():
+                    for ptask in tasks.at_end:
+                        if ptask[1]:
+                            comp.embed(Task(ptask[1], phases[phase]))
+                for phase, tasks in cfstasks.items():
+                    for ptask in tasks.after.get(component, []):
+                        if ptask[1]:
+                            cfs.embed(Task(ptask[1], phases[phase]))
+                last_component = element
+            cfs.embed(comp)
+    for phase, tasks in cfstasks.items():
+        for ptask in tasks.at_end:
+            if ptask[1]:
+                cfs.embed(Task(ptask[1], phases[phase]))
+
+    out = cfs.createImage()
+    filename = "{}_{}.png".format(cfsname, action)
+    DBG(10, "Generating file {}".format(filename))
+    out.save(filename)
+
+def create_output(cfs, structure, action, cfstasks, comptasks, create_graphic, *, reverse=False, empty_phases=[]):
+    if create_graphic:
+        create_drawing(cfs, structure, action, cfstasks, comptasks, reverse=reverse, empty_phases=empty_phases)
+    else:
+        describe_flow2(cfs, structure, action, cfstasks, comptasks, reverse=reverse, empty_phases=empty_phases)
+
+
+def create_flow(cfs, structure, create_graphic=False):
     createContext =   (r'[Create a "context" in Cramer|\[TND\] (F1) Cramer APIs#Create Context]',
                        'Cramer\nCreate Context')
     createCFS     =   (r'[Create a CFS in Cramer|\[TND\] (F1) Cramer APIs#Create CFS]',
@@ -160,75 +197,101 @@ def create_flow(cfs, structure):
             comptasks[compname] = {"Prepare": ExtraTasks(at_start=[createComponent, (generateL2Name[0].format(compname), generateL2Name[1])])}
         else:
             comptasks[compname] = {"Prepare": ExtraTasks(at_start=[createComponent])}
-    describe_flow2(cfs, structure, "Create", cfstasks, comptasks)
+    create_output(cfs, structure, "Create", cfstasks, comptasks, create_graphic)
 
-def delete_flow(cfs, structure):
-    queryCFS = r'[Query Child Services of the '+cfs+r' CFS from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]'
-    queryComponent = r'[Query Child Services of the {} component from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]'
-    createContext =   r'[Create a "context" in Cramer|\[TND\] (F1) Cramer APIs#Create Context]'
-    updateCFSPS = r'[Update Provision Status of CFS to "SERVICE - PLANNED CEASE"|\[TND\] (F1) Cramer APIs#Update Provision Status of Service]'
-    updateCompPS = r'[Update Provision Status of Component to "SERVICE - PLANNED CEASE"|\[TND\] (F1) Cramer APIs#Update Provision Status of Service]'
-    deleteCFS     =   r'[Delete the CFS in Cramer|\[TND\] (F1) Cramer APIs#Delete CFS]'
-    deleteComponent = r'[Delete the Component in Cramer|\[TND\] (F1) Cramer APIs#Delete Component]'
-    skipProvsioning = r'If order line parameter SKIP_PROVISIONING is true, skip remaining steps (Provision and Finalize phase)'
-    pauseAfterPrepare = r'If order line parameter PAUSE_AFTER_PREPARE is true: [Create a manual task to await confirmation that the provisioning can be started|\[TND\] (F1) Internal Libraries#Create a manual task to await confirmation that the provisioning can be started]'
-    applyContext  =   r'[Apply the "context" in Cramer|\[TND\] (F1) Cramer APIs#Apply Context]'
+def delete_flow(cfs, structure, create_graphic=False):
+    queryCFS = (r'[Query Child Services of the '+cfs+r' CFS from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]',
+                "Cramer\nQuery CFS Decomposition")
+    queryComponent = (r'[Query Child Services of the {} component from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]',
+                      "Cramer\nQuery Component Decomposition")
+    createContext =   (r'[Create a "context" in Cramer|\[TND\] (F1) Cramer APIs#Create Context]',
+                       "Cramer\nCreate Context")
+    updateCFSPS = (r'[Update Provision Status of CFS to "SERVICE - PLANNED CEASE"|\[TND\] (F1) Cramer APIs#Update Provision Status of Service]',
+                   "Cramer\nSet CFS to \"Planned Cease\"")
+    updateCompPS = (r'[Update Provision Status of Component to "SERVICE - PLANNED CEASE"|\[TND\] (F1) Cramer APIs#Update Provision Status of Service]',
+                    "Cramer\nSet Component to \"Planned Cease\"")
+    deleteCFS     =   (r'[Delete the CFS in Cramer|\[TND\] (F1) Cramer APIs#Delete CFS]',
+                       "Cramer\nDelete CFS")
+    deleteComponent = (r'[Delete the Component in Cramer|\[TND\] (F1) Cramer APIs#Delete Component]',
+                       "Cramer\nDelete Component")
+    skipProvsioning = (r'If order line parameter SKIP_PROVISIONING is true, skip remaining steps (Provision and Finalize phase)',
+                       None)
+    pauseAfterPrepare = (r'If order line parameter PAUSE_AFTER_PREPARE is true: [Create a manual task to await confirmation that the provisioning can be started|\[TND\] (F1) Internal Libraries#Create a manual task to await confirmation that the provisioning can be started]',
+                         'Order Hub\nConfirm Modelling')
+    applyContext  =   (r'[Apply the "context" in Cramer|\[TND\] (F1) Cramer APIs#Apply Context]',
+                       'Cramer\nApply Context')
+    ponr = ('PONR', 'PONR')
 
     cfstasks = {"Validate": ExtraTasks(at_start=[queryCFS]),
                 "Prepare": ExtraTasks(at_start=[createContext, updateCFSPS], at_end=[skipProvsioning]),
-                "Provision": ExtraTasks(at_start=[pauseAfterPrepare, "PONR"]),
+                "Provision": ExtraTasks(at_start=[pauseAfterPrepare, ponr]),
                 "Finalize": ExtraTasks(at_end=[deleteCFS, applyContext])}
     comptasks = {}
     for compname, items in [c for c in structure if isinstance(c, tuple)]:
-        comptasks[compname] = {"Validate": ExtraTasks(at_start=[queryComponent.format(compname)]),
+        comptasks[compname] = {"Validate": ExtraTasks(at_start=[(queryComponent[0].format(compname), queryComponent[1])]),
                                 "Prepare": ExtraTasks(at_start=[updateCompPS]),
                                 "Finalize": ExtraTasks(at_end=[deleteComponent])}
 
-    describe_flow(cfs, structure, "Delete", cfstasks, comptasks, reverse=True)
+    create_output(cfs, structure, "Delete", cfstasks, comptasks, create_graphic, reverse=True)
 
-def provision_flow(cfs, structure):
-    queryCFS = r'[Query Child Services of the '+cfs+r' CFS from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]'
-    queryComponent = r'[Query Child Services of the {} component from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]'
-    applyContext  =   r'[Apply the "context" in Cramer|\[TND\] (F1) Cramer APIs#Apply Context]'
+
+def provision_flow(cfs, structure, create_graphic=False):
+    queryCFS = (r'[Query Child Services of the '+cfs+r' CFS from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]',
+                "Cramer\nQuery CFS Decomposition")
+    queryComponent = (r'[Query Child Services of the {} component from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]',
+                      "Cramer\nQuery Component Decomposition")
+    applyContext  =   (r'[Apply the "context" in Cramer|\[TND\] (F1) Cramer APIs#Apply Context]',
+                       'Cramer\nApply Context')
 
     cfstasks = {"Validate": ExtraTasks(at_start=[queryCFS]),
                 "Finalize": ExtraTasks(at_end=[applyContext])}
     comptasks = {}
     for compname, items in [c for c in structure if isinstance(c, tuple)]:
-        comptasks[compname] = {"Validate": ExtraTasks(at_start=[queryComponent.format(compname)])}
-    describe_flow(cfs, structure, "Provision", cfstasks, comptasks, empty_phases=["Prepare"])
+        comptasks[compname] = {"Validate": ExtraTasks(at_start=[(queryComponent[0].format(compname), queryComponent[1])])}
+    
+    create_output(cfs, structure, "Provision", cfstasks, comptasks, create_graphic, empty_phases=["Prepare"])
 
-def deprovision_flow(cfs, structure):
-    queryCFS        = r'[Query Child Services of the '+cfs+r' CFS from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]'
-    queryComponent  = r'[Query Child Services of the {} component from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]'
-    deleteCFS       = r'[Delete the CFS in Cramer|\[TND\] (F1) Cramer APIs#Delete CFS]'
-    deleteComponent = r'[Delete the Component in Cramer|\[TND\] (F1) Cramer APIs#Delete Component]'
-    applyContext    = r'[Apply the "context" in Cramer|\[TND\] (F1) Cramer APIs#Apply Context]'
+def deprovision_flow(cfs, structure, create_graphic=False):
+    queryCFS = (r'[Query Child Services of the '+cfs+r' CFS from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]',
+                "Cramer\nQuery CFS Decomposition")
+    queryComponent = (r'[Query Child Services of the {} component from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]',
+                      "Cramer\nQuery Component Decomposition")
+    deleteCFS     =   (r'[Delete the CFS in Cramer|\[TND\] (F1) Cramer APIs#Delete CFS]',
+                       "Cramer\nDelete CFS")
+    deleteComponent = (r'[Delete the Component in Cramer|\[TND\] (F1) Cramer APIs#Delete Component]',
+                       "Cramer\nDelete Component")
+    applyContext  =   (r'[Apply the "context" in Cramer|\[TND\] (F1) Cramer APIs#Apply Context]',
+                       'Cramer\nApply Context')
 
     cfstasks = {"Validate": ExtraTasks(at_start=[queryCFS]),
                 "Finalize": ExtraTasks(at_end=[deleteCFS, applyContext])}
     comptasks = {}
     for compname, items in [c for c in structure if isinstance(c, tuple)]:
-        comptasks[compname] = {"Validate": ExtraTasks(at_start=[queryComponent.format(compname)]),
+        comptasks[compname] = {"Validate": ExtraTasks(at_start=[(queryComponent[0].format(compname), queryComponent[1])]),
                                "Finalize": ExtraTasks(at_end=[deleteComponent])}
 
-    describe_flow(cfs, structure, "Deprovision", cfstasks, comptasks, reverse=True, empty_phases=["Prepare"])
+    create_output(cfs, structure, "Deprovision", cfstasks, comptasks, create_graphic, reverse=True, empty_phases=["Prepare"])
 
-def remove_modelling_flow(cfs, structure):
-    queryCFS        = r'[Query Child Services of the '+cfs+r' CFS from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]'
-    queryComponent  = r'[Query Child Services of the {} component from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]'
-    deleteCFS       = r'[Remove the CFS in Cramer|\[TND\] (F1) Cramer APIs#Remove CFS]'
-    deleteComponent = r'[Remove the Component in Cramer|\[TND\] (F1) Cramer APIs#Remove Component]'
-    rollbackContext = r'[Rollback the "context" in Cramer|\[TND\] (F1) Cramer APIs#Rollback Context]'
+def remove_modelling_flow(cfs, structure, create_graphic=False):
+    queryCFS = (r'[Query Child Services of the '+cfs+r' CFS from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]',
+                "Cramer\nQuery CFS Decomposition")
+    queryComponent = (r'[Query Child Services of the {} component from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]',
+                      "Cramer\nQuery Component Decomposition")
+    deleteCFS     =   (r'[Delete the CFS in Cramer|\[TND\] (F1) Cramer APIs#Delete CFS]',
+                       "Cramer\nDelete CFS")
+    deleteComponent = (r'[Delete the Component in Cramer|\[TND\] (F1) Cramer APIs#Delete Component]',
+                       "Cramer\nDelete Component")
+    rollbackContext = (r'[Rollback the "context" in Cramer|\[TND\] (F1) Cramer APIs#Rollback Context]',
+                       "Cramer\nRollback Context")
 
     cfstasks = {"Validate": ExtraTasks(at_start=[queryCFS]),
                 "Finalize": ExtraTasks(at_end=[deleteCFS, rollbackContext])}
     comptasks = {}
     for compname, items in [c for c in structure if isinstance(c, tuple)]:
-        comptasks[compname] = {"Validate": ExtraTasks(at_start=[queryComponent.format(compname)]),
+        comptasks[compname] = {"Validate": ExtraTasks(at_start=[(queryComponent[0].format(compname), queryComponent[1])]),
                                 "Finalize": ExtraTasks(at_end=[deleteComponent])}
 
-    describe_flow(cfs, structure, "RemoveModelling", cfstasks, comptasks, reverse=True, empty_phases=["Provision"])
+    create_output(cfs, structure, "RemoveModelling", cfstasks, comptasks, create_graphic, reverse=True, empty_phases=["Provision"])
 
 def explain_structure(cfs, structure):
     print("h1. CFS Structure")
@@ -269,6 +332,7 @@ if __name__ == "__main__":
     parser.add_argument('-D', dest='dbglevel', action='store', default=0,      help='Print Debug information')
     parser.add_argument('-H', dest='headers', action='store_true',             help='Include headers (default if multiple files are given)')
     parser.add_argument('-x', dest='html', action='store_true',                help='Output html instead of markup')
+    parser.add_argument('-g', dest='graphic', action='store_true',             help='Crate Graphic instead of textual flow')
     parser.add_argument('filename', metavar='<FILENAME>',                      help='JSON input file')
     parser.add_argument('flow', metavar='<FLOW>', choices=list(FLOWS.keys())+[":ALL:"],  help='The action' )
 
@@ -291,9 +355,11 @@ if __name__ == "__main__":
                 cfsstructure.append((component, [fp["factoryProduct"] for fp in comp_config["paramMapping"]]))
 
     if args.flow == ":ALL:":
-        explain_structure(cfsname, cfsstructure)
+        if not args.graphic:
+            explain_structure(cfsname, cfsstructure)
         for f in FLOWS.values():
-            f(cfsname, cfsstructure)
+            f(cfsname, cfsstructure, args.graphic)
+        if not args.graphic:
             print("\n")
     else:
-        FLOWS[args.flow](cfsname, cfsstructure)
+        FLOWS[args.flow](cfsname, cfsstructure, args.graphic)
