@@ -41,43 +41,6 @@ def describe_flow(cfs, structure, action, cfstasks, componenttasks, *, reverse=F
             cfs_ptasks = cfstasks.get(phase, ExtraTasks())
             print(f"# {phase} phase")
             for ptask in cfs_ptasks.at_start:
-                print(f"## {ptask}")
-            for element in reversed(structure) if reverse else structure:
-                if isinstance(element, str):
-                    print(f"## Execute {phase} phase for the {element} factory product RFS (Cf. {rfslink})")
-                    for ptask in cfs_ptasks.after.get(element, []):
-                        print(f"## {ptask}")
-                elif isinstance(element, tuple):
-                    component, subelements = element
-                    if last_component is not None and subelements == last_component[1]:
-                        print(f"## Execute {phase} phase for the {component} component (same tasks as for {last_component[0]})")
-                    else:
-                        print(f"## Execute {phase} phase for the {component} component")
-                        ctasks = componenttasks[component].get(phase, ExtraTasks())
-                        for ctask in ctasks.at_start:
-                            print(f"### {ctask}")
-                        for subelement in reversed(subelements) if reverse else subelements:
-                            print(f"### Execute {phase} phase for the {subelement} factory product RFS (Cf. {rfslink})")
-                        for ctask in ctasks.at_end:
-                            print(f"### {ctask}")
-                        for ptask in cfs_ptasks.after.get(component, []):
-                            print(f"## {ptask}")
-                        last_component = element
-            for ptask in cfs_ptasks.at_end:
-                print(f"## {ptask}")
-
-def describe_flow2(cfs, structure, action, cfstasks, componenttasks, *, reverse=False, empty_phases=[]):
-    rfslink = f"[the generic RFS {action} flow|\\[TND\\] (F1) Process Flows - Factory Products RFS generic flow#{action}]"
-    print(f"h1. {action}")
-    print(f"The following describes the {action} {cfs} flow:\n")
-    for phase in ["Validate", "Prepare", "Provision", "Finalize"]:
-        if phase in empty_phases:
-            print(f"# {phase} phase (empty)")
-        else:
-            last_component = None
-            cfs_ptasks = cfstasks.get(phase, ExtraTasks())
-            print(f"# {phase} phase")
-            for ptask in cfs_ptasks.at_start:
                 print(f"## {ptask[0]}")
             for element in reversed(structure) if reverse else structure:
                 if isinstance(element, str):
@@ -106,12 +69,6 @@ def describe_flow2(cfs, structure, action, cfstasks, componenttasks, *, reverse=
 
 def create_drawing(cfsname, structure, action, cfstasks, componenttasks, *, reverse=False, empty_phases=[]):
 
-    #PHASE_VALIDATE = Phase("Validate")
-    #PHASE_PREPARE = Phase("Prepare")
-    #PHASE_PROVISION = Phase("Provision")
-    #PHASE_FINALIZE = Phase("Finalize")
-
-    #phases = {"Validate": PHASE_VALIDATE, "Prepare": PHASE_PREPARE, "Provision": PHASE_PROVISION, "Finalize": PHASE_FINALIZE}
     phases = {s: Phase(s, empty=s in empty_phases) for s in ["Validate", "Prepare", "Provision", "Finalize"]}
     lc = "Prepare" in empty_phases
 
@@ -166,7 +123,7 @@ def create_output(cfs, structure, action, cfstasks, comptasks, create_graphic, *
     if create_graphic:
         create_drawing(cfs, structure, action, cfstasks, comptasks, reverse=reverse, empty_phases=empty_phases)
     else:
-        describe_flow2(cfs, structure, action, cfstasks, comptasks, reverse=reverse, empty_phases=empty_phases)
+        describe_flow(cfs, structure, action, cfstasks, comptasks, reverse=reverse, empty_phases=empty_phases)
 
 
 def create_flow(cfs, structure, create_graphic=False):

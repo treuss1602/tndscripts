@@ -100,9 +100,7 @@ class Task(Element):
             d.rounded_rectangle([(0,0), (SCALE*5, self.height)], 10, None, COLOR_PONR, 7)
             d.text([SCALE*5//2, self.height//2], self.text, font=FONT_PONR, anchor="mm", align="center", fill=COLOR_PONR)
             rotated = ponr.rotate(-15, expand=1)
-            #img.paste(rotated, (self.x()+2*SCALE, self.y()-(rotated.height-self.height)//2), mask=rotated)
-            img.paste(rotated, (self.x()+2*SCALE, self.y()-(rotated.height-self.height)//2))
-            #img.paste(ponr, self._pt)
+            img.paste(rotated, (self.x()+2*SCALE, self.y()-(rotated.height-self.height)//2), mask=rotated)
         else:
             d = ImageDraw.Draw(img)
             d.rectangle([self._pt, (self.x()+self.width,self.y()+self.height)], fill=COLOR_GREY, outline=COLOR_BLACK)
