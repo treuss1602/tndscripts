@@ -41,7 +41,7 @@
         {
           "name": "ESILAG_IF_MTU",
           "type": "static",
-          "value": 9188
+          "value": 9000
         },
         {
           "name": "ESILAG_SYNCE_ENABLED",
@@ -56,7 +56,7 @@
         {
           "name": "ESILAG_PTP_PRIO",
           "type": "static",
-          "value": 255
+          "value": 128
         },
         {
           "name": "ESILAG_MAC_SEC",
@@ -66,7 +66,7 @@
         {
           "name": "QOS_INGRESS_CLASSIFICATION_PROFILE",
           "type": "static",
-          "value": "ACCESS_IN_CLASS_DSCP"
+          "value": "ACCESS_IN_CLASS_802.1P"
         },
         {
           "name": "QOS_INGRESS_POLICING_PROFILE",
@@ -76,17 +76,17 @@
         {
           "name": "QOS_EGRESS_QOS_QUEUE_PROFILE",
           "type": "static",
-          "value": "EGRESS_BESTEFFORT"
+          "value": "ACCESS_OUT_QUEUE_MBH_ACCESS"
         },
         {
           "name": "QOS_EGRESS_QOS_POLICY",
           "type": "static",
-          "value": "CORE_MPLS"
+          "value": null
         },
         {
           "name": "QOS_CUST_EGRESS_REWRITE_CONFIG",
           "type": "static",
-          "value": "rewrite_config1"
+          "value": null
         },
         {
           "name": "CUST_SNIPPET_NAMES",

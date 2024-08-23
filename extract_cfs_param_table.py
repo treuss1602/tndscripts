@@ -58,7 +58,7 @@ def read_data_from_sheet(sheet, col1, col2, cfsname, componentname, fpname):
             elif paramtype == 'static "null"':
                 rv.append({"name": techname, "type": "static", "value": None})
             elif paramtype == 'mapped':
-                rv.append({"name": techname, "type": "mapped", "from": paramdetails})
+                rv.append({"name": techname, "type": "mapped", "from": paramdetails.replace(" OR ","|")})
             elif paramtype == 'n/a':
                 pass
             else:

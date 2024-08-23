@@ -10,7 +10,7 @@
   "paramMapping": [
     {
       "factoryProduct": "PHY_SINGLE_LINK",
-      "factoryProductVersion": "0.16",
+      "factoryProductVersion": "0.17",
       "parameters": [
         {
           "name": "PHYS_IF_NAME",
@@ -20,7 +20,7 @@
         {
           "name": "PHYS_IF_MTU",
           "type": "static",
-          "value": 1500
+          "value": 9000
         },
         {
           "name": "PHYS_IF_AUTO_NEGOTIATION",
@@ -30,17 +30,17 @@
         {
           "name": "PHYS_IF_SYNCE_ENABLED",
           "type": "static",
-          "value": "false"
+          "value": "true"
         },
         {
           "name": "PHYS_IF_PTP_ENABLED",
           "type": "static",
-          "value": "false"
+          "value": "true"
         },
         {
           "name": "PHYS_IF_PTP_PRIO",
           "type": "static",
-          "value": null
+          "value": 128
         },
         {
           "name": "PHYS_IF_MAC_SEC",
@@ -70,7 +70,7 @@
         {
           "name": "QOS_INGRESS_CLASSIFICATION_PROFILE",
           "type": "static",
-          "value": "ACCESS_IN_CLASS_DSCP"
+          "value": "ACCESS_IN_CLASS_802.1P"
         },
         {
           "name": "QOS_INGRESS_POLICING_PROFILE",
@@ -80,7 +80,7 @@
         {
           "name": "QOS_EGRESS_QOS_QUEUE_PROFILE",
           "type": "static",
-          "value": "ACCESS_OUT_QUEUE_CMTS_ACCESS"
+          "value": "ACCESS_OUT_QUEUE_MBH_ACCESS"
         },
         {
           "name": "QOS_EGRESS_QOS_POLICY",

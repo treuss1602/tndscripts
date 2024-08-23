@@ -4,17 +4,17 @@
   "paramMapping": [
     {
       "factoryProduct": "IPVPN_CORE",
-      "factoryProductVersion": "2.5",
+      "factoryProductVersion": "2.6",
       "parameters": [
         {
           "name": "L3_VPN_NAME",
           "type": "static",
-          "value": "MBH_S1_MAD"
+          "value": "MBH_ACCESS_F1"
         },
         {
           "name": "VRF_NAME",
           "type": "static",
-          "value": "MBH_S1_MAD"
+          "value": "MBH_ACCESS_F1"
         },
         {
           "name": "VRF_TYPE",
@@ -22,9 +22,19 @@
           "value": "Any2Any"
         },
         {
+          "name": "VRF_IMPORT_ADDITIONAL_RT_SET",
+          "type": "static",
+          "value": "6730:124; 6730:176"
+        },
+        {
+          "name": "VRF_EXPORT_ADDITIONAL_RT_SET",
+          "type": "static",
+          "value": "6730:124; 6730:176"
+        },
+        {
           "name": "VRF_SR_TE_COLOR",
           "type": "static",
-          "value": null
+          "value": "0:128"
         },
         {
           "name": "UCAST_IPV4_FLAG",
@@ -39,12 +49,12 @@
         {
           "name": "MCAST_SITE_TYPE",
           "type": "static",
-          "value": "receiver"
+          "value": null
         },
         {
           "name": "MCAST_IPV4_FLAG",
           "type": "static",
-          "value": "true"
+          "value": "false"
         },
         {
           "name": "MCAST_IPV4_SSM_GROUPS",
@@ -110,12 +120,12 @@
     },
     {
       "factoryProduct": "IPVPN_SAP",
-      "factoryProductVersion": "2.18",
+      "factoryProductVersion": "2.24",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
-          "type": "input",
-          "from": "MBH_S1_5G_MAD_LOGICAL_SUB_IF_ID"
+          "type": "static",
+          "value": 502
         },
         {
           "name": "VPN_ACCESS_TYPE",
@@ -140,7 +150,7 @@
         {
           "name": "OUTER_VLAN_ID",
           "type": "static",
-          "value": 1704
+          "value": 502
         },
         {
           "name": "OUTER_TPI",
@@ -150,22 +160,22 @@
         {
           "name": "SERVICE_MTU",
           "type": "static",
-          "value": 1518
+          "value": 1650
         },
         {
           "name": "IPVPN_CORE_RFS_NAME",
           "type": "mapped",
-          "from": "MBH_OAM_IPVPN_CORE_RFS_NAME"
+          "from": "MBH_S1_5G_MAD_IPVPN_CORE_RFS_NAME"
         },
         {
           "name": "PHY_SERVICE_NAME",
           "type": "mapped",
-          "from": "PHY_ILAG_RFS_NAME"
+          "from": "PHY_IRB_RFS_NAME"
         },
         {
           "name": "PRIMARY_IPV4_IF_ADDRESS",
           "type": "static",
-          "value": "/30@EBH LINKNET"
+          "value": "/30@5GS!"
         },
         {
           "name": "ADDITIONAL_IPV4_IF_ADDRESSES",
@@ -235,7 +245,7 @@
         {
           "name": "QOS_INGRESS_CLASSIFICATION_PROFILE",
           "type": "static",
-          "value": "ACCESS_IN_CLASS_DSCP"
+          "value": "ACCESS_IN_CLASS_802.1P"
         },
         {
           "name": "QOS_INGRESS_POLICING_PROFILE",
@@ -259,13 +269,13 @@
         },
         {
           "name": "IPV4_STATIC_ROUTE_<N>",
-          "type": "input",
-          "from": "MBH_S1_5G_MAD_IPV4_STATIC_ROUTE_<N>"
+          "type": "static",
+          "value": null
         },
         {
           "name": "IPV6_STATIC_ROUTE_<N>",
-          "type": "input",
-          "from": "MBH_S1_5G_MAD_IPV6_STATIC_ROUTE_<N>"
+          "type": "static",
+          "value": null
         },
         {
           "name": "VRRP_IPV4_FLAG",
@@ -304,18 +314,18 @@
         },
         {
           "name": "PE_CE_EBGP_AUTHENTICATION_KEY",
-          "type": "input",
-          "from": "MBH_S1_5G_MAD_PE_CE_EBGP_AUTHENTICATION_KEY"
-        },
-        {
-          "name": "PE_CE_EBGP_PEER_ASN",
           "type": "static",
           "value": null
         },
         {
+          "name": "PE_CE_EBGP_PEER_ASN",
+          "type": "static",
+          "value": 65223
+        },
+        {
           "name": "PE_CE_EBGP_BFD_FLAG",
           "type": "static",
-          "value": "false"
+          "value": "true"
         },
         {
           "name": "PE_CE_EBGP_IPV4_DEFAULT_FLAG",
@@ -335,42 +345,42 @@
         {
           "name": "PE_CE_EBGP_IPV4_INGRESS_PREFIX_FILTERS_ALLOWED",
           "type": "static",
-          "value": "10.1.2.0/24-ge 32"
+          "value": null
         },
         {
           "name": "PE_CE_EBGP_IPV6_INGRESS_PREFIX_FILTERS_ALLOWED",
           "type": "static",
-          "value": "2001:0db7:/24-ge 32"
+          "value": null
         },
         {
           "name": "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTERS_ALLOWED",
           "type": "static",
-          "value": "10.1.2.0/24-ge 32"
+          "value": null
         },
         {
           "name": "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTERS_ALLOWED",
           "type": "static",
-          "value": "2001:0db7:/24-ge 32"
+          "value": null
         },
         {
           "name": "PE_CE_EBGP_IPV4_INGRESS_PREFIX_FILTERS_DENIED",
           "type": "static",
-          "value": "10.1.2.0/24-ge 32"
+          "value": null
         },
         {
           "name": "PE_CE_EBGP_IPV6_INGRESS_PREFIX_FILTERS_DENIED",
           "type": "static",
-          "value": "2001:0db7:/24-ge 32"
+          "value": null
         },
         {
           "name": "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTERS_DENIED",
           "type": "static",
-          "value": "10.1.2.0/24-ge 32"
+          "value": null
         },
         {
           "name": "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTERS_DENIED",
           "type": "static",
-          "value": "2001:0db7:/24-ge 32"
+          "value": null
         },
         {
           "name": "PE_CE_EBGP_STD_TE_COMMUNITY_HANDLING",
@@ -384,13 +394,13 @@
         },
         {
           "name": "PE_CE_EBGP_IPV4_PEERS",
-          "type": "input",
-          "from": "MBH_S1_5G_MAD_PE_CE_EBGP_IPV4_PEERS"
+          "type": "static",
+          "value": "DERIVED"
         },
         {
           "name": "PE_CE_EBGP_IPV6_PEERS",
-          "type": "input",
-          "from": "MBH_S1_5G_MAD_PE_CE_EBGP_IPV6_PEERS"
+          "type": "static",
+          "value": null
         },
         {
           "name": "PE_CE_EBGP_LOCAL_ASN",
@@ -416,6 +426,11 @@
           "name": "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTER_NAME",
           "type": "static",
           "value": null
+        },
+        {
+          "name": "PE_CE_EBGP_ASN_OVERWRITE",
+          "type": "static",
+          "value": "true"
         }
       ]
     }
