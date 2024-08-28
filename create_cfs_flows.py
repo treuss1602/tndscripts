@@ -29,8 +29,11 @@ def tablerow(*values, alignments=None):
     else:
         return '<tr>' + ''.join('<td class="confluenceTd"{}><p>'.format(' style="text-align:{};"'.format(a) if a else '')+quote(s)+'</p></td>' for s,a in zip(values, alignments)) + '</tr>'
 
-def describe_flow(cfs, structure, action, cfstasks, componenttasks, *, reverse=False, empty_phases=[]):
+def describe_flow(cfs, structure, action, cfstasks, componenttasks, *, reverse=False, empty_phases=[], rollback=True):
     rfslink = f"[the generic RFS {action} flow|\\[TND\\] (F1) Process Flows - Factory Products RFS generic flow#{action}]"
+    enumerations = [list(range(1,30)), "abcdefghijklmnop", ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x"]]
+    rbtasks = []
+    ijk = [0, None, None]
     print(f"h1. {action}")
     print(f"The following describes the {action} {cfs} flow:\n")
     for phase in ["Validate", "Prepare", "Provision", "Finalize"]:
@@ -40,31 +43,69 @@ def describe_flow(cfs, structure, action, cfstasks, componenttasks, *, reverse=F
             last_component = None
             cfs_ptasks = cfstasks.get(phase, ExtraTasks())
             print(f"# {phase} phase")
+            ijk = [ijk[0], 0, None]
             for ptask in cfs_ptasks.at_start:
                 print(f"## {ptask[0]}")
+                rbtasks.append((ijk.copy(), ptask))
+                ijk[1] += 1
             for element in reversed(structure) if reverse else structure:
                 if isinstance(element, str):
                     print(f"## Execute {phase} phase for the {element} factory product RFS (Cf. {rfslink})")
+                    ijk[1] += 1
                     for ptask in cfs_ptasks.after.get(element, []):
                         print(f"## {ptask[0]}")
+                        rbtasks.append((ijk.copy(), ptask))
+                        ijk[1] += 1
                 elif isinstance(element, tuple):
                     component, subelements = element
                     if last_component is not None and subelements == last_component[1]:
                         print(f"## Execute {phase} phase for the {component} component (same tasks as for {last_component[0]})")
+                        ijk[1] += 1
                     else:
                         print(f"## Execute {phase} phase for the {component} component")
+                        ijk = [ijk[0], ijk[1], 0]
                         ctasks = componenttasks[component].get(phase, ExtraTasks())
                         for ctask in ctasks.at_start:
                             print(f"### {ctask[0]}")
+                            rbtasks.append((ijk.copy(), ctask))
+                            ijk[2] += 1
                         for subelement in reversed(subelements) if reverse else subelements:
                             print(f"### Execute {phase} phase for the {subelement} factory product RFS (Cf. {rfslink})")
+                            ijk[2] += 1
                         for ctask in ctasks.at_end:
                             print(f"### {ctask[0]}")
+                            rbtasks.append((ijk.copy(), ctask))
+                            ijk[2] += 1
+                        ijk = [ijk[0], ijk[1]+1, None]
                         for ptask in cfs_ptasks.after.get(component, []):
                             print(f"## {ptask[0]}")
+                            rbtasks.append((ijk.copy(), ptask))
+                            ijk[2] += 1
                         last_component = element
             for ptask in cfs_ptasks.at_end:
-                print(f"## {ptask[0]}")
+                print(f"## {ptask[0]}") 
+                rbtasks.append((ijk.copy(), ptask))
+                ijk[1] += 1
+        ijk = [ijk[0]+1, None, None]
+
+    print("\nVisual representation of the flow:")
+    print("!{}_{}.png|width=1200!".format(cfs, action))
+    print("\nh3. Rollback\n")
+    if rollback:
+        rows = [item for item in reversed(rbtasks) if len(item[1]) == 3]
+        if rows:
+            print("In addition to the rollback tasks described for the Factory Product RFS, the following additional tasks can be rolled back:")
+            print("||Create Task||Rollback Task||")
+            for ijk, task in rows:
+                enumval = [enumerations[i][ijk[i]] for i in range(3) if ijk[i] is not None]
+                print('|{} {}|{}|'.format(".".join(str(e) for e in enumval), task[0], task[2]))
+        else:
+            print("In addition to the rollback tasks described for the Factory Product RFS, there are no additional rollback tasks.")
+    else:
+        print("Rollback is not supported by this flow.")
+
+
+
 
 
 def create_drawing(cfsname, structure, action, cfstasks, componenttasks, *, reverse=False, empty_phases=[]):
@@ -128,13 +169,16 @@ def create_output(cfs, structure, action, cfstasks, comptasks, create_graphic, *
 
 def create_flow(cfs, structure, create_graphic=False):
     createContext =   (r'[Create a "context" in Cramer|\[TND\] (F1) Cramer APIs#Create Context]',
-                       'Cramer\nCreate Context')
+                       'Cramer\nCreate Context',
+                       r'[Rollback the "context" in Cramer|\[TND\] (F1) Cramer APIs#Rollback Context]')
     createCFS     =   (r'[Create a CFS in Cramer|\[TND\] (F1) Cramer APIs#Create CFS]',
-                       'Cramer\nCreate CFS Service')
+                       'Cramer\nCreate CFS Service',
+                       r'[Remove the CFS|\[TND\] (F1) Cramer APIs#Remove CFS]')
     createIRB     =   (r'[Find or Create an IRB Service|\[TND\] (F1) Cramer APIs#Find or Create IRB Service]',
                        'Cramer\nFind Or Create IRB')
     createComponent = (r'[Create a Component Service in Cramer|\[TND\] (F1) Cramer APIs#Create Component]',
-                       'Cramer\nCreate Component Service')
+                       'Cramer\nCreate Component Service',
+                       r'[Remove the Component Service|\[TND\] (F1) Cramer APIs#Remove Component]')
     generateL2Name =  (r'[Query location name from Cramer|\[TND\] (F1) Cramer APIs#Query Location Name of a Node] and generate L2_VPN_NAME as {}_L2_<LOCATION_NAME>',
                        'Cramer\nCreate L2 VPN Name')
     skipProvsioning = (r'If order line parameter SKIP_PROVISIONING is true, skip remaining steps (Provision and Finalize phase)',
@@ -162,11 +206,14 @@ def delete_flow(cfs, structure, create_graphic=False):
     queryComponent = (r'[Query Child Services of the {} component from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]',
                       "Cramer\nQuery Component Decomposition")
     createContext =   (r'[Create a "context" in Cramer|\[TND\] (F1) Cramer APIs#Create Context]',
-                       "Cramer\nCreate Context")
+                       "Cramer\nCreate Context",
+                       r'[Rollback the "context" in Cramer|\[TND\] (F1) Cramer APIs#Rollback Context]')
     updateCFSPS = (r'[Update Provision Status of CFS to "SERVICE - PLANNED CEASE"|\[TND\] (F1) Cramer APIs#Update Provision Status of Service]',
-                   "Cramer\nSet CFS to \"Planned Cease\"")
+                   "Cramer\nSet CFS to \"Planned Cease\"",
+                   r'[Update Provision Status of CFS to "SERVICE - ACTIVE"|\[TND\] (F1) Cramer APIs#Update Provision Status of Service]')
     updateCompPS = (r'[Update Provision Status of Component to "SERVICE - PLANNED CEASE"|\[TND\] (F1) Cramer APIs#Update Provision Status of Service]',
-                    "Cramer\nSet Component to \"Planned Cease\"")
+                    "Cramer\nSet Component to \"Planned Cease\"",
+                    r'[Update Provision Status of Component to "SERVICE - ACTIVE"|\[TND\] (F1) Cramer APIs#Update Provision Status of Service]')
     deleteCFS     =   (r'[Delete the CFS in Cramer|\[TND\] (F1) Cramer APIs#Delete CFS]',
                        "Cramer\nDelete CFS")
     deleteComponent = (r'[Delete the Component in Cramer|\[TND\] (F1) Cramer APIs#Delete Component]',
@@ -316,7 +363,7 @@ if __name__ == "__main__":
             explain_structure(cfsname, cfsstructure)
         for f in FLOWS.values():
             f(cfsname, cfsstructure, args.graphic)
-        if not args.graphic:
-            print("\n")
+            if not args.graphic:
+                print("\n")
     else:
         FLOWS[args.flow](cfsname, cfsstructure, args.graphic)
