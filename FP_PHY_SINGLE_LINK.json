@@ -1,6 +1,6 @@
 {
   "factoryProductName": "PHY_SINGLE_LINK",
-  "version": "0.17",
+  "version": "0.18",
   "prerequisite": null,
   "inputParameters": [
     {
@@ -198,7 +198,8 @@
           "ACCESS_OUT_QUEUE_RPD_ACCESS",
           "ACCESS_OUT_QUEUE_CMTS_ACCESS",
           "ACCESS_OUT_QUEUE_CMTS_CORE",
-          "EGRESS_BESTEFFORT"
+          "EGRESS_BESTEFFORT",
+          "ACCESS_OUT_QUEUE_MBH_ACCESS"
         ]
       },
       "special": false,

@@ -311,7 +311,8 @@
         "enumValues": [
           "NOQOS",
           "ACCESS_OUT_QUEUE_CMTS_CORE",
-          "ACCESS_OUT_QUEUE_CMTS_ACCESS"
+          "ACCESS_OUT_QUEUE_CMTS_ACCESS",
+          "ACCESS_OUT_QUEUE_MBH_ACCESS"
         ]
       },
       "special": false,

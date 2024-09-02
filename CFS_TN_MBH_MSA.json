@@ -11,7 +11,7 @@
   "paramMapping": [
     {
       "factoryProduct": "PHY_ESILAG",
-      "factoryProductVersion": "1.0",
+      "factoryProductVersion": "2.1",
       "parameters": [
         {
           "name": "ESILAG_IF_NAME",
@@ -66,7 +66,7 @@
         {
           "name": "QOS_INGRESS_CLASSIFICATION_PROFILE",
           "type": "static",
-          "value": "ACCESS_IN_CLASS_802.1P"
+          "value": "ACCESS_IN_CLASS_8021P"
         },
         {
           "name": "QOS_INGRESS_POLICING_PROFILE",

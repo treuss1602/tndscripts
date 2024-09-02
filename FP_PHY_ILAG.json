@@ -1,6 +1,6 @@
 {
   "factoryProductName": "PHY_ILAG",
-  "version": "1.4",
+  "version": "1.5",
   "prerequisite": null,
   "inputParameters": [
     {
@@ -186,7 +186,8 @@
           "ACCESS_OUT_QUEUE_RPD_ACCESS",
           "ACCESS_OUT_QUEUE_CMTS_ACCESS",
           "ACCESS_OUT_QUEUE_CMTS_CORE",
-          "EGRESS_BESTEFFORT"
+          "EGRESS_BESTEFFORT",
+          "ACCESS_OUT_QUEUE_MBH_ACCESS"
         ]
       },
       "special": false,

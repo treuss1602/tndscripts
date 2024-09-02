@@ -1,6 +1,6 @@
 {
   "factoryProductName": "ELAN_SAP",
-  "version": "1.4",
+  "version": "1.5",
   "prerequisite": {
     "product": "ELAN_CORE",
     "referenceParameter": "ELAN_CORE_RFS_NAME"
@@ -266,7 +266,8 @@
         "enumValues": [
           "NOQOS",
           "ACCESS_OUT_QUEUE_CMTS_CORE",
-          "ACCESS_OUT_QUEUE_CMTS_ACCESS"
+          "ACCESS_OUT_QUEUE_CMTS_ACCESS",
+          "ACCESS_OUT_QUEUE_MBH_ACCESS"
         ]
       },
       "special": false,

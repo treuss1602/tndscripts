@@ -4,7 +4,7 @@
   "paramMapping": [
     {
       "factoryProduct": "IPVPN_CORE",
-      "factoryProductVersion": "2.6",
+      "factoryProductVersion": "2.7",
       "parameters": [
         {
           "name": "L3_VPN_NAME",
@@ -20,6 +20,26 @@
           "name": "VRF_TYPE",
           "type": "static",
           "value": "Any2Any"
+        },
+        {
+          "name": "VRF_IMPORT_RT_SET",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "VRF_EXPORT_RT_SET",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "VRF_IMPORT_ADDITIONAL_RT_SET",
+          "type": "static",
+          "value": "6730:189"
+        },
+        {
+          "name": "VRF_EXPORT_ADDITIONAL_RT_SET",
+          "type": "static",
+          "value": "6730:189"
         },
         {
           "name": "VRF_SR_TE_COLOR",
@@ -487,7 +507,7 @@
     },
     {
       "factoryProduct": "ELAN_SAP",
-      "factoryProductVersion": "1.4",
+      "factoryProductVersion": "1.5",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",

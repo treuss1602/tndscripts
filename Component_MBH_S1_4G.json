@@ -4,7 +4,7 @@
   "paramMapping": [
     {
       "factoryProduct": "IPVPN_CORE",
-      "factoryProductVersion": "2.6",
+      "factoryProductVersion": "2.7",
       "parameters": [
         {
           "name": "L3_VPN_NAME",
@@ -245,7 +245,7 @@
         {
           "name": "QOS_INGRESS_CLASSIFICATION_PROFILE",
           "type": "static",
-          "value": "ACCESS_IN_CLASS_802.1P"
+          "value": "ACCESS_IN_CLASS_8021P"
         },
         {
           "name": "QOS_INGRESS_POLICING_PROFILE",
@@ -497,7 +497,7 @@
     },
     {
       "factoryProduct": "ELAN_SAP",
-      "factoryProductVersion": "1.4",
+      "factoryProductVersion": "1.5",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
@@ -517,12 +517,12 @@
         {
           "name": "ELAN_CORE_RFS_NAME",
           "type": "mapped",
-          "from": "MBH_S1_4G__ELAN_CORE_RFS_NAME"
+          "from": "MBH_S1_4G_ELAN_CORE_RFS_NAME"
         },
         {
           "name": "PHY_SERVICE_NAME",
           "type": "mapped",
-          "from": "PHY_ESILAG_RFS_NAME|PHY_SINGLE_LINK_RFS_NAME"
+          "from": "PHY_ESILAG_RFS_NAME| PHY_SINGLE_LINK_RFS_NAME"
         },
         {
           "name": "INNER_VLAN_ID",

@@ -1,6 +1,6 @@
 {
   "factoryProductName": "PHY_ESILAG",
-  "version": "1.0",
+  "version": "2.1",
   "prerequisite": null,
   "inputParameters": [
     {
@@ -197,7 +197,8 @@
           "ACCESS_OUT_QUEUE_RPD_ACCESS",
           "ACCESS_OUT_QUEUE_CMTS_ACCESS",
           "ACCESS_OUT_QUEUE_CMTS_CORE",
-          "EGRESS_BESTEFFORT"
+          "EGRESS_BESTEFFORT",
+          "ACCESS_OUT_QUEUE_MBH_ACCESS"
         ]
       },
       "special": false,

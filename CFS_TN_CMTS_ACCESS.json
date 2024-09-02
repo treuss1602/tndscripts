@@ -8,7 +8,7 @@
   "paramMapping": [
     {
       "factoryProduct": "PHY_ILAG",
-      "factoryProductVersion": "1.4",
+      "factoryProductVersion": "1.5",
       "parameters": [
         {
           "name": "PHYS_LINK_UP_DELAY",

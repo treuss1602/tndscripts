@@ -4,7 +4,7 @@
   "paramMapping": [
     {
       "factoryProduct": "IPVPN_CORE",
-      "factoryProductVersion": "2.6",
+      "factoryProductVersion": "2.7",
       "parameters": [
         {
           "name": "L3_VPN_NAME",
@@ -245,7 +245,7 @@
         {
           "name": "QOS_INGRESS_CLASSIFICATION_PROFILE",
           "type": "static",
-          "value": "ACCESS_IN_CLASS_802.1P"
+          "value": "ACCESS_IN_CLASS_8021P"
         },
         {
           "name": "QOS_INGRESS_POLICING_PROFILE",

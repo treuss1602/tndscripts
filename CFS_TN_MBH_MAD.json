@@ -11,7 +11,7 @@
   "paramMapping": [
     {
       "factoryProduct": "PHY_ILAG",
-      "factoryProductVersion": "1.4",
+      "factoryProductVersion": "1.5",
       "parameters": [
         {
           "name": "PHYS_LINK_UP_DELAY",
@@ -66,7 +66,7 @@
         {
           "name": "QOS_INGRESS_CLASSIFICATION_PROFILE",
           "type": "static",
-          "value": "ACCESS_IN_CLASS_802.1P"
+          "value": "ACCESS_IN_CLASS_8021P"
         },
         {
           "name": "QOS_INGRESS_POLICING_PROFILE",
@@ -76,7 +76,7 @@
         {
           "name": "QOS_EGRESS_QOS_QUEUE_PROFILE",
           "type": "static",
-          "value": "ACCESS_OUT_QUEUE_CMTS_CORE"
+          "value": "ACCESS_OUT_QUEUE_MBH_ACCESS"
         },
         {
           "name": "QOS_EGRESS_QOS_POLICY",

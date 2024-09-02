@@ -14,7 +14,7 @@
   "paramMapping": [
     {
       "factoryProduct": "PHY_ESILAG",
-      "factoryProductVersion": "1.0",
+      "factoryProductVersion": "2.1",
       "parameters": [
         {
           "name": "ESILAG_IF_NAME",
