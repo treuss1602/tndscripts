@@ -421,7 +421,7 @@
     },
     {
       "factoryProduct": "ELAN_CORE",
-      "factoryProductVersion": "2.3",
+      "factoryProductVersion": "2.4",
       "parameters": [
         {
           "name": "EVPN_EVI_RANGE",

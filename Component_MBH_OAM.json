@@ -436,7 +436,7 @@
     },
     {
       "factoryProduct": "ELAN_CORE",
-      "factoryProductVersion": "2.3",
+      "factoryProductVersion": "2.4",
       "parameters": [
         {
           "name": "EVPN_EVI_RANGE",
@@ -446,7 +446,7 @@
         {
           "name": "L2_VPN_NAME",
           "type": "mapped",
-          "from": "MBH_ACCESS_OAM_L2_VPN_NAME"
+          "from": "MBH_OAM_L2_VPN_NAME"
         },
         {
           "name": "EVI_NAME",
