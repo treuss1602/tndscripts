@@ -120,7 +120,7 @@
     },
     {
       "factoryProduct": "IPVPN_SAP",
-      "factoryProductVersion": "2.24",
+      "factoryProductVersion": "2.25",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
@@ -170,7 +170,7 @@
         {
           "name": "PHY_SERVICE_NAME",
           "type": "mapped",
-          "from": "PHY_IRB_RFS_NAME"
+          "from": "PHY_ILAG_RFS_NAME"
         },
         {
           "name": "PRIMARY_IPV4_IF_ADDRESS",
