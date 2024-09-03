@@ -1,6 +1,6 @@
 {
   "factoryProductName": "IPVPN_SAP",
-  "version": "2.24",
+  "version": "2.25",
   "prerequisite": {
     "product": "IPVPN_CORE",
     "referenceParameter": "IPVPN_CORE_RFS_NAME"

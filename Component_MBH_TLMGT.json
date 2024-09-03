@@ -120,7 +120,7 @@
     },
     {
       "factoryProduct": "IPVPN_SAP",
-      "factoryProductVersion": "2.24",
+      "factoryProductVersion": "2.25",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
@@ -522,7 +522,7 @@
         {
           "name": "PHY_SERVICE_NAME",
           "type": "mapped",
-          "from": "PHY_ESILAG_RFS_NAME| PHY_SINGLE_LINK_RFS_NAME"
+          "from": "PHY_ESILAG_RFS_NAME|PHY_SINGLE_LINK_RFS_NAME"
         },
         {
           "name": "INNER_VLAN_ID",
