@@ -58,7 +58,7 @@ def read_data_from_sheet(sheet, col1, col2, cfsname, componentname, fpname):
             elif paramtype == 'static "null"':
                 rv.append({"name": techname, "type": "static", "value": None})
             elif paramtype == 'mapped':
-                rv.append({"name": techname, "type": "mapped", "from": paramdetails.replace(" OR ","|")})
+                rv.append({"name": techname, "type": "mapped", "from": paramdetails.replace(" OR ","|").replace(" ","")})
             elif paramtype == 'n/a':
                 pass
             else:
@@ -83,22 +83,23 @@ def read_data_from_excel(xlfile, cfsname, componentname):
             sheet = wb[tab]
 
             prodname = sheet[PRODNAME_CELL].value
-            if not prodname:
-                raise ValueError("Unable to read product name from excel {}, tab {}, cell {}".format(xlfile, tab, PRODNAME_CELL))
             version = sheet[VERSION_CELL].value
 
-            for col in range(1,60):
-                cellval = sheet.cell(row=HEADERROW, column=col).value
-                if  (componentname and cellval == componentname) or (cfsname and cellval == "CFS " + cfsname):
-                    col1, col2 = col, col+1
-                    DBG(10, "Reading parameters for product {} version {} from tab {}, columns {},{}".format(prodname, version, tab, col1, col2))
-                    data = read_data_from_sheet(sheet, col1, col2, cfsname, componentname, prodname)
-                    rv.append({"factoryProduct": prodname, "factoryProductVersion": str(version), "parameters": data})
-                    break
-                else:
-                    if cellval:
-                        DBG(50, "Ignoring header {} - not '{}'".format(cellval, "CFS "+cfsname if cfsname else componentname))
-    
+            if prodname and version:
+                for col in range(1,60):
+                    cellval = sheet.cell(row=HEADERROW, column=col).value
+                    if  (componentname and cellval == componentname) or (cfsname and cellval == "CFS " + cfsname):
+                        col1, col2 = col, col+1
+                        DBG(10, "Reading parameters for product {} version {} from tab {}, columns {},{}".format(prodname, version, tab, col1, col2))
+                        data = read_data_from_sheet(sheet, col1, col2, cfsname, componentname, prodname)
+                        rv.append({"factoryProduct": prodname, "factoryProductVersion": str(version), "parameters": data})
+                        break
+                    else:
+                        if cellval:
+                            DBG(50, "Ignoring header {} - not '{}'".format(cellval, "CFS "+cfsname if cfsname else componentname))
+            else:
+                DBG(20, "Ignoring tab {}".format(tab))
+
     return rv
 
 
