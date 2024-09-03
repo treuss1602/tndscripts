@@ -94,10 +94,17 @@ def describe_flow(cfs, structure, action, cfstasks, componenttasks, *, reverse=F
     if rollback:
         rows = [item for item in reversed(rbtasks) if len(item[1]) == 3]
         if rows:
+            newrows = []
+            for row in rows:
+                if not newrows or len(row[0]) < 3 or row[0][2] is None or newrows[-1][0][0] != row[0][0] or newrows[-1][0][2] != row[0][2]:
+                    newrows.append(row)
+                else:
+                    newrows[-1][0][1] = 'X'
+
             print("In addition to the rollback tasks described for the Factory Product RFS, the following additional tasks can be rolled back:")
             print("||Create Task||Rollback Task||")
-            for ijk, task in rows:
-                enumval = [enumerations[i][ijk[i]] for i in range(3) if ijk[i] is not None]
+            for ijk, task in newrows:
+                enumval = [enumerations[i][ijk[i]] if ijk[i] != 'X' else 'X' for i in range(3) if ijk[i] is not None]
                 print('|{} {}|{}|'.format(".".join(str(e) for e in enumval), task[0], task[2]))
         else:
             print("In addition to the rollback tasks described for the Factory Product RFS, there are no additional rollback tasks.")
@@ -160,14 +167,14 @@ def create_drawing(cfsname, structure, action, cfstasks, componenttasks, *, reve
     DBG(10, "Generating file {}".format(filename))
     out.save(filename)
 
-def create_output(cfs, structure, action, cfstasks, comptasks, create_graphic, *, reverse=False, empty_phases=[]):
+def create_output(cfs, structure, action, cfstasks, comptasks, create_graphic, *, reverse=False, empty_phases=[], rollback=True):
     if create_graphic:
-        create_drawing(cfs, structure, action, cfstasks, comptasks, reverse=reverse, empty_phases=empty_phases)
+        create_drawing(cfs, structure, action, cfstasks, comptasks, reverse=reverse, empty_phases=empty_phases, rollback=rollback)
     else:
-        describe_flow(cfs, structure, action, cfstasks, comptasks, reverse=reverse, empty_phases=empty_phases)
+        describe_flow(cfs, structure, action, cfstasks, comptasks, reverse=reverse, empty_phases=empty_phases, rollback=rollback)
 
 
-def create_flow(cfs, structure, create_graphic=False):
+def create_flow(cfs, structure, create_graphic=False, dynparams=None):
     createContext =   (r'[Create a "context" in Cramer|\[TND\] (F1) Cramer APIs#Create Context]',
                        'Cramer\nCreate Context',
                        r'[Rollback the "context" in Cramer|\[TND\] (F1) Cramer APIs#Rollback Context]')
@@ -199,8 +206,22 @@ def create_flow(cfs, structure, create_graphic=False):
         else:
             comptasks[compname] = {"Prepare": ExtraTasks(at_start=[createComponent])}
     create_output(cfs, structure, "Create", cfstasks, comptasks, create_graphic)
+    if dynparams and not create_graphic:
+        print("\nh3. Dynamically mapped parameters\n")
+        print("The following parameters need to be mapped dynamically during the Prepare Phase:")
+        print("||CFS/Component||Factory Product||Parameter Name||Mapped From||")
+        for dynmapping in dynparams:
+            #print ("----------- {} -----------".format(dynmapping))
+            c, f, params = dynmapping
+            for p,fr in params:
+                if "|" in fr:
+                    for realfr in fr.split("|"):
+                        if realfr[:-9] in [el[1] for el in dynparams]:
+                            fr = realfr
+                            break;
+                print("|{}|{}|{}|{}|".format(c,f,p,fr))
 
-def delete_flow(cfs, structure, create_graphic=False):
+def delete_flow(cfs, structure, create_graphic=False, dynparams=None):
     queryCFS = (r'[Query Child Services of the '+cfs+r' CFS from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]',
                 "Cramer\nQuery CFS Decomposition")
     queryComponent = (r'[Query Child Services of the {} component from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]',
@@ -239,7 +260,7 @@ def delete_flow(cfs, structure, create_graphic=False):
     create_output(cfs, structure, "Delete", cfstasks, comptasks, create_graphic, reverse=True)
 
 
-def provision_flow(cfs, structure, create_graphic=False):
+def provision_flow(cfs, structure, create_graphic=False, dynparams=None):
     queryCFS = (r'[Query Child Services of the '+cfs+r' CFS from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]',
                 "Cramer\nQuery CFS Decomposition")
     queryComponent = (r'[Query Child Services of the {} component from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]',
@@ -255,7 +276,7 @@ def provision_flow(cfs, structure, create_graphic=False):
     
     create_output(cfs, structure, "Provision", cfstasks, comptasks, create_graphic, empty_phases=["Prepare"])
 
-def deprovision_flow(cfs, structure, create_graphic=False):
+def deprovision_flow(cfs, structure, create_graphic=False, dynparams=None):
     queryCFS = (r'[Query Child Services of the '+cfs+r' CFS from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]',
                 "Cramer\nQuery CFS Decomposition")
     queryComponent = (r'[Query Child Services of the {} component from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]',
@@ -276,7 +297,7 @@ def deprovision_flow(cfs, structure, create_graphic=False):
 
     create_output(cfs, structure, "Deprovision", cfstasks, comptasks, create_graphic, reverse=True, empty_phases=["Prepare"])
 
-def remove_modelling_flow(cfs, structure, create_graphic=False):
+def remove_modelling_flow(cfs, structure, create_graphic=False, dynparams=None):
     queryCFS = (r'[Query Child Services of the '+cfs+r' CFS from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]',
                 "Cramer\nQuery CFS Decomposition")
     queryComponent = (r'[Query Child Services of the {} component from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]',
@@ -295,7 +316,7 @@ def remove_modelling_flow(cfs, structure, create_graphic=False):
         comptasks[compname] = {"Validate": ExtraTasks(at_start=[(queryComponent[0].format(compname), queryComponent[1])]),
                                 "Finalize": ExtraTasks(at_end=[deleteComponent])}
 
-    create_output(cfs, structure, "RemoveModelling", cfstasks, comptasks, create_graphic, reverse=True, empty_phases=["Provision"])
+    create_output(cfs, structure, "RemoveModelling", cfstasks, comptasks, create_graphic, reverse=True, empty_phases=["Provision"], rollback=False)
 
 def explain_structure(cfs, structure):
     print("h1. CFS Structure")
@@ -324,6 +345,11 @@ def explain_structure(cfs, structure):
             print("the factory product "+fps[0]+" ", end="")
     print(".")
 
+def dynamic_mapping(cfs, structure):
+    for element in structure:
+        pass
+
+
 
 FLOWS = {"Create": create_flow,
          "Delete": delete_flow,
@@ -344,12 +370,12 @@ if __name__ == "__main__":
     args=parser.parse_args()
     set_debug_level(args.dbglevel)
 
-    cfsname = None
     DBG(10, "Reading json file '{}'".format(args.filename))
     with open(args.filename, "r") as fp:
         config = json.load(fp)
     cfsname = config["compositionName"]
     cfsstructure = [fp["factoryProduct"] for fp in config["paramMapping"]]
+    dynparams = [(cfsname, fp["factoryProduct"], [(p["name"], p["from"]) for p in fp["parameters"] if p["type"] == "mapped"]) for fp in config["paramMapping"]]
     if "includedComponents" in config:
         for component in config["includedComponents"]:
             component_definition_filename = "Component_{}.json".format(component)
@@ -357,13 +383,16 @@ if __name__ == "__main__":
             with open (component_definition_filename, "r") as f:
                 comp_config = json.load(f)
                 cfsstructure.append((component, [fp["factoryProduct"] for fp in comp_config["paramMapping"]]))
+                dynparams += [(component, fp["factoryProduct"], [(p["name"], p["from"]) for p in fp["parameters"] if p["type"] == "mapped"]) for fp in comp_config["paramMapping"]]
+
 
     if args.flow == ":ALL:":
         if not args.graphic:
             explain_structure(cfsname, cfsstructure)
         for f in FLOWS.values():
-            f(cfsname, cfsstructure, args.graphic)
+            f(cfsname, cfsstructure, args.graphic, dynparams)
             if not args.graphic:
-                print("\n")
+                print("\n----\n")
     else:
-        FLOWS[args.flow](cfsname, cfsstructure, args.graphic)
+        FLOWS[args.flow](cfsname, cfsstructure, args.graphic, dynparams)
+
