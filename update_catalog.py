@@ -64,6 +64,21 @@ def update_xml(xml, required_updates):
     items.extend(rv)
     return rv
 
+def get_version(xml, itemname):
+    ''' Find the version of a specific item '''
+    DBG(30, "Looking for item {}".format(itemname))
+    port = xml.find('i:port', ns)
+    if port is None:
+        raise RuntimeError("No <port> tag inside XML root")
+    items = port.find('i:items', ns)
+    if items is None:
+        raise RuntimeError("No <items> tag inside <port>")
+    for item in items.findall('i:item', ns):
+        DBG(30, "Found item {}".format(item.attrib["name"]))
+        if item.attrib["name"] == itemname:
+            return item.attrib["version"]
+    return None
+
 
 def read_rfs(filename, prefix, replace_all):
     rv = {}
@@ -87,23 +102,39 @@ def read_rfs(filename, prefix, replace_all):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Update Catalogs with new RFS')
     parser.add_argument('filename', metavar='<FILENAME>', help='The Catalog export XML of the product to be updated')
-    parser.add_argument('rfsfile', metavar='<RFSFILE>',   help='The Catalog export XML of the latest version of the RFS')
+    parser.add_argument('rfsfile', metavar='<RFSFILE>',  nargs='+', help='The Catalog export XML of the latest version of the RFS')
     parser.add_argument('-o', dest='outfile', action='store',  help='Write output to file instead of stdout')
     parser.add_argument('-a', dest='repl_all', action='store_true',  help='Replace all items (also TLs) with ones from RFS, not only specific ones')
-    parser.add_argument('-p', dest='prefix', action='store', default="RFS_", help='Replace items with <prefix> with ones from RFS. Default is "RFS_"')
+    parser.add_argument('-p', dest='prefix', action='store', help='Replace items with <prefix> with ones from RFS. Default is "RFS_"')
     parser.add_argument('-D', dest='dbglevel', action='store', default=0, help='Print Debug information')
 
     args = parser.parse_args()
     set_debug_level(args.dbglevel)
 
-    required_updates = read_rfs(args.rfsfile, args.prefix, args.repl_all)
+    required_updates = {}
+    for rfsfile in args.rfsfile:
+        if args.prefix is None:
+            m = re.match(r'([A-Z]*_).*', rfsfile)
+            prefix = m.group(1)
+        else:
+            prefix = args.prefix
+        required_updates.update(read_rfs(rfsfile, prefix, args.repl_all))
 
     xml = ET.parse(args.filename)
     items = update_xml(xml, required_updates)
 
     ET.register_namespace('', 'http://schemas.comptel.com/wsdl/comptel/catalog/internal/')
-    if (args.outfile):
-        xml.write(args.outfile, encoding='UTF-8', xml_declaration=True)
-    else:
+    if args.outfile == "-":
         print(ET.tostring(xml.getroot(), encoding='UTF-8', xml_declaration=True).decode('UTF-8'))
+    else:
+        if not args.outfile:
+            m = re.match(r'(.*)_v\d+\.\d+\.xml', args.filename)
+            if m:
+                outfilename = m.group(1) + "_v" + get_version(xml, m.group(1)) + ".xml"
+            else:
+                outfilename = args.filename[:-4] + "_v" + get_version(xml, args.filename[:-4]) + ".xml"
+        else:
+            outfilename = args.outfile
+        print("Writing file {}".format(outfilename))
+        xml.write(outfilename, encoding='UTF-8', xml_declaration=True)
 
