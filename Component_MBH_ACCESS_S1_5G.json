@@ -1,5 +1,5 @@
 {
-  "compositionName": "MBH_S1_4G",
+  "compositionName": "MBH_ACCESS_S1_5G",
   "compositionType": "component",
   "paramMapping": [
     {
@@ -109,7 +109,7 @@
         {
           "name": "CUST_SNIPPET_NAMES",
           "type": "input",
-          "from": "MBH_S1_4G_IPVPN_CORE_CUST_SNIPPET_NAMES"
+          "from": "MBH_ACCESS_S1_5G_IPVPN_CORE_CUST_SNIPPET_NAMES"
         },
         {
           "name": "DHCP_RELAY_LOOPBACK_ID",
@@ -120,12 +120,12 @@
     },
     {
       "factoryProduct": "IPVPN_SAP",
-      "factoryProductVersion": "2.26",
+      "factoryProductVersion": "2.27",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
           "type": "static",
-          "value": 501
+          "value": 502
         },
         {
           "name": "VPN_ACCESS_TYPE",
@@ -165,7 +165,7 @@
         {
           "name": "IPVPN_CORE_RFS_NAME",
           "type": "mapped",
-          "from": "MBH_S1_4G_IPVPN_CORE_RFS_NAME"
+          "from": "MBH_ACCESS_S1_5G_IPVPN_CORE_RFS_NAME"
         },
         {
           "name": "PHY_SERVICE_NAME",
@@ -175,7 +175,7 @@
         {
           "name": "PRIMARY_IPV4_IF_ADDRESS",
           "type": "static",
-          "value": "/26@LTES1LINKNET"
+          "value": "/26@5GS1"
         },
         {
           "name": "ADDITIONAL_IPV4_IF_ADDRESSES",
@@ -390,17 +390,17 @@
         {
           "name": "CUST_SNIPPET_NAMES",
           "type": "input",
-          "from": "MBH_S1_4G_IPVPN_SAP_CUST_SNIPPET_NAMES"
+          "from": "MBH_ACCESS_S1_5G_IPVPN_SAP_CUST_SNIPPET_NAMES"
         },
         {
           "name": "PE_CE_EBGP_IPV4_PEERS",
           "type": "input",
-          "from": "MBH_S1_4G_PE_CE_EBGP_IPV4_PEERS"
+          "from": "MBH_ACCESS_S1_5G_PE_CE_EBGP_IPV4_PEERS"
         },
         {
           "name": "PE_CE_EBGP_IPV6_PEERS",
           "type": "input",
-          "from": "MBH_S1_4G_PE_CE_EBGP_IPV6_PEERS"
+          "from": "MBH_ACCESS_S1_5G_PE_CE_EBGP_IPV6_PEERS"
         },
         {
           "name": "PE_CE_EBGP_LOCAL_ASN",
@@ -446,12 +446,12 @@
         {
           "name": "L2_VPN_NAME",
           "type": "mapped",
-          "from": "MBH_S1_4G_L2_VPN_NAME"
+          "from": "MBH_ACCESS_S1_5G_L2_VPN_NAME"
         },
         {
           "name": "EVI_NAME",
           "type": "static",
-          "value": "MBH_ACCESS_S1_4G_L2VPN"
+          "value": "MBH_ACCESS_S1_5G_L2VPN"
         },
         {
           "name": "EVI_IMPORT_ADDITIONAL_ROUTE_TARGET_SET",
@@ -476,7 +476,7 @@
         {
           "name": "RELATED_L3_LOGICAL_IF",
           "type": "static",
-          "value": 501
+          "value": 502
         },
         {
           "name": "MANAGEMENT_FLAG",
@@ -491,7 +491,7 @@
         {
           "name": "CUST_SNIPPET_NAMES",
           "type": "input",
-          "from": "MBH_S1_4G_ELAN_CORE_CUST_SNIPPET_NAMES"
+          "from": "MBH_ACCESS_S1_5G_ELAN_CORE_CUST_SNIPPET_NAMES"
         }
       ]
     },
@@ -502,7 +502,7 @@
         {
           "name": "LOGICAL_SUB_IF_ID",
           "type": "static",
-          "value": 501
+          "value": 502
         },
         {
           "name": "ELAN_ACCESS_TYPE",
@@ -517,7 +517,7 @@
         {
           "name": "ELAN_CORE_RFS_NAME",
           "type": "mapped",
-          "from": "MBH_S1_4G_ELAN_CORE_RFS_NAME"
+          "from": "MBH_ACCESS_S1_5G_ELAN_CORE_RFS_NAME"
         },
         {
           "name": "PHY_SERVICE_NAME",
@@ -537,7 +537,7 @@
         {
           "name": "OUTER_VLAN_ID",
           "type": "static",
-          "value": 501
+          "value": 502
         },
         {
           "name": "OUTER_TPI",
@@ -592,7 +592,7 @@
         {
           "name": "CUST_SNIPPET_NAMES",
           "type": "input",
-          "from": "MBH_S1_4G_ELAN_SAP_CUST_SNIPPET_NAMES"
+          "from": "MBH_ACCESS_S1_5G_ELAN_SAP_CUST_SNIPPET_NAMES"
         },
         {
           "name": "IPV4_DHCP_RELAY_FLAG",

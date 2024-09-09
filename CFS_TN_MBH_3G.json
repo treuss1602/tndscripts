@@ -2,8 +2,8 @@
   "compositionName": "TN_MBH_3G",
   "compositionType": "cfs",
   "includedComponents": [
-    "MBH_OAM",
-    "MBH_UPCP"
+    "MBH_ACCESS_OAM",
+    "MBH_ACCESS_UPCP"
   ],
   "paramMapping": [
     {
