@@ -120,7 +120,7 @@
     },
     {
       "factoryProduct": "IPVPN_SAP",
-      "factoryProductVersion": "2.26",
+      "factoryProductVersion": "2.27",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
@@ -175,7 +175,7 @@
         {
           "name": "PRIMARY_IPV4_IF_ADDRESS",
           "type": "static",
-          "value": "/30@5GS!"
+          "value": "/30@5GS1"
         },
         {
           "name": "ADDITIONAL_IPV4_IF_ADDRESSES",

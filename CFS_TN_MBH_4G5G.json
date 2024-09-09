@@ -2,10 +2,10 @@
   "compositionName": "TN_MBH_4G5G",
   "compositionType": "cfs",
   "includedComponents": [
-    "MBH_OAM",
-    "MBH_UPCP",
-    "MBH_S1_4G",
-    "MBH_S1_5G"
+    "MBH_ACCESS_OAM",
+    "MBH_ACCESS_UPCP",
+    "MBH_ACCESS_S1_4G",
+    "MBH_ACCESS_S1_5G"
   ],
   "paramMapping": [
     {
