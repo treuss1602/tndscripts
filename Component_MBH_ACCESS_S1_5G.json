@@ -174,23 +174,27 @@
         },
         {
           "name": "PRIMARY_IPV4_IF_ADDRESS",
-          "type": "static",
-          "value": "/26@5GS1"
+          "type": "input",
+          "from": "MBH_ACCESS_S1_5G_PRIMARY_IPV4_IF_ADDRESS",
+          "acadefault": "/26@5GS1"
         },
         {
           "name": "ADDITIONAL_IPV4_IF_ADDRESSES",
-          "type": "static",
-          "value": null
+          "type": "input",
+          "from": "MBH_ACCESS_S1_5G_ADDITIONAL_IPV4_IF_ADDRESSES",
+          "acadefault": null
         },
         {
           "name": "PRIMARY_IPV6_IF_ADDRESS",
-          "type": "static",
-          "value": null
+          "type": "input",
+          "from": "MBH_ACCESS_S1_5G_PRIMARY_IPV6_IF_ADDRESS",
+          "acadefault": null
         },
         {
           "name": "ADDITIONAL_IPV6_IF_ADDRESSES",
-          "type": "static",
-          "value": null
+          "type": "input",
+          "from": "MBH_ACCESS_S1_5G_ADDITIONAL_IPV6_IF_ADDRESSES",
+          "acadefault": null
         },
         {
           "name": "INGRESS_L3_ACL_NAME",

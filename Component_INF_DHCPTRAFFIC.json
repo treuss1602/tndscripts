@@ -12,9 +12,24 @@
           "value": "INF_DHCPTRAFFIC"
         },
         {
+          "name": "VRF_NAME",
+          "type": "static",
+          "value": null
+        },
+        {
           "name": "VRF_TYPE",
           "type": "static",
           "value": "Any2Any"
+        },
+        {
+          "name": "VRF_IMPORT_ADDITIONAL_RT_SET",
+          "type": "static",
+          "value": null
+        },
+        {
+          "name": "VRF_EXPORT_ADDITIONAL_RT_SET",
+          "type": "static",
+          "value": null
         },
         {
           "name": "VRF_SR_TE_COLOR",
@@ -159,23 +174,27 @@
         },
         {
           "name": "PRIMARY_IPV4_IF_ADDRESS",
-          "type": "static",
-          "value": "/30@EBH LINKNET"
+          "type": "input",
+          "from": "INF_DHCPTRAFFIC_PRIMARY_IPV4_IF_ADDRESS",
+          "acadefault": "/30@EBH LINKNET"
         },
         {
           "name": "ADDITIONAL_IPV4_IF_ADDRESSES",
-          "type": "static",
-          "value": null
+          "type": "input",
+          "from": "INF_DHCPTRAFFIC_ADDITIONAL_IPV4_IF_ADDRESSES",
+          "acadefault": null
         },
         {
           "name": "PRIMARY_IPV6_IF_ADDRESS",
-          "type": "static",
-          "value": null
+          "type": "input",
+          "from": "INF_DHCPTRAFFIC_PRIMARY_IPV6_IF_ADDRESS",
+          "acadefault": null
         },
         {
           "name": "ADDITIONAL_IPV6_IF_ADDRESSES",
-          "type": "static",
-          "value": null
+          "type": "input",
+          "from": "INF_DHCPTRAFFIC_ADDITIONAL_IPV6_IF_ADDRESSES",
+          "acadefault": null
         },
         {
           "name": "INGRESS_L3_ACL_NAME",
