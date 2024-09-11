@@ -174,23 +174,27 @@
         },
         {
           "name": "PRIMARY_IPV4_IF_ADDRESS",
-          "type": "static",
-          "value": "/30@CMTS LINKNETS"
+          "type": "input",
+          "from": "RBH_CMTS_INET_PRIMARY_IPV4_IF_ADDRESS",
+          "acadefault": "/30@CMTS LINKNETS"
         },
         {
           "name": "ADDITIONAL_IPV4_IF_ADDRESSES",
-          "type": "static",
-          "value": null
+          "type": "input",
+          "from": "RBH_CMTS_INET_ADDITIONAL_IPV4_IF_ADDRESSES",
+          "acadefault": null
         },
         {
           "name": "PRIMARY_IPV6_IF_ADDRESS",
-          "type": "static",
-          "value": "/64@IPv6 CMTS LINKNETS"
+          "type": "input",
+          "from": "RBH_CMTS_INET_PRIMARY_IPV6_IF_ADDRESS",
+          "acadefault": "/64@IPv6 CMTS LINKNETS"
         },
         {
           "name": "ADDITIONAL_IPV6_IF_ADDRESSES",
-          "type": "static",
-          "value": null
+          "type": "input",
+          "from": "RBH_CMTS_INET_ADDITIONAL_IPV6_IF_ADDRESSES",
+          "acadefault": null
         },
         {
           "name": "INGRESS_L3_ACL_NAME",

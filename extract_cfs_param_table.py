@@ -23,21 +23,32 @@ CFS_COMPONENT_MAPPING = {
     "TN_MBH_3G": ["MBH_ACCESS_OAM", "MBH_ACCESS_UPCP"],
 }
 
+COMPATIBILITY_MATRIX = {
+    "input" : ["input", "static value", 'static "null"', "mapped", "input with ACA default"],
+    "return" : ["n/a"],
+    "inputORreturn" : ["input", "static value", 'static "null"', "mapped", "input with ACA default"],
+    "n/a" : ["n/a"],
+    "special" : ["input"],
+    "Stablenet NEI" : ["n/a"]
+}
+
 def read_data_from_sheet(sheet, col1, col2, cfsname, componentname, fpname):
     STARTROW = 7
     AMBIGUOUS = ["CUST_SNIPPET_NAMES"] # Parameters which can have different values for different FPs
 
     rv = []
     for row in range(STARTROW, 300):
-        cellvalues = [sheet.cell(row=row, column=col).value for col in [1, 3, 4, col1, col2]]
-        techname, valuetype, valuedetails, paramtype, paramdetails = (x.strip() if isinstance(x, str) else x for x in cellvalues)
+        cellvalues = [sheet.cell(row=row, column=col).value for col in [1, 3, 4, 11, col1, col2]]
+        techname, valuetype, valuedetails, fp_paramtype, paramtype, paramdetails = (x.strip() if isinstance(x, str) else x for x in cellvalues)
         if techname == "Version": # avoid reading version history
             break
         if sheet.cell(row=row, column=1).font.strike:
             DBG(20, "Ignoring parameter {} because of strikethough formatting".format(techname))
             continue
         if techname and paramtype and techname != "NETWORK_ELEMENT_NAME":
-            if paramtype == 'input':
+            if paramtype not in COMPATIBILITY_MATRIX[fp_paramtype]:
+                print("WARNING: {}: type '{}' defined for {} is not compatible with parameter type '{}'".format(techname, paramtype, cfsname if cfsname else componentname, fp_paramtype))
+            if paramtype == 'input' or paramtype == 'input with ACA default':
                 if techname in AMBIGUOUS:
                     if cfsname:
                         input_param = "{}_{}".format(fpname, techname)
@@ -48,7 +59,10 @@ def read_data_from_sheet(sheet, col1, col2, cfsname, componentname, fpname):
                         input_param = "{}".format(techname)
                     else:
                         input_param = "{}_{}".format(componentname, techname)
-                rv.append({"name": techname, "type": "input", "from": input_param})
+                paramentry = {"name": techname, "type": "input", "from": input_param}
+                if paramtype == 'input with ACA default':
+                    paramentry["acadefault"] = paramdetails
+                rv.append(paramentry)
             elif paramtype == 'static value':
                 if valuetype == "Enumerated" and paramdetails not in [x.strip() for x in valuedetails.split(";")]:
                     print("Warning: Value '{}' for parameter {} is not a valid enum value.".format(paramdetails, techname))
