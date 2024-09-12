@@ -24,7 +24,6 @@ if [ $STATCOUNT != 0 ]; then
 	cd $TNDREPODIR && git status
 fi
 
-exit 1
 STAGINGDIR=stagedir
 echo "--------------------------------------------------------------------------------"
 echo "Generating all Lookup Tables in staging dir"
