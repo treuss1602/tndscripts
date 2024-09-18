@@ -120,7 +120,7 @@
     },
     {
       "factoryProduct": "IPVPN_SAP",
-      "factoryProductVersion": "2.27",
+      "factoryProductVersion": "2.28",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
@@ -174,27 +174,23 @@
         },
         {
           "name": "PRIMARY_IPV4_IF_ADDRESS",
-          "type": "input",
-          "from": "MBH_ACCESS_S1_4G_PRIMARY_IPV4_IF_ADDRESS",
-          "acadefault": "/26@LTES1LINKNET"
+          "type": "static",
+          "value": "/26@LTES1LINKNET"
         },
         {
           "name": "ADDITIONAL_IPV4_IF_ADDRESSES",
-          "type": "input",
-          "from": "MBH_ACCESS_S1_4G_ADDITIONAL_IPV4_IF_ADDRESSES",
-          "acadefault": null
+          "type": "static",
+          "value": null
         },
         {
           "name": "PRIMARY_IPV6_IF_ADDRESS",
-          "type": "input",
-          "from": "MBH_ACCESS_S1_4G_PRIMARY_IPV6_IF_ADDRESS",
-          "acadefault": null
+          "type": "static",
+          "value": null
         },
         {
           "name": "ADDITIONAL_IPV6_IF_ADDRESSES",
-          "type": "input",
-          "from": "MBH_ACCESS_S1_4G_ADDITIONAL_IPV6_IF_ADDRESSES",
-          "acadefault": null
+          "type": "static",
+          "value": null
         },
         {
           "name": "INGRESS_L3_ACL_NAME",
@@ -440,7 +436,7 @@
     },
     {
       "factoryProduct": "ELAN_CORE",
-      "factoryProductVersion": "2.4",
+      "factoryProductVersion": "2.5",
       "parameters": [
         {
           "name": "EVPN_EVI_RANGE",

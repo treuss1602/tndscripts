@@ -120,7 +120,7 @@
     },
     {
       "factoryProduct": "IPVPN_SAP",
-      "factoryProductVersion": "2.27",
+      "factoryProductVersion": "2.28",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
@@ -174,27 +174,23 @@
         },
         {
           "name": "PRIMARY_IPV4_IF_ADDRESS",
-          "type": "input",
-          "from": "MBH_S1_5G_MAD_PRIMARY_IPV4_IF_ADDRESS",
-          "acadefault": "/30@5GS1"
+          "type": "static",
+          "value": "/30@5GS1"
         },
         {
           "name": "ADDITIONAL_IPV4_IF_ADDRESSES",
-          "type": "input",
-          "from": "MBH_S1_5G_MAD_ADDITIONAL_IPV4_IF_ADDRESSES",
-          "acadefault": null
+          "type": "static",
+          "value": null
         },
         {
           "name": "PRIMARY_IPV6_IF_ADDRESS",
-          "type": "input",
-          "from": "MBH_S1_5G_MAD_PRIMARY_IPV6_IF_ADDRESS",
-          "acadefault": null
+          "type": "static",
+          "value": null
         },
         {
           "name": "ADDITIONAL_IPV6_IF_ADDRESSES",
-          "type": "input",
-          "from": "MBH_S1_5G_MAD_ADDITIONAL_IPV6_IF_ADDRESSES",
-          "acadefault": null
+          "type": "static",
+          "value": null
         },
         {
           "name": "INGRESS_L3_ACL_NAME",

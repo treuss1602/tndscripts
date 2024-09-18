@@ -1,6 +1,6 @@
 {
   "factoryProductName": "ELAN_CORE",
-  "version": "2.4",
+  "version": "2.5",
   "prerequisite": null,
   "inputParameters": [
     {
@@ -104,7 +104,7 @@
       "modifyOperation": null,
       "exampleValue": "E-LAN",
       "acadefault": "E-LAN",
-      "cramerStorage": "ELANC Topology",
+      "cramerStorage": "Routing Instance.Behaviour attritbute",
       "jsonName": "eviType"
     },
     {
