@@ -169,7 +169,7 @@ def create_drawing(cfsname, structure, action, cfstasks, componenttasks, *, reve
 
 def create_output(cfs, structure, action, cfstasks, comptasks, create_graphic, *, reverse=False, empty_phases=[], rollback=True):
     if create_graphic:
-        create_drawing(cfs, structure, action, cfstasks, comptasks, reverse=reverse, empty_phases=empty_phases, rollback=rollback)
+        create_drawing(cfs, structure, action, cfstasks, comptasks, reverse=reverse, empty_phases=empty_phases)
     else:
         describe_flow(cfs, structure, action, cfstasks, comptasks, reverse=reverse, empty_phases=empty_phases, rollback=rollback)
 
