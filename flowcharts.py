@@ -148,7 +148,7 @@ class Component(Container):
 class FactoryProduct(Container):
 
     def __init__(self, title, lowcaption=False):
-        super().__init__((0,0), 11*SCALE, 32*SCALE, title, COLOR_FP)
+        super().__init__((0,0), 9*SCALE, 32*SCALE, title, COLOR_FP)
         self.textypos = 8 if lowcaption else 13
 
     def draw(self, img):
