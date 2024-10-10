@@ -1,6 +1,6 @@
 {
   "factoryProductName": "IP_SAP",
-  "version": "1",
+  "version": "1.2",
   "prerequisite": null,
   "inputParameters": [
     {
@@ -25,7 +25,7 @@
       "modifyOperation": null,
       "exampleValue": "1024",
       "cramerStorage": "Number object",
-      "jsonName": "logicalSubInterfaceId"
+      "jsonName": "logicalSubIfId"
     },
     {
       "name": "INNER_VLAN_ID",
@@ -127,7 +127,7 @@
       "modifyOperation": "ModifySubnets",
       "exampleValue": "/30@EBH LINKNET",
       "cramerStorage": "IP number,Subnet group,SNG",
-      "jsonName": "primaryIPv4IFaddress"
+      "jsonName": "primaryIPv4IfAddress"
     },
     {
       "name": "ADDITIONAL_IPV4_IF_ADDRESSES",
@@ -142,7 +142,7 @@
       "modifyOperation": "ModifySubnets",
       "exampleValue": "121.10.10.1/30@EBH LINKNET;121.10.20.1/24@EBH LINKNET",
       "cramerStorage": "IP number,Subnet group,SNG",
-      "jsonName": "additionalIPv4IFaddresses"
+      "jsonName": "additionalIPv4IfAddresses"
     },
     {
       "name": "PRIMARY_IPV6_IF_ADDRESS",
@@ -157,7 +157,7 @@
       "modifyOperation": "ModifySubnets",
       "exampleValue": "2001:0db8:0000:0000:0000:0000:0000:0000/64@EBH LINKNET",
       "cramerStorage": "IP number,Subnet group,SNG",
-      "jsonName": "primaryIPv6IFaddress"
+      "jsonName": "primaryIPv6IfAddress"
     },
     {
       "name": "ADDITIONAL_IPV6_IF_ADDRESSES",
@@ -172,7 +172,7 @@
       "modifyOperation": "ModifySubnets",
       "exampleValue": "2001:0dba:0000:0000:0000:0000:0000:0000/64@EBH LINKNET",
       "cramerStorage": "IP number,Subnet group,SNG",
-      "jsonName": "additionalIPv6IFaddresses"
+      "jsonName": "additionalIPv6IfAddresses"
     },
     {
       "name": "INGRESS_L3_ACL_NAME",
@@ -805,7 +805,7 @@
       "modifyOperation": null,
       "exampleValue": "Bundle-Ether20.1024",
       "cramerStorage": "Port",
-      "jsonName": "sapIFName"
+      "jsonName": "sapIfName"
     },
     {
       "name": "INNER_VLAN_ID",
@@ -844,7 +844,7 @@
       "modifyOperation": null,
       "exampleValue": "/30@EBH LINKNET",
       "cramerStorage": "IP number,Subnet group,SNG",
-      "jsonName": "primaryIPv4IFaddress"
+      "jsonName": "primaryIPv4IfAddress"
     },
     {
       "name": "ADDITIONAL_IPV4_IF_ADDRESSES",
@@ -857,7 +857,7 @@
       "modifyOperation": null,
       "exampleValue": "121.10.10.1/30@EBH LINKNET;121.10.20.1/24@EBH LINKNET",
       "cramerStorage": "IP number,Subnet group,SNG",
-      "jsonName": "additionalIPv4IFaddresses"
+      "jsonName": "additionalIPv4IfAddresses"
     },
     {
       "name": "PRIMARY_IPV6_IF_ADDRESS",
@@ -870,7 +870,7 @@
       "modifyOperation": null,
       "exampleValue": "2001:0db8:0000:0000:0000:0000:0000:0000/64@EBH LINKNET",
       "cramerStorage": "IP number,Subnet group,SNG",
-      "jsonName": "primaryIPv6IFaddress"
+      "jsonName": "primaryIPv6IfAddress"
     },
     {
       "name": "ADDITIONAL_IPV6_IF_ADDRESSES",
@@ -883,7 +883,7 @@
       "modifyOperation": null,
       "exampleValue": "2001:0dba:0000:0000:0000:0000:0000:0000/64@EBH LINKNET",
       "cramerStorage": "IP number,Subnet group,SNG",
-      "jsonName": "additionalIPv6IFaddresses"
+      "jsonName": "additionalIPv6IfAddresses"
     },
     {
       "name": "PE_CE_EBGP_IPV4_PEERS",
