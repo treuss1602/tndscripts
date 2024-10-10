@@ -135,7 +135,7 @@ def create_confluence_table_compare(productconfig : FactoryProductConfiguration,
 def print_confluence_markup_header(config, supported_modify_ops):
     print("NBI Specification for {}, based on version {} of the Parameter Excel Sheet.".format(config.factoryProductName, config.version))
     print("Supported actions:")
-    for (action, title) in [("Create", "Create"), ("Delete", "Delete")] + supported_modify_ops + [("Display", "Display")]:
+    for (action, title) in [("Create", "Create"), ("Delete", "Delete")] + supported_modify_ops + [("Display", "Display"), ("Compare", "Compare")]:
         print("* [{}|#{}]".format(title, title))
     print()
 
