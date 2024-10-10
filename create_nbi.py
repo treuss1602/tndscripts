@@ -18,7 +18,7 @@ def tablerow(*values, alignments=None):
     else:
         return '<tr>' + ''.join('<td class="confluenceTd"{}><p>'.format(' style="text-align:{};"'.format(a) if a else '')+quote(s)+'</p></td>' for s,a in zip(values, alignments)) + '</tr>'
 
-def create_confluence_html_tables(name, action, inputparams, outputparams):
+def create_confluence_html_tables(name, action, inputparams, outputparams, prefix_return_params):
     IWIDTHS = [350, 90, 340, 250, 70]
     IALIGNS = [None, None, None, None, "center"]
     OWIDTHS = [350, 500, 250]
@@ -35,19 +35,19 @@ def create_confluence_html_tables(name, action, inputparams, outputparams):
         print('<div class="table-wrap"><table class="confluenceTable"><tbody>')
         print(tableheader("Parameter name", "Description", "Example Value", widths=OWIDTHS))
         for param in outputparams:
-            pname = param.name if param.name.startswith(name) else "{}_{}".format(name, param.name)
+            pname = param.name if param.name.startswith(name) or not prefix_return_params else "{}_{}".format(name, param.name)
             print(tablerow(pname, param.desc, param.examplevalue))
         print('</tbody></table></div>')
     else:
         print("<p>There are no return parameters for this action.</p>")
     print()
 
-def create_confluence_html(heading, name, action, inputparams, outputparams):
+def create_confluence_html(heading, name, action, inputparams, outputparams, prefix_return_params=True):
     print('<h2 id="FactoryProduct{}-{}">{}</h2>'.format(name, heading.replace(" ",""), heading))
     print('<p>Below order parameters are applicable for orders with LINE_x_NAME=FACTORY_PRODUCT_{} and LINE_x_ACTION={}</p>'.format(name, action))
-    create_confluence_html_tables(name, action, inputparams, outputparams)
+    create_confluence_html_tables(name, action, inputparams, outputparams, prefix_return_params)
 
-def create_confluence_markup(heading, name, action, inputparams, outputparams):
+def create_confluence_markup(heading, name, action, inputparams, outputparams, prefix_return_params=True):
     print("h2. {}".format(heading))
     print("Below order parameters are applicable for orders with LINE_x_NAME=FACTORY_PRODUCT_{} and LINE_x_ACTION={}".format(name, action))
     print("||Parameter name (without prefix)||Section||Description||Example Value||M/O/C||")
@@ -60,7 +60,7 @@ def create_confluence_markup(heading, name, action, inputparams, outputparams):
         print("\nReturn Parameters:")
         print("||Parameter name||Description||Example Value||")
         for param in outputparams:
-            pname = param.name if param.name.startswith(name) else "{}_{}".format(name, param.name)
+            pname = param.name if param.name.startswith(name) or not prefix_return_params else "{}_{}".format(name, param.name)
             print("|{}|{}|{}|".format(pname, param.desc, param.examplevalue))
     else:
         print("\nThere are no return parameters for this action.")
@@ -118,6 +118,20 @@ def create_confluence_table_display(productconfig : FactoryProductConfiguration,
     else:
         create_confluence_markup("Display", productconfig.factoryProductName, "Display", inparams, outparams)
 
+def create_confluence_table_compare(productconfig : FactoryProductConfiguration, headers=True, html=False):
+    rfsnameparam = "{}_RFS_NAME".format(productconfig.factoryProductName)
+    rfsnameexample = productconfig.find_return_param(rfsnameparam).examplevalue
+    inparams = [Param("input", rfsnameparam, "The Cramer RFS Name of the service to be compared.", "String", "", True, rfsnameexample)]
+    outparams = []
+    outparams.append(Param("output", "RESULT_1", "First line that is extracted from Stablenet as result of the comparison operation.", 
+                           "", "", False, "Context (original): interface GigabitEthernet0/13/9"))
+    outparams.append(Param("output", "RESULT_<N>", "Further lines extracted.", 
+                           "", "", False, "..."))
+    if html:
+        create_confluence_html("Compare", productconfig.factoryProductName, "Compare", inparams, outparams, prefix_return_params=False)
+    else:
+        create_confluence_markup("Compare", productconfig.factoryProductName, "Compare", inparams, outparams, prefix_return_params=False)
+
 def print_confluence_markup_header(config, supported_modify_ops):
     print("NBI Specification for {}, based on version {} of the Parameter Excel Sheet.".format(config.factoryProductName, config.version))
     print("Supported actions:")
@@ -167,3 +181,4 @@ if __name__ == "__main__":
         for action, title in supported_modify_ops:
             create_confluence_table_modify(config, action, title, True, html=args.html)
         create_confluence_table_display(config, True, html=args.html)
+        create_confluence_table_compare(config, True, html=args.html)
