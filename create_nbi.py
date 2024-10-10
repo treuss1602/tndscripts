@@ -143,7 +143,7 @@ def print_confluence_html_header(config, supported_modify_ops):
     print('<p>NBI Specification for {}, based on version {} of the Parameter Excel Sheet.</p>'.format(config.factoryProductName, config.version))
     print('<p>Supported actions:</p>')
     print('<ul>')
-    for (action, title) in [("Create", "Create"), ("Delete", "Delete")] + supported_modify_ops + [("Display", "Display")]:
+    for (action, title) in [("Create", "Create"), ("Delete", "Delete")] + supported_modify_ops + [("Display", "Display"), ("Compare", "Compare")]:
         print('<li><a href="#FactoryProduct{}-{}">{}</a></li>'.format(config.factoryProductName, title.replace(" ",""), title))
     print('</ul>')
 
