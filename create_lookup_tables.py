@@ -42,6 +42,7 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
                      joinparams([p for p in config.input_params if p.dynamically_mapped]),
                      ";".join(config.key_params)+";"))
     lkt.add(LtEntry(prod+"#Delete", "{}_RFS_NAME;".format(prod), ";", ";".join(config.key_params)+";"))
+    lkt.add(LtEntry(prod+"#Compare", "{}_RFS_NAME;".format(prod), ";", ";".join(config.key_params)+";"))
     lkt.add(LtEntry(prod+"#Provision", "{}_RFS_NAME;".format(prod), ";", ";".join(config.key_params)+";"))
     lkt.add(LtEntry(prod+"#Deprovision", "{}_RFS_NAME;".format(prod), ";", ";".join(config.key_params)+";"))
     lkt.add(LtEntry(prod+"#RemoveModelling", "{}_RFS_NAME;".format(prod), ";", ";".join(config.key_params)+";"))
@@ -164,6 +165,7 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
     # LKT_TND_STABLENET
     TRANSACTIONS = {"Create": "new_rfs",
                     "Delete": "cease_rfs",
+                    "Compare": "compare_rfs",
                     "ModifyParameter": "modify_rfs_generic",
                     "ModifyCustomSnippets": "modify_rfs_custom_snippets",
                     "ModifyQoS": "modify_rfs_qos",
