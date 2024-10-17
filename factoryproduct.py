@@ -3,6 +3,7 @@ import json
 import re
 import validations
 import typing
+from collections import defaultdict
 from debug import DBG
 from lookuptable import LookupTable, LtEntry
 
@@ -153,17 +154,17 @@ class FactoryProductConfiguration:
         self.cramer_output_params = cramer_output_params
         self.stablenet_params = stablenet_params
         self.key_params = key_params
-        self.cramer_validations = cramer_validations if cramer_validations else []
+        self.cramer_validations = cramer_validations if cramer_validations else defaultdict(list)
         self.prerequisite_product = None
 
-    def add_validation(self, validation_name, *validation_params, taskname = None):
+    def add_validation(self, action, validation_name, *validation_params, taskname = None):
         if validation_name not in VALIDATIONS:
             raise ValueError("Validation '{}' not defined".format(validation_name))
         if taskname:
             val = VALIDATIONS[validation_name](*validation_params, taskname=taskname)
         else:
             val = VALIDATIONS[validation_name](*validation_params)
-        self.cramer_validations.append(val)
+        self.cramer_validations[action].append(val)
 
     def add_prerequisite_product(self, name, referenceparam):
         self.prerequisite_product = (name, referenceparam)
@@ -187,7 +188,9 @@ class FactoryProductConfiguration:
         data["cramerParameters"] = [p.as_dict() for p in self.cramer_output_params]
         data["keyParameters"] = self.key_params
         data["stablenetParameters"] = {"preNEI": self.stablenet_params[0], "postNEI": self.stablenet_params[1]}
-        data["cramerValidations"] = [{"name": v.name, "parameters": v.config_parameters(), "taskname": v.taskname} for v in self.cramer_validations]
+        data["cramerValidations"] = {action : [{"name": v.name, "parameters": v.config_parameters(), "taskname": v.taskname}
+                                                for v in validations]
+                                     for action, validations in self.cramer_validations.items()}
         json.dump(data, fp, indent=2)
 
     @staticmethod
@@ -200,12 +203,13 @@ class FactoryProductConfiguration:
                                            input_params, cramer_params, stablenet_params, key_params)
         if data["prerequisite"]:
             prod.add_prerequisite_product(data["prerequisite"]["product"], data["prerequisite"]["referenceParameter"])
-        for v in data["cramerValidations"]:
-            DBG(30, "Adding validation {}".format(v["name"]))
-            if "taskname" in v:
-                prod.add_validation(v["name"], *v["parameters"], taskname=v["taskname"])
-            else:
-                prod.add_validation(v["name"], *v["parameters"])
+        for t, validations in data["cramerValidations"].items():
+            for v in validations:
+                DBG(30, "Adding validation {} (action {})".format(v["name"], t))
+                if "taskname" in v:
+                    prod.add_validation(t, v["name"], *v["parameters"], taskname=v["taskname"])
+                else:
+                    prod.add_validation(t, v["name"], *v["parameters"])
         return prod
 
     @staticmethod

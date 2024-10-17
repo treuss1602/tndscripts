@@ -501,13 +501,5 @@
       "ELINE_CORE_VC_ID_RANGE"
     ]
   },
-  "cramerValidations": [
-    {
-      "name": "CHECK_NODE_LOCATION",
-      "parameters": [
-        "NETWORK_ELEMENT_NAME"
-      ],
-      "taskname": "CHECK_TARGET_NE_EXISTS"
-    }
-  ]
+  "cramerValidations": {}
 }

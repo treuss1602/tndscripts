@@ -1,5 +1,6 @@
 ''' Model for FlowOne Lookup Tables '''
 import re
+from debug import DBG
 
 class LtEntry:
     ''' Lookup Table Entry/Row '''
@@ -50,12 +51,14 @@ class LookupTable:
         return rv
 
     @staticmethod
-    def from_validations(prod, trans, *validations):
+    def from_validations(prod, validation_config):
         lt = LookupTable('LKT_TND_CRAMER_COMMAND_VALIDATION')
-        lt.add(LtEntry(prod+"#"+trans+"#TASKS", ";".join(v.taskname for v in validations)+";"))
-        for v in validations:
-            lt.add(LtEntry(prod+"#"+trans+"#{}#API_NAME".format(v.taskname), v.apiname))
-            lt.add(LtEntry(prod+"#"+trans+"#{}#PARAMETERS".format(v.taskname), v.get_param_string()))
-            lt.add(LtEntry(prod+"#"+trans+"#{}#RETURN_PARAMETERS".format(v.taskname), v.get_return_param_string()))
+        for trans, validations in validation_config.items():
+            DBG(30, "Adding {} validations for transaction {}".format(len(validations), trans))
+            lt.add(LtEntry(prod+"#"+trans+"#TASKS", ";".join(v.taskname for v in validations)+";"))
+            for v in validations:
+                lt.add(LtEntry(prod+"#"+trans+"#{}#API_NAME".format(v.taskname), v.apiname))
+                lt.add(LtEntry(prod+"#"+trans+"#{}#PARAMETERS".format(v.taskname), v.get_param_string()))
+                lt.add(LtEntry(prod+"#"+trans+"#{}#RETURN_PARAMETERS".format(v.taskname), v.get_return_param_string()))
         return lt
 

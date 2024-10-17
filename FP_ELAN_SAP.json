@@ -514,13 +514,5 @@
       "ELAN_CORE_CUST_SNIPPET_NAMES"
     ]
   },
-  "cramerValidations": [
-    {
-      "name": "CHECK_NODE_LOCATION",
-      "parameters": [
-        "NETWORK_ELEMENT_NAME"
-      ],
-      "taskname": "CHECK_TARGET_NE_EXISTS"
-    }
-  ]
+  "cramerValidations": {}
 }

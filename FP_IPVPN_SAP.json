@@ -1256,13 +1256,32 @@
       "IPVPN_CORE_NODE_ASN"
     ]
   },
-  "cramerValidations": [
-    {
-      "name": "CHECK_NODE_LOCATION",
-      "parameters": [
-        "NETWORK_ELEMENT_NAME"
-      ],
-      "taskname": "CHECK_TARGET_NE_EXISTS"
-    }
-  ]
+  "cramerValidations": {
+    "Create": [
+      {
+        "name": "CHECK_IPAM_PERMISSIONS",
+        "parameters": [
+          "REQ_USER",
+          "PRIMARY_IPV4_IF_ADDRESS",
+          "ADDITIONAL_IPV4_IF_ADDRESSES",
+          "PRIMARY_IPV6_IF_ADDRESS",
+          "ADDITIONAL_IPV6_IF_ADDRESSES"
+        ],
+        "taskname": "CHECK_IPAM_PERMISSIONS"
+      }
+    ],
+    "Delete": [
+      {
+        "name": "CHECK_IPAM_PERMISSIONS",
+        "parameters": [
+          "REQ_USER",
+          "PRIMARY_IPV4_IF_ADDRESS",
+          "ADDITIONAL_IPV4_IF_ADDRESSES",
+          "PRIMARY_IPV6_IF_ADDRESS",
+          "ADDITIONAL_IPV6_IF_ADDRESSES"
+        ],
+        "taskname": "CHECK_IPAM_PERMISSIONS"
+      }
+    ]
+  }
 }

@@ -482,13 +482,5 @@
       "ESILAG_MINIMUM_LINKS"
     ]
   },
-  "cramerValidations": [
-    {
-      "name": "CHECK_NODE_LOCATION",
-      "parameters": [
-        "NETWORK_ELEMENT_NAME"
-      ],
-      "taskname": "CHECK_TARGET_NE_EXISTS"
-    }
-  ]
+  "cramerValidations": {}
 }

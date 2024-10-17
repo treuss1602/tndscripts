@@ -102,7 +102,7 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
     tables.append(lkt)
 
     # LKT_TND_CRAMER_COMMAND_VALIDATION
-    tables.append(LookupTable.from_validations(prod, "Create", *config.cramer_validations))
+    tables.append(LookupTable.from_validations(prod, config.cramer_validations))
 
     # LKT_TND_CRAMER_QUERY_SERVICE
     api = CramerAPIs[prod][0]

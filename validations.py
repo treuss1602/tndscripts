@@ -63,4 +63,27 @@ class NodeLocationValidation(Validation):
             The list and order needs to be consistent with __init__ parameters. '''
         return [self.nodename]
     
+class UserIpamPermissions(Validation):
+    ''' Checks whether a user has IPAM permissions for all subnet groups '''
+    name = "CHECK_IPAM_PERMISSIONS"
+    api = "validateSubnetGroupPermissionsForTND"
+
+    def __init__(self, userName, primaryIPv4IfAddress, additionalIPv4IfAddresses, primaryIPv6IfAddress, additionalIPv6IfAddresses, *, taskname=name):
+        super().__init__(taskname, self.api)
+        self.userName = userName
+        self.primaryIPv4IfAddress = primaryIPv4IfAddress
+        self.additionalIPv4IfAddresses = additionalIPv4IfAddresses
+        self.primaryIPv6IfAddress = primaryIPv6IfAddress
+        self.additionalIPv6IfAddresses = additionalIPv6IfAddresses
+        self.add_parameter("userName", userName, VALUETYPE_PARAMETER)
+        self.add_parameter("primaryIPv4IfAddress", primaryIPv4IfAddress, VALUETYPE_PARAMETER)
+        self.add_parameter("additionalIPv4IfAddresses", additionalIPv4IfAddresses, VALUETYPE_PARAMETER)
+        self.add_parameter("primaryIPv6IfAddress", primaryIPv6IfAddress, VALUETYPE_PARAMETER)
+        self.add_parameter("additionalIPv6IfAddresses", additionalIPv6IfAddresses, VALUETYPE_PARAMETER)
+
+    def config_parameters(self):
+        ''' Return the list of parameters needed for configuring this validation.
+            The list and order needs to be consistent with __init__ parameters. '''
+        return [self.userName, self.primaryIPv4IfAddress, self.additionalIPv4IfAddresses, self.primaryIPv6IfAddress, self.additionalIPv6IfAddresses]
+    
 

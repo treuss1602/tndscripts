@@ -155,9 +155,11 @@ if __name__ == "__main__":
     if prodname in FP_DEPENDENCIES:
         config.add_prerequisite_product(*FP_DEPENDENCIES[prodname])
 
-    config.add_validation("CHECK_NODE_LOCATION", args.nename, taskname="CHECK_TARGET_NE_EXISTS")
-    if "ACCESS_DEVICE_NAME" in config.input_param_names():
-        config.add_validation("CHECK_NODE_LOCATION", "ACCESS_DEVICE_NAME", taskname="CHECK_ACCESS_DEVICE_EXISTS")
+    if prodname in ["IPVPN_SAP", "IP_SAP"]:
+        for action in ["Create", "Delete"]:
+            config.add_validation(action, "CHECK_IPAM_PERMISSIONS", "REQ_USER", "PRIMARY_IPV4_IF_ADDRESS", "ADDITIONAL_IPV4_IF_ADDRESSES", "PRIMARY_IPV6_IF_ADDRESS", "ADDITIONAL_IPV6_IF_ADDRESSES")
+    # if "ACCESS_DEVICE_NAME" in config.input_param_names():
+    #     config.add_validation("Create", "CHECK_NODE_LOCATION", "ACCESS_DEVICE_NAME", taskname="CHECK_ACCESS_DEVICE_EXISTS")
     outfile = "FP_{}.json".format(prodname) if args.outfile is None else args.outfile
     DBG(10, "Writing json file '{}'".format(outfile))
     with open(outfile, "w", newline='\n') as fp:
