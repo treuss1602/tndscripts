@@ -159,7 +159,7 @@ if __name__ == "__main__":
         for action in ["Create", "Delete"]:
             config.add_validation(action, "CHECK_IPAM_PERMISSIONS", "REQ_USER", "PRIMARY_IPV4_IF_ADDRESS", "ADDITIONAL_IPV4_IF_ADDRESSES", "PRIMARY_IPV6_IF_ADDRESS", "ADDITIONAL_IPV6_IF_ADDRESSES")
     elif prodname.startswith("PHY_"):
-        config.add_validation("Create", "CHECK_NODE_LOCATION", args.nename, taskname="CHECK_NETWORK_ELEMENT_EXISTS")
+        config.add_validation("Create", "CHECK_NODE_LOCATION", args.nename, taskname="CHECK_TARGET_NE_EXISTS")
     outfile = "FP_{}.json".format(prodname) if args.outfile is None else args.outfile
     DBG(10, "Writing json file '{}'".format(outfile))
     with open(outfile, "w", newline='\n') as fp:
