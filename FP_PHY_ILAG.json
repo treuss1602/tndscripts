@@ -458,5 +458,15 @@
       "ILAG_MINIMUM_LINKS"
     ]
   },
-  "cramerValidations": {}
+  "cramerValidations": {
+    "Create": [
+      {
+        "name": "CHECK_NODE_LOCATION",
+        "parameters": [
+          "NETWORK_ELEMENT_NAME"
+        ],
+        "taskname": "CHECK_NETWORK_ELEMENT_EXISTS"
+      }
+    ]
+  }
 }

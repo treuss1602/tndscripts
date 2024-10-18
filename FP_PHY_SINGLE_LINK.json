@@ -420,5 +420,15 @@
       "PHYS_LLDP_FLAG"
     ]
   },
-  "cramerValidations": {}
+  "cramerValidations": {
+    "Create": [
+      {
+        "name": "CHECK_NODE_LOCATION",
+        "parameters": [
+          "NETWORK_ELEMENT_NAME"
+        ],
+        "taskname": "CHECK_NETWORK_ELEMENT_EXISTS"
+      }
+    ]
+  }
 }
