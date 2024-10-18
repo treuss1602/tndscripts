@@ -173,7 +173,7 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
                     "ModifyVlan": "modify_rfs_vlan",
                     "AddMemberLinks": "placeholder_add_member_links",
                     "RemoveMemberLinks": "placeholder_remove_member_links"}
-    supported_transactions = {"Create", "Delete"}.union({p.modifyOperation for p in config.input_params})
+    supported_transactions = {"Create", "Delete", "Compare"}.union({p.modifyOperation for p in config.input_params})
     if prod in ["PHY_ILAG", "PHY_ESILAG"]:
         supported_transactions.add("AddMemberLinks")
         supported_transactions.add("RemoveMemberLinks")
