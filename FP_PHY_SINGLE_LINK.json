@@ -427,7 +427,7 @@
         "parameters": [
           "NETWORK_ELEMENT_NAME"
         ],
-        "taskname": "CHECK_NETWORK_ELEMENT_EXISTS"
+        "taskname": "CHECK_TARGET_NE_EXISTS"
       }
     ]
   }
