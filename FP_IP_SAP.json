@@ -1,6 +1,6 @@
 {
   "factoryProductName": "IP_SAP",
-  "version": "1.2",
+  "version": "1.3",
   "prerequisite": null,
   "inputParameters": [
     {
@@ -367,7 +367,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "modifyOperation": "ModifyParameter",
+      "modifyOperation": "ModifySubnets",
       "exampleValue": "10.10.24.128/28-10.20.0.1-\"VRF1\"-\"22\"-2",
       "cramerStorage": "IP_SAP_GE",
       "maxOccurs": 50
@@ -382,7 +382,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "modifyOperation": "ModifyParameter",
+      "modifyOperation": "ModifySubnets",
       "exampleValue": "2001:0db8:/64-fe80::dea6:32ff:fe6b:3f72-\"IPV6_VRF_NAME\"-\"IPV6_ROUTE_TAG\"-IPV6_ADMIN_DISTANCE\"",
       "cramerStorage": "IP_SAP_GE",
       "maxOccurs": 50

@@ -1,6 +1,6 @@
 {
   "factoryProductName": "IPVPN_SAP",
-  "version": "2.27",
+  "version": "2.29",
   "prerequisite": {
     "product": "IPVPN_CORE",
     "referenceParameter": "IPVPN_CORE_RFS_NAME"
@@ -456,7 +456,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "modifyOperation": "ModifyParameter",
+      "modifyOperation": "ModifySubnets",
       "exampleValue": "10.10.24.128/28-10.20.0.1-\"VRF1\"-\"22\"-2",
       "cramerStorage": "IPVPN_SAP_GE",
       "maxOccurs": 50
@@ -471,7 +471,7 @@
       },
       "special": false,
       "dynamicallyMapped": false,
-      "modifyOperation": "ModifyParameter",
+      "modifyOperation": "ModifySubnets",
       "exampleValue": "2001:0db8:/64-fe80::dea6:32ff:fe6b:3f72-\"IPV6_VRF_NAME\"-\"IPV6_ROUTE_TAG\"-IPV6_ADMIN_DISTANCE\"",
       "cramerStorage": "IPVPN_SAP_GE",
       "maxOccurs": 50
@@ -877,7 +877,7 @@
     {
       "name": "PE_CE_EBGP_ASN_OVERWRITE",
       "description": "PE-CE eBGP overwrite received ASN flag.",
-      "mandatory": false,
+      "mandatory": true,
       "valueType": "boolean",
       "valueTypeDetails": {
         "comment": "default to false"
