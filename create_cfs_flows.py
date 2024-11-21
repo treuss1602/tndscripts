@@ -192,7 +192,7 @@ def create_flow(cfs, structure, create_graphic=False, dynparams=None):
                        None)
     pauseAfterPrepare = (r'If order line parameter PAUSE_AFTER_PREPARE is true: [Create a manual task to await confirmation that the provisioning can be started|\[TND\] (F1) Internal Libraries#Create a manual task to await confirmation that the provisioning can be started]',
                          'Order Hub\nConfirm Modelling')
-    applyContext  =   (r'[Apply the "context" in Cramer|\[TND\] (F1) Cramer APIs#Apply Context]',
+    applyContext  =   (r'If order line parameter APPLY_CONTEXT is true: [Apply the "context" in Cramer|\[TND\] (F1) Cramer APIs#Apply Context]',
                        'Cramer\nApply Context')
     ponr = ('PONR', 'PONR')
 
@@ -243,7 +243,7 @@ def delete_flow(cfs, structure, create_graphic=False, dynparams=None):
                        None)
     pauseAfterPrepare = (r'If order line parameter PAUSE_AFTER_PREPARE is true: [Create a manual task to await confirmation that the provisioning can be started|\[TND\] (F1) Internal Libraries#Create a manual task to await confirmation that the provisioning can be started]',
                          'Order Hub\nConfirm Modelling')
-    applyContext  =   (r'[Apply the "context" in Cramer|\[TND\] (F1) Cramer APIs#Apply Context]',
+    applyContext  =   (r'If order line parameter APPLY_CONTEXT is true: [Apply the "context" in Cramer|\[TND\] (F1) Cramer APIs#Apply Context]',
                        'Cramer\nApply Context')
     ponr = ('PONR', 'PONR')
 
@@ -265,7 +265,7 @@ def provision_flow(cfs, structure, create_graphic=False, dynparams=None):
                 "Cramer\nQuery CFS Decomposition")
     queryComponent = (r'[Query Child Services of the {} component from Cramer|\[TND\] (F1) Cramer APIs#Query Service Decomposition]',
                       "Cramer\nQuery Component Decomposition")
-    applyContext  =   (r'[Apply the "context" in Cramer|\[TND\] (F1) Cramer APIs#Apply Context]',
+    applyContext  =   (r'If order line parameter APPLY_CONTEXT is true: [Apply the "context" in Cramer|\[TND\] (F1) Cramer APIs#Apply Context]',
                        'Cramer\nApply Context')
 
     cfstasks = {"Validate": ExtraTasks(at_start=[queryCFS]),
@@ -285,7 +285,7 @@ def deprovision_flow(cfs, structure, create_graphic=False, dynparams=None):
                        "Cramer\nDelete CFS")
     deleteComponent = (r'[Delete the Component in Cramer|\[TND\] (F1) Cramer APIs#Delete Component]',
                        "Cramer\nDelete Component")
-    applyContext  =   (r'[Apply the "context" in Cramer|\[TND\] (F1) Cramer APIs#Apply Context]',
+    applyContext  =   (r'If order line parameter APPLY_CONTEXT is true: [Apply the "context" in Cramer|\[TND\] (F1) Cramer APIs#Apply Context]',
                        'Cramer\nApply Context')
 
     cfstasks = {"Validate": ExtraTasks(at_start=[queryCFS]),
