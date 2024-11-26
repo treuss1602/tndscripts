@@ -10,7 +10,7 @@
   "paramMapping": [
     {
       "factoryProduct": "PHY_SINGLE_LINK",
-      "factoryProductVersion": "0.18",
+      "factoryProductVersion": "0.19",
       "parameters": [
         {
           "name": "PHYS_IF_NAME",

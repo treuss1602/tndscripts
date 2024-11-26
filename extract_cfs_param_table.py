@@ -21,6 +21,7 @@ CFS_COMPONENT_MAPPING = {
     "TN_MBH_MSA": ["MBH_ACCESS_OAM", "MBH_ACCESS_UPCP", "MBH_ACCESS_TLMGT", "MBH_ACCESS_S1_4G", "MBH_ACCESS_S1_5G"],
     "TN_MBH_4G5G": ["MBH_ACCESS_OAM", "MBH_ACCESS_UPCP", "MBH_ACCESS_S1_4G", "MBH_ACCESS_S1_5G"],
     "TN_MBH_3G": ["MBH_ACCESS_OAM", "MBH_ACCESS_UPCP"],
+    "TN_INF_MGT": ["INF_MGT_UT"],
 }
 
 COMPATIBILITY_MATRIX = {
@@ -100,7 +101,7 @@ def read_data_from_excel(xlfile, cfsname, componentname):
             version = sheet[VERSION_CELL].value
 
             if prodname and version:
-                for col in range(1,60):
+                for col in range(1,100):
                     cellval = sheet.cell(row=HEADERROW, column=col).value
                     if  (componentname and cellval == componentname) or (cfsname and cellval == "CFS " + cfsname):
                         col1, col2 = col, col+1

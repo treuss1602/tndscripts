@@ -4,7 +4,7 @@
   "paramMapping": [
     {
       "factoryProduct": "IPVPN_CORE",
-      "factoryProductVersion": "2.8",
+      "factoryProductVersion": "2.9",
       "parameters": [
         {
           "name": "L3_VPN_NAME",
@@ -120,7 +120,7 @@
     },
     {
       "factoryProduct": "IPVPN_SAP",
-      "factoryProductVersion": "2.29",
+      "factoryProductVersion": "2.30",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",
@@ -440,7 +440,7 @@
     },
     {
       "factoryProduct": "ELAN_CORE",
-      "factoryProductVersion": "2.5",
+      "factoryProductVersion": "2.9",
       "parameters": [
         {
           "name": "EVPN_EVI_RANGE",
@@ -501,7 +501,7 @@
     },
     {
       "factoryProduct": "ELAN_SAP",
-      "factoryProductVersion": "1.5",
+      "factoryProductVersion": "1.6",
       "parameters": [
         {
           "name": "LOGICAL_SUB_IF_ID",

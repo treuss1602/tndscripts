@@ -1,6 +1,6 @@
 {
   "factoryProductName": "ELAN_SAP",
-  "version": "1.5",
+  "version": "1.6",
   "prerequisite": {
     "product": "ELAN_CORE",
     "referenceParameter": "ELAN_CORE_RFS_NAME"

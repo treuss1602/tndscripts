@@ -1,5 +1,5 @@
 {
-  "compositionName": "MBH_ACCESS_S1_5G",
+  "compositionName": "INF_MGT_UT",
   "compositionType": "component",
   "paramMapping": [
     {
@@ -9,12 +9,12 @@
         {
           "name": "L3_VPN_NAME",
           "type": "static",
-          "value": "MBH_ACCESS_F1"
+          "value": "INF_MGT"
         },
         {
           "name": "VRF_NAME",
           "type": "static",
-          "value": "MBH_ACCESS_F1"
+          "value": null
         },
         {
           "name": "VRF_TYPE",
@@ -24,17 +24,17 @@
         {
           "name": "VRF_IMPORT_ADDITIONAL_RT_SET",
           "type": "static",
-          "value": "6730:124; 6730:176"
+          "value": null
         },
         {
           "name": "VRF_EXPORT_ADDITIONAL_RT_SET",
           "type": "static",
-          "value": "6730:124; 6730:176"
+          "value": null
         },
         {
           "name": "VRF_SR_TE_COLOR",
           "type": "static",
-          "value": "0:128"
+          "value": "0:130"
         },
         {
           "name": "UCAST_IPV4_FLAG",
@@ -49,7 +49,7 @@
         {
           "name": "MCAST_SITE_TYPE",
           "type": "static",
-          "value": null
+          "value": "receiver"
         },
         {
           "name": "MCAST_IPV4_FLAG",
@@ -109,7 +109,7 @@
         {
           "name": "CUST_SNIPPET_NAMES",
           "type": "input",
-          "from": "MBH_ACCESS_S1_5G_IPVPN_CORE_CUST_SNIPPET_NAMES"
+          "from": "INF_MGT_UT_IPVPN_CORE_CUST_SNIPPET_NAMES"
         },
         {
           "name": "DHCP_RELAY_LOOPBACK_ID",
@@ -125,7 +125,7 @@
         {
           "name": "LOGICAL_SUB_IF_ID",
           "type": "static",
-          "value": 502
+          "value": 9009
         },
         {
           "name": "VPN_ACCESS_TYPE",
@@ -160,12 +160,12 @@
         {
           "name": "SERVICE_MTU",
           "type": "static",
-          "value": 1650
+          "value": 9000
         },
         {
           "name": "IPVPN_CORE_RFS_NAME",
           "type": "mapped",
-          "from": "MBH_ACCESS_S1_5G_IPVPN_CORE_RFS_NAME"
+          "from": "INF_MGT_IPVPN_CORE_RFS_NAME"
         },
         {
           "name": "PHY_SERVICE_NAME",
@@ -175,25 +175,25 @@
         {
           "name": "PRIMARY_IPV4_IF_ADDRESS",
           "type": "input",
-          "from": "MBH_ACCESS_S1_5G_PRIMARY_IPV4_IF_ADDRESS",
-          "acadefault": "/26@5GS1"
+          "from": "INF_MGT_UT_PRIMARY_IPV4_IF_ADDRESS",
+          "acadefault": "/30@EBH LINKNET"
         },
         {
           "name": "ADDITIONAL_IPV4_IF_ADDRESSES",
           "type": "input",
-          "from": "MBH_ACCESS_S1_5G_ADDITIONAL_IPV4_IF_ADDRESSES",
+          "from": "INF_MGT_UT_ADDITIONAL_IPV4_IF_ADDRESSES",
           "acadefault": null
         },
         {
           "name": "PRIMARY_IPV6_IF_ADDRESS",
           "type": "input",
-          "from": "MBH_ACCESS_S1_5G_PRIMARY_IPV6_IF_ADDRESS",
+          "from": "INF_MGT_UT_PRIMARY_IPV6_IF_ADDRESS",
           "acadefault": null
         },
         {
           "name": "ADDITIONAL_IPV6_IF_ADDRESSES",
           "type": "input",
-          "from": "MBH_ACCESS_S1_5G_ADDITIONAL_IPV6_IF_ADDRESSES",
+          "from": "INF_MGT_UT_ADDITIONAL_IPV6_IF_ADDRESSES",
           "acadefault": null
         },
         {
@@ -209,7 +209,7 @@
         {
           "name": "IPV4_MCAST_IGMP_FLAG",
           "type": "static",
-          "value": "false"
+          "value": "true"
         },
         {
           "name": "IPV4_MCAST_IGMP_VERSION",
@@ -219,7 +219,7 @@
         {
           "name": "IPV4_MCAST_PIM_FLAG",
           "type": "static",
-          "value": "false"
+          "value": "true"
         },
         {
           "name": "IPV6_MCAST_IF_FLAG",
@@ -229,7 +229,7 @@
         {
           "name": "IPV4_DHCP_RELAY_FLAG",
           "type": "static",
-          "value": "false"
+          "value": "true"
         },
         {
           "name": "IPV6_DHCP_RELAY_FLAG",
@@ -239,7 +239,7 @@
         {
           "name": "ACAST_IPV4_FLAG",
           "type": "static",
-          "value": "true"
+          "value": "false"
         },
         {
           "name": "ACAST_IPV6_FLAG",
@@ -249,7 +249,7 @@
         {
           "name": "QOS_INGRESS_CLASSIFICATION_PROFILE",
           "type": "static",
-          "value": "ACCESS_IN_CLASS_8021P"
+          "value": null
         },
         {
           "name": "QOS_INGRESS_POLICING_PROFILE",
@@ -273,13 +273,13 @@
         },
         {
           "name": "IPV4_STATIC_ROUTE_<N>",
-          "type": "static",
-          "value": null
+          "type": "input",
+          "from": "INF_MGT_UT_IPV4_STATIC_ROUTE_<N>"
         },
         {
           "name": "IPV6_STATIC_ROUTE_<N>",
-          "type": "static",
-          "value": null
+          "type": "input",
+          "from": "INF_MGT_UT_IPV6_STATIC_ROUTE_<N>"
         },
         {
           "name": "VRRP_IPV4_FLAG",
@@ -319,7 +319,7 @@
         {
           "name": "PE_CE_EBGP_AUTHENTICATION_KEY",
           "type": "static",
-          "value": null
+          "value": "abb$abc"
         },
         {
           "name": "PE_CE_EBGP_PEER_ASN",
@@ -349,42 +349,42 @@
         {
           "name": "PE_CE_EBGP_IPV4_INGRESS_PREFIX_FILTERS_ALLOWED",
           "type": "static",
-          "value": null
+          "value": "10.1.2.0/24-ge 32"
         },
         {
           "name": "PE_CE_EBGP_IPV6_INGRESS_PREFIX_FILTERS_ALLOWED",
           "type": "static",
-          "value": null
+          "value": "2001:0db7:/24-ge 32"
         },
         {
           "name": "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTERS_ALLOWED",
           "type": "static",
-          "value": null
+          "value": "10.1.2.0/24-ge 32"
         },
         {
           "name": "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTERS_ALLOWED",
           "type": "static",
-          "value": null
+          "value": "2001:0db7:/24-ge 32"
         },
         {
           "name": "PE_CE_EBGP_IPV4_INGRESS_PREFIX_FILTERS_DENIED",
           "type": "static",
-          "value": null
+          "value": "10.1.2.0/24-ge 32"
         },
         {
           "name": "PE_CE_EBGP_IPV6_INGRESS_PREFIX_FILTERS_DENIED",
           "type": "static",
-          "value": null
+          "value": "2001:0db7:/24-ge 32"
         },
         {
           "name": "PE_CE_EBGP_IPV4_EGRESS_PREFIX_FILTERS_DENIED",
           "type": "static",
-          "value": null
+          "value": "10.1.2.0/24-ge 32"
         },
         {
           "name": "PE_CE_EBGP_IPV6_EGRESS_PREFIX_FILTERS_DENIED",
           "type": "static",
-          "value": null
+          "value": "2001:0db7:/24-ge 32"
         },
         {
           "name": "PE_CE_EBGP_STD_TE_COMMUNITY_HANDLING",
@@ -394,17 +394,17 @@
         {
           "name": "CUST_SNIPPET_NAMES",
           "type": "input",
-          "from": "MBH_ACCESS_S1_5G_IPVPN_SAP_CUST_SNIPPET_NAMES"
+          "from": "INF_MGT_UT_IPVPN_SAP_CUST_SNIPPET_NAMES"
         },
         {
           "name": "PE_CE_EBGP_IPV4_PEERS",
-          "type": "input",
-          "from": "MBH_ACCESS_S1_5G_PE_CE_EBGP_IPV4_PEERS"
+          "type": "static",
+          "value": null
         },
         {
           "name": "PE_CE_EBGP_IPV6_PEERS",
-          "type": "input",
-          "from": "MBH_ACCESS_S1_5G_PE_CE_EBGP_IPV6_PEERS"
+          "type": "static",
+          "value": null
         },
         {
           "name": "PE_CE_EBGP_LOCAL_ASN",
@@ -450,12 +450,12 @@
         {
           "name": "L2_VPN_NAME",
           "type": "mapped",
-          "from": "MBH_ACCESS_S1_5G_L2_VPN_NAME"
+          "from": "INF_MGT_UT_L2_VPN_NAME"
         },
         {
           "name": "EVI_NAME",
           "type": "static",
-          "value": "MBH_ACCESS_S1_5G_L2VPN"
+          "value": "INF_MGT"
         },
         {
           "name": "EVI_IMPORT_ADDITIONAL_ROUTE_TARGET_SET",
@@ -475,12 +475,12 @@
         {
           "name": "VRF_SR_TE_COLOR_COMMUNITY",
           "type": "static",
-          "value": "0:128"
+          "value": "0:130"
         },
         {
           "name": "RELATED_L3_LOGICAL_IF",
           "type": "static",
-          "value": 502
+          "value": 9009
         },
         {
           "name": "MANAGEMENT_FLAG",
@@ -495,7 +495,7 @@
         {
           "name": "CUST_SNIPPET_NAMES",
           "type": "input",
-          "from": "MBH_ACCESS_S1_5G_ELAN_CORE_CUST_SNIPPET_NAMES"
+          "from": "INF_MGT_UT_ELAN_CORE_CUST_SNIPPET_NAMES"
         }
       ]
     },
@@ -506,7 +506,7 @@
         {
           "name": "LOGICAL_SUB_IF_ID",
           "type": "static",
-          "value": 502
+          "value": 1030
         },
         {
           "name": "ELAN_ACCESS_TYPE",
@@ -521,12 +521,12 @@
         {
           "name": "ELAN_CORE_RFS_NAME",
           "type": "mapped",
-          "from": "MBH_ACCESS_S1_5G_ELAN_CORE_RFS_NAME"
+          "from": "INF_MGT_ELAN_CORE_RFS_NAME"
         },
         {
           "name": "PHY_SERVICE_NAME",
           "type": "mapped",
-          "from": "PHY_ESILAG_RFS_NAME|PHY_SINGLE_LINK_RFS_NAME"
+          "from": "PHY_SINGLE_LINK_RFS_NAME"
         },
         {
           "name": "INNER_VLAN_ID",
@@ -541,7 +541,7 @@
         {
           "name": "OUTER_VLAN_ID",
           "type": "static",
-          "value": 502
+          "value": 1000
         },
         {
           "name": "OUTER_TPI",
@@ -556,7 +556,7 @@
         {
           "name": "SERVICE_MTU",
           "type": "static",
-          "value": 9000
+          "value": 1500
         },
         {
           "name": "INGRESS_L2_ACL_NAME",
@@ -596,22 +596,22 @@
         {
           "name": "CUST_SNIPPET_NAMES",
           "type": "input",
-          "from": "MBH_ACCESS_S1_5G_ELAN_SAP_CUST_SNIPPET_NAMES"
+          "from": "INF_MGT_UT_ELAN_SAP_CUST_SNIPPET_NAMES"
         },
         {
           "name": "IPV4_DHCP_RELAY_FLAG",
           "type": "static",
-          "value": "false"
+          "value": "true"
         },
         {
           "name": "IPV4_DHCP_CIRCUITID_FORMAT",
           "type": "static",
-          "value": null
+          "value": "\"%portname:%svlan.%cvlan %sysname/0/0/0/0/0\""
         },
         {
           "name": "IPV4_DHCP_REMOTEID_FORMAT",
           "type": "static",
-          "value": null
+          "value": "%mac"
         }
       ]
     }
