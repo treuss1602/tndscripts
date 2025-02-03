@@ -1,3 +1,5 @@
 *.json
 *.xlsx
 *.zip
+__pycache__
+.~lock*
