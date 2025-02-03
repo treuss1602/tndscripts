@@ -1,12 +1,9 @@
 #!/usr/bin/python3
 import argparse
 import re
-import sys
 import json
-from zipfile import ZipFile
-from collections import namedtuple
+from collections import defaultdict
 from openpyxl import load_workbook
-from lookuptable import LookupTable, LtEntry
 
 from debug import DBG, set_debug_level
 
@@ -33,9 +30,10 @@ COMPATIBILITY_MATRIX = {
     "Stablenet NEI" : ["n/a"]
 }
 
+AMBIGUOUS = ["CUST_SNIPPET_NAMES"] # Parameters which can have different values for different FPs
+
 def read_data_from_sheet(sheet, col1, col2, cfsname, componentname, fpname):
     STARTROW = 7
-    AMBIGUOUS = ["CUST_SNIPPET_NAMES"] # Parameters which can have different values for different FPs
 
     rv = []
     for row in range(STARTROW, 300):
@@ -82,15 +80,13 @@ def read_data_from_sheet(sheet, col1, col2, cfsname, componentname, fpname):
 
 
 
-def read_data_from_excel(xlfile, cfsname, componentname):
+def read_data_from_excel(wb, cfsname, componentname):
     ''' Read and return the data from the correct sheet in the excel file.'''
     PRODNAME_CELL = 'B1'
     VERSION_CELL = 'B4'
 
     HEADERROW = 5 # Row that contains the Component/CFS names
 
-    DBG(10, "Reading data from excel file '{}'".format(xlfile))
-    wb = load_workbook(xlfile, data_only=True)
     rv = []
     for tab in wb.sheetnames:
         if re.match(r'[A-Z_]*', tab):
@@ -117,17 +113,54 @@ def read_data_from_excel(xlfile, cfsname, componentname):
 
     return rv
 
+def read_component_overrides_from_excel(wb, cfsname):
+    overrides = defaultdict(lambda : defaultdict(list))
+    sheet = wb["Component Overrides"]
+    for row in range(2,101):
+        cfs, componentname, fpname, paramname, paramtype, paramdetails = (sheet.cell(row=row, column=c).value for c in range(1,7))
+        if not cfs or cfs != cfsname:
+            continue
+        if not componentname or not fpname or not paramname or not paramtype:
+            print("Warning: Row {} in tab 'Component Overrides' is incomplete and thus ignored.".format(row))
+            continue
+        if paramtype == 'n/a':
+            print("Warning: 'n/a' is not applicable as param type in tab 'Component Overrides'. Row {} is ignored.".format(row))
+            continue
 
-def extract_data_to_file(composite, recursive=False, outfile=None):
+        if paramtype == 'input' or paramtype == 'input with ACA default':
+            if paramname in AMBIGUOUS:
+                input_param = "{}_{}_{}".format(componentname, fpname, paramname)
+            else:
+                input_param = "{}_{}".format(componentname, paramname)
+            paramentry = {"name": paramname, "type": "input", "from": input_param}
+        elif paramtype == 'static value':
+            paramentry = {"name": paramname, "type": "static", "value": paramdetails}
+        elif paramtype == 'static "null"':
+            paramentry = {"name": paramname, "type": "static", "value": None}
+        elif paramtype == 'mapped':
+            paramentry = {"name": paramname, "type": "mapped", "from": paramdetails.replace(" OR ","|").replace(" ","")}
+        else:
+            print("Warning: Invalid param type '{}' in 'Component Overrides', row {}".format(paramtype, row))
+            continue
+        # Add to complist
+        overrides[componentname][fpname].append(paramentry)
+
+    return [{"componentName": comp, 
+             "overrides": [{"factoryProduct": fp, "parameters": params} for fp, params in fps.items()]}
+            for comp,fps in overrides.items()]
+
+
+def extract_data_to_file(wb, composite, recursive=False, outfile=None):
     if composite.startswith("TN_"):
         cfsname = composite
         jsondata = {"compositionName": cfsname, "compositionType": "cfs"}
         jsondata["includedComponents"] = CFS_COMPONENT_MAPPING.get(cfsname, [])
-        jsondata["paramMapping"] = read_data_from_excel(args.filename, cfsname, None)
+        jsondata["paramMapping"] = read_data_from_excel(wb, cfsname, None)
+        jsondata["componentOverrides"] = read_component_overrides_from_excel(wb, cfsname)
     else:
         componentname = composite
         jsondata = {"compositionName": componentname, "compositionType": "component"}
-        jsondata["paramMapping"] = read_data_from_excel(args.filename, None, componentname)
+        jsondata["paramMapping"] = read_data_from_excel(wb, None, componentname)
         cfsname = None
     
     if outfile is None:
@@ -152,15 +185,8 @@ if __name__ == "__main__":
     args=parser.parse_args()
     set_debug_level(args.dbglevel)
 
+    DBG(10, "Reading data from excel file '{}'".format(args.filename))
+    wb = load_workbook(args.filename, data_only=True)
+
     for composite in args.composite:
-        extract_data_to_file(composite, args.recursive, args.outfile)
-
-        # jsondata = {"compositionName": composite, "compositionType": "cfs" if cfsname else "component"}
-        # if cfsname:
-        #     jsondata["includedComponents"] = CFS_COMPONENT_MAPPING.get(cfsname, [])
-        # jsondata["paramMapping"] = read_data_from_excel(args.filename, cfsname, componentname)
-
-        # outfile = "{}_{}.json".format("CFS" if cfsname else "Component", composite) if args.outfile is None else args.outfile
-        # DBG(10, "Writing json file '{}'".format(outfile))
-        # with open(outfile, "w", newline='\n') as fp:
-        #     json.dump(jsondata, fp, indent=2)
+        extract_data_to_file(wb, composite, args.recursive, args.outfile)

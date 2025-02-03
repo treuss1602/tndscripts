@@ -190,6 +190,18 @@ def create_lookup_tables_for_factory_product(config : FactoryProductConfiguratio
 
     return tables
 
+def create_kv(cfs, component, fpname, paramdata):
+    pname, ptype = (paramdata[x] for x in ["name", "type"])
+    key = "#".join([cfs, component, fpname, "Create", pname])
+    DBG(30, "Key is {}".format(key))
+    if ptype == "static":
+        values = (str(paramdata["value"]).replace('*', '\\*').replace('"', '*') if paramdata["value"] is not None else "<NULL>", "S")
+    elif ptype in ["input", "mapped"]:
+        values = (paramdata["from"], "D")
+    DBG(30, "Values are {}".format(values))
+    return key, values
+
+
 def create_lookup_tables_for_composition(data):
     ''' Create the lookup Tables '''
     if data["compositionType"] == "cfs":
@@ -203,15 +215,16 @@ def create_lookup_tables_for_composition(data):
     for fpdata in data["paramMapping"]:
         fpname = fpdata["factoryProduct"]
         for paramdata in fpdata["parameters"]:
-            pname, ptype = (paramdata[x] for x in ["name", "type"])
-            key = "#".join([cfs, component, fpname, "Create", pname])
-            DBG(30, "Key is {}".format(key))
-            if ptype == "static":
-                values = (str(paramdata["value"]).replace('*', '\\*').replace('"', '*') if paramdata["value"] is not None else "<NULL>", "S")
-            elif ptype in ["input", "mapped"]:
-                values = (paramdata["from"], "D")
-            DBG(30, "Values are {}".format(values))
+            key, values = create_kv(cfs, component, fpname, paramdata)
             lkt1.add(LtEntry(key, *values))
+    if cfs and "componentOverrides" in data:
+        for compoverride in data["componentOverrides"]:
+            component = compoverride["componentName"]
+            for fpdata in compoverride["overrides"]:
+                fpname = fpdata["factoryProduct"]
+                for paramdata in fpdata["parameters"]:
+                    key, values = create_kv(cfs, component, fpname, paramdata)
+                    lkt1.add(LtEntry(key, *values))
 
     DISPLAY_PARAM_BLACKLIST = ["EVPN_EVI_RANGE"]
     lkt2 = LookupTable('LKT_TND_DISPLAY_PARAMETERS')
